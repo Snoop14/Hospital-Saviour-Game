@@ -1,33 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player1 : MonoBehaviour
 {
     [SerializeField] float speed;
-    private Player1_Input inputActions;
+
+    private Vector3 movementVec;
+
+    
     private Rigidbody rbody;
-    private Vector2 moveInput;
 
-    private void Awake()
+    void Start()
     {
-        inputActions = new Player1_Input();
         rbody = GetComponent<Rigidbody>();
-    }
-
-    private void OnEnable()
-    {
-        inputActions.Player_Main.Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputActions.Player_Main.Disable();
     }
 
     void FixedUpdate()
     {
-        moveInput = inputActions.Player_Main.Movement.ReadValue<Vector2>();
-        rbody.velocity = new Vector3(moveInput.x, 0, moveInput.y) * speed;
+        transform.LookAt(transform.position + movementVec, new Vector3(0, 1, 0));
+        rbody.velocity = movementVec * speed;
+    }
+
+    public void OnMove(InputValue input)
+    {
+        Vector2 xyInput = input.Get<Vector2>();
+        movementVec = new Vector3(xyInput.x, 0, xyInput.y);
+    }
+
+    public void OnInteract()
+    {
+
     }
 }

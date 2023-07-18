@@ -28,7 +28,7 @@ public partial class @Player1_Input : IInputActionCollection2, IDisposable
             ""id"": ""e63cabde-cb52-4416-8adb-eaf601fa8e7d"",
             ""actions"": [
                 {
-                    ""name"": ""Movement"",
+                    ""name"": ""Move"",
                     ""type"": ""Value"",
                     ""id"": ""4566331c-ee61-4d06-a8b6-4e6fa5a1d956"",
                     ""expectedControlType"": ""Vector2"",
@@ -65,7 +65,7 @@ public partial class @Player1_Input : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""Move"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -76,7 +76,7 @@ public partial class @Player1_Input : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -87,7 +87,7 @@ public partial class @Player1_Input : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -98,7 +98,7 @@ public partial class @Player1_Input : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -109,7 +109,7 @@ public partial class @Player1_Input : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -120,7 +120,7 @@ public partial class @Player1_Input : IInputActionCollection2, IDisposable
 }");
         // Player_Main
         m_Player_Main = asset.FindActionMap("Player_Main", throwIfNotFound: true);
-        m_Player_Main_Movement = m_Player_Main.FindAction("Movement", throwIfNotFound: true);
+        m_Player_Main_Move = m_Player_Main.FindAction("Move", throwIfNotFound: true);
         m_Player_Main_Interact = m_Player_Main.FindAction("Interact", throwIfNotFound: true);
     }
 
@@ -181,13 +181,13 @@ public partial class @Player1_Input : IInputActionCollection2, IDisposable
     // Player_Main
     private readonly InputActionMap m_Player_Main;
     private IPlayer_MainActions m_Player_MainActionsCallbackInterface;
-    private readonly InputAction m_Player_Main_Movement;
+    private readonly InputAction m_Player_Main_Move;
     private readonly InputAction m_Player_Main_Interact;
     public struct Player_MainActions
     {
         private @Player1_Input m_Wrapper;
         public Player_MainActions(@Player1_Input wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement => m_Wrapper.m_Player_Main_Movement;
+        public InputAction @Move => m_Wrapper.m_Player_Main_Move;
         public InputAction @Interact => m_Wrapper.m_Player_Main_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player_Main; }
         public void Enable() { Get().Enable(); }
@@ -198,9 +198,9 @@ public partial class @Player1_Input : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_Player_MainActionsCallbackInterface != null)
             {
-                @Movement.started -= m_Wrapper.m_Player_MainActionsCallbackInterface.OnMovement;
-                @Movement.performed -= m_Wrapper.m_Player_MainActionsCallbackInterface.OnMovement;
-                @Movement.canceled -= m_Wrapper.m_Player_MainActionsCallbackInterface.OnMovement;
+                @Move.started -= m_Wrapper.m_Player_MainActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_Player_MainActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_Player_MainActionsCallbackInterface.OnMove;
                 @Interact.started -= m_Wrapper.m_Player_MainActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_Player_MainActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_Player_MainActionsCallbackInterface.OnInteract;
@@ -208,9 +208,9 @@ public partial class @Player1_Input : IInputActionCollection2, IDisposable
             m_Wrapper.m_Player_MainActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Movement.started += instance.OnMovement;
-                @Movement.performed += instance.OnMovement;
-                @Movement.canceled += instance.OnMovement;
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
@@ -220,7 +220,7 @@ public partial class @Player1_Input : IInputActionCollection2, IDisposable
     public Player_MainActions @Player_Main => new Player_MainActions(this);
     public interface IPlayer_MainActions
     {
-        void OnMovement(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
     }
 }
