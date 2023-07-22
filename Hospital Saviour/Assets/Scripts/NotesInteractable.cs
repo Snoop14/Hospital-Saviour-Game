@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class NotesInteractable : BaseInteractable
 {
-    public override void MainInteract(GameObject gameObject)
+    public override void MainInteract(GameObject playerObject)
     {
-        if(!CheckIfCarrying())
+        if(!playerObject.GetComponent<Player1>().isCarrying)
         {
-            GetComponent<Collider>().enabled = false;
-            transform.parent = gameObject.transform;
+            playerObject.GetComponent<Player1>().isCarrying = true;
+            GetComponent<Collider>().enabled = false; //turns off the folders collider
+            transform.parent = playerObject.transform; //changes the parent of folder to the player
             changeObjectPos();
         }
     }
 
     private void changeObjectPos()
     {
-        Vector3 newPos = new Vector3(0f, 0.5f, 0.85f);
-        transform.localPosition = newPos;
-        transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
+        transform.localPosition = new Vector3(0f, 0.5f, 0.85f);
+        transform.localRotation = new Quaternion(0f, 0f, 0f, 0f); //resets rotation
     }
 }

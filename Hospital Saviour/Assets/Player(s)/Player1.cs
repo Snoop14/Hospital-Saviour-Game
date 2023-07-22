@@ -13,6 +13,8 @@ public class Player1 : MonoBehaviour
 
     private GameObject interactable;
 
+    public bool isCarrying = false;
+
     void Start()
     {
         rbody = GetComponent<Rigidbody>();
@@ -39,15 +41,17 @@ public class Player1 : MonoBehaviour
         }
     }
 
+    //Called when the player enters in range of another object
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Interactable")
         {
-            interactable = other.gameObject;
-            other.GetComponent<BaseInteractable>().setPlayer(gameObject);
-            
+            interactable = other.gameObject; //set global var to interactable gameobject
+            other.GetComponent<BaseInteractable>().setPlayer(gameObject); 
         }
     }
+
+    //Called when the player exits range of another object
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Interactable")

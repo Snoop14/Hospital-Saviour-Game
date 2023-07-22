@@ -213,6 +213,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1993922392}
     m_Modifications:
+    - target: {fileID: 4226509921620952892, guid: 964db6eede2727349ac7b0b319fc7662,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4995375310067094971, guid: 964db6eede2727349ac7b0b319fc7662,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6958602824932283035, guid: 964db6eede2727349ac7b0b319fc7662,
         type: 3}
       propertyPath: m_RootOrder
@@ -273,8 +283,44 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bed
       objectReference: {fileID: 0}
+    - target: {fileID: 8854363157470512984, guid: 964db6eede2727349ac7b0b319fc7662,
+        type: 3}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 964db6eede2727349ac7b0b319fc7662, type: 3}
+--- !u!1 &201468194 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8854363157470512984, guid: 964db6eede2727349ac7b0b319fc7662,
+    type: 3}
+  m_PrefabInstance: {fileID: 201468193}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &201468195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201468194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dfca01951f6a14199b2716b2d18e22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &201468196
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201468194}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 1, z: 1.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &452894066
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,6 +407,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1993922392}
     m_Modifications:
+    - target: {fileID: 4226509921620952892, guid: 964db6eede2727349ac7b0b319fc7662,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4995375310067094971, guid: 964db6eede2727349ac7b0b319fc7662,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6958602824932283035, guid: 964db6eede2727349ac7b0b319fc7662,
         type: 3}
       propertyPath: m_RootOrder
@@ -421,8 +477,44 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bed (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8854363157470512984, guid: 964db6eede2727349ac7b0b319fc7662,
+        type: 3}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 964db6eede2727349ac7b0b319fc7662, type: 3}
+--- !u!1 &461410680 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8854363157470512984, guid: 964db6eede2727349ac7b0b319fc7662,
+    type: 3}
+  m_PrefabInstance: {fileID: 461410679}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &461410681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461410680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dfca01951f6a14199b2716b2d18e22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &461410682
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461410680}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 1, z: 1.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &662861236
 GameObject:
   m_ObjectHideFlags: 0
@@ -1319,7 +1411,7 @@ PrefabInstance:
     - target: {fileID: 6797946521238593119, guid: bbe03b141e771654ba471d278ce4e049,
         type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Player1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbe03b141e771654ba471d278ce4e049, type: 3}

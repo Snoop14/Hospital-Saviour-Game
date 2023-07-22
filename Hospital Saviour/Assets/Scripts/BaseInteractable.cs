@@ -6,20 +6,13 @@ public class BaseInteractable : MonoBehaviour
 {
     public GameObject player { get; private set; }
 
-    public virtual void MainInteract(GameObject gameObject)
+    public virtual void MainInteract(GameObject playerObject)
     {
-        //this needs to be change based on the object
+        //this needs to be change based on the type of interactable object
     }
 
     public void setPlayer(GameObject _player)
     {
         player = _player;
     }
-
-    public bool CheckIfCarrying()
-    {
-        return false;
-    }
-
-
 }
