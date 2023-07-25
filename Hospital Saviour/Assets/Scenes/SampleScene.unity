@@ -418,6 +418,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Patient (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4354967415416081357, guid: 3d2577d9b91b22d479ea7ca799e0b313,
+        type: 3}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d2577d9b91b22d479ea7ca799e0b313, type: 3}
 --- !u!1001 &1861266856910926385
