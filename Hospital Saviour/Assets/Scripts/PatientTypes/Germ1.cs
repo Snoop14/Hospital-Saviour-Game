@@ -34,7 +34,7 @@ public class Germ1 : BaseInteractable
     public override void MainInteract(GameObject playerObject)
     {
        
-        //prevent sate going out of range whilst testing (replace contents later with "walk out of scene" action)
+        //prevent sate going out of range whilst testing (replace contents later with "walk out of scene" action & add score etc.)
         if (currState == "complete")
         {
             setState();
@@ -46,7 +46,7 @@ public class Germ1 : BaseInteractable
             object notes = gameObject.transform.Find("Folder");
 
             //find notes
-            if (notes != null)
+            if (notes != null  && playerObject.GetComponent<Player1>().isCarrying == false)
             {
                 Debug.Log(notes);
 
@@ -56,22 +56,24 @@ public class Germ1 : BaseInteractable
                 //notes.MainInteract(playerObject);
                 //notes.GetComponent(MainInteract);
                 //notes.GetComponent(NotesInteractable);
-
+                gameObject.GetComponentInChildren<NotesInteractable>().MainInteract(playerObject);
 
                 //change notes value
                 withNotes = false;
+
+                //iterate state
+                iterateState(); 
             }
 
             
-            //iterate state
-            iterateState();
+           
         }
         else
         {
             iterateState();
         }
         //Debug log the state
-        Debug.Log(currState);
+        //Debug.Log(currState);
     }
 
     //set initial values
@@ -79,6 +81,7 @@ public class Germ1 : BaseInteractable
     {
         actionsVal = 0;
         currState = actions[actionsVal];
+        Debug.Log(currState);
     }
 
     //move to next state
@@ -88,5 +91,7 @@ public class Germ1 : BaseInteractable
         actionsVal += 1;
         //change the state
         currState = actions[actionsVal];
+
+        Debug.Log(currState);
     }
 }
