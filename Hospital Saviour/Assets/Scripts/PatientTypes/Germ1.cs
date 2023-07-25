@@ -17,9 +17,7 @@ public class Germ1 : BaseInteractable
     // Start is called before the first frame update
     void Start()
     {
-        //set initial values
-        actionsVal = 0;
-        currState = actions[actionsVal];
+        setState();
     }
 
     // Update is called once per frame
@@ -32,11 +30,24 @@ public class Germ1 : BaseInteractable
 
     public override void MainInteract(GameObject playerObject)
     {
-        //add 1 to the current position
-        actionsVal += 1;
-        //shange the state
-        currState = actions[actionsVal];
+        iterateState();
         //Debug log the state
         Debug.Log(currState);
+    }
+
+    //set initial values
+    private void setState()
+    {
+        actionsVal = 0;
+        currState = actions[actionsVal];
+    }
+
+    //move to next state
+    private void iterateState()
+    {
+        //add 1 to the current position
+        actionsVal += 1;
+        //change the state
+        currState = actions[actionsVal];
     }
 }
