@@ -30,7 +30,15 @@ public class Germ1 : BaseInteractable
 
     public override void MainInteract(GameObject playerObject)
     {
-        iterateState();
+        //prevent sate going out of range whilst testing (replace contents later with "walk out of scene action")
+        if (currState == "complete")
+        {
+            setState();
+        }
+        else
+        {
+            iterateState();
+        }
         //Debug log the state
         Debug.Log(currState);
     }
