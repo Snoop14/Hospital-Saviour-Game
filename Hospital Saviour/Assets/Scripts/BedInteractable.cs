@@ -8,11 +8,11 @@ public class BedInteractable : BaseInteractable
     {
         if (playerObject.GetComponent<Player1>().isCarrying)
         {
-            NotesDropOff();
+            NotesDropOff(playerObject);
         }
     }
 
-    private void NotesDropOff()
+    private void NotesDropOff(GameObject playerObject)
     {
         foreach(Transform tempTrans in player.GetComponentsInChildren<Transform>())
         {
@@ -21,6 +21,7 @@ public class BedInteractable : BaseInteractable
                 tempTrans.parent = transform;
             }
         }
+        playerObject.GetComponent<Player1>().isCarrying = false;
     }
 
     private void NotesPickUp()
