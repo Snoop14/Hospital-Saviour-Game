@@ -6,8 +6,7 @@ using UnityEngine.InputSystem;
 public class Player1 : MonoBehaviour
 {
     [SerializeField] float speed;
-
-    private Vector3 movementVec;
+    Vector3 movementVec;
     
     private Rigidbody rbody;
 
@@ -54,13 +53,16 @@ public class Player1 : MonoBehaviour
                         Bed b = go.GetComponent<Bed>();
                         if (b && b.isActive && b.isInteractable && !b.hasFolder && !b.isOccupied)
                         {
-                            Folder i = item.GetComponent<Folder>();
-                            i.transferTo(go);
-                            i.changePosToBed();
+                            Folder f = item.GetComponent<Folder>();
+                            f.transferTo(go);
+                            f.changePosToBed();
                             b.folderDropOff(item);
+                            f.patientOwner.GetComponent<Patient>().folderPlaced(go);
+                            manager.removeFromQueue(f.patientOwner);
                             isCarrying = false;
                             item = null;
                             itemType = "";
+
                             break;
                         }
                     }

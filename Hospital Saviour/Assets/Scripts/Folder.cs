@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Folder : MonoBehaviour
 {
+    public GameObject patientOwner;
     public void transferTo(GameObject obj)
     {
         transform.parent = obj.transform; //changes the parent of folder to the transfered object

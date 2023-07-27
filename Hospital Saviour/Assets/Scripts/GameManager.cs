@@ -34,10 +34,18 @@ public class GameManager : MonoBehaviour
     public float patientSeperation = 5;
 
 
+    List<GameObject> patientQueue;
+    List<Vector3> queuePositions;
+    [SerializeField]
+    Vector3 initialPosition = new Vector3(-12, 0, -5);
+
 
     public List<GameObject> objectList;
     private void Awake()
     {
+        //might need to change this to different function later when we setup levels for resetting
+        patientQueue = new List<GameObject>();
+        queuePositions = new List<Vector3>();
         objectList = new List<GameObject>();
     }
     // Start is called before the first frame update
@@ -48,7 +56,9 @@ public class GameManager : MonoBehaviour
          * called when user clicks on a level, then pass the level data into 
          * generateObjects function as a parameter
         **/
+        
         generateObjects();
+        assignPatientPositions();
     }
 
     void generateObjects()
@@ -88,7 +98,9 @@ public class GameManager : MonoBehaviour
             newPatient.transform.position += new Vector3(0, 0, patientSeperation * i);
 
             GameObject newFolder = Instantiate(folderPrefab, newPatient.transform, false);
-            newFolder.GetComponent<Folder>().changePosToPlayer();
+            Folder f = newFolder.GetComponent<Folder>();
+            f.changePosToPlayer();
+            f.patientOwner = newPatient;
 
             //Place patient into object list
             objectList.Add(newPatient);
@@ -96,6 +108,26 @@ public class GameManager : MonoBehaviour
             p.isInteractable = true;
             p.isHoldingFolder = true;
             p.folder = newFolder;
+
+            patientQueue.Add(newPatient);
+        }
+    }
+
+    void assignPatientPositions()
+    {
+        for (int i = 0; i < patientCount; i++)
+        {
+            queuePositions.Add(initialPosition + new Vector3(0,0,patientSeperation*i));
+            patientQueue[i].GetComponent<Patient>().queuePosition = queuePositions[i];
+        }
+    }
+
+    public void removeFromQueue(GameObject p)
+    {
+        patientQueue.Remove(p);
+        for(int i = 0; i < patientQueue.Count; i++)
+        {
+            patientQueue[i].GetComponent<Patient>().moveInQueue(queuePositions[i]);
         }
     }
 }

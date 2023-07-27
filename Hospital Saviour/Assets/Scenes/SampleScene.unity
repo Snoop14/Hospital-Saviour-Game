@@ -391,7 +391,9 @@ MonoBehaviour:
     type: 3}
   patientPrefab: {fileID: 4354967415416081357, guid: 3d2577d9b91b22d479ea7ca799e0b313,
     type: 3}
-  patientsParent: {fileID: 2100235274}
+  folderPrefab: {fileID: 4479300790105107674, guid: 7abd0ad2dbe5e28469a1bdf2ebb784d5,
+    type: 3}
+  patientParent: {fileID: 2100235274}
   inActiveBedParent: {fileID: 732267288}
   activeBedParent: {fileID: 1993922392}
   inActiveMat: {fileID: 2100000, guid: 26c55f76337d8bc4ca3545d976ea8773, type: 2}
@@ -400,6 +402,8 @@ MonoBehaviour:
   bedSeperation: 3
   patientCount: 4
   patientSeperation: 5
+  initialPosition: {x: -12, y: 0, z: -5}
+  objectList: []
 --- !u!4 &1362452446
 Transform:
   m_ObjectHideFlags: 0
@@ -610,6 +614,11 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1362452444}
+    - target: {fileID: 6797946521238593114, guid: bbe03b141e771654ba471d278ce4e049,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
     - target: {fileID: 6797946521238593119, guid: bbe03b141e771654ba471d278ce4e049,
         type: 3}
       propertyPath: m_Name
