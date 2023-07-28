@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     Vector3 initialPosition = new Vector3(-12, 0, -5);
 
+    public List<Sickness> sicknessList;
+
 
     public List<GameObject> objectList;
     private void Awake()
@@ -108,6 +110,7 @@ public class GameManager : MonoBehaviour
             p.isInteractable = true;
             p.isHoldingFolder = true;
             p.folder = newFolder;
+            p.sickness = sicknessList[0];
 
             patientQueue.Add(newPatient);
         }

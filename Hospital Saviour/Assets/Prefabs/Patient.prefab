@@ -81,6 +81,8 @@ MonoBehaviour:
   isHoldingFolder: 0
   folder: {fileID: 0}
   queuePosition: {x: 0, y: 0, z: 0}
+  iconPrefab: {fileID: 7705217214407622907, guid: 4af3a4b53adb2b44ba3f07ecd95c436b,
+    type: 3}
 --- !u!1 &5578460877272871581
 GameObject:
   m_ObjectHideFlags: 0

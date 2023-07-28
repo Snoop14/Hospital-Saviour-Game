@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Patient : MonoBehaviour
 {
@@ -26,13 +27,41 @@ public class Patient : MonoBehaviour
     float speed;
     Vector3 targetPosition;
 
-    // Start is called before the first frame update
+
+    public Image iconPrefab; // Assign this in the Inspector
+    Image icon;
+    public Sickness sickness;
+    Image sicknessIconBackground;
+    Image sicknessIcon;
+    Image healingIcon;
+    List<Sprite> healingOrderIcons;
+
     void Start()
     {
         speed = 7.0f;
         targetPosition = transform.position;
         rbody = GetComponent<Rigidbody>();
+        icon = Instantiate(iconPrefab, FindObjectOfType<Canvas>().transform);
+
+        sicknessIconBackground = icon.transform.GetChild(0).GetComponent<Image>();
+        sicknessIcon = icon.transform.GetChild(1).GetComponent<Image>();
+        healingIcon = icon.transform.GetChild(2).GetComponent<Image>();
+        healingOrderIcons = sickness.healingOrderIcons;
+        //change based on patient type
+        if (sickness.type == "Germ")
+        {
+            sicknessIconBackground.sprite = sickness.sicknessIconBackGround;
+            sicknessIcon.sprite = sickness.sicknessIcon;
+            healingIcon.sprite = healingOrderIcons[0];
+        }
+
         setState();
+    }
+    void Update()
+    {
+        Vector3 offset = new Vector3(0, 2.5f, 0);
+        Vector2 positionOnScreen = Camera.main.WorldToScreenPoint(transform.position + offset);
+        icon.transform.position = positionOnScreen;
     }
     void FixedUpdate()
     {
