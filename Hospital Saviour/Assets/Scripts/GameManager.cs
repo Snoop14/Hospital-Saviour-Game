@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
+    [Header("Prefabs")]
     [SerializeField]
     GameObject bedPrefab;
     [SerializeField]
@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject folderPrefab;
 
+    [Header("Parents")]
     [SerializeField]
     Transform patientParent;
     [SerializeField]
@@ -19,15 +20,19 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     Transform activeBedParent;
 
+    [Header("")]
     [SerializeField]
     Material inActiveMat;
 
+    [Header("Bed Controls")]
     //this later needs to be determined within the level data
     public int activeBedCount = 2;
     public int inActiveBedCount = 4;
     // bedSeperation 3 looks correct
     [Range(0, 5)]
     public float bedSeperation = 3;
+
+    [Header("Patient Controls")]
     //temperary for testing
     public int patientCount = 4;
     [Range(0, 10)]
@@ -40,7 +45,6 @@ public class GameManager : MonoBehaviour
     Vector3 initialPosition = new Vector3(-12, 0, -5);
 
     public List<Sickness> sicknessList;
-
 
     public List<GameObject> objectList;
     private void Awake()
@@ -114,6 +118,10 @@ public class GameManager : MonoBehaviour
 
             patientQueue.Add(newPatient);
         }
+
+        GameObject tempObj = GameObject.Find("SoupMachine");
+
+        objectList.Add(tempObj);
     }
 
     void assignPatientPositions()

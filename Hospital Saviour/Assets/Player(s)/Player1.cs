@@ -76,27 +76,46 @@ public class Player1 : MonoBehaviour
             {
                 if (manager.objectList.Contains(go))
                 {
-                    Patient p = go.GetComponent<Patient>();
-                    print(p);
-                    if (p && p.isInteractable)
+                    //Patient p = go.GetComponent<Patient>();
+                    //print(p);
+                    //Adjusted the getComponent to TryGetComponent
+                    if (go.TryGetComponent(out Patient p))
                     {
-                        if (p.isHoldingFolder)
+                        if (p && p.isInteractable)
                         {
-                            isCarrying = true;
-                            item = p.folder;
-                            itemType = "Folder";
-                            p.releaseFolder();
-                            Folder i = item.GetComponent<Folder>();
-                            i.transferTo(gameObject);
-                            i.changePosToPlayer();
+                            if (p.isHoldingFolder)
+                            {
+                                isCarrying = true;
+                                item = p.folder;
+                                itemType = "Folder";
+                                p.releaseFolder();
+                                Folder i = item.GetComponent<Folder>();
+                                i.transferTo(gameObject);
+                                i.changePosToPlayer();
 
-                            break;
+                                break;
+                            }
                         }
+                    }
+
+                    if(go.TryGetComponent(out SoupMachine s))
+                    {
+                        isCarrying = true;
+                        item = s.currentSoup;
+                        itemType = "Soup";
+                        s.soupPickUp();
+                        Soup i = item.GetComponent<Soup>();
+                        i.transferTo(gameObject);
+                        i.changePosToPlayer();
+
+                        break;
                     }
                 }
             }
         }
     }
+
+    
 
     //Called when the player enters in range of another object
     private void OnTriggerEnter(Collider other)
