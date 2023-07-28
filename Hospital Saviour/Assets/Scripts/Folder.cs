@@ -17,7 +17,7 @@ public class Folder : MonoBehaviour
     }
     public void changePosToBed()
     {
-        transform.localPosition = new Vector3(0.8f, 0.4f, -0.763f);
+        transform.localPosition = new Vector3(-0.6f, 0.2f, 0f);
         transform.localRotation = new Quaternion(0f, 0f, 0f, 0f); //resets rotation
         transform.localRotation = Quaternion.Euler(0f, 90f, -90f); //resets rotation
     }

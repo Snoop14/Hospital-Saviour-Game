@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -503,6 +503,7 @@ MonoBehaviour:
   initialPosition: {x: -12, y: 0, z: -5}
   sicknessList:
   - {fileID: 11400000, guid: b65efb007cc28354682960938d9b4a5e, type: 2}
+  - {fileID: 11400000, guid: dd31ea45492c3ee42af4e7a07217667a, type: 2}
   objectList: []
 --- !u!4 &1362452446
 Transform:

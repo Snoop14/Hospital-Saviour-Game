@@ -10,4 +10,5 @@ public class Sickness : ScriptableObject
     public Sprite sicknessIcon;
     public Sprite sicknessIconBackGround;
     public List<Sprite> healingOrderIcons;
+    public float happinessDropLevel;
 }

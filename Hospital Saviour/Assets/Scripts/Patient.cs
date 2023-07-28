@@ -114,7 +114,7 @@ public class Patient : MonoBehaviour
     public void folderPlaced(GameObject place)
     {
         assignedPlacement = place;
-        targetPosition = assignedPlacement.transform.position - new Vector3(1.5f,0,0);
+        targetPosition = assignedPlacement.transform.position - new Vector3(0,0,1.5f);
     }
 
     public void moveInQueue(Vector3 pos)

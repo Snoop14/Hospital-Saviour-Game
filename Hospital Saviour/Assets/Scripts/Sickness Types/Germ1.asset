@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae11008c6ec7ae54ea735565b64d687e, type: 3}
-  m_Name: Germ
+  m_Name: Germ1
   m_EditorClassIdentifier: 
-  type: Germ
+  type: Germ1
   sicknessIcon: {fileID: -5751537101852055295, guid: 10fb8a5f49079294bac67cd584019b84,
     type: 3}
   sicknessIconBackGround: {fileID: -990350697582360155, guid: 733a70509c526d848bd7f8d32cc9ed41,
     type: 3}
   healingOrderIcons:
   - {fileID: 6408919844822956424, guid: 10fb8a5f49079294bac67cd584019b84, type: 3}
-  - {fileID: 4734577599308588053, guid: 10fb8a5f49079294bac67cd584019b84, type: 3}
+  happinessDropLevel: 2
