@@ -64,8 +64,7 @@ public class Patient : MonoBehaviour
     }
     void FixedUpdate()
     {
-        //need to check patient state instead later
-        if((targetPosition - transform.position).sqrMagnitude > 1.5f)
+        if (currState == actions[1])  // walking
         {
             move();
         }
@@ -93,6 +92,11 @@ public class Patient : MonoBehaviour
         Debug.Log(currState);
     }
 
+    public string getState()
+    {
+        return currState;
+    }
+
     //move to next state
     private void iterateState()
     {
@@ -113,12 +117,37 @@ public class Patient : MonoBehaviour
     public void folderPlaced(GameObject place)
     {
         assignedPlacement = place;
-        targetPosition = assignedPlacement.transform.position - new Vector3(0,0,1.5f);
+        targetPosition = assignedPlacement.transform.position - new Vector3(0,0,1.0f);
+        iterateState();
     }
 
     public void moveInQueue(Vector3 pos)
     {
         queuePosition = pos;
         targetPosition = queuePosition;
+    }
+    
+    private void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.CompareTag("Bed"))
+        {
+            iterateState(); // set state to bed
+            print("Patient: " + other.gameObject.name + " entered collider");
+        }
+    }
+
+    public void changePosToBed()
+    {
+        iterateState(); // set state to waiting
+        Debug.Log("Patient: Switched to bed");
+        transform.parent = assignedPlacement.transform; //changes the parent of folder to the transfered object
+        transform.localPosition = new Vector3(0f, 1f, 0f);
+        transform.localRotation = new Quaternion(0f, 0f, 0f, 0f); //resets rotation
+        transform.localRotation = Quaternion.Euler(-90f, 90f, 180f); //resets rotation
+    }
+
+    public GameObject getAssignment<GameObject>()
+    {
+        return assignedPlacement.GetComponent<GameObject>();
     }
 }

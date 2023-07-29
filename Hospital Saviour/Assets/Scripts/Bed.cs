@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,11 @@ public class Bed : MonoBehaviour
     public GameObject currentPatient { get; private set; } = null;
     public GameObject currentFolder { get; private set; } = null;
 
+    private void Start()
+    {
+        gameObject.tag = "Bed";
+    }
+
     public void folderDropOff(GameObject folder)
     {
         currentFolder = folder;
@@ -22,8 +28,11 @@ public class Bed : MonoBehaviour
         currentFolder = null;
     }
 
-    private void NPCInteract()
+    public void NPCInteract(GameObject patient)
     {
-
+        Debug.Log("Bed: Assigned patient");
+        currentPatient = patient;
+        isOccupied = true;
+        isActive = true; // Please confirm
     }
 }
