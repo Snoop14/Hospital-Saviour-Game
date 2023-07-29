@@ -27,7 +27,6 @@ public class Patient : MonoBehaviour
     float speed;
     Vector3 targetPosition;
 
-
     public Image iconPrefab; // Assign this in the Inspector
     Image icon;
     public Sickness sickness;
