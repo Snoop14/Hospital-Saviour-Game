@@ -44,6 +44,8 @@ public class Patient : MonoBehaviour
 
         sicknessIconBackground = icon.transform.GetChild(0).GetComponent<Image>();
         sicknessIcon = icon.transform.GetChild(1).GetComponent<Image>();
+        sicknessIcon.SetNativeSize();
+        //sicknessIcon.transform.localScale = new Vector3(0.3f,0.3f,1);
         healingIcon = icon.transform.GetChild(2).GetComponent<Image>();
         healingOrderIcons = sickness.healingOrderIcons;
         //change based on patient type
