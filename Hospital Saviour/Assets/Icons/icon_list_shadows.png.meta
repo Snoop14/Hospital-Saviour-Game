@@ -19,7 +19,7 @@ TextureImporter:
     second: icon_list_shadows_4
   - first:
       213: -3715147670689906002
-    second: icon_list_shadows_5
+    second: Soup
   - first:
       213: 8796340836314443512
     second: icon_list_shadows_6
@@ -351,7 +351,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icon_list_shadows_5
+      name: Soup
       rect:
         serializedVersion: 2
         x: 1637

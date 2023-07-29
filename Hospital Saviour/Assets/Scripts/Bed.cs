@@ -12,10 +12,6 @@ public class Bed : MonoBehaviour
     public GameObject currentPatient { get; private set; } = null;
     public GameObject currentFolder { get; private set; } = null;
 
-    private void Start()
-    {
-        gameObject.tag = "Bed";
-    }
 
     public void folderDropOff(GameObject folder)
     {

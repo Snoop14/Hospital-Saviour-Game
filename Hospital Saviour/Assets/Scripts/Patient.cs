@@ -15,7 +15,7 @@ public class Patient : MonoBehaviour
     public Vector3 queuePosition;
 
     //array to hold states of this patient type
-    private string[] actions = { "waiting", "walking", "bed", "waiting", "soup", "eating", "complete" };
+    private string[] actions = { "waiting", "walking"};
 
     //integer to hold current position in the state array
     private int actionsVal;
@@ -82,9 +82,6 @@ public class Patient : MonoBehaviour
         Vector3 lookAtTarget = new Vector3(targetPosition.x, transform.position.y, targetPosition.z);
         transform.LookAt(lookAtTarget);
         rbody.velocity = direction * speed;
-        print(rbody.velocity);
-        print(direction);
-        print(speed);
     }
     //set initial values
     private void setState()
