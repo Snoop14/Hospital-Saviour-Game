@@ -41,20 +41,21 @@ public class Patient : MonoBehaviour
         targetPosition = transform.position;
         rbody = GetComponent<Rigidbody>();
         icon = Instantiate(iconPrefab, FindObjectOfType<Canvas>().transform);
-
+        
         sicknessIconBackground = icon.transform.GetChild(0).GetComponent<Image>();
         sicknessIcon = icon.transform.GetChild(1).GetComponent<Image>();
         sicknessIcon.SetNativeSize();
         //sicknessIcon.transform.localScale = new Vector3(0.3f,0.3f,1);
         healingIcon = icon.transform.GetChild(2).GetComponent<Image>();
         healingOrderIcons = sickness.healingOrderIcons;
+
         //change based on patient type
-        if (sickness.type == "Germ")
-        {
+        //if (sickness.type == "Germ") //It will change regardless so I am unsure as to whether this is needed?
+        //{
             sicknessIconBackground.sprite = sickness.sicknessIconBackGround;
             sicknessIcon.sprite = sickness.sicknessIcon;
             healingIcon.sprite = healingOrderIcons[0];
-        }
+        //}
 
         setState();
     }
@@ -97,7 +98,7 @@ public class Patient : MonoBehaviour
     }
 
     //move to next state
-    private void iterateState()
+    private void iterateState() //Due to changes in the action array we will need to change this
     {
         //add 1 to the current position
         actionsVal += 1;
@@ -110,14 +111,14 @@ public class Patient : MonoBehaviour
     public void releaseFolder()
     {
         isHoldingFolder = false;
-        folder = null;
+        //folder = null; //is this okay to be null, this way we still know exactly which folder is actually the patients
     }
 
     public void folderPlaced(GameObject place)
     {
         assignedPlacement = place;
         targetPosition = assignedPlacement.transform.position - new Vector3(0,0,1.0f);
-        iterateState();
+        iterateState(); //Due to changes in the action array we may need to change this
     }
 
     public void moveInQueue(Vector3 pos)
@@ -128,16 +129,31 @@ public class Patient : MonoBehaviour
     
     private void OnCollisionEnter(Collision other)
     {
+        //Due to changes made elsewhere (actions array), this will likely also need to be changed
+        /*
         if(other.gameObject.CompareTag("Bed"))
         {
-            iterateState(); // set state to bed
+            iterateState(); // set state to bed 
             print("Patient: " + other.gameObject.name + " entered collider");
+        }
+        */
+
+        if(other.gameObject.TryGetComponent(out Bed b))
+        {
+            if(b.currentFolder == folder)
+            {
+                b.NPCInteract(gameObject);
+                changePosToBed();
+            }
         }
     }
 
     public void changePosToBed()
     {
-        iterateState(); // set state to waiting
+        //iterateState(); // set state to waiting //Due to changes in the action array we may need to change this
+
+        currState = actions[0];
+
         Debug.Log("Patient: Switched to bed");
         transform.parent = assignedPlacement.transform; //changes the parent of folder to the transfered object
         transform.localPosition = new Vector3(0f, 1f, 0f);

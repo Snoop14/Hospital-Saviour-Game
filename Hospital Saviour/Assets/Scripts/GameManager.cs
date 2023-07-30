@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
             p.isInteractable = true;
             p.isHoldingFolder = true;
             p.folder = newFolder;
-            p.sickness = sicknessList[0];
+            p.sickness = sicknessList[2];
 
             patientQueue.Add(newPatient);
         }

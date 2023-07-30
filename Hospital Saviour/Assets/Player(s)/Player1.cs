@@ -69,6 +69,31 @@ public class Player1 : MonoBehaviour
                     }
                 }
             }
+            else if (itemType == "Soup")
+            {
+                foreach (GameObject go in collidingObjects)
+                {
+                    if (manager.objectList.Contains(go))
+                    {
+                        Bed b = go.GetComponent<Bed>();
+                        if (b && b.isActive && b.isInteractable && b.hasFolder && b.isOccupied)
+                        {
+                            Soup s = item.GetComponent<Soup>();
+                            s.transferTo(go);
+                            s.changePosToBed();
+
+                            //Stuff needs to be done here to actually continue with soup hand off
+
+
+                            isCarrying = false;
+                            item = null;
+                            itemType = "";
+                            break;
+                        }
+                    }
+                }
+            }
+
         }
         else
         {

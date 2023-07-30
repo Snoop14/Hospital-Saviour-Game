@@ -13,4 +13,10 @@ public class Soup : MonoBehaviour
         transform.localPosition = new Vector3(0f, 0.5f, 0.85f);
         transform.localRotation = new Quaternion(0f, 0f, 0f, 0f); //resets rotation
     }
+
+    public void changePosToBed()
+    {
+        transform.localPosition = new Vector3(0f, 1.75f, 0f); //Values will need to be changed
+        transform.localRotation = new Quaternion(0f, 0f, 0f, 0f); //resets rotation
+    }
 }

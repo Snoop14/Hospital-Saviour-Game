@@ -29,6 +29,7 @@ public class Bed : MonoBehaviour
         Debug.Log("Bed: Assigned patient");
         currentPatient = patient;
         isOccupied = true;
-        isActive = true; // Please confirm
+        //isActive = true; // Please confirm
+        //Patient should only be able to get on a bed that is already active
     }
 }

@@ -12,18 +12,19 @@ public class SoupMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        generateSoup();
+        StartCoroutine(generateSoup());
     }
 
     public void soupPickUp()
     {
         currentSoup = null;
-        generateSoup();
+        StartCoroutine(generateSoup());
     }
 
     //Generates a new soup at the specific location
-    void generateSoup()
+    IEnumerator generateSoup()
     {
+        yield return new WaitForSeconds(1.0f);
         Vector3 spawnLoc = new Vector3(transform.localPosition.x, 
                                        transform.localPosition.y + 1.1255f, 
                                        transform.localPosition.z - 0.1f);
