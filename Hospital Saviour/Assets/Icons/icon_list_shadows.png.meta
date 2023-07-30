@@ -1,0 +1,1271 @@
+fileFormatVersion: 2
+guid: 9ff7471cab857854198d8e66b2f24c1e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3748888889129515824
+    second: icon_list_shadows_0
+  - first:
+      213: -355604372273936786
+    second: icon_list_shadows_1
+  - first:
+      213: 6233268190067904798
+    second: icon_list_shadows_2
+  - first:
+      213: -7003106514825295522
+    second: icon_list_shadows_3
+  - first:
+      213: -3157414378716861659
+    second: icon_list_shadows_4
+  - first:
+      213: -3715147670689906002
+    second: Soup
+  - first:
+      213: 8796340836314443512
+    second: icon_list_shadows_6
+  - first:
+      213: 4967682356312951864
+    second: icon_list_shadows_7
+  - first:
+      213: -101160352664514759
+    second: icon_list_shadows_8
+  - first:
+      213: -3276331294588746092
+    second: icon_list_shadows_9
+  - first:
+      213: -3451461004036661188
+    second: icon_list_shadows_10
+  - first:
+      213: -7205681741152595082
+    second: icon_list_shadows_11
+  - first:
+      213: -5306990748058841821
+    second: icon_list_shadows_12
+  - first:
+      213: -3811998956066803302
+    second: icon_list_shadows_13
+  - first:
+      213: -1909336906160165703
+    second: icon_list_shadows_14
+  - first:
+      213: 7890862248720408546
+    second: icon_list_shadows_15
+  - first:
+      213: 7643999259914046574
+    second: icon_list_shadows_16
+  - first:
+      213: 8299144151959523198
+    second: icon_list_shadows_17
+  - first:
+      213: 6434312666144044652
+    second: icon_list_shadows_18
+  - first:
+      213: 5069492032870394550
+    second: icon_list_shadows_19
+  - first:
+      213: 1014459882808501654
+    second: icon_list_shadows_20
+  - first:
+      213: 5856651982786975897
+    second: icon_list_shadows_21
+  - first:
+      213: -5583034420727875908
+    second: icon_list_shadows_22
+  - first:
+      213: -4677818171921200427
+    second: icon_list_shadows_23
+  - first:
+      213: -6518570935935917966
+    second: icon_list_shadows_24
+  - first:
+      213: 5142614496686598639
+    second: icon_list_shadows_25
+  - first:
+      213: -487448007538941673
+    second: icon_list_shadows_26
+  - first:
+      213: -8718996536032161487
+    second: icon_list_shadows_27
+  - first:
+      213: -5420991979209080202
+    second: icon_list_shadows_28
+  - first:
+      213: -6081544342116500838
+    second: icon_list_shadows_29
+  - first:
+      213: 8542866620707765348
+    second: icon_list_shadows_30
+  - first:
+      213: -7672177230382023882
+    second: icon_list_shadows_31
+  - first:
+      213: 1658017803110585727
+    second: icon_list_shadows_32
+  - first:
+      213: 1129989228358263504
+    second: icon_list_shadows_33
+  - first:
+      213: 7937392517868439458
+    second: icon_list_shadows_34
+  - first:
+      213: 2430391320537465674
+    second: icon_list_shadows_35
+  - first:
+      213: -575020359550666827
+    second: icon_list_shadows_36
+  - first:
+      213: -8697336847983094311
+    second: icon_list_shadows_37
+  - first:
+      213: -8112004617022763607
+    second: icon_list_shadows_38
+  - first:
+      213: -4245344801368065883
+    second: icon_list_shadows_39
+  - first:
+      213: -2192914785306118220
+    second: icon_list_shadows_40
+  - first:
+      213: 3932549287322548707
+    second: icon_list_shadows_41
+  - first:
+      213: -4466394229333114666
+    second: icon_list_shadows_42
+  - first:
+      213: -1163325551514929805
+    second: icon_list_shadows_43
+  - first:
+      213: -3252532290555385969
+    second: icon_list_shadows_44
+  - first:
+      213: -9208744537372893318
+    second: icon_list_shadows_45
+  - first:
+      213: 4564478783521190799
+    second: icon_list_shadows_46
+  - first:
+      213: -259241916477610132
+    second: icon_list_shadows_47
+  - first:
+      213: 5608346624214886593
+    second: icon_list_shadows_48
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 400
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: icon_list_shadows_0
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 1935
+        width: 227
+        height: 232
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03b39fa059ab60430800000000000000
+      internalID: 3748888889129515824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_1
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 1935
+        width: 228
+        height: 232
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e66490e15b3a01bf0800000000000000
+      internalID: -355604372273936786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_2
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 1942
+        width: 232
+        height: 216
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e115db2c464018650800000000000000
+      internalID: 6233268190067904798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_3
+      rect:
+        serializedVersion: 2
+        x: 1031
+        y: 1935
+        width: 190
+        height: 232
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e594d939ab7ffce90800000000000000
+      internalID: -7003106514825295522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_4
+      rect:
+        serializedVersion: 2
+        x: 1371
+        y: 1934
+        width: 135
+        height: 233
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52beedbe95c9e24d0800000000000000
+      internalID: -3157414378716861659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soup
+      rect:
+        serializedVersion: 2
+        x: 1637
+        y: 1934
+        width: 228
+        height: 232
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea2886090e4217cc0800000000000000
+      internalID: -3715147670689906002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_6
+      rect:
+        serializedVersion: 2
+        x: 1958
+        y: 1934
+        width: 212
+        height: 233
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fee8c7b261e21a70800000000000000
+      internalID: 8796340836314443512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_7
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 1620
+        width: 260
+        height: 234
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83c420d78c0c0f440800000000000000
+      internalID: 4967682356312951864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_8
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 1631
+        width: 80
+        height: 211
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93f041af13b989ef0800000000000000
+      internalID: -101160352664514759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_9
+      rect:
+        serializedVersion: 2
+        x: 701
+        y: 1641
+        width: 224
+        height: 191
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 496ca8bdb022882d0800000000000000
+      internalID: -3276331294588746092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_10
+      rect:
+        serializedVersion: 2
+        x: 984
+        y: 1641
+        width: 283
+        height: 191
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c302842e082f910d0800000000000000
+      internalID: -3451461004036661188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_11
+      rect:
+        serializedVersion: 2
+        x: 1286
+        y: 1612
+        width: 305
+        height: 249
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 673d41e32a6400c90800000000000000
+      internalID: -7205681741152595082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_12
+      rect:
+        serializedVersion: 2
+        x: 1661
+        y: 1584
+        width: 180
+        height: 306
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32d0ba34808c956b0800000000000000
+      internalID: -5306990748058841821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_13
+      rect:
+        serializedVersion: 2
+        x: 1951
+        y: 1640
+        width: 225
+        height: 193
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a917a73752f091bc0800000000000000
+      internalID: -3811998956066803302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_14
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 1314
+        width: 233
+        height: 218
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bca7cf233ca085e0800000000000000
+      internalID: -1909336906160165703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_15
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 1317
+        width: 232
+        height: 212
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ef158a5869f18d60800000000000000
+      internalID: 7890862248720408546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_16
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 1319
+        width: 232
+        height: 207
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6c8686c3d0f41a60800000000000000
+      internalID: 7643999259914046574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_17
+      rect:
+        serializedVersion: 2
+        x: 1014
+        y: 1306
+        width: 224
+        height: 232
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7fce4da2ab7c2370800000000000000
+      internalID: 8299144151959523198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_18
+      rect:
+        serializedVersion: 2
+        x: 1322
+        y: 1326
+        width: 232
+        height: 193
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c66ff4787454b4950800000000000000
+      internalID: 6434312666144044652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_19
+      rect:
+        serializedVersion: 2
+        x: 1655
+        y: 1345
+        width: 192
+        height: 156
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6baa9e205247a5640800000000000000
+      internalID: 5069492032870394550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_20
+      rect:
+        serializedVersion: 2
+        x: 1988
+        y: 1329
+        width: 153
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6956fa973e5141e00800000000000000
+      internalID: 1014459882808501654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_21
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 1001
+        width: 199
+        height: 215
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 998da1fc2f1074150800000000000000
+      internalID: 5856651982786975897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_22
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 1021
+        width: 200
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb67cb746c31582b0800000000000000
+      internalID: -5583034420727875908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_23
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 1006
+        width: 232
+        height: 217
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5da05c2282d051fb0800000000000000
+      internalID: -4677818171921200427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_24
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 987
+        width: 219
+        height: 271
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 270aa5845426985a0800000000000000
+      internalID: -6518570935935917966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_25
+      rect:
+        serializedVersion: 2
+        x: 1331
+        y: 1012
+        width: 212
+        height: 207
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe967c353ac3e5740800000000000000
+      internalID: 5142614496686598639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_27
+      rect:
+        serializedVersion: 2
+        x: 1664
+        y: 1003
+        width: 175
+        height: 210
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13111ff78d6eff680800000000000000
+      internalID: -8718996536032161487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_28
+      rect:
+        serializedVersion: 2
+        x: 1951
+        y: 1012
+        width: 225
+        height: 193
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 672400d3484c4c4b0800000000000000
+      internalID: -5420991979209080202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_29
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 713
+        width: 281
+        height: 164
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9afb5a64a30a9ba0800000000000000
+      internalID: -6081544342116500838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_30
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 679
+        width: 208
+        height: 232
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46cf3d2fdeb5e8670800000000000000
+      internalID: 8542866620707765348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_31
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 713
+        width: 213
+        height: 155
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63b3d393573f68590800000000000000
+      internalID: -7672177230382023882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_32
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 687
+        width: 233
+        height: 217
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f751ea94866720710800000000000000
+      internalID: 1658017803110585727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_33
+      rect:
+        serializedVersion: 2
+        x: 1308
+        y: 670
+        width: 283
+        height: 248
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d2ef4c57378eaf00800000000000000
+      internalID: 1129989228358263504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_34
+      rect:
+        serializedVersion: 2
+        x: 1694
+        y: 679
+        width: 137
+        height: 232
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a7446ed078472e60800000000000000
+      internalID: 7937392517868439458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_35
+      rect:
+        serializedVersion: 2
+        x: 1980
+        y: 708
+        width: 166
+        height: 173
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4304dd770c7ab120800000000000000
+      internalID: 2430391320537465674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_36
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 395
+        width: 284
+        height: 171
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b77d52970e1508f0800000000000000
+      internalID: -575020359550666827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_37
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 375
+        width: 281
+        height: 211
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d55d0c973adc4780800000000000000
+      internalID: -8697336847983094311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_38
+      rect:
+        serializedVersion: 2
+        x: 701
+        y: 362
+        width: 224
+        height: 238
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ad8702b7ce5c6f80800000000000000
+      internalID: -8112004617022763607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_39
+      rect:
+        serializedVersion: 2
+        x: 1081
+        y: 366
+        width: 90
+        height: 229
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a8b76d55618515c0800000000000000
+      internalID: -4245344801368065883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_40
+      rect:
+        serializedVersion: 2
+        x: 1350
+        y: 381
+        width: 177
+        height: 198
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b7702f0f933191e0800000000000000
+      internalID: -2192914785306118220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_41
+      rect:
+        serializedVersion: 2
+        x: 1676
+        y: 388
+        width: 150
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e97394cdb8339630800000000000000
+      internalID: 3932549287322548707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_42
+      rect:
+        serializedVersion: 2
+        x: 1961
+        y: 377
+        width: 206
+        height: 207
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d0ceb5cc1e2402c0800000000000000
+      internalID: -4466394229333114666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_43
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 51
+        width: 190
+        height: 232
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37531df03990bdfe0800000000000000
+      internalID: -1163325551514929805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_44
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 51
+        width: 208
+        height: 232
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8765f84d1facd2d0800000000000000
+      internalID: -3252532290555385969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_45
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 58
+        width: 232
+        height: 218
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7fd19e12a7f33080800000000000000
+      internalID: -9208744537372893318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_46
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 60
+        width: 233
+        height: 214
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f83769c1549485f30800000000000000
+      internalID: 4564478783521190799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_47
+      rect:
+        serializedVersion: 2
+        x: 1322
+        y: 59
+        width: 232
+        height: 216
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c67e579b9dcf66cf0800000000000000
+      internalID: -259241916477610132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_list_shadows_48
+      rect:
+        serializedVersion: 2
+        x: 1635
+        y: 50
+        width: 232
+        height: 233
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c8e6995a89d4dd40800000000000000
+      internalID: 5608346624214886593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 7b4e706981bb2ea44a93b0174bf22b19
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

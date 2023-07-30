@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4479300790105107673}
   - component: {fileID: 4479300790105107679}
-  - component: {fileID: 4479300790105107672}
   m_Layer: 0
   m_Name: Folder
   m_TagString: Interactable
@@ -26,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4479300790105107674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.34, z: 4.13}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4479300790401199286}
@@ -47,19 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a20a86707307a4d4485fa6d608531644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &4479300790105107672
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4479300790105107674}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.04, z: 0.65}
-  m_Center: {x: 0, y: 0.018757775, z: 0.02229619}
+  patientOwner: {fileID: 0}
 --- !u!1 &4479300790401199287
 GameObject:
   m_ObjectHideFlags: 0
