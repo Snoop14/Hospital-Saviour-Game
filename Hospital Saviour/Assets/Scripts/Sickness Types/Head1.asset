@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Head1
   m_EditorClassIdentifier: 
   type: Head1
-  sicknessIcon: {fileID: 1118433847174912979, guid: 10fb8a5f49079294bac67cd584019b84,
+  sicknessIcon: {fileID: 2430391320537465674, guid: 9ff7471cab857854198d8e66b2f24c1e,
     type: 3}
   sicknessIconBackGround: {fileID: -4139347571040828393, guid: 733a70509c526d848bd7f8d32cc9ed41,
     type: 3}

@@ -15,7 +15,7 @@ GameObject:
   m_Name: Pillow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6853455510020946369
@@ -94,7 +94,7 @@ GameObject:
   m_Name: Bed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &2122912624468757111
@@ -169,6 +169,7 @@ GameObject:
   - component: {fileID: 6958602824932283035}
   - component: {fileID: 7223641871480285765}
   - component: {fileID: 3169181904613109600}
+  - component: {fileID: 5383703525764856101}
   m_Layer: 0
   m_Name: Bed
   m_TagString: Untagged
@@ -222,6 +223,22 @@ MonoBehaviour:
   isOccupied: 0
   isInteractable: 0
   hasFolder: 0
+--- !u!208 &5383703525764856101
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8854363157470512984}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &9084052221634461383
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,7 +254,7 @@ GameObject:
   m_Name: Clip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7373313891856016901

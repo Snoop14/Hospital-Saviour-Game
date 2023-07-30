@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class Patient : MonoBehaviour
 {
+    private NavMeshAgent agent;
+
     public bool isInteractable = false;
     //bool to hold if carrying folder
     public bool isHoldingFolder = false;
@@ -35,8 +38,12 @@ public class Patient : MonoBehaviour
     Image healingIcon;
     List<Sprite> healingOrderIcons;
 
+    private int currHeal = 0;
+
     void Start()
     {
+        agent = gameObject.GetComponent<NavMeshAgent>();
+
         speed = 7.0f;
         targetPosition = transform.position;
         rbody = GetComponent<Rigidbody>();
@@ -52,9 +59,10 @@ public class Patient : MonoBehaviour
         //change based on patient type
         //if (sickness.type == "Germ") //It will change regardless so I am unsure as to whether this is needed?
         //{
-            sicknessIconBackground.sprite = sickness.sicknessIconBackGround;
-            sicknessIcon.sprite = sickness.sicknessIcon;
-            healingIcon.sprite = healingOrderIcons[0];
+        sicknessIconBackground.sprite = sickness.sicknessIconBackGround;
+        sicknessIcon.sprite = sickness.sicknessIcon;
+        healingIcon.sprite = healingOrderIcons[currHeal];
+        healingIcon.SetNativeSize();
         //}
 
         setState();
@@ -79,10 +87,13 @@ public class Patient : MonoBehaviour
 
     public void move()
     {
+        agent.SetDestination(targetPosition);
+        /*
         Vector3 direction = (targetPosition - transform.position).normalized;
         Vector3 lookAtTarget = new Vector3(targetPosition.x, transform.position.y, targetPosition.z);
         transform.LookAt(lookAtTarget);
         rbody.velocity = direction * speed;
+        */
     }
     //set initial values
     private void setState()
@@ -144,6 +155,7 @@ public class Patient : MonoBehaviour
             {
                 b.NPCInteract(gameObject);
                 changePosToBed();
+                icon.transform.GetChild(2).gameObject.SetActive(true);
             }
         }
     }

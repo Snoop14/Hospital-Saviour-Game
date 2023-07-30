@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] NavMeshSurface surface;
+
     [Header("Prefabs")]
     [SerializeField]
     GameObject bedPrefab;
@@ -67,6 +70,7 @@ public class GameManager : MonoBehaviour
         
         generateObjects();
         assignPatientPositions();
+        surface.BuildNavMesh();
         InvokeRepeating("checkWalkingPatients", 2.0f, 0.1f); // repeat every 0.1 seconds
     }
 
@@ -117,7 +121,7 @@ public class GameManager : MonoBehaviour
             p.isInteractable = true;
             p.isHoldingFolder = true;
             p.folder = newFolder;
-            p.sickness = sicknessList[2];
+            p.sickness = sicknessList[0];
 
             patientQueue.Add(newPatient);
         }
