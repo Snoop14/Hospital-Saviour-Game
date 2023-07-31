@@ -500,7 +500,7 @@ MonoBehaviour:
   bedSeperation: 3
   patientCount: 4
   patientSeperation: 4
-  initialPosition: {x: -12, y: 0, z: -5}
+  initialPosition: {x: -5, y: 0, z: -10}
   sicknessList:
   - {fileID: 11400000, guid: b65efb007cc28354682960938d9b4a5e, type: 2}
   - {fileID: 11400000, guid: dd31ea45492c3ee42af4e7a07217667a, type: 2}

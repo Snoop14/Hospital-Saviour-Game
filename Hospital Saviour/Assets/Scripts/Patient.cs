@@ -69,13 +69,36 @@ public class Patient : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (currState == actions[1])  // walking
+        //if (currState == actions[1])  // walking
+        //{
+        if (currState == "walking" && transform.position != targetPosition)
         {
             move();
+
+            isInteractable = false;
+            
         }
+            
+            //move();
+            
+        //}
         else
         {
+            //Debug.Log("Else");
             rbody.velocity = Vector3.zero;
+
+            isInteractable = true;
+
+            //reset actions state to 0 (will need changing later, as we do not want to reset the states like this)
+            if (currState != "waiting")
+            {
+                setState();
+            }
+            
+
+            //transform.LookAt(Vector3.back);          
+            
+            
         }
     }
 
@@ -85,13 +108,16 @@ public class Patient : MonoBehaviour
         Vector3 lookAtTarget = new Vector3(targetPosition.x, transform.position.y, targetPosition.z);
         transform.LookAt(lookAtTarget);
         rbody.velocity = direction * speed;
+
+
     }
+
     //set initial values
     private void setState()
     {
         actionsVal = 0;
         currState = actions[actionsVal];
-        //Debug.Log(currState);
+        Debug.Log(currState);
     }
 
     public string getState()
@@ -127,8 +153,12 @@ public class Patient : MonoBehaviour
     {
         queuePosition = pos;
         targetPosition = queuePosition;
-        Debug.Log(targetPosition);
-        Debug.Log("moving func called");
+        //Debug.Log(targetPosition);
+        //Debug.Log("moving func called");
+        
+        //move state on by 1
+        iterateState();
+        
     }
 
     private void OnCollisionEnter(Collision other)
@@ -200,7 +230,15 @@ public class Patient : MonoBehaviour
             Debug.Log("else");
             //iconPos += 1;
             healingIcon.sprite = healingOrderIcons[iconPos];
-            icon = healingIcon;
+            healingIcon.SetNativeSize();
+            healingIcon.transform.localScale = new Vector3(0.3f,0.3f,1);
+
+            //turn off sickness icon
+            icon.transform.GetChild(1).gameObject.SetActive(false);
+            //turn on healing icon
+            icon.transform.GetChild(2).gameObject.SetActive(true);
+            
+            //icon = healingIcon;
         }
 
 

@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     List<Vector3> queuePositions;
     List<GameObject> patientInTransitQueue;
     [SerializeField]
-    Vector3 initialPosition = new Vector3(-12, 0, -5);
+    Vector3 initialPosition = new Vector3(-5, 0, -10);
 
     public List<Sickness> sicknessList;
 
@@ -68,6 +68,9 @@ public class GameManager : MonoBehaviour
         generateObjects();
         assignPatientPositions();
         InvokeRepeating("checkWalkingPatients", 2.0f, 0.1f); // repeat every 0.1 seconds
+
+        // Debug.Log("start" + initialPosition);
+
     }
 
     void generateObjects()
@@ -131,9 +134,10 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < patientCount; i++)
         {
+            //Debug.Log(initialPosition);
             queuePositions.Add(initialPosition + new Vector3(patientSeperation * (-i), 0, 0));
             patientQueue[i].GetComponent<Patient>().queuePosition = queuePositions[i];
-            Debug.Log(queuePositions[i]);
+            //Debug.Log("proof " + queuePositions[i]);
 
         }
     }
