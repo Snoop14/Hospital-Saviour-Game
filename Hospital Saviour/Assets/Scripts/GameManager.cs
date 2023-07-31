@@ -133,6 +133,8 @@ public class GameManager : MonoBehaviour
         {
             queuePositions.Add(initialPosition + new Vector3(patientSeperation * (-i), 0, 0));
             patientQueue[i].GetComponent<Patient>().queuePosition = queuePositions[i];
+            Debug.Log(queuePositions[i]);
+
         }
     }
 
@@ -143,6 +145,9 @@ public class GameManager : MonoBehaviour
         for(int i = 0; i < patientQueue.Count; i++)
         {
             patientQueue[i].GetComponent<Patient>().moveInQueue(queuePositions[i]);
+            //Debug.Log(patientQueue[i].GetComponent<Patientv>());
+            //Debug.Log(queuePositions[i]);
+            //Debug.Log("adjusting Queue");
         }
     }
 

@@ -107,7 +107,7 @@ public class Patient : MonoBehaviour
         //change the state
         currState = actions[actionsVal];
 
-        Debug.Log(currState);
+        //Debug.Log(currState);
     }
 
     public void releaseFolder()
@@ -127,6 +127,8 @@ public class Patient : MonoBehaviour
     {
         queuePosition = pos;
         targetPosition = queuePosition;
+        Debug.Log(targetPosition);
+        Debug.Log("moving func called");
     }
 
     private void OnCollisionEnter(Collision other)
@@ -156,7 +158,7 @@ public class Patient : MonoBehaviour
 
         currState = actions[0];
 
-        Debug.Log("Patient: Switched to bed");
+        //Debug.Log("Patient: Switched to bed");
         transform.parent = assignedPlacement.transform; //changes the parent of folder to the transfered object
         transform.localPosition = new Vector3(0f, 1f, 0f);
         transform.localRotation = new Quaternion(0f, 0f, 0f, 0f); //resets rotation
