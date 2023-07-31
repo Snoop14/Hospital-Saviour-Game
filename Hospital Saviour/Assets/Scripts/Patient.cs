@@ -185,7 +185,8 @@ public class Patient : MonoBehaviour
 
     private void iterateIcons() 
     {
-        Debug.Log(icon.sprite);
+        //Debug.Log(icon.sprite);
+        Debug.Log(iconPrefab);
         if (icon.sprite == sickness.sicknessIcon)
         {
             Debug.Log("If");
