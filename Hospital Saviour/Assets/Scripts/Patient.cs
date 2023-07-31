@@ -34,6 +34,8 @@ public class Patient : MonoBehaviour
     Image sicknessIcon;
     Image healingIcon;
     List<Sprite> healingOrderIcons;
+    //int to hold position in icons
+    private int iconPos = 0;
 
     void Start()
     {
@@ -54,7 +56,7 @@ public class Patient : MonoBehaviour
         //{
         sicknessIconBackground.sprite = sickness.sicknessIconBackGround;
         sicknessIcon.sprite = sickness.sicknessIcon;
-        healingIcon.sprite = healingOrderIcons[0];
+        healingIcon.sprite = healingOrderIcons[iconPos];
         //}
 
         setState();
@@ -89,7 +91,7 @@ public class Patient : MonoBehaviour
     {
         actionsVal = 0;
         currState = actions[actionsVal];
-        Debug.Log(currState);
+        //Debug.Log(currState);
     }
 
     public string getState()
@@ -170,6 +172,34 @@ public class Patient : MonoBehaviour
     public void interactionOnBed()
     {
         Debug.Log("I'm Occupied");
+
+        //change icon
+        //Debug.Log(healingOrderIcons.Count);
+        //healingIcon.sprite = healingOrderIcons[1];
+
+        iterateIcons();
+
+        //change state
+
+    }
+
+    private void iterateIcons() 
+    {
+        Debug.Log(icon.sprite);
+        if (icon.sprite == sickness.sicknessIcon)
+        {
+            Debug.Log("If");
+            icon = healingIcon;
+        }
+        else
+        {
+            //need to add a checker later on to prevent going out of range
+            Debug.Log("else");
+            //iconPos += 1;
+            healingIcon.sprite = healingOrderIcons[iconPos];
+            icon = healingIcon;
+        }
+
 
     }
 }
