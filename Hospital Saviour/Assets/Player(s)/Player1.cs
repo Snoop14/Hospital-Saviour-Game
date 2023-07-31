@@ -81,10 +81,10 @@ public class Player1 : MonoBehaviour
                             Soup s = item.GetComponent<Soup>();
                             s.transferTo(go);
                             s.changePosToBed();
+                            StartCoroutine(s.destroySelf());
 
                             //Stuff needs to be done here to actually continue with soup hand off
                             b.currentPatient.GetComponent<Patient>().healOnBed(itemType);
-
 
                             isCarrying = false;
                             item = null;

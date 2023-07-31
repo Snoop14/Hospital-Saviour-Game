@@ -19,9 +19,10 @@ public class Bed : MonoBehaviour
         hasFolder = true;
     }
 
-    private void FolderPickUp()
+    public void FolderPickUp()
     {
         currentFolder = null;
+        hasFolder = false;
     }
 
     public void NPCInteract(GameObject patient)
@@ -31,5 +32,11 @@ public class Bed : MonoBehaviour
         isOccupied = true;
         //isActive = true; // Please confirm
         //Patient should only be able to get on a bed that is already active
+    }
+
+    public void NPCLeaves()
+    {
+        currentPatient = null;
+        isOccupied = false;
     }
 }

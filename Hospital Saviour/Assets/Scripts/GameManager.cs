@@ -69,8 +69,8 @@ public class GameManager : MonoBehaviour
         **/
         
         generateObjects();
+        
         assignPatientPositions();
-        surface.BuildNavMesh();
         InvokeRepeating("checkWalkingPatients", 2.0f, 0.1f); // repeat every 0.1 seconds
     }
 
@@ -103,6 +103,8 @@ public class GameManager : MonoBehaviour
             b.isActive = true;
             b.isInteractable = true;
         }
+
+        surface.BuildNavMesh();
 
         //Instatiate Patients and folders
         for (int i = 0; i < patientCount; i++)

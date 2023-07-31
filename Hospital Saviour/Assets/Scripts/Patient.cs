@@ -27,7 +27,7 @@ public class Patient : MonoBehaviour
     private string currState;
 
     Rigidbody rbody;
-    float speed;
+
     Vector3 targetPosition;
 
     public Image iconPrefab; // Assign this in the Inspector
@@ -44,7 +44,6 @@ public class Patient : MonoBehaviour
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
 
-        speed = 7.0f;
         targetPosition = transform.position;
         rbody = GetComponent<Rigidbody>();
         icon = Instantiate(iconPrefab, FindObjectOfType<Canvas>().transform);
@@ -88,12 +87,6 @@ public class Patient : MonoBehaviour
     public void move()
     {
         agent.SetDestination(targetPosition);
-        /*
-        Vector3 direction = (targetPosition - transform.position).normalized;
-        Vector3 lookAtTarget = new Vector3(targetPosition.x, transform.position.y, targetPosition.z);
-        transform.LookAt(lookAtTarget);
-        rbody.velocity = direction * speed;
-        */
     }
     //set initial values
     private void setState()
@@ -129,7 +122,7 @@ public class Patient : MonoBehaviour
     {
         assignedPlacement = place;
         targetPosition = assignedPlacement.transform.position - new Vector3(0,0,1.0f);
-        iterateState(); //Due to changes in the action array we may need to change this
+        agent.SetDestination(targetPosition);
     }
 
     public void moveInQueue(Vector3 pos)
@@ -141,15 +134,6 @@ public class Patient : MonoBehaviour
     
     private void OnCollisionEnter(Collision other)
     {
-        //Due to changes made elsewhere (actions array), this will likely also need to be changed
-        /*
-        if(other.gameObject.CompareTag("Bed"))
-        {
-            iterateState(); // set state to bed 
-            print("Patient: " + other.gameObject.name + " entered collider");
-        }
-        */
-
         if(other.gameObject.TryGetComponent(out Bed b))
         {
             if(b.currentFolder == folder)
@@ -168,7 +152,7 @@ public class Patient : MonoBehaviour
         currState = actions[0];
 
         Debug.Log("Patient: Switched to bed");
-        agent.enabled = false;
+        agent.enabled = false;//Disable AI movement
         transform.parent = assignedPlacement.transform; //changes the parent of folder to the transfered object
         transform.localPosition = new Vector3(0f, 1f, 0f);
         transform.localRotation = new Quaternion(0f, 0f, 0f, 0f); //resets rotation
@@ -180,26 +164,40 @@ public class Patient : MonoBehaviour
         return assignedPlacement.GetComponent<GameObject>();
     }
 
+    //Called when an object is given to the patient while they are on the bed
     public void healOnBed(string item)
     {
-        
-        //We will need to change the names of the icons so we can use healingIcon.name instead of hard coding
-        if(item == "Soup") //healingIcon.name 
+        if(item == healingIcon.sprite.name) 
         {
             currHeal++;
-            if (currHeal == healingOrderIcons.Count)
-            {
-                StartCoroutine(leaveHospital());
-            }
+        }
+
+        if (currHeal == healingOrderIcons.Count)
+        {
+            StartCoroutine(leaveBed(assignedPlacement));
+        }
+        else
+        {
+            healingIcon.sprite = healingOrderIcons[currHeal];
         }
     }
 
-    IEnumerator leaveHospital()
+
+    IEnumerator leaveBed(GameObject bed)
     {
         yield return new WaitForSeconds(1.5f);
+        Bed b = bed.GetComponent<Bed>();
+        b.FolderPickUp();
+        b.NPCLeaves();
+        folder.GetComponent<Folder>().destroySelf();
+        leaveHospital();
+    }
+    //called when patient is to leave the hospital
+    private void leaveHospital()
+    {
         agent.enabled = true;
+        icon.gameObject.SetActive(false);
         Vector3 leaveLoc = new Vector3(-13.5f, 0.5f, 13.5f);
         agent.SetDestination(leaveLoc);
-
     }
 }
