@@ -83,6 +83,7 @@ public class Player1 : MonoBehaviour
                             s.changePosToBed();
 
                             //Stuff needs to be done here to actually continue with soup hand off
+                            b.currentPatient.GetComponent<Patient>().healOnBed(itemType);
 
 
                             isCarrying = false;

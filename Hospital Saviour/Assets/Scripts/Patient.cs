@@ -136,6 +136,7 @@ public class Patient : MonoBehaviour
     {
         queuePosition = pos;
         targetPosition = queuePosition;
+        agent.SetDestination(targetPosition);
     }
     
     private void OnCollisionEnter(Collision other)
@@ -167,6 +168,7 @@ public class Patient : MonoBehaviour
         currState = actions[0];
 
         Debug.Log("Patient: Switched to bed");
+        agent.enabled = false;
         transform.parent = assignedPlacement.transform; //changes the parent of folder to the transfered object
         transform.localPosition = new Vector3(0f, 1f, 0f);
         transform.localRotation = new Quaternion(0f, 0f, 0f, 0f); //resets rotation
@@ -176,5 +178,28 @@ public class Patient : MonoBehaviour
     public GameObject getAssignment<GameObject>()
     {
         return assignedPlacement.GetComponent<GameObject>();
+    }
+
+    public void healOnBed(string item)
+    {
+        
+        //We will need to change the names of the icons so we can use healingIcon.name instead of hard coding
+        if(item == "Soup") //healingIcon.name 
+        {
+            currHeal++;
+            if (currHeal == healingOrderIcons.Count)
+            {
+                StartCoroutine(leaveHospital());
+            }
+        }
+    }
+
+    IEnumerator leaveHospital()
+    {
+        yield return new WaitForSeconds(1.5f);
+        agent.enabled = true;
+        Vector3 leaveLoc = new Vector3(-13.5f, 0.5f, 13.5f);
+        agent.SetDestination(leaveLoc);
+
     }
 }
