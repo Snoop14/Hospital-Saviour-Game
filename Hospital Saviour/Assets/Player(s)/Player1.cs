@@ -135,6 +135,13 @@ public class Player1 : MonoBehaviour
 
                         break;
                     }
+
+                    if (go.TryGetComponent(out Bed b))
+                    {
+                        b.interactWithPatient();
+
+                        break;
+                    }
                 }
             }
         }

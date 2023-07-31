@@ -32,4 +32,12 @@ public class Bed : MonoBehaviour
         //isActive = true; // Please confirm
         //Patient should only be able to get on a bed that is already active
     }
+
+    public void interactWithPatient ()
+    {
+        if (isOccupied)
+        {
+            GetComponentInChildren<Patient>().interactionOnBed();
+        }
+    }
 }

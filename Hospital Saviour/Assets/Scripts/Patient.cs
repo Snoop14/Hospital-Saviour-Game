@@ -15,7 +15,7 @@ public class Patient : MonoBehaviour
     public Vector3 queuePosition;
 
     //array to hold states of this patient type
-    private string[] actions = { "waiting", "walking"};
+    private string[] actions = { "waiting", "walking" };
 
     //integer to hold current position in the state array
     private int actionsVal;
@@ -41,7 +41,7 @@ public class Patient : MonoBehaviour
         targetPosition = transform.position;
         rbody = GetComponent<Rigidbody>();
         icon = Instantiate(iconPrefab, FindObjectOfType<Canvas>().transform);
-        
+
         sicknessIconBackground = icon.transform.GetChild(0).GetComponent<Image>();
         sicknessIcon = icon.transform.GetChild(1).GetComponent<Image>();
         sicknessIcon.SetNativeSize();
@@ -52,9 +52,9 @@ public class Patient : MonoBehaviour
         //change based on patient type
         //if (sickness.type == "Germ") //It will change regardless so I am unsure as to whether this is needed?
         //{
-            sicknessIconBackground.sprite = sickness.sicknessIconBackGround;
-            sicknessIcon.sprite = sickness.sicknessIcon;
-            healingIcon.sprite = healingOrderIcons[0];
+        sicknessIconBackground.sprite = sickness.sicknessIconBackGround;
+        sicknessIcon.sprite = sickness.sicknessIcon;
+        healingIcon.sprite = healingOrderIcons[0];
         //}
 
         setState();
@@ -117,7 +117,7 @@ public class Patient : MonoBehaviour
     public void folderPlaced(GameObject place)
     {
         assignedPlacement = place;
-        targetPosition = assignedPlacement.transform.position - new Vector3(0,0,1.0f);
+        targetPosition = assignedPlacement.transform.position - new Vector3(0, 0, 1.0f);
         iterateState(); //Due to changes in the action array we may need to change this
     }
 
@@ -126,7 +126,7 @@ public class Patient : MonoBehaviour
         queuePosition = pos;
         targetPosition = queuePosition;
     }
-    
+
     private void OnCollisionEnter(Collision other)
     {
         //Due to changes made elsewhere (actions array), this will likely also need to be changed
@@ -138,9 +138,9 @@ public class Patient : MonoBehaviour
         }
         */
 
-        if(other.gameObject.TryGetComponent(out Bed b))
+        if (other.gameObject.TryGetComponent(out Bed b))
         {
-            if(b.currentFolder == folder)
+            if (b.currentFolder == folder)
             {
                 b.NPCInteract(gameObject);
                 changePosToBed();
@@ -164,5 +164,12 @@ public class Patient : MonoBehaviour
     public GameObject getAssignment<GameObject>()
     {
         return assignedPlacement.GetComponent<GameObject>();
+    }
+
+    //managed interactions with player whilst on bed
+    public void interactionOnBed()
+    {
+        Debug.Log("I'm Occupied");
+
     }
 }
