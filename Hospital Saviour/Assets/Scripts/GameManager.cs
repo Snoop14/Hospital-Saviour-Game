@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < patientCount; i++)
         {
             GameObject newPatient = Instantiate(patientPrefab, patientParent, false);
-            newPatient.transform.position += new Vector3(0, 0, patientSeperation * i);
+            newPatient.transform.position += new Vector3(patientSeperation * (-i), 0, 0);
 
             GameObject newFolder = Instantiate(folderPrefab, newPatient.transform, false);
             Folder f = newFolder.GetComponent<Folder>();
@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < patientCount; i++)
         {
-            queuePositions.Add(initialPosition + new Vector3(0,0,patientSeperation*i));
+            queuePositions.Add(initialPosition + new Vector3(patientSeperation * (-i), 0, 0));
             patientQueue[i].GetComponent<Patient>().queuePosition = queuePositions[i];
         }
     }
