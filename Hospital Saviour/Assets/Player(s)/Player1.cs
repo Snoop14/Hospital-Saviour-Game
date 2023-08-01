@@ -209,6 +209,13 @@ public class Player1 : MonoBehaviour
                         i.transferTo(gameObject);
                         i.changePosToPlayer();
                     }
+
+                    if (go.TryGetComponent(out Bed b))
+                    {
+                        b.interactWithPatient(isCarrying);
+
+                        break;
+                    }
                 }
             }
         }
@@ -222,7 +229,7 @@ public class Player1 : MonoBehaviour
         if(other != null)
         {
             collidingObjects.Add(other.gameObject);
-            print(other.gameObject.name + " entered collider");
+            //print(other.gameObject.name + " entered collider");
         }
     }
 
@@ -232,7 +239,7 @@ public class Player1 : MonoBehaviour
         if (collidingObjects.Contains(other.gameObject))
         {
             collidingObjects.Remove(other.gameObject);
-            print(other.gameObject.name + " left collider");
+            //print(other.gameObject.name + " left collider");
         }
     }
 }

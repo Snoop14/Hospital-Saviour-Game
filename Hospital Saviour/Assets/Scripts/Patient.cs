@@ -38,7 +38,7 @@ public class Patient : MonoBehaviour
         agent = gameObject.GetComponent<NavMeshAgent>();
 
         targetPosition = queuePosition;
-        icon = Instantiate(iconPrefab, FindObjectOfType<Canvas>().transform,true);
+        icon = Instantiate(iconPrefab, FindObjectOfType<Canvas>().transform, true);
 
         sicknessIconBackground = icon.transform.GetChild(0).GetComponent<Image>();
         sicknessIconObject = icon.transform.GetChild(1).gameObject;
@@ -82,7 +82,7 @@ public class Patient : MonoBehaviour
     {
         assignedPlacement = place;
         isInteractable = false;
-        targetPosition = assignedPlacement.transform.position - new Vector3(0,0,1.0f);
+        targetPosition = assignedPlacement.transform.position - new Vector3(0, 0, 1.0f);
         agent.SetDestination(targetPosition);
     }
 
@@ -95,15 +95,15 @@ public class Patient : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.TryGetComponent(out Bed b))
+        if (other.gameObject.TryGetComponent(out Bed b))
         {
             if (b.currentFolder == folder)
             {
                 b.NPCInteract(gameObject);
                 changePosToBed();
                 isInteractable = true;
-                sicknessIconObject.gameObject.SetActive(false);
-                healingIconObject.gameObject.SetActive(true);
+                //sicknessIconObject.gameObject.SetActive(false);
+                //healingIconObject.gameObject.SetActive(true);
             }
         }
     }
@@ -121,7 +121,14 @@ public class Patient : MonoBehaviour
     //Called when an object is given to the patient while they are on the bed
     public void healOnBed(string item)
     {
-        if(item == healingIcon.sprite.name) 
+        //iif the sickenss icon is active
+        if (sicknessIconObject.gameObject.activeSelf)
+        {
+            //end the function
+            return;
+        }
+
+        if (item == healingIcon.sprite.name)
         {
             currHeal++;
         }
@@ -133,9 +140,17 @@ public class Patient : MonoBehaviour
         else
         {
             healingIcon.sprite = healingOrderIcons[currHeal];
+            healingIcon.SetNativeSize();
+            healingIcon.transform.localScale = new Vector3(0.3f, 0.3f, 1);
+
+            //turn off sickness icon
+            icon.transform.GetChild(1).gameObject.SetActive(false);
+            //turn on healing icon
+            icon.transform.GetChild(2).gameObject.SetActive(true);
+
+            //icon = healingIcon;
         }
     }
-
 
     IEnumerator leaveBed(GameObject bed)
     {
@@ -146,11 +161,41 @@ public class Patient : MonoBehaviour
         folder.GetComponent<Folder>().destroySelf();
         leaveHospital();
     }
+
     //called when patient is to leave the hospital
     private void leaveHospital()
     {
         agent.enabled = true;
         icon.gameObject.SetActive(false);
         agent.SetDestination(ExitTransform.position);
+    }
+
+    //managed interactions with player whilst on bed
+    public void interactionOnBed(bool isCarrying)
+    {
+
+        //change icon
+        iterateIcons(isCarrying);
+
+    }
+
+    private void iterateIcons(bool isCarrying)
+    {
+        if (icon.sprite == sickness.sicknessBase.sicknessIcon  && !isCarrying)
+        {
+            icon = healingIcon;
+        }
+        else
+        {
+            healingIcon.sprite = healingOrderIcons[currHeal];
+            healingIcon.SetNativeSize();
+            healingIcon.transform.localScale = new Vector3(0.3f, 0.3f, 1);
+
+            //turn off sickness icon
+            icon.transform.GetChild(1).gameObject.SetActive(false);
+            //turn on healing icon
+            icon.transform.GetChild(2).gameObject.SetActive(true);
+        }
+
     }
 }
