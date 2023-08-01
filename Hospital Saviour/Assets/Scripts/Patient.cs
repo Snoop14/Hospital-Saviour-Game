@@ -121,6 +121,13 @@ public class Patient : MonoBehaviour
     //Called when an object is given to the patient while they are on the bed
     public void healOnBed(string item)
     {
+        //iif the sickenss icon is active
+        if (sicknessIconObject.gameObject.activeSelf)
+        {
+            //end the function
+            return;
+        }
+
         if (item == healingIcon.sprite.name)
         {
             currHeal++;
@@ -167,32 +174,19 @@ public class Patient : MonoBehaviour
     public void interactionOnBed(bool isCarrying)
     {
 
-        Debug.Log("I'm Occupied");
-
         //change icon
-        //Debug.Log(healingOrderIcons.Count);
-        //healingIcon.sprite = healingOrderIcons[1];
-
         iterateIcons(isCarrying);
-
-        //change state
 
     }
 
     private void iterateIcons(bool isCarrying)
     {
-        //Debug.Log(icon.sprite);
-        Debug.Log(iconPrefab);
         if (icon.sprite == sickness.sicknessBase.sicknessIcon  && !isCarrying)
         {
-            //Debug.Log("If");
             icon = healingIcon;
         }
         else
         {
-            //need to add a checker later on to prevent going out of range
-            //Debug.Log("else");
-            //iconPos += 1;
             healingIcon.sprite = healingOrderIcons[currHeal];
             healingIcon.SetNativeSize();
             healingIcon.transform.localScale = new Vector3(0.3f, 0.3f, 1);
@@ -201,8 +195,6 @@ public class Patient : MonoBehaviour
             icon.transform.GetChild(1).gameObject.SetActive(false);
             //turn on healing icon
             icon.transform.GetChild(2).gameObject.SetActive(true);
-
-            //icon = healingIcon;
         }
 
     }
