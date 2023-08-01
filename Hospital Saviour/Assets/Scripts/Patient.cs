@@ -121,8 +121,6 @@ public class Patient : MonoBehaviour
         transform.parent = assignedPlacement.transform; //changes the parent of folder to the transfered object
         transform.localRotation = new Quaternion(0f, 0f, 0f, 0f); //resets rotation
         animator.SetTrigger(toBedHash);
-        // transform.localPosition = new Vector3(0f, 1f, 0f);
-        // transform.localRotation = Quaternion.Euler(-90f, 90f, 180f); //resets rotation
     }
 
     //Called when an object is given to the patient while they are on the bed
