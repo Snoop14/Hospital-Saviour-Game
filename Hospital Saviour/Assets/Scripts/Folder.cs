@@ -21,5 +21,10 @@ public class Folder : MonoBehaviour
         transform.localRotation = new Quaternion(0f, 0f, 0f, 0f); //resets rotation
         transform.localRotation = Quaternion.Euler(-90f, 90f, 0f); //resets rotation
     }
+
+    public void destroySelf()
+    {
+        Destroy(gameObject);
+    }
     //change pos to machine... xray 
 }

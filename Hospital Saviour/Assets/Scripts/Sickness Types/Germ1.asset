@@ -12,11 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae11008c6ec7ae54ea735565b64d687e, type: 3}
   m_Name: Germ1
   m_EditorClassIdentifier: 
-  type: Germ1
-  sicknessIcon: {fileID: -4677818171921200427, guid: 9ff7471cab857854198d8e66b2f24c1e,
-    type: 3}
-  sicknessIconBackGround: {fileID: -3379131762657576616, guid: 11d43ec6a3e751c4eb94b52bb8fcb3f6,
-    type: 3}
+  sicknessBase: {fileID: 11400000, guid: fcdaa6183a4bcca4eb5036f2f8e49bfd, type: 2}
   healingOrderIcons:
-  - {fileID: 6233268190067904798, guid: 9ff7471cab857854198d8e66b2f24c1e, type: 3}
-  happinessDropLevel: 2
+  - {fileID: 5142614496686598639, guid: 9ff7471cab857854198d8e66b2f24c1e, type: 3}
+  happinessDropLevel: 5

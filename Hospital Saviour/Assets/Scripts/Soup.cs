@@ -19,4 +19,10 @@ public class Soup : MonoBehaviour
         transform.localPosition = new Vector3(0f, 1.75f, 0f); //Values will need to be changed
         transform.localRotation = new Quaternion(0f, 0f, 0f, 0f); //resets rotation
     }
+
+    public IEnumerator destroySelf()
+    {
+        yield return new WaitForSeconds(1.5f);
+        Destroy(gameObject);
+    }
 }

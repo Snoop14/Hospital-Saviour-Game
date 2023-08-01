@@ -46,7 +46,7 @@ TextureImporter:
     second: icon_list_shadows_13
   - first:
       213: -1909336906160165703
-    second: icon_list_shadows_14
+    second: Heart
   - first:
       213: 7890862248720408546
     second: icon_list_shadows_15
@@ -79,13 +79,13 @@ TextureImporter:
     second: icon_list_shadows_24
   - first:
       213: 5142614496686598639
-    second: icon_list_shadows_25
+    second: Pill
   - first:
       213: -487448007538941673
     second: icon_list_shadows_26
   - first:
       213: -8718996536032161487
-    second: icon_list_shadows_27
+    second: Bone
   - first:
       213: -5420991979209080202
     second: icon_list_shadows_28
@@ -109,7 +109,7 @@ TextureImporter:
     second: icon_list_shadows_34
   - first:
       213: 2430391320537465674
-    second: icon_list_shadows_35
+    second: Head
   - first:
       213: -575020359550666827
     second: icon_list_shadows_36
@@ -148,7 +148,7 @@ TextureImporter:
     second: icon_list_shadows_47
   - first:
       213: 5608346624214886593
-    second: icon_list_shadows_48
+    second: Bandage
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -232,6 +232,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -540,7 +552,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icon_list_shadows_14
+      name: Heart
       rect:
         serializedVersion: 2
         x: 71
@@ -771,7 +783,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icon_list_shadows_25
+      name: Pill
       rect:
         serializedVersion: 2
         x: 1331
@@ -792,10 +804,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icon_list_shadows_27
+      name: Bone
       rect:
         serializedVersion: 2
-        x: 1664
+        x: 1671
         y: 1003
         width: 175
         height: 210
@@ -960,7 +972,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icon_list_shadows_35
+      name: Head
       rect:
         serializedVersion: 2
         x: 1980
@@ -1233,7 +1245,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icon_list_shadows_48
+      name: Bandage
       rect:
         serializedVersion: 2
         x: 1635

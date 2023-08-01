@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4479300790105107673}
   - component: {fileID: 4479300790105107679}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Folder
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -58,12 +58,12 @@ GameObject:
   - component: {fileID: 4479300790401199286}
   - component: {fileID: 4479300790401199275}
   - component: {fileID: 4479300790401199284}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FolderFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &4479300790401199286
 Transform:
@@ -137,12 +137,12 @@ GameObject:
   - component: {fileID: 4479300790798355112}
   - component: {fileID: 4479300790798355117}
   - component: {fileID: 4479300790798355118}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FolderBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &4479300790798355112
 Transform:
@@ -216,12 +216,12 @@ GameObject:
   - component: {fileID: 4479300791448135326}
   - component: {fileID: 4479300791448135324}
   - component: {fileID: 4479300791448135325}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FolderBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &4479300791448135326
 Transform:

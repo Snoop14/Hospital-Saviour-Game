@@ -6,9 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Sickness", menuName = "Sickness")]
 public class Sickness : ScriptableObject
 {
-    public string type;
-    public Sprite sicknessIcon;
-    public Sprite sicknessIconBackGround;
+    public SicknessBase sicknessBase;
     public List<Sprite> healingOrderIcons;
     public float happinessDropLevel;
 }
