@@ -209,6 +209,13 @@ public class Player1 : MonoBehaviour
                         i.transferTo(gameObject);
                         i.changePosToPlayer();
                     }
+
+                    if (go.TryGetComponent(out Bed b))
+                    {
+                        b.interactWithPatient(isCarrying);
+
+                        break;
+                    }
                 }
             }
         }
