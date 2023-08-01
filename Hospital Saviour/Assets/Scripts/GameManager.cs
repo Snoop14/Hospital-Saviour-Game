@@ -44,9 +44,10 @@ public class GameManager : MonoBehaviour
 
     List<GameObject> patientQueue;
     List<Vector3> queuePositions;
-    List<GameObject> patientInTransitQueue;
     [SerializeField]
-    Vector3 initialPosition = new Vector3(-12, 0, -5);
+    Transform EnterTransform;
+    [SerializeField]
+    Transform ExitTransform;
 
     public List<Sickness> sicknessList;
 
@@ -57,7 +58,6 @@ public class GameManager : MonoBehaviour
         patientQueue = new List<GameObject>();
         queuePositions = new List<Vector3>();
         objectList = new List<GameObject>();
-        patientInTransitQueue = new List<GameObject>();
     }
     // Start is called before the first frame update
     void Start()
@@ -69,9 +69,6 @@ public class GameManager : MonoBehaviour
         **/
         
         generateObjects();
-        
-        assignPatientPositions();
-        InvokeRepeating("checkWalkingPatients", 2.0f, 0.1f); // repeat every 0.1 seconds
     }
 
     void generateObjects()
@@ -107,26 +104,7 @@ public class GameManager : MonoBehaviour
         surface.BuildNavMesh();
 
         //Instatiate Patients and folders
-        for (int i = 0; i < patientCount; i++)
-        {
-            GameObject newPatient = Instantiate(patientPrefab, patientParent, false);
-            newPatient.transform.position += new Vector3(patientSeperation * (-i), 0, 0);
-
-            GameObject newFolder = Instantiate(folderPrefab, newPatient.transform, false);
-            Folder f = newFolder.GetComponent<Folder>();
-            f.changePosToPlayer();
-            f.patientOwner = newPatient;
-
-            //Place patient into object list
-            objectList.Add(newPatient);
-            Patient p = newPatient.GetComponent<Patient>();
-            p.isInteractable = true;
-            p.isHoldingFolder = true;
-            p.folder = newFolder;
-            p.sickness = sicknessList[0];
-
-            patientQueue.Add(newPatient);
-        }
+        StartCoroutine(CreatePatient());
 
         GameObject tempObj = GameObject.Find("SoupMachine");
         objectList.Add(tempObj);
@@ -138,21 +116,37 @@ public class GameManager : MonoBehaviour
         objectList.Add(tempObj);
     }
 
-    void assignPatientPositions()
+    IEnumerator CreatePatient()
     {
         for (int i = 0; i < patientCount; i++)
         {
-            queuePositions.Add(initialPosition + new Vector3(patientSeperation * (-i), 0, 0));
-            patientQueue[i].GetComponent<Patient>().queuePosition = queuePositions[i];
-            Debug.Log(queuePositions[i]);
+            yield return new WaitForSeconds(1f);
+            GameObject newPatient = Instantiate(patientPrefab, patientParent, false);
+            newPatient.transform.position = EnterTransform.position;
+            newPatient.transform.rotation = EnterTransform.rotation;
 
+            GameObject newFolder = Instantiate(folderPrefab, newPatient.transform, false);
+            Folder f = newFolder.GetComponent<Folder>();
+            f.changePosToPlayer();
+            f.patientOwner = newPatient;
+
+            //Place patient into object list
+            objectList.Add(newPatient);
+            Patient p = newPatient.GetComponent<Patient>();
+            p.folder = newFolder;
+            p.sickness = sicknessList[0];
+            p.ExitTransform = ExitTransform;
+
+            patientQueue.Add(newPatient);
+            queuePositions.Add(EnterTransform.position + new Vector3(patientSeperation * (patientCount - i + 1), 0, 0));
+            patientQueue[i].GetComponent<Patient>().queuePosition = queuePositions[i];
         }
     }
 
     public void removeFromQueue(GameObject p)
     {
         patientQueue.Remove(p);
-        patientInTransitQueue.Add(p);
+        p.GetComponent<Patient>().isInQueue = false;
         for(int i = 0; i < patientQueue.Count; i++)
         {
             patientQueue[i].GetComponent<Patient>().moveInQueue(queuePositions[i]);
@@ -160,25 +154,5 @@ public class GameManager : MonoBehaviour
             //Debug.Log(queuePositions[i]);
             //Debug.Log("adjusting Queue");
         }
-    }
-
-    private void checkWalkingPatients()
-    {
-        foreach (GameObject go in patientInTransitQueue)
-        {
-            Patient patient = go.GetComponent<Patient>();
-            if (patient.getState() == "bed")
-            {
-                putPatientOnBed(go);
-            }
-        }
-    }
-
-    public void putPatientOnBed(GameObject p)
-    {
-        Patient patient = p.GetComponent<Patient>();
-        Bed bed = patient.getAssignment<Bed>();
-        bed.NPCInteract(p);
-        patient.changePosToBed();
     }
 }
