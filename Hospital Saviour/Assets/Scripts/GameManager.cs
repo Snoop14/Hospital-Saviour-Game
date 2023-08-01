@@ -134,7 +134,8 @@ public class GameManager : MonoBehaviour
             objectList.Add(newPatient);
             Patient p = newPatient.GetComponent<Patient>();
             p.folder = newFolder;
-            p.sickness = sicknessList[0];
+            int rnd = Random.Range(0,sicknessList.Count);
+            p.sickness = sicknessList[rnd];
             p.ExitTransform = ExitTransform;
 
             patientQueue.Add(newPatient);
@@ -150,9 +151,6 @@ public class GameManager : MonoBehaviour
         for(int i = 0; i < patientQueue.Count; i++)
         {
             patientQueue[i].GetComponent<Patient>().moveInQueue(queuePositions[i]);
-            //Debug.Log(patientQueue[i].GetComponent<Patientv>());
-            //Debug.Log(queuePositions[i]);
-            //Debug.Log("adjusting Queue");
         }
     }
 }

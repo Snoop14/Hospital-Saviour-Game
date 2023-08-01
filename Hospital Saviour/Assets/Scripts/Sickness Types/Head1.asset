@@ -12,12 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae11008c6ec7ae54ea735565b64d687e, type: 3}
   m_Name: Head1
   m_EditorClassIdentifier: 
-  type: Head1
-  sicknessIcon: {fileID: 2430391320537465674, guid: 9ff7471cab857854198d8e66b2f24c1e,
-    type: 3}
-  sicknessIconBackGround: {fileID: -4139347571040828393, guid: 733a70509c526d848bd7f8d32cc9ed41,
-    type: 3}
+  sicknessBase: {fileID: 11400000, guid: 36ad833ecdd2bd54c8fb7991cc56a8d0, type: 2}
   healingOrderIcons:
-  - {fileID: 838959426011336378, guid: 10fb8a5f49079294bac67cd584019b84, type: 3}
-  - {fileID: -3256589244261959374, guid: 10fb8a5f49079294bac67cd584019b84, type: 3}
-  happinessDropLevel: 10
+  - {fileID: 5608346624214886593, guid: 9ff7471cab857854198d8e66b2f24c1e, type: 3}
+  - {fileID: 5142614496686598639, guid: 9ff7471cab857854198d8e66b2f24c1e, type: 3}
+  happinessDropLevel: 5

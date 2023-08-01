@@ -10,13 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae11008c6ec7ae54ea735565b64d687e, type: 3}
-  m_Name: Bone
+  m_Name: Bone1
   m_EditorClassIdentifier: 
-  type: Bone
-  sicknessIcon: {fileID: -8718996536032161487, guid: 9ff7471cab857854198d8e66b2f24c1e,
-    type: 3}
-  sicknessIconBackGround: {fileID: -7330796221644148621, guid: 11d43ec6a3e751c4eb94b52bb8fcb3f6,
-    type: 3}
+  sicknessBase: {fileID: 11400000, guid: c3f4deb672d53e046af09530fe4ced13, type: 2}
   healingOrderIcons:
   - {fileID: 5608346624214886593, guid: 9ff7471cab857854198d8e66b2f24c1e, type: 3}
   - {fileID: 5142614496686598639, guid: 9ff7471cab857854198d8e66b2f24c1e, type: 3}

@@ -27,7 +27,6 @@ public class Bed : MonoBehaviour
 
     public void NPCInteract(GameObject patient)
     {
-        //Debug.Log("Bed: Assigned patient");
         currentPatient = patient;
         isOccupied = true;
         //isActive = true; // Please confirm

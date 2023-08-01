@@ -47,8 +47,8 @@ public class Patient : MonoBehaviour
         healingIconObject = icon.transform.GetChild(2).gameObject;
         healingIcon = healingIconObject.GetComponent<Image>();
         healingOrderIcons = sickness.healingOrderIcons;
-        sicknessIconBackground.sprite = sickness.sicknessIconBackGround;
-        sicknessIcon.sprite = sickness.sicknessIcon;
+        sicknessIconBackground.sprite = sickness.sicknessBase.sicknessIconBackGround;
+        sicknessIcon.sprite = sickness.sicknessBase.sicknessIcon;
         healingIcon.sprite = healingOrderIcons[currHeal];
         healingIcon.SetNativeSize();
         healingIconObject.transform.localScale = new Vector3(0.3f, 0.3f, 1);

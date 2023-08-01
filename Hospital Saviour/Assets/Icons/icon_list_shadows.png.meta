@@ -46,7 +46,7 @@ TextureImporter:
     second: icon_list_shadows_13
   - first:
       213: -1909336906160165703
-    second: icon_list_shadows_14
+    second: Heart
   - first:
       213: 7890862248720408546
     second: icon_list_shadows_15
@@ -85,7 +85,7 @@ TextureImporter:
     second: icon_list_shadows_26
   - first:
       213: -8718996536032161487
-    second: icon_list_shadows_27
+    second: Bone
   - first:
       213: -5420991979209080202
     second: icon_list_shadows_28
@@ -109,7 +109,7 @@ TextureImporter:
     second: icon_list_shadows_34
   - first:
       213: 2430391320537465674
-    second: icon_list_shadows_35
+    second: Head
   - first:
       213: -575020359550666827
     second: icon_list_shadows_36
@@ -552,7 +552,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icon_list_shadows_14
+      name: Heart
       rect:
         serializedVersion: 2
         x: 71
@@ -804,10 +804,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icon_list_shadows_27
+      name: Bone
       rect:
         serializedVersion: 2
-        x: 1664
+        x: 1671
         y: 1003
         width: 175
         height: 210
@@ -972,7 +972,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icon_list_shadows_35
+      name: Head
       rect:
         serializedVersion: 2
         x: 1980

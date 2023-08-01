@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae11008c6ec7ae54ea735565b64d687e, type: 3}
-  m_Name: Germ1
+  m_Name: Germ2
   m_EditorClassIdentifier: 
   sicknessBase: {fileID: 11400000, guid: fcdaa6183a4bcca4eb5036f2f8e49bfd, type: 2}
   healingOrderIcons:
-  - {fileID: 5142614496686598639, guid: 9ff7471cab857854198d8e66b2f24c1e, type: 3}
-  happinessDropLevel: 5
+  - {fileID: -3715147670689906002, guid: 9ff7471cab857854198d8e66b2f24c1e, type: 3}
+  happinessDropLevel: 2
