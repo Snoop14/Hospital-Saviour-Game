@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3523191551404319107}
   - component: {fileID: 8932268286336035967}
   - component: {fileID: -1140215495529084502}
+  - component: {fileID: 7483029955061136267}
   m_Layer: 8
   m_Name: Patient
   m_TagString: Untagged
@@ -107,6 +108,25 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 3
+--- !u!95 &7483029955061136267
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4354967415416081357}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cab7df0fedf607043a2e41c925f0c9cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5578460877272871581
 GameObject:
   m_ObjectHideFlags: 0

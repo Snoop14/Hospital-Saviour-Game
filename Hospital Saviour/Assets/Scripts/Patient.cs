@@ -33,6 +33,9 @@ public class Patient : MonoBehaviour
     //int to hold current position in icons
     private int currHeal = 0;
 
+    private Animator animator;
+    private int toBedHash;
+
     void Start()
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
@@ -52,6 +55,9 @@ public class Patient : MonoBehaviour
         healingIcon.sprite = healingOrderIcons[currHeal];
         healingIcon.SetNativeSize();
         healingIconObject.transform.localScale = new Vector3(0.3f, 0.3f, 1);
+        
+        animator = GetComponent<Animator>();
+        toBedHash = Animator.StringToHash("ToBed");
     }
     void Update()
     {
@@ -113,9 +119,10 @@ public class Patient : MonoBehaviour
         Debug.Log("Patient: Switched to bed");
         agent.enabled = false;//Disable AI movement
         transform.parent = assignedPlacement.transform; //changes the parent of folder to the transfered object
-        transform.localPosition = new Vector3(0f, 1f, 0f);
         transform.localRotation = new Quaternion(0f, 0f, 0f, 0f); //resets rotation
-        transform.localRotation = Quaternion.Euler(-90f, 90f, 180f); //resets rotation
+        animator.SetTrigger(toBedHash);
+        // transform.localPosition = new Vector3(0f, 1f, 0f);
+        // transform.localRotation = Quaternion.Euler(-90f, 90f, 180f); //resets rotation
     }
 
     //Called when an object is given to the patient while they are on the bed
