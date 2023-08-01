@@ -1972,8 +1972,9 @@ MonoBehaviour:
   bedSeperation: 3
   patientCount: 4
   patientSeperation: 3
-  EnterTransform: {fileID: 0}
-  ExitTransform: {fileID: 0}
+  patientSpawnTime: 2
+  EnterTransform: {fileID: 2084710195}
+  ExitTransform: {fileID: 863202923}
   sicknessList:
   - {fileID: 11400000, guid: da30b2c4a3c6beb42b8fba32df99f028, type: 2}
   - {fileID: 11400000, guid: b65efb007cc28354682960938d9b4a5e, type: 2}
