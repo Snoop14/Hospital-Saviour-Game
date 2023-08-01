@@ -79,7 +79,7 @@ TextureImporter:
     second: icon_list_shadows_24
   - first:
       213: 5142614496686598639
-    second: icon_list_shadows_25
+    second: Pill
   - first:
       213: -487448007538941673
     second: icon_list_shadows_26
@@ -148,7 +148,7 @@ TextureImporter:
     second: icon_list_shadows_47
   - first:
       213: 5608346624214886593
-    second: icon_list_shadows_48
+    second: Bandage
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -783,7 +783,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icon_list_shadows_25
+      name: Pill
       rect:
         serializedVersion: 2
         x: 1331
@@ -1245,7 +1245,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icon_list_shadows_48
+      name: Bandage
       rect:
         serializedVersion: 2
         x: 1635

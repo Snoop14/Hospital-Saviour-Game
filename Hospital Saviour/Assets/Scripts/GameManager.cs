@@ -123,13 +123,18 @@ public class GameManager : MonoBehaviour
             p.isInteractable = true;
             p.isHoldingFolder = true;
             p.folder = newFolder;
-            p.sickness = sicknessList[0];
+            p.sickness = sicknessList[2];
 
             patientQueue.Add(newPatient);
         }
 
         GameObject tempObj = GameObject.Find("SoupMachine");
+        objectList.Add(tempObj);
 
+        tempObj = GameObject.Find("PillDispenser");
+        objectList.Add(tempObj);
+
+        tempObj = GameObject.Find("Medkit");
         objectList.Add(tempObj);
     }
 

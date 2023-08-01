@@ -94,7 +94,56 @@ public class Player1 : MonoBehaviour
                     }
                 }
             }
+            else if (itemType == "Pill")
+            {
+                foreach (GameObject go in collidingObjects)
+                {
+                    if (manager.objectList.Contains(go))
+                    {
+                        Bed b = go.GetComponent<Bed>();
+                        if (b && b.isActive && b.isInteractable && b.hasFolder && b.isOccupied)
+                        {
+                            Pill p = item.GetComponent<Pill>();
+                            p.transferTo(go);
+                            p.changePosToBed();
+                            StartCoroutine(p.destroySelf());
 
+                            //Stuff needs to be done here to actually continue with soup hand off
+                            b.currentPatient.GetComponent<Patient>().healOnBed(itemType);
+
+                            isCarrying = false;
+                            item = null;
+                            itemType = "";
+                            break;
+                        }
+                    }
+                }
+            }
+            else if (itemType == "Bandage")
+            {
+                foreach (GameObject go in collidingObjects)
+                {
+                    if (manager.objectList.Contains(go))
+                    {
+                        Bed b = go.GetComponent<Bed>();
+                        if (b && b.isActive && b.isInteractable && b.hasFolder && b.isOccupied)
+                        {
+                            Bandage band = item.GetComponent<Bandage>();
+                            band.transferTo(go);
+                            band.changePosToBed();
+                            StartCoroutine(band.destroySelf());
+
+                            //Stuff needs to be done here to actually continue with soup hand off
+                            b.currentPatient.GetComponent<Patient>().healOnBed(itemType);
+
+                            isCarrying = false;
+                            item = null;
+                            itemType = "";
+                            break;
+                        }
+                    }
+                }
+            }
         }
         else
         {
@@ -135,6 +184,30 @@ public class Player1 : MonoBehaviour
                         i.changePosToPlayer();
 
                         break;
+                    }
+
+                    if (go.TryGetComponent(out PillMachine pillM))
+                    {
+                        isCarrying = true;
+                        item = pillM.currentPill;
+                        itemType = "Pill";
+                        pillM.pillPickUp();
+                        Pill i = item.GetComponent<Pill>();
+                        i.transferTo(gameObject);
+                        i.changePosToPlayer();
+
+                        break;
+                    }
+
+                    if(go.TryGetComponent(out BandageMachine bandM))
+                    {
+                        isCarrying = true;
+                        item = bandM.currentBandage;
+                        itemType = "Bandage";
+                        bandM.bandagePickUp();
+                        Bandage i = item.GetComponent<Bandage>();
+                        i.transferTo(gameObject);
+                        i.changePosToPlayer();
                     }
                 }
             }
