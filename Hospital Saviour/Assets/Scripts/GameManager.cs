@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < patientCount; i++)
         {
             GameObject newPatient = Instantiate(patientPrefab, patientParent, false);
-            newPatient.transform.position += new Vector3(0, 0, patientSeperation * i);
+            newPatient.transform.position += new Vector3(patientSeperation * (-i), 0, 0);
 
             GameObject newFolder = Instantiate(folderPrefab, newPatient.transform, false);
             Folder f = newFolder.GetComponent<Folder>();
@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour
             p.isInteractable = true;
             p.isHoldingFolder = true;
             p.folder = newFolder;
-            p.sickness = sicknessList[2];
+            p.sickness = sicknessList[0];
 
             patientQueue.Add(newPatient);
         }
@@ -142,8 +142,10 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < patientCount; i++)
         {
-            queuePositions.Add(initialPosition + new Vector3(0,0,patientSeperation*i));
+            queuePositions.Add(initialPosition + new Vector3(patientSeperation * (-i), 0, 0));
             patientQueue[i].GetComponent<Patient>().queuePosition = queuePositions[i];
+            Debug.Log(queuePositions[i]);
+
         }
     }
 
@@ -154,6 +156,9 @@ public class GameManager : MonoBehaviour
         for(int i = 0; i < patientQueue.Count; i++)
         {
             patientQueue[i].GetComponent<Patient>().moveInQueue(queuePositions[i]);
+            //Debug.Log(patientQueue[i].GetComponent<Patientv>());
+            //Debug.Log(queuePositions[i]);
+            //Debug.Log("adjusting Queue");
         }
     }
 

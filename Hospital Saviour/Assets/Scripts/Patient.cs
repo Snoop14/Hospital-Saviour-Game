@@ -18,7 +18,7 @@ public class Patient : MonoBehaviour
     public Vector3 queuePosition;
 
     //array to hold states of this patient type
-    private string[] actions = { "waiting", "walking"};
+    private string[] actions = { "waiting", "walking" };
 
     //integer to hold current position in the state array
     private int actionsVal;
@@ -37,6 +37,8 @@ public class Patient : MonoBehaviour
     Image sicknessIcon;
     Image healingIcon;
     List<Sprite> healingOrderIcons;
+    //int to hold position in icons
+    private int iconPos = 0;
 
     private int currHeal = 0;
 
@@ -47,7 +49,7 @@ public class Patient : MonoBehaviour
         targetPosition = transform.position;
         rbody = GetComponent<Rigidbody>();
         icon = Instantiate(iconPrefab, FindObjectOfType<Canvas>().transform);
-        
+
         sicknessIconBackground = icon.transform.GetChild(0).GetComponent<Image>();
         sicknessIcon = icon.transform.GetChild(1).GetComponent<Image>();
         sicknessIcon.SetNativeSize();
@@ -93,7 +95,7 @@ public class Patient : MonoBehaviour
     {
         actionsVal = 0;
         currState = actions[actionsVal];
-        Debug.Log(currState);
+        //Debug.Log(currState);
     }
 
     public string getState()
@@ -109,7 +111,7 @@ public class Patient : MonoBehaviour
         //change the state
         currState = actions[actionsVal];
 
-        Debug.Log(currState);
+        //Debug.Log(currState);
     }
 
     public void releaseFolder()
@@ -131,12 +133,12 @@ public class Patient : MonoBehaviour
         targetPosition = queuePosition;
         agent.SetDestination(targetPosition);
     }
-    
+
     private void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.TryGetComponent(out Bed b))
         {
-            if(b.currentFolder == folder)
+            if (b.currentFolder == folder)
             {
                 b.NPCInteract(gameObject);
                 changePosToBed();
