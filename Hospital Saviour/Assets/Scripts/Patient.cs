@@ -120,6 +120,7 @@ public class Patient : MonoBehaviour
         agent.enabled = false;//Disable AI movement
         transform.parent = assignedPlacement.transform; //changes the parent of folder to the transfered object
         transform.localRotation = new Quaternion(0f, 0f, 0f, 0f); //resets rotation
+        animator.applyRootMotion = false; // true breaks animation, but false breaks spawning of patients
         animator.SetTrigger(toBedHash);
     }
 
