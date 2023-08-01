@@ -102,8 +102,8 @@ public class Patient : MonoBehaviour
                 b.NPCInteract(gameObject);
                 changePosToBed();
                 isInteractable = true;
-                sicknessIconObject.gameObject.SetActive(false);
-                healingIconObject.gameObject.SetActive(true);
+                //sicknessIconObject.gameObject.SetActive(false);
+                //healingIconObject.gameObject.SetActive(true);
             }
         }
     }
@@ -121,7 +121,7 @@ public class Patient : MonoBehaviour
     //Called when an object is given to the patient while they are on the bed
     public void healOnBed(string item)
     {
-        if(item == healingIcon.sprite.name) 
+        if (item == healingIcon.sprite.name)
         {
             currHeal++;
         }
@@ -132,21 +132,18 @@ public class Patient : MonoBehaviour
         }
         else
         {
-            //need to add a checker later on to prevent going out of range
-            Debug.Log("else");
-            //iconPos += 1;
-            healingIcon.sprite = healingOrderIcons[iconPos];
+            healingIcon.sprite = healingOrderIcons[currHeal];
             healingIcon.SetNativeSize();
-            healingIcon.transform.localScale = new Vector3(0.3f,0.3f,1);
+            healingIcon.transform.localScale = new Vector3(0.3f, 0.3f, 1);
 
             //turn off sickness icon
             icon.transform.GetChild(1).gameObject.SetActive(false);
             //turn on healing icon
             icon.transform.GetChild(2).gameObject.SetActive(true);
-            
+
             //icon = healingIcon;
         }
-
+    }
 
     IEnumerator leaveBed(GameObject bed)
     {
@@ -157,6 +154,7 @@ public class Patient : MonoBehaviour
         folder.GetComponent<Folder>().destroySelf();
         leaveHospital();
     }
+
     //called when patient is to leave the hospital
     private void leaveHospital()
     {
