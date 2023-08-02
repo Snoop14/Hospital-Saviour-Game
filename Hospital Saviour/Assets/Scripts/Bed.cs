@@ -38,4 +38,12 @@ public class Bed : MonoBehaviour
         currentPatient = null;
         isOccupied = false;
     }
+
+    public void interactWithPatient(bool isCarrying)
+    {
+        if (isOccupied)
+        {
+            GetComponentInChildren<Patient>().interactionOnBed(isCarrying);
+        }
+    }
 }

@@ -40,7 +40,9 @@ public class GameManager : MonoBehaviour
     public int patientCount = 4;
     [Range(0, 10)]
     public float patientSeperation = 5;
-
+    //time between spawns
+    [SerializeField]
+    float patientSpawnTime;
 
     List<GameObject> patientQueue;
     List<Vector3> queuePositions;
@@ -120,7 +122,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < patientCount; i++)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(patientSpawnTime);
             GameObject newPatient = Instantiate(patientPrefab, patientParent, false);
             newPatient.transform.position = EnterTransform.position;
             newPatient.transform.rotation = EnterTransform.rotation;
