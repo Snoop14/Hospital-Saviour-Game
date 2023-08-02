@@ -35,6 +35,7 @@ public class Patient : MonoBehaviour
 
     private Animator animator;
     private int toBedHash;
+    private int fromBedHash;
 
     void Start()
     {
@@ -58,6 +59,7 @@ public class Patient : MonoBehaviour
         
         animator = GetComponent<Animator>();
         toBedHash = Animator.StringToHash("ToBed");
+        fromBedHash = Animator.StringToHash("FromBed");
     }
     void Update()
     {
@@ -103,7 +105,7 @@ public class Patient : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Bed b))
         {
-            if (b.currentFolder == folder)
+            if (b.currentFolder == folder && !isInteractable)
             {
                 b.NPCInteract(gameObject);
                 changePosToBed();
@@ -127,7 +129,8 @@ public class Patient : MonoBehaviour
     //Called when an object is given to the patient while they are on the bed
     public void healOnBed(string item)
     {
-        //iif the sickenss icon is active
+        animator.ResetTrigger(toBedHash);
+        //if the sickness icon is active
         if (sicknessIconObject.gameObject.activeSelf)
         {
             //end the function
@@ -161,6 +164,8 @@ public class Patient : MonoBehaviour
     IEnumerator leaveBed(GameObject bed)
     {
         yield return new WaitForSeconds(1.5f);
+        animator.SetTrigger(fromBedHash);
+        Debug.Log("leaving bed");
         Bed b = bed.GetComponent<Bed>();
         b.FolderPickUp();
         b.NPCLeaves();
