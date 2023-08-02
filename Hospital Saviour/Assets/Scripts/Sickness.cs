@@ -8,5 +8,5 @@ public class Sickness : ScriptableObject
 {
     public SicknessBase sicknessBase;
     public List<Sprite> healingOrderIcons;
-    public float happinessDropLevel;
+    public int happinessDropLevel;
 }

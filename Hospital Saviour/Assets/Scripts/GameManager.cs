@@ -54,6 +54,11 @@ public class GameManager : MonoBehaviour
     public List<Sickness> sicknessList;
 
     public List<GameObject> objectList;
+
+    [Header("Level Controls")]
+    public int currScore;
+    public int scoreAim = 250;
+
     private void Awake()
     {
         //might need to change this to different function later when we setup levels for resetting

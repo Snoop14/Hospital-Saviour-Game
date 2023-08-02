@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public class Patient : MonoBehaviour
 {
+    private GameManager manager;
+
     private NavMeshAgent agent;
 
     public bool isInteractable { get; private set; } = true;
@@ -31,10 +33,14 @@ public class Patient : MonoBehaviour
     Image healingIcon;
     List<Sprite> healingOrderIcons;
     //int to hold current position in icons
-    private int currHeal = 0;
+    private int currHeal;
+
+    public int happinessLvl { get; private set; } = 100;
+    private int happinessDrop;
 
     void Start()
     {
+        manager = GameObject.Find("Manager").GetComponent<GameManager>();
         agent = gameObject.GetComponent<NavMeshAgent>();
 
         targetPosition = queuePosition;
@@ -52,7 +58,22 @@ public class Patient : MonoBehaviour
         healingIcon.sprite = healingOrderIcons[currHeal];
         healingIcon.SetNativeSize();
         healingIconObject.transform.localScale = new Vector3(0.3f, 0.3f, 1);
+
+        happinessDrop = sickness.happinessDropLevel;
+
+        //function starts after 10s and repeats every 5s
+        InvokeRepeating("dropHappinessLvl", 10, 5);
     }
+
+    /// <summary>
+    /// Drop happiness level based on sickness type
+    /// </summary>
+    private void dropHappinessLvl()
+    {
+        //drop happiness level based on sickness
+        happinessLvl -= happinessDrop;
+    }
+
     void Update()
     {
         Vector3 offset = new Vector3(0, 2.5f, 0);
@@ -61,6 +82,7 @@ public class Patient : MonoBehaviour
     }
     void FixedUpdate()
     {
+        //I am unsure if we need fixedUpdate for movement because i think the AI handles it?
         if ((targetPosition - transform.position).sqrMagnitude > 1f && isInQueue)
         {
             move();
@@ -75,9 +97,12 @@ public class Patient : MonoBehaviour
     public void releaseFolder()
     {
         isHoldingFolder = false;
-        //folder = null; //is this okay to be null, this way we still know exactly which folder is actually the patients
     }
 
+    /// <summary>
+    /// called when folder is placed somewhere else i.e. bed
+    /// </summary>
+    /// <param name="place"></param>
     public void folderPlaced(GameObject place)
     {
         assignedPlacement = place;
@@ -95,30 +120,39 @@ public class Patient : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        //if the other objecy is a bed
         if (other.gameObject.TryGetComponent(out Bed b))
         {
+            //if the bed has this patients folder
             if (b.currentFolder == folder)
             {
                 b.NPCInteract(gameObject);
                 changePosToBed();
                 isInteractable = true;
-                //sicknessIconObject.gameObject.SetActive(false);
-                //healingIconObject.gameObject.SetActive(true);
             }
         }
     }
 
+    /// <summary>
+    /// changes position of player to lay down on bed
+    /// </summary>
     public void changePosToBed()
     {
-        Debug.Log("Patient: Switched to bed");
         agent.enabled = false;//Disable AI movement
-        transform.parent = assignedPlacement.transform; //changes the parent of folder to the transfered object
-        transform.localPosition = new Vector3(0f, 1f, 0f);
+        
+        //patients transform in my opinion does not need to be changed
+        //transform.parent = assignedPlacement.transform; //changes the parent of folder to the transfered object
+        
+        Vector3 pos = assignedPlacement.transform.position;
+        transform.position = new Vector3(pos.x, pos.y + 1f, pos.z);
         transform.localRotation = new Quaternion(0f, 0f, 0f, 0f); //resets rotation
         transform.localRotation = Quaternion.Euler(-90f, 90f, 180f); //resets rotation
     }
 
-    //Called when an object is given to the patient while they are on the bed
+    /// <summary>
+    /// Called when an object is given to the patient while they are on the bed
+    /// </summary>
+    /// <param name="item"></param>
     public void healOnBed(string item)
     {
         //iif the sickenss icon is active
@@ -128,30 +162,40 @@ public class Patient : MonoBehaviour
             return;
         }
 
+        //if given item is same as healing icon
         if (item == healingIcon.sprite.name)
         {
-            currHeal++;
+            currHeal++; //increase current heal state
         }
 
-        if (currHeal == healingOrderIcons.Count)
+        //if currHeal is greater than or equal to length of healingIcons
+        if (currHeal >= healingOrderIcons.Count)
         {
+            //should be leaving hospital but changes to functions will need to be made
             StartCoroutine(leaveBed(assignedPlacement));
         }
         else
         {
+            //change healing icon to next one
             healingIcon.sprite = healingOrderIcons[currHeal];
             healingIcon.SetNativeSize();
             healingIcon.transform.localScale = new Vector3(0.3f, 0.3f, 1);
 
+            //These lines of code seem uneccesary
             //turn off sickness icon
-            icon.transform.GetChild(1).gameObject.SetActive(false);
+            //icon.transform.GetChild(1).gameObject.SetActive(false);
             //turn on healing icon
-            icon.transform.GetChild(2).gameObject.SetActive(true);
+            //icon.transform.GetChild(2).gameObject.SetActive(true);
 
             //icon = healingIcon;
         }
     }
 
+    /// <summary>
+    /// called when patient leaves the bed
+    /// </summary>
+    /// <param name="bed"></param>
+    /// <returns></returns>
     IEnumerator leaveBed(GameObject bed)
     {
         yield return new WaitForSeconds(1.5f);
@@ -159,15 +203,22 @@ public class Patient : MonoBehaviour
         b.FolderPickUp();
         b.NPCLeaves();
         folder.GetComponent<Folder>().destroySelf();
+        
+        //may not necessarily leave the hospital after leaving bed
         leaveHospital();
     }
 
-    //called when patient is to leave the hospital
+    /// <summary>
+    /// called when patient is to leave the hospital
+    /// </summary>
     private void leaveHospital()
     {
-        agent.enabled = true;
-        icon.gameObject.SetActive(false);
-        agent.SetDestination(ExitTransform.position);
+        agent.enabled = true; //re-enable navmesh ageny
+        icon.gameObject.SetActive(false); //disable icons above head
+        agent.SetDestination(ExitTransform.position); //patient heads to exit loc
+        manager.currScore += happinessLvl; // increase score
+        
+        Debug.Log(manager.currScore);
     }
 
     //managed interactions with player whilst on bed
@@ -187,6 +238,7 @@ public class Patient : MonoBehaviour
         }
         else
         {
+            currHeal = 0;
             healingIcon.sprite = healingOrderIcons[currHeal];
             healingIcon.SetNativeSize();
             healingIcon.transform.localScale = new Vector3(0.3f, 0.3f, 1);

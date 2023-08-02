@@ -15,13 +15,18 @@ public class SoupMachine : MonoBehaviour
         StartCoroutine(generateSoup());
     }
 
+    /// <summary>
+    /// Called when player picks up the soup
+    /// </summary>
     public void soupPickUp()
     {
         currentSoup = null;
         StartCoroutine(generateSoup());
     }
 
-    //Generates a new soup at the specific location
+    /// <summary>
+    /// Regenerates soup after a certain amount of time
+    /// </summary>
     IEnumerator generateSoup()
     {
         yield return new WaitForSeconds(1.0f);

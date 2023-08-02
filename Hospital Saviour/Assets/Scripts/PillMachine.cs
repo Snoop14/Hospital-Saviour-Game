@@ -14,11 +14,18 @@ public class PillMachine : MonoBehaviour
         StartCoroutine(generatePill());
     }
 
+    /// <summary>
+    /// Called when player picks up the pill
+    /// </summary>
     public void pillPickUp()
     {
         currentPill = null;
         StartCoroutine(generatePill());
     }
+
+    /// <summary>
+    /// Regenerates pills after a certain amount of time
+    /// </summary>
     IEnumerator generatePill()
     {
         yield return new WaitForSeconds(1.0f);

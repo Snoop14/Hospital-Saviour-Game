@@ -12,19 +12,29 @@ public class Bed : MonoBehaviour
     public GameObject currentPatient { get; private set; } = null;
     public GameObject currentFolder { get; private set; } = null;
 
-
+    /// <summary>
+    /// Folder is dropped off here
+    /// </summary>
+    /// <param name="folder"></param>
     public void folderDropOff(GameObject folder)
     {
         currentFolder = folder;
         hasFolder = true;
     }
 
+    /// <summary>
+    /// Folder is picked up/removed from here
+    /// </summary>
     public void FolderPickUp()
     {
         currentFolder = null;
         hasFolder = false;
     }
 
+    /// <summary>
+    /// Patient gets on bed
+    /// </summary>
+    /// <param name="patient"></param>
     public void NPCInteract(GameObject patient)
     {
         currentPatient = patient;
@@ -33,6 +43,9 @@ public class Bed : MonoBehaviour
         //Patient should only be able to get on a bed that is already active
     }
 
+    /// <summary>
+    /// Patient leaves the bed
+    /// </summary>
     public void NPCLeaves()
     {
         currentPatient = null;
@@ -41,9 +54,12 @@ public class Bed : MonoBehaviour
 
     public void interactWithPatient(bool isCarrying)
     {
+        
         if (isOccupied)
         {
-            GetComponentInChildren<Patient>().interactionOnBed(isCarrying);
+            //gets the beds current patient rather than searching through the children
+            currentPatient.GetComponent<Patient>().interactionOnBed(isCarrying);
+            //GetComponentInChildren<Patient>().interactionOnBed(isCarrying);
         }
     }
 }

@@ -15,12 +15,18 @@ public class BandageMachine : MonoBehaviour
         StartCoroutine(generateBandage());
     }
 
+    /// <summary>
+    /// Called when player picks up the bandage
+    /// </summary>
     public void bandagePickUp()
     {
         currentBandage = null;
         StartCoroutine(generateBandage());
     }
 
+    /// <summary>
+    /// Regenerates bandages after a certain amount of time
+    /// </summary>
     IEnumerator generateBandage()
     {
         yield return new WaitForSeconds(1.0f);
