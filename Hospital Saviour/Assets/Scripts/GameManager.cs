@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -56,8 +57,11 @@ public class GameManager : MonoBehaviour
     public List<GameObject> objectList;
 
     [Header("Level Controls")]
-    public int currScore;
     public int scoreAim = 250;
+    private int currScore;
+
+    private GameObject HUD;
+    private GameObject displayScore;
 
     private void Awake()
     {
@@ -76,6 +80,7 @@ public class GameManager : MonoBehaviour
         **/
         
         generateObjects();
+        GenerateHUD();
     }
 
     void generateObjects()
@@ -159,5 +164,19 @@ public class GameManager : MonoBehaviour
         {
             patientQueue[i].GetComponent<Patient>().moveInQueue(queuePositions[i]);
         }
+    }
+
+    private void GenerateHUD()
+    {
+        HUD = GameObject.Find("HUDCanvas");
+        displayScore = HUD.transform.Find("DisplayScore").gameObject;
+        UpdateScore(0);
+        HUD.transform.Find("DisplayScore").GetComponent<Text>().text = currScore.ToString();
+    }
+
+    public void UpdateScore(int score)
+    {
+        currScore += score;
+        displayScore.GetComponent<Text>().text = currScore.ToString();
     }
 }

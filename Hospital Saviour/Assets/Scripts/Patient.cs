@@ -44,7 +44,9 @@ public class Patient : MonoBehaviour
         agent = gameObject.GetComponent<NavMeshAgent>();
 
         targetPosition = queuePosition;
-        icon = Instantiate(iconPrefab, FindObjectOfType<Canvas>().transform, true);
+        
+        //icon = Instantiate(iconPrefab, FindObjectOfType<Canvas>().transform, true);
+        icon = Instantiate(iconPrefab, GameObject.Find("IconCanvas").transform, true);
 
         sicknessIconBackground = icon.transform.GetChild(0).GetComponent<Image>();
         sicknessIconObject = icon.transform.GetChild(1).gameObject;
@@ -216,9 +218,7 @@ public class Patient : MonoBehaviour
         agent.enabled = true; //re-enable navmesh ageny
         icon.gameObject.SetActive(false); //disable icons above head
         agent.SetDestination(ExitTransform.position); //patient heads to exit loc
-        manager.currScore += happinessLvl; // increase score
-        
-        Debug.Log(manager.currScore);
+        manager.UpdateScore(happinessLvl); // increase score
     }
 
     //managed interactions with player whilst on bed
