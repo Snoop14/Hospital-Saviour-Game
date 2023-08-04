@@ -58,6 +58,8 @@ public class GameManager : MonoBehaviour
     [Header("Level Controls")]
     public int currScore;
     public int scoreAim = 250;
+    [SerializeField]
+    Levels currentLevel;
 
     private void Awake()
     {
@@ -127,7 +129,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < patientCount; i++)
         {
-            yield return new WaitForSeconds(patientSpawnTime);
+            yield return new WaitForSeconds(currentLevel.spawnTimes[i]);
             GameObject newPatient = Instantiate(patientPrefab, patientParent, false);
             newPatient.transform.position = EnterTransform.position;
             newPatient.transform.rotation = EnterTransform.rotation;
@@ -141,8 +143,7 @@ public class GameManager : MonoBehaviour
             objectList.Add(newPatient);
             Patient p = newPatient.GetComponent<Patient>();
             p.folder = newFolder;
-            int rnd = Random.Range(0,sicknessList.Count);
-            p.sickness = sicknessList[rnd];
+            p.sickness = currentLevel.sicknessType[i];
             p.ExitTransform = ExitTransform;
 
             patientQueue.Add(newPatient);
