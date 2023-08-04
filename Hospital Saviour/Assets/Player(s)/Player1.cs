@@ -94,6 +94,7 @@ public class Player1 : MonoBehaviour
                     }
                 }
             }
+            
             else if (itemType == "Soup")
             {
                 foreach (GameObject go in collidingObjects)
@@ -110,6 +111,22 @@ public class Player1 : MonoBehaviour
 
                             //Stuff needs to be done here to actually continue with soup hand off
                             b.currentPatient.GetComponent<Patient>().healOnBed(itemType);
+
+                            isCarrying = false;
+                            item = null;
+                            itemType = "";
+                            break;
+                        }
+
+                        Bin t = go.GetComponent<Bin>();
+                        if (t && !t.isFull && t.isInteractable)
+                        {
+                            Soup s = item.GetComponent<Soup>();
+                            //s.transferTo(go);
+                            //s.changePosToBed();
+                            StartCoroutine(s.destroySelf());
+                            Debug.Log("destroying Soup");
+                            //Stuff needs to be done here to actually continue with soup hand off
 
                             isCarrying = false;
                             item = null;
@@ -267,4 +284,7 @@ public class Player1 : MonoBehaviour
             //print(other.gameObject.name + " left collider");
         }
     }
+
 }
+
+
