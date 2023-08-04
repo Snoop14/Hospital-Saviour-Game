@@ -82,11 +82,7 @@ public class Player1 : MonoBehaviour
                                 //change to patient 
                                 f.transferTo(go);
                                 f.changePosToPatient();
-
-                                //b.folderDropOff(item);
-                                //f.patientOwner.GetComponent<Patient>().folderPlaced(go);
-                                //manager.removeFromQueue(f.patientOwner);
-
+                                
                                 isCarrying = false;
                                 item = null;
                                 itemType = "";
@@ -127,11 +123,8 @@ public class Player1 : MonoBehaviour
                         if (t)
                         {
                             Soup s = item.GetComponent<Soup>();
-                            //s.transferTo(go);
-                            //s.changePosToBed();
+                            s.transferTo(go);
                             StartCoroutine(s.destroySelf());
-                            Debug.Log("destroying Soup");
-                            //Stuff needs to be done here to actually continue with soup hand off
 
                             isCarrying = false;
                             item = null;
@@ -163,6 +156,20 @@ public class Player1 : MonoBehaviour
                             itemType = "";
                             break;
                         }
+
+
+                        Bin t = go.GetComponent<Bin>();
+                        if (t)
+                        {
+                            Pill p = item.GetComponent<Pill>();
+                            p.transferTo(go);
+                            StartCoroutine(p.destroySelf());
+
+                            isCarrying = false;
+                            item = null;
+                            itemType = "";
+                            break;
+                        }
                     }
                 }
             }
@@ -182,6 +189,19 @@ public class Player1 : MonoBehaviour
 
                             //Stuff needs to be done here to actually continue with soup hand off
                             b.currentPatient.GetComponent<Patient>().healOnBed(itemType);
+
+                            isCarrying = false;
+                            item = null;
+                            itemType = "";
+                            break;
+                        }
+
+                        Bin t = go.GetComponent<Bin>();
+                        if (t)
+                        {
+                            Bandage band = item.GetComponent<Bandage>();
+                            band.transferTo(go);
+                            StartCoroutine(band.destroySelf());
 
                             isCarrying = false;
                             item = null;
