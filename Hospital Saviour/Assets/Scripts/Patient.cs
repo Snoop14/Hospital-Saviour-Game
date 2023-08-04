@@ -57,7 +57,8 @@ public class Patient : MonoBehaviour
         healingIcon.SetNativeSize();
         healingIconObject.transform.localScale = new Vector3(0.3f, 0.3f, 1);
         
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
+        animator = gameObject.GetComponentInChildren<Animator>();
         toBedHash = Animator.StringToHash("ToBed");
         fromBedHash = Animator.StringToHash("FromBed");
     }
@@ -67,11 +68,28 @@ public class Patient : MonoBehaviour
         Vector2 positionOnScreen = Camera.main.WorldToScreenPoint(transform.position + offset);
         icon.transform.position = positionOnScreen;
     }
+
     void FixedUpdate()
     {
-        if ((targetPosition - transform.position).sqrMagnitude > 1f && isInQueue)
+        if ((targetPosition - transform.position).sqrMagnitude > 1f)
         {
-            move();
+            if (isInQueue)
+            {
+                move();
+            }
+        }
+        else
+        {
+            //interact with bed is here now
+            if (assignedPlacement.TryGetComponent(out Bed b))
+            {
+                if (b.currentFolder == folder && b.currentPatient == null)
+                {
+                    b.NPCInteract(gameObject);
+                    changePosToBed();
+                    isInteractable = true;
+                }
+            }
         }
     }
 
@@ -79,7 +97,9 @@ public class Patient : MonoBehaviour
     {
         agent.SetDestination(targetPosition);
     }
-
+    /// <summary>
+    /// this function releases folder
+    /// </summary>
     public void releaseFolder()
     {
         isHoldingFolder = false;
@@ -101,21 +121,6 @@ public class Patient : MonoBehaviour
         agent.SetDestination(targetPosition);
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.TryGetComponent(out Bed b))
-        {
-            if (b.currentFolder == folder && !isInteractable)
-            {
-                b.NPCInteract(gameObject);
-                changePosToBed();
-                isInteractable = true;
-                //sicknessIconObject.gameObject.SetActive(false);
-                //healingIconObject.gameObject.SetActive(true);
-            }
-        }
-    }
-
     public void changePosToBed()
     {
         Debug.Log("Patient: Switched to bed");
@@ -123,13 +128,14 @@ public class Patient : MonoBehaviour
         transform.parent = assignedPlacement.transform; //changes the parent of folder to the transfered object
         transform.localRotation = new Quaternion(0f, 0f, 0f, 0f); //resets rotation
         animator.applyRootMotion = false; // true breaks animation, but false breaks spawning of patients
-        animator.SetTrigger(toBedHash);
+        //animator.SetTrigger(toBedHash);
+        animator.SetTrigger("ToBed");
     }
 
     //Called when an object is given to the patient while they are on the bed
     public void healOnBed(string item)
     {
-        animator.ResetTrigger(toBedHash);
+        //animator.ResetTrigger(toBedHash);
         //if the sickness icon is active
         if (sicknessIconObject.gameObject.activeSelf)
         {
@@ -163,8 +169,10 @@ public class Patient : MonoBehaviour
 
     IEnumerator leaveBed(GameObject bed)
     {
+        targetPosition = ExitTransform.position;
         yield return new WaitForSeconds(1.5f);
-        animator.SetTrigger(fromBedHash);
+        //animator.SetTrigger(fromBedHash);
+        animator.SetTrigger("FromBed");
         Debug.Log("leaving bed");
         Bed b = bed.GetComponent<Bed>();
         b.FolderPickUp();
@@ -176,9 +184,10 @@ public class Patient : MonoBehaviour
     //called when patient is to leave the hospital
     private void leaveHospital()
     {
+        targetPosition = ExitTransform.position;
         agent.enabled = true;
         icon.gameObject.SetActive(false);
-        agent.SetDestination(ExitTransform.position);
+        agent.SetDestination(targetPosition);
     }
 
     //managed interactions with player whilst on bed
