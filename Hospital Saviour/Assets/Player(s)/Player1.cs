@@ -71,24 +71,29 @@ public class Player1 : MonoBehaviour
                         //may also need a check to confirm folder belongs to this patient
                         if (p && p.isInteractable && p.isInQueue && !p.isHoldingFolder)
                         {
-                            Debug.Log("p " + p);
                             Folder f = item.GetComponent<Folder>();
-                            Debug.Log(f.patientOwner);
+
+                            //check if the patient is the owner of the notes
                             if (f.patientOwner.GetComponent<Patient>() == p)
                             {
 
                                 Debug.Log("true");
-                            }
-                            f.transferTo(go);
-                            f.changePosToBed();
-                            //b.folderDropOff(item);
-                            //f.patientOwner.GetComponent<Patient>().folderPlaced(go);
-                            //manager.removeFromQueue(f.patientOwner);
-                            isCarrying = false;
-                            item = null;
-                            itemType = "";
+                                
+                                //change to patient 
+                                f.transferTo(go);
+                                f.changePosToPatient();
 
-                            break;
+                                //b.folderDropOff(item);
+                                //f.patientOwner.GetComponent<Patient>().folderPlaced(go);
+                                //manager.removeFromQueue(f.patientOwner);
+
+                                isCarrying = false;
+                                item = null;
+                                itemType = "";
+
+                                break;
+                            }
+                            
                         }
 
                     }
