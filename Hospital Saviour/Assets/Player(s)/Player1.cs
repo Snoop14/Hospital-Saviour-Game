@@ -74,7 +74,7 @@ public class Player1 : MonoBehaviour
                             Debug.Log("p " + p);
                             Folder f = item.GetComponent<Folder>();
                             Debug.Log(f.patientOwner);
-                            if (f.patientOwner == p)
+                            if (f.patientOwner.GetComponent<Patient>() == p)
                             {
 
                                 Debug.Log("true");
@@ -82,8 +82,8 @@ public class Player1 : MonoBehaviour
                             f.transferTo(go);
                             f.changePosToBed();
                             //b.folderDropOff(item);
-                            f.patientOwner.GetComponent<Patient>().folderPlaced(go);
-                            manager.removeFromQueue(f.patientOwner);
+                            //f.patientOwner.GetComponent<Patient>().folderPlaced(go);
+                            //manager.removeFromQueue(f.patientOwner);
                             isCarrying = false;
                             item = null;
                             itemType = "";
