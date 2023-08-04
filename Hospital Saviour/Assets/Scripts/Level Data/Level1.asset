@@ -12,16 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8353ef2f05695346912b4a78b0d2e3b, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  patientCount: 4
+  patientCount: 2
   sicknessType:
-  - {fileID: 11400000, guid: dd31ea45492c3ee42af4e7a07217667a, type: 2}
   - {fileID: 11400000, guid: da30b2c4a3c6beb42b8fba32df99f028, type: 2}
-  - {fileID: 11400000, guid: c5cc0c6e1b2bb4d4f950f67157dca2f6, type: 2}
-  - {fileID: 11400000, guid: b65efb007cc28354682960938d9b4a5e, type: 2}
+  - {fileID: 11400000, guid: da30b2c4a3c6beb42b8fba32df99f028, type: 2}
   spawnTimes:
   - 1
   - 3
-  - 10
-  - 12
   inActiveBedCount: 4
   activeBedCount: 2
+  stars: 3200000064000000c8000000

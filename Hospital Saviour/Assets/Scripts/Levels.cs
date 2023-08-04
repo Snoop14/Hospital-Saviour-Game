@@ -12,4 +12,5 @@ public class Levels : ScriptableObject
     public List<float> spawnTimes;
     public int inActiveBedCount;
     public int activeBedCount;
+    public int[] stars = new int[3];
 }
