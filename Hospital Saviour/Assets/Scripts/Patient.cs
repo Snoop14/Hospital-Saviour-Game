@@ -99,6 +99,11 @@ public class Patient : MonoBehaviour
         isHoldingFolder = false;
     }
 
+    public void retakeFolder()
+    {
+        isHoldingFolder = true;
+    }
+
     /// <summary>
     /// called when folder is placed somewhere else i.e. bed
     /// </summary>

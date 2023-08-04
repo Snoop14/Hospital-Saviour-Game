@@ -82,6 +82,7 @@ public class Player1 : MonoBehaviour
                                 //change to patient 
                                 f.transferTo(go);
                                 f.changePosToPatient();
+                                p.retakeFolder();
                                 
                                 isCarrying = false;
                                 item = null;
