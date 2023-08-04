@@ -119,7 +119,7 @@ public class Player1 : MonoBehaviour
                         }
 
                         Bin t = go.GetComponent<Bin>();
-                        if (t && !t.isFull && t.isInteractable)
+                        if (t)
                         {
                             Soup s = item.GetComponent<Soup>();
                             //s.transferTo(go);
