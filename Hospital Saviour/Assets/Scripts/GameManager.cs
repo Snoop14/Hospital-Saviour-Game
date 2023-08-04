@@ -121,6 +121,9 @@ public class GameManager : MonoBehaviour
 
         tempObj = GameObject.Find("Medkit");
         objectList.Add(tempObj);
+
+        tempObj = GameObject.Find("Bin");
+        objectList.Add(tempObj);
     }
 
     IEnumerator CreatePatient()
