@@ -214,12 +214,22 @@ public class Patient : MonoBehaviour
     private void leaveHospital()
     {
         agent.enabled = true; //re-enable navmesh ageny
-        icon.gameObject.SetActive(false); //disable icons above head
+        StartCoroutine(DisplayHappy());// show happy icon for a few seconds
         agent.SetDestination(ExitTransform.position); //patient heads to exit loc
         manager.currScore += happinessLvl; // increase score
         
         Debug.Log(manager.currScore);
     }
+
+    IEnumerator DisplayHappy()
+    {
+        sicknessIconBackground.gameObject.SetActive(false);
+        healingIconObject.SetActive(false);
+        icon.transform.GetChild(4).gameObject.SetActive(true); //enable happy icon
+        yield return new WaitForSeconds(2f);
+        icon.gameObject.SetActive(false); //disable icons above head
+    }
+    
 
     //managed interactions with player whilst on bed
     public void interactionOnBed(bool isCarrying)
