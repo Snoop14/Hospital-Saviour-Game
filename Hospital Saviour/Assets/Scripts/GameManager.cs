@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Level Controls")]
     public int scoreAim = 250;
-    private int currScore;
+    private float currScore;
 
     private GameObject HUD;
     private GameObject displayScore;
@@ -174,9 +174,10 @@ public class GameManager : MonoBehaviour
         HUD.transform.Find("DisplayScore").GetComponent<Text>().text = currScore.ToString();
     }
 
-    public void UpdateScore(int score)
+    public void UpdateScore(float score)
     {
         currScore += score;
-        displayScore.GetComponent<Text>().text = currScore.ToString();
+        int displayVal = (int)currScore;
+        displayScore.GetComponent<Text>().text = displayVal.ToString();
     }
 }
