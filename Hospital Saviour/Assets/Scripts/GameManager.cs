@@ -152,7 +152,7 @@ public class GameManager : MonoBehaviour
 
             patientQueue.Add(newPatient);
             queuePositions.Add(EnterTransform.position + new Vector3(patientSeperation * (patientCount - i + 1), 0, 0));
-            patientQueue[i].GetComponent<Patient>().queuePosition = queuePositions[i];
+            p.queuePosition = queuePositions[patientQueue.Count - 1];
         }
     }
 
