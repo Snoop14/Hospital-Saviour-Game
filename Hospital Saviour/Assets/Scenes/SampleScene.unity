@@ -2475,7 +2475,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c5cc0c6e1b2bb4d4f950f67157dca2f6, type: 2}
   - {fileID: 11400000, guid: dd31ea45492c3ee42af4e7a07217667a, type: 2}
   objectList: []
-  scoreAim: 250
+  currScore: 0
+  scoreAim: 0
+  currentLevel: {fileID: 11400000, guid: 03ef1b98c12a3e249abfea9ecc255193, type: 2}
 --- !u!4 &1362452446
 Transform:
   m_ObjectHideFlags: 0
