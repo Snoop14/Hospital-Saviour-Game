@@ -32,6 +32,7 @@ public class Patient : MonoBehaviour
     GameObject healingIconObject;
     Image healingIcon;
     List<Sprite> healingOrderIcons;
+    GameObject FillObject;
     //int to hold current position in icons
     private int currHeal;
 
@@ -59,10 +60,11 @@ public class Patient : MonoBehaviour
         healingIcon.SetNativeSize();
         healingIconObject.transform.localScale = new Vector3(0.3f, 0.3f, 1);
 
+        FillObject = icon.transform.GetChild(3).GetChild(0).GetChild(0).gameObject;
         happinessDrop = sickness.happinessDropLevel;
 
         //function starts after 10s and repeats every 5s
-        InvokeRepeating("dropHappinessLvl", 10, 5);
+        InvokeRepeating("dropHappinessLvl", 10, 1);
     }
 
     /// <summary>
@@ -72,6 +74,11 @@ public class Patient : MonoBehaviour
     {
         //drop happiness level based on sickness
         happinessLvl -= happinessDrop;
+        float startPos = -5.5f;
+        float endPos = -40f;
+        FillObject.transform.localPosition = new Vector3((endPos-startPos)*(1-(happinessLvl/100f)), 0,0);
+
+
     }
 
     void Update()
