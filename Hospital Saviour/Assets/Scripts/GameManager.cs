@@ -205,4 +205,9 @@ public class GameManager : MonoBehaviour
         int displayVal = (int)currScore;
         displayScore.GetComponent<Text>().text = displayVal.ToString();
     }
+
+    public void EndGame()
+    {
+        Debug.Log("End game now");
+    }
 }

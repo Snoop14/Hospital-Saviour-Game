@@ -276,4 +276,9 @@ public class Patient : MonoBehaviour
         }
 
     }
+
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
+    }
 }
