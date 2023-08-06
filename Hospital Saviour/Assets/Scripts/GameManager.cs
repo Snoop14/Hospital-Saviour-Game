@@ -72,7 +72,9 @@ public class GameManager : MonoBehaviour
         objectList = new List<GameObject>();
     }
 
-    
+    /// <summary>
+    /// Gets the data of the current level through playerPrefs and finding assets
+    /// </summary>
     private void GetLevelData()
     {
         int levelNum = PlayerPrefs.GetInt("LevelNum");
