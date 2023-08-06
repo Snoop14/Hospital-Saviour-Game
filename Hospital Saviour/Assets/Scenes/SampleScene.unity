@@ -2200,6 +2200,7 @@ MonoBehaviour:
   objectList: []
   currScore: 0
   scoreAim: 0
+  currentLevel: {fileID: 11400000, guid: 03ef1b98c12a3e249abfea9ecc255193, type: 2}
 --- !u!4 &1362452446
 Transform:
   m_ObjectHideFlags: 0
