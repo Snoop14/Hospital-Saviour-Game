@@ -89,6 +89,10 @@ public class Patient : MonoBehaviour
         else
             fillImage.color = Color.Lerp(Color.yellow, Color.red, (percentage - 0.5f)*2f);
 
+        if (happinessLvl <= 0)
+        {
+            MadPatient();
+        }
     }
 
     void Update()
@@ -275,6 +279,27 @@ public class Patient : MonoBehaviour
             icon.transform.GetChild(2).gameObject.SetActive(true);
         }
 
+    }
+
+    /// <summary>
+    /// Called when patient isn't healed in time
+    /// </summary>
+    private void MadPatient()
+    {
+        CancelInvoke();
+        if (assignedPlacement)
+        {
+            if(assignedPlacement.TryGetComponent(out Bed b))
+            {
+                b.FolderPickUp();
+                b.NPCLeaves();
+            }
+        }
+        folder.GetComponent<Folder>().destroySelf();
+        isInteractable = false;
+        agent.enabled = true; //re-enable navmesh agent
+        targetPosition = ExitTransform.position;
+        agent.SetDestination(targetPosition);
     }
 
     /// <summary>
