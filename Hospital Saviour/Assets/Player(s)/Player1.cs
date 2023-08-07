@@ -35,12 +35,19 @@ public class Player1 : MonoBehaviour
         rbody.velocity = movementVec * speed; 
     }
 
+    /// <summary>
+    /// Called when the movement keys are pressed.
+    /// </summary>
+    /// <param name="input"></param>
     public void OnMove(InputValue input)
     {
         Vector2 xyInput = input.Get<Vector2>();
         movementVec = new Vector3(xyInput.x, 0, xyInput.y);
     }
 
+    /// <summary>
+    /// Called when the interact button is pressed.
+    /// </summary>
     public void OnInteract()
     {
         if (isCarrying)

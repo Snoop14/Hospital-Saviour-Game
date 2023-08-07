@@ -277,6 +277,9 @@ public class Patient : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Destroys the entire patient
+    /// </summary>
     public void DestroySelf()
     {
         Destroy(gameObject);

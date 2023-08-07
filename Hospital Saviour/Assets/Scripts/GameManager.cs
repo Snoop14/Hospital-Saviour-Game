@@ -94,6 +94,8 @@ public class GameManager : MonoBehaviour
          * called when user clicks on a level, then pass the level data into 
          * generateObjects function as a parameter
         **/
+        //This actually works fine.
+
         InitializeLevelData();
         
         generateObjects();
@@ -101,7 +103,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Initalize the data from the current levels data into varaiables
+    /// Initalize the data from the current levels data into variables
     /// </summary>
     private void InitializeLevelData()
     {
@@ -193,6 +195,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Generates the HUD at start of game
+    /// </summary>
     private void GenerateHUD()
     {
         HUD = GameObject.Find("HUDCanvas");
@@ -201,6 +206,10 @@ public class GameManager : MonoBehaviour
         HUD.transform.Find("DisplayScore").GetComponent<Text>().text = currScore.ToString();
     }
 
+    /// <summary>
+    /// Updates the score in displayed in the HUD
+    /// </summary>
+    /// <param name="score"></param>
     public void UpdateScore(float score)
     {
         currScore += score;
@@ -208,8 +217,24 @@ public class GameManager : MonoBehaviour
         displayScore.GetComponent<Text>().text = displayVal.ToString();
     }
 
+    /// <summary>
+    /// This function ends the gameplay and
+    /// should then display the other end game info
+    /// e.g. Score and target completion
+    /// </summary>
     public void EndGame()
     {
-        Debug.Log("End game now");
+        GameObject endDetails = HUD.transform.Find("EndDetails").gameObject;
+        endDetails.SetActive(true);
+    }
+
+    /// <summary>
+    /// This function returns the users to the menu.
+    /// It is called by a button when endDetails becomes active
+    /// </summary>
+    public void ReturnToMenu()
+    {
+        Debug.Log("Returning to Menu");
+        SceneManager.LoadScene("MenuScene");
     }
 }

@@ -15,6 +15,11 @@ public class RemovePatient : MonoBehaviour
         removeCounter = 0;
     }
 
+    /// <summary>
+    /// Deletes the patient when they enter the objects trigger.
+    /// This function may require conditionals, so patients are not deleted by accident.
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Patient")
