@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEditor;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,8 +15,14 @@ public class GameManager : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField]
     GameObject bedPrefab;
-    [SerializeField]
-    GameObject patientPrefab;
+
+    [Serializable]
+    public struct PatientsPrefab
+    {
+        public GameObject patientPrefab;
+    }
+
+    public PatientsPrefab[] patientPrefabs;
     [SerializeField]
     GameObject folderPrefab;
 
@@ -161,7 +169,8 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < patientCount; i++)
         {
             yield return new WaitForSeconds(currentLevel.spawnTimes[i]);
-            GameObject newPatient = Instantiate(patientPrefab, patientParent, false);
+            int prefabType = Random.Range(0, patientPrefabs.Length); 
+            GameObject newPatient = Instantiate(patientPrefabs[prefabType].patientPrefab, patientParent, false);
             newPatient.transform.position = EnterTransform.position;
             newPatient.transform.rotation = EnterTransform.rotation;
 
