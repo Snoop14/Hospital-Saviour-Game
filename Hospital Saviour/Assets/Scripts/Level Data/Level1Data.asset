@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8353ef2f05695346912b4a78b0d2e3b, type: 3}
+  m_Name: Level1Data
+  m_EditorClassIdentifier: 
+  patientCount: 2
+  sicknessType:
+  - {fileID: 11400000, guid: da30b2c4a3c6beb42b8fba32df99f028, type: 2}
+  - {fileID: 11400000, guid: da30b2c4a3c6beb42b8fba32df99f028, type: 2}
+  spawnTimes:
+  - 1
+  - 3
+  inActiveBedCount: 4
+  activeBedCount: 2
+  stars: 3200000064000000c8000000

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public class Patient : MonoBehaviour
 {
+    private GameManager manager;
+
     private NavMeshAgent agent;
 
     public bool isInteractable { get; private set; } = true;
@@ -30,8 +32,13 @@ public class Patient : MonoBehaviour
     GameObject healingIconObject;
     Image healingIcon;
     List<Sprite> healingOrderIcons;
+    GameObject FillObject;
+    Image fillImage;
     //int to hold current position in icons
-    private int currHeal = 0;
+    private int currHeal;
+
+    public float happinessLvl { get; private set; } = 100f;
+    private float happinessDrop;
 
     private Animator animator;
     private int toBedHash;
@@ -39,10 +46,13 @@ public class Patient : MonoBehaviour
 
     void Start()
     {
+        manager = GameObject.Find("Manager").GetComponent<GameManager>();
         agent = gameObject.GetComponent<NavMeshAgent>();
 
         targetPosition = queuePosition;
-        icon = Instantiate(iconPrefab, FindObjectOfType<Canvas>().transform, true);
+        
+        //icon = Instantiate(iconPrefab, FindObjectOfType<Canvas>().transform, true);
+        icon = Instantiate(iconPrefab, GameObject.Find("IconCanvas").transform, true);
 
         sicknessIconBackground = icon.transform.GetChild(0).GetComponent<Image>();
         sicknessIconObject = icon.transform.GetChild(1).gameObject;
@@ -56,12 +66,40 @@ public class Patient : MonoBehaviour
         healingIcon.sprite = healingOrderIcons[currHeal];
         healingIcon.SetNativeSize();
         healingIconObject.transform.localScale = new Vector3(0.3f, 0.3f, 1);
+
+        FillObject = icon.transform.GetChild(3).GetChild(0).GetChild(0).gameObject;
+        fillImage = FillObject.GetComponent<Image>();
+        fillImage.color = Color.green;
+        happinessDrop = sickness.happinessDropLevel;
+
+        //function starts after 10s and repeats every 5s
+        InvokeRepeating("dropHappinessLvl", 10, 1);
         
         //animator = GetComponent<Animator>();
         animator = gameObject.GetComponentInChildren<Animator>();
         toBedHash = Animator.StringToHash("ToBed");
         fromBedHash = Animator.StringToHash("FromBed");
     }
+
+    /// <summary>
+    /// Drop happiness level based on sickness type
+    /// https://docs.unity3d.com/ScriptReference/Color.Lerp.html
+    /// </summary>
+    private void dropHappinessLvl()
+    {
+        //drop happiness level based on sickness
+        happinessLvl -= happinessDrop;
+        float startPos = -5.5f;
+        float endPos = -40f;
+        float percentage = 1 - (happinessLvl / 100f);
+        FillObject.transform.localPosition = new Vector3((endPos-startPos)* percentage + startPos, 0,0);
+        if(percentage < 0.5f)
+            fillImage.color = Color.Lerp(Color.green,Color.yellow,percentage*2);
+        else
+            fillImage.color = Color.Lerp(Color.yellow, Color.red, (percentage - 0.5f)*2f);
+
+    }
+
     void Update()
     {
         Vector3 offset = new Vector3(0, 2.5f, 0);
@@ -71,6 +109,7 @@ public class Patient : MonoBehaviour
 
     void FixedUpdate()
     {
+        //I am unsure if we need fixedUpdate for movement because i think the AI handles it?
         if ((targetPosition - transform.position).sqrMagnitude > 1f)
         {
             if (isInQueue)
@@ -103,9 +142,12 @@ public class Patient : MonoBehaviour
     public void releaseFolder()
     {
         isHoldingFolder = false;
-        //folder = null; //is this okay to be null, this way we still know exactly which folder is actually the patients
     }
 
+    /// <summary>
+    /// called when folder is placed somewhere else i.e. bed
+    /// </summary>
+    /// <param name="place"></param>
     public void folderPlaced(GameObject place)
     {
         assignedPlacement = place;
@@ -121,9 +163,26 @@ public class Patient : MonoBehaviour
         agent.SetDestination(targetPosition);
     }
 
+    private void OnCollisionEnter(Collision other)
+    {
+        //if the other objecy is a bed
+        if (other.gameObject.TryGetComponent(out Bed b))
+        {
+            //if the bed has this patients folder
+            if (b.currentFolder == folder)
+            {
+                b.NPCInteract(gameObject);
+                changePosToBed();
+                isInteractable = true;
+            }
+        }
+    }
+
+    /// <summary>
+    /// changes position of player to lay down on bed
+    /// </summary>
     public void changePosToBed()
     {
-        Debug.Log("Patient: Switched to bed");
         agent.enabled = false;//Disable AI movement
         transform.parent = assignedPlacement.transform; //changes the parent of folder to the transfered object
         transform.localRotation = new Quaternion(0f, 0f, 0f, 0f); //resets rotation
@@ -132,7 +191,10 @@ public class Patient : MonoBehaviour
         animator.SetTrigger("ToBed");
     }
 
-    //Called when an object is given to the patient while they are on the bed
+    /// <summary>
+    /// Called when an object is given to the patient while they are on the bed
+    /// </summary>
+    /// <param name="item"></param>
     public void healOnBed(string item)
     {
         //animator.ResetTrigger(toBedHash);
@@ -143,30 +205,40 @@ public class Patient : MonoBehaviour
             return;
         }
 
+        //if given item is same as healing icon
         if (item == healingIcon.sprite.name)
         {
-            currHeal++;
+            currHeal++; //increase current heal state
         }
 
-        if (currHeal == healingOrderIcons.Count)
+        //if currHeal is greater than or equal to length of healingIcons
+        if (currHeal >= healingOrderIcons.Count)
         {
+            //should be leaving hospital but changes to functions will need to be made
             StartCoroutine(leaveBed(assignedPlacement));
         }
         else
         {
+            //change healing icon to next one
             healingIcon.sprite = healingOrderIcons[currHeal];
             healingIcon.SetNativeSize();
             healingIcon.transform.localScale = new Vector3(0.3f, 0.3f, 1);
 
+            //These lines of code seem uneccesary
             //turn off sickness icon
-            icon.transform.GetChild(1).gameObject.SetActive(false);
+            //icon.transform.GetChild(1).gameObject.SetActive(false);
             //turn on healing icon
-            icon.transform.GetChild(2).gameObject.SetActive(true);
+            //icon.transform.GetChild(2).gameObject.SetActive(true);
 
             //icon = healingIcon;
         }
     }
 
+    /// <summary>
+    /// called when patient leaves the bed
+    /// </summary>
+    /// <param name="bed"></param>
+    /// <returns></returns>
     IEnumerator leaveBed(GameObject bed)
     {
         targetPosition = ExitTransform.position;
@@ -178,17 +250,33 @@ public class Patient : MonoBehaviour
         b.FolderPickUp();
         b.NPCLeaves();
         folder.GetComponent<Folder>().destroySelf();
+        
+        //may not necessarily leave the hospital after leaving bed
         leaveHospital();
     }
 
-    //called when patient is to leave the hospital
+    /// <summary>
+    /// called when patient is to leave the hospital
+    /// </summary>
     private void leaveHospital()
     {
         targetPosition = ExitTransform.position;
-        agent.enabled = true;
-        icon.gameObject.SetActive(false);
-        agent.SetDestination(targetPosition);
+        agent.enabled = true; //re-enable navmesh ageny
+        StartCoroutine(DisplayHappy());// show happy icon for a few seconds
+        agent.SetDestination(ExitTransform.position); //patient heads to exit loc
+        manager.UpdateScore(happinessLvl); // increase score
     }
+
+    IEnumerator DisplayHappy()
+    {
+        sicknessIconBackground.gameObject.SetActive(false);
+        healingIconObject.SetActive(false);
+        FillObject.SetActive(false);
+        icon.transform.GetChild(4).gameObject.SetActive(true); //enable happy icon
+        yield return new WaitForSeconds(2f);
+        icon.gameObject.SetActive(false); //disable icons above head
+    }
+    
 
     //managed interactions with player whilst on bed
     public void interactionOnBed(bool isCarrying)
@@ -207,6 +295,7 @@ public class Patient : MonoBehaviour
         }
         else
         {
+            currHeal = 0;
             healingIcon.sprite = healingOrderIcons[currHeal];
             healingIcon.SetNativeSize();
             healingIcon.transform.localScale = new Vector3(0.3f, 0.3f, 1);
@@ -217,5 +306,10 @@ public class Patient : MonoBehaviour
             icon.transform.GetChild(2).gameObject.SetActive(true);
         }
 
+    }
+
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
     }
 }

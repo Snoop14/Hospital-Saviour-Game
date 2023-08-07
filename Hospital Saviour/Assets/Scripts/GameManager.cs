@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -29,20 +32,17 @@ public class GameManager : MonoBehaviour
 
     [Header("Bed Controls")]
     //this later needs to be determined within the level data
-    public int activeBedCount = 2;
-    public int inActiveBedCount = 4;
+    public int activeBedCount;
+    public int inActiveBedCount;
     // bedSeperation 3 looks correct
     [Range(0, 5)]
     public float bedSeperation = 3;
 
     [Header("Patient Controls")]
     //temperary for testing
-    public int patientCount = 4;
+    public int patientCount;
     [Range(0, 10)]
     public float patientSeperation = 5;
-    //time between spawns
-    [SerializeField]
-    float patientSpawnTime;
 
     List<GameObject> patientQueue;
     List<Vector3> queuePositions;
@@ -51,16 +51,41 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     Transform ExitTransform;
 
-    public List<Sickness> sicknessList;
-
     public List<GameObject> objectList;
+
+    [Header("Level Controls")]
+    public int scoreAim = 250;
+    private float currScore;
+
+    private GameObject HUD;
+    private GameObject displayScore;
+    [SerializeField]
+    Levels currentLevel;
+
     private void Awake()
     {
+        GetLevelData();
+
         //might need to change this to different function later when we setup levels for resetting
         patientQueue = new List<GameObject>();
         queuePositions = new List<Vector3>();
         objectList = new List<GameObject>();
     }
+
+    /// <summary>
+    /// Gets the data of the current level through playerPrefs and finding assets
+    /// </summary>
+    private void GetLevelData()
+    {
+        int levelNum = PlayerPrefs.GetInt("LevelNum");
+        string levelName = "Level" + levelNum + "Data";
+        //https://docs.unity3d.com/ScriptReference/AssetDatabase.FindAssets.html
+        string[] guids = AssetDatabase.FindAssets(levelName);
+        string assetPath = AssetDatabase.GUIDToAssetPath(guids[0]);
+        //https://docs.unity3d.com/ScriptReference/AssetDatabase.LoadAssetAtPath.html
+        currentLevel = (Levels)AssetDatabase.LoadAssetAtPath(assetPath, typeof(Levels));
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,8 +94,21 @@ public class GameManager : MonoBehaviour
          * called when user clicks on a level, then pass the level data into 
          * generateObjects function as a parameter
         **/
+        InitializeLevelData();
         
         generateObjects();
+        GenerateHUD();
+    }
+
+    /// <summary>
+    /// Initalize the data from the current levels data into varaiables
+    /// </summary>
+    private void InitializeLevelData()
+    {
+        patientCount = currentLevel.patientCount;
+        activeBedCount = currentLevel.activeBedCount;
+        inActiveBedCount = currentLevel.inActiveBedCount;
+        //May need to initialize more here later
     }
 
     void generateObjects()
@@ -122,7 +160,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < patientCount; i++)
         {
-            yield return new WaitForSeconds(patientSpawnTime);
+            yield return new WaitForSeconds(currentLevel.spawnTimes[i]);
             GameObject newPatient = Instantiate(patientPrefab, patientParent, false);
             newPatient.transform.position = EnterTransform.position;
             newPatient.transform.rotation = EnterTransform.rotation;
@@ -136,13 +174,12 @@ public class GameManager : MonoBehaviour
             objectList.Add(newPatient);
             Patient p = newPatient.GetComponent<Patient>();
             p.folder = newFolder;
-            int rnd = Random.Range(0,sicknessList.Count);
-            p.sickness = sicknessList[rnd];
+            p.sickness = currentLevel.sicknessType[i];
             p.ExitTransform = ExitTransform;
 
             patientQueue.Add(newPatient);
             queuePositions.Add(EnterTransform.position + new Vector3(patientSeperation * (patientCount - i + 1), 0, 0));
-            patientQueue[i].GetComponent<Patient>().queuePosition = queuePositions[i];
+            p.queuePosition = queuePositions[patientQueue.Count - 1];
         }
     }
 
@@ -154,5 +191,25 @@ public class GameManager : MonoBehaviour
         {
             patientQueue[i].GetComponent<Patient>().moveInQueue(queuePositions[i]);
         }
+    }
+
+    private void GenerateHUD()
+    {
+        HUD = GameObject.Find("HUDCanvas");
+        displayScore = HUD.transform.Find("DisplayScore").gameObject;
+        UpdateScore(0);
+        HUD.transform.Find("DisplayScore").GetComponent<Text>().text = currScore.ToString();
+    }
+
+    public void UpdateScore(float score)
+    {
+        currScore += score;
+        int displayVal = (int)currScore;
+        displayScore.GetComponent<Text>().text = displayVal.ToString();
+    }
+
+    public void EndGame()
+    {
+        Debug.Log("End game now");
     }
 }
