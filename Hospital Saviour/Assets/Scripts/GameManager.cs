@@ -5,6 +5,8 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEditor;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -202,6 +204,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator CreatePatient()
     {
+        
         for (int i = 0; i < patientCount; i++)
         {
             yield return new WaitForSeconds(currentLevel.spawnTimes[i]);
@@ -218,7 +221,12 @@ public class GameManager : MonoBehaviour
             objectList.Add(newPatient);
             Patient p = newPatient.GetComponent<Patient>();
             p.folder = newFolder;
-            p.sickness = currentLevel.sicknessType[i];
+
+            //get random value from sickness list for level
+            //https://docs.unity3d.com/ScriptReference/Random.Range.html accessed 7/8/23
+            int sickInt = Random.Range(0, currentLevel.sicknessType.Count);
+            //p.sickness = currentLevel.sicknessType[i];
+            p.sickness = currentLevel.sicknessType[sickInt];
             p.ExitTransform = ExitTransform;
 
             patientQueue.Add(newPatient);

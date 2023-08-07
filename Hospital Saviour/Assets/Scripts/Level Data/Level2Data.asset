@@ -16,8 +16,6 @@ MonoBehaviour:
   sicknessType:
   - {fileID: 11400000, guid: b65efb007cc28354682960938d9b4a5e, type: 2}
   - {fileID: 11400000, guid: da30b2c4a3c6beb42b8fba32df99f028, type: 2}
-  - {fileID: 11400000, guid: b65efb007cc28354682960938d9b4a5e, type: 2}
-  - {fileID: 11400000, guid: da30b2c4a3c6beb42b8fba32df99f028, type: 2}
   spawnTimes:
   - 1
   - 3
