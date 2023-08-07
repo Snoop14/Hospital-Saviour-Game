@@ -31,8 +31,8 @@ public class SoupMachine : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
         Vector3 spawnLoc = new Vector3(transform.localPosition.x, 
-                                       transform.localPosition.y + 1.1255f, 
-                                       transform.localPosition.z - 0.1f);
+                                       transform.localPosition.y + 1.69f, 
+                                       transform.localPosition.z);
         Quaternion spawnRot = new Quaternion();
         currentSoup = Instantiate(soupPrefab, spawnLoc, spawnRot, transform);
     }
