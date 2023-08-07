@@ -7,6 +7,9 @@ public class SoupMachine : MonoBehaviour
 
     [SerializeField] GameObject soupPrefab;
 
+    public bool isInteractable = false;
+
+
     public GameObject currentSoup { get; private set; } = null;
 
     // Start is called before the first frame update

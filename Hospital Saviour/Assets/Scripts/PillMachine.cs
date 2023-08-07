@@ -6,6 +6,9 @@ public class PillMachine : MonoBehaviour
 {
     [SerializeField] GameObject pillPrefab;
 
+    public bool isInteractable = false;
+
+
     public GameObject currentPill { get; private set; } = null;
 
     // Start is called before the first frame update
