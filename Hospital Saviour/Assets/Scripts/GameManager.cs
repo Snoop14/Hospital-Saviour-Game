@@ -62,6 +62,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     Levels currentLevel;
 
+    //bools to hold interactable status of machines
+    private bool soupMachine;
+    private bool pharmacy;
+    private bool bandageDispenser;
+
     private void Awake()
     {
         GetLevelData();
@@ -109,6 +114,12 @@ public class GameManager : MonoBehaviour
         activeBedCount = currentLevel.activeBedCount;
         inActiveBedCount = currentLevel.inActiveBedCount;
         //May need to initialize more here later
+
+
+        //bools to hold interactable status of machines
+        soupMachine = currentLevel.soupMachine;
+        pharmacy = currentLevel.pharmacy;
+        bandageDispenser = currentLevel.bandageDispenser;
     }
 
     void generateObjects()
@@ -146,14 +157,39 @@ public class GameManager : MonoBehaviour
         //Instatiate Patients and folders
         StartCoroutine(CreatePatient());
 
-        GameObject tempObj = GameObject.Find("SoupMachine");
-        objectList.Add(tempObj);
+        //for each interactable object, check if it's interactable and add to lit if it is, and
+        //if not, make if not interactable and change material
+        if (soupMachine)
+        {
+            GameObject tempObj = GameObject.Find("SoupMachine");
+            objectList.Add(tempObj);
+        }
+        else
+        {
+            Debug.Log("disabling soup");
+        }
 
-        tempObj = GameObject.Find("PillDispenser");
-        objectList.Add(tempObj);
+        
+        if (pharmacy)
+        {
+            GameObject tempObj = GameObject.Find("PillDispenser");
+            objectList.Add(tempObj);
+        }
+        else
+        {
+            Debug.Log("disabling pharmacy");
+        }
 
-        tempObj = GameObject.Find("Medkit");
-        objectList.Add(tempObj);
+        if (bandageDispenser)
+        {
+            GameObject tempObj = GameObject.Find("Medkit");
+            objectList.Add(tempObj);
+        }
+        else
+        {
+            Debug.Log("disabling bandage dispenser");
+        }
+
     }
 
     IEnumerator CreatePatient()
