@@ -224,6 +224,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soupPrefab: {fileID: 7151309421863562177, guid: f7c7a7bd1f588324987c82fe53f3fee2,
     type: 3}
+  isInteractable: 1
+  inactiveObjectMaterial: {fileID: 2100000, guid: 26c55f76337d8bc4ca3545d976ea8773,
+    type: 2}
 --- !u!1 &5553602608196344866
 GameObject:
   m_ObjectHideFlags: 0

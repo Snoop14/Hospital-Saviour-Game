@@ -166,7 +166,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("disabling soup");
+            GameObject tempObj = GameObject.Find("PillDispenser");
+            tempObj.GetComponent<SoupMachine>().disableSelf();
+            //Debug.Log("soup" + tempObj.GetComponent<SoupMachine>().isInteractable);
         }
 
         
@@ -177,7 +179,10 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("disabling pharmacy");
+            GameObject tempObj = GameObject.Find("PillDispenser");
+            tempObj.GetComponent<PillMachine>().disableSelf();
+            //Debug.Log("pharmacy" + tempObj.GetComponent<PillMachine>().isInteractable);
+
         }
 
         if (bandageDispenser)
@@ -187,7 +192,10 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("disabling bandage dispenser");
+            GameObject tempObj = GameObject.Find("Medkit");
+            tempObj.GetComponent<BandageMachine>().disableSelf();
+            //Debug.Log("bandage dispenser" + tempObj.GetComponent<BandageMachine>().isInteractable);
+
         }
 
     }

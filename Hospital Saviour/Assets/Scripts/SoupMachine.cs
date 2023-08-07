@@ -8,7 +8,8 @@ public class SoupMachine : MonoBehaviour
     [SerializeField] GameObject soupPrefab;
 
     public bool isInteractable = true;
-
+    [SerializeField]
+    Material inactiveObjectMaterial;
 
     public GameObject currentSoup { get; private set; } = null;
 
@@ -38,5 +39,34 @@ public class SoupMachine : MonoBehaviour
                                        transform.localPosition.z - 0.1f);
         Quaternion spawnRot = new Quaternion();
         currentSoup = Instantiate(soupPrefab, spawnLoc, spawnRot, transform);
+    }
+
+    public void disableSelf()
+    {
+        //disable the interactable variable
+        isInteractable = false;
+
+        changeMaterial(transform);
+
+
+    }
+
+    private void changeMaterial(Transform objectToChange)
+    {
+        //https://gamedev.stackexchange.com/questions/168803/looping-through-children-in-a-foreach-loop accessed 7/8/23
+        //change material for all elements to InactiveMaterial
+        foreach (Transform child in objectToChange.transform)
+        {
+            //https://gamedev.stackexchange.com/questions/84160/how-do-i-change-the-material-of-an-object-with-script-in-unity accessed 7/8/23
+            MeshRenderer my_renderer = child.GetComponent<MeshRenderer>();
+            if (my_renderer != null)
+            {
+                my_renderer.material = inactiveObjectMaterial;
+            }
+            else
+            {
+                changeMaterial(child);
+            }
+        }
     }
 }
