@@ -213,7 +213,7 @@ RectTransform:
   m_Children:
   - {fileID: 1228581218}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -957,7 +957,7 @@ Transform:
   - {fileID: 1872045275}
   - {fileID: 1717453409}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &649202391
 MonoBehaviour:
@@ -1271,7 +1271,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &824670082
 GameObject:
@@ -1489,7 +1489,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &863202924
 BoxCollider:
@@ -2466,6 +2466,13 @@ MonoBehaviour:
   surface: {fileID: 1023145089}
   bedPrefab: {fileID: 8854363157470512984, guid: 964db6eede2727349ac7b0b319fc7662,
     type: 3}
+  patientPrefabs:
+  - patientPrefab: {fileID: 4354967415416081357, guid: 3d2577d9b91b22d479ea7ca799e0b313,
+      type: 3}
+  - patientPrefab: {fileID: 4354967415416081357, guid: ba88d9b552aeb8c48a8573c370993248,
+      type: 3}
+  - patientPrefab: {fileID: 4354967415416081357, guid: ebb6d717a10bdee4fa55303ea97337fa,
+      type: 3}
   patientPrefab: {fileID: 4354967415416081357, guid: 3d2577d9b91b22d479ea7ca799e0b313,
     type: 3}
   folderPrefab: {fileID: 4479300790105107674, guid: 7abd0ad2dbe5e28469a1bdf2ebb784d5,
@@ -2479,16 +2486,9 @@ MonoBehaviour:
   bedSeperation: 3
   patientCount: 4
   patientSeperation: 3
-  patientSpawnTime: 2
   EnterTransform: {fileID: 2084710195}
   ExitTransform: {fileID: 863202923}
-  sicknessList:
-  - {fileID: 11400000, guid: da30b2c4a3c6beb42b8fba32df99f028, type: 2}
-  - {fileID: 11400000, guid: b65efb007cc28354682960938d9b4a5e, type: 2}
-  - {fileID: 11400000, guid: c5cc0c6e1b2bb4d4f950f67157dca2f6, type: 2}
-  - {fileID: 11400000, guid: dd31ea45492c3ee42af4e7a07217667a, type: 2}
   objectList: []
-  currScore: 0
   scoreAim: 0
   currentLevel: {fileID: 11400000, guid: 03ef1b98c12a3e249abfea9ecc255193, type: 2}
 --- !u!4 &1362452446
@@ -2621,7 +2621,7 @@ Transform:
   - {fileID: 573062977}
   - {fileID: 1757005162}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1461824619
 MonoBehaviour:
@@ -3213,7 +3213,7 @@ PrefabInstance:
     - target: {fileID: 5553602607766209572, guid: c863f3ae3b0dc4d41816d5f84cc8134a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5553602607766209572, guid: c863f3ae3b0dc4d41816d5f84cc8134a,
         type: 3}
@@ -3567,7 +3567,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &2087602376 stripped
 Transform:
@@ -3823,7 +3823,7 @@ PrefabInstance:
     - target: {fileID: 6933284018039537619, guid: 2e17e3e96967ba74fa1aac9332daafcd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6933284018039537619, guid: 2e17e3e96967ba74fa1aac9332daafcd,
         type: 3}
@@ -4061,7 +4061,7 @@ PrefabInstance:
     - target: {fileID: 7646275085238183693, guid: 48068df33b2660041b5842be19fc8ca7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7646275085238183693, guid: 48068df33b2660041b5842be19fc8ca7,
         type: 3}
