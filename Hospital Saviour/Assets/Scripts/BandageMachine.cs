@@ -6,7 +6,7 @@ public class BandageMachine : MonoBehaviour
 {
     [SerializeField] GameObject bandagePrefab;
 
-    public bool isInteractable = false;
+    public bool isInteractable = true;
 
 
     public GameObject currentBandage { get; private set; } = null;

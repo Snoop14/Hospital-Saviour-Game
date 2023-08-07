@@ -6,7 +6,7 @@ public class PillMachine : MonoBehaviour
 {
     [SerializeField] GameObject pillPrefab;
 
-    public bool isInteractable = false;
+    public bool isInteractable = true;
 
 
     public GameObject currentPill { get; private set; } = null;

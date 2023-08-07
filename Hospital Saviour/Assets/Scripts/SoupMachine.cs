@@ -7,7 +7,7 @@ public class SoupMachine : MonoBehaviour
 
     [SerializeField] GameObject soupPrefab;
 
-    public bool isInteractable = false;
+    public bool isInteractable = true;
 
 
     public GameObject currentSoup { get; private set; } = null;
