@@ -208,6 +208,10 @@ public class Patient : MonoBehaviour
         //if given item is same as healing icon
         if (item == healingIcon.sprite.name)
         {
+            if (healingIcon.sprite.name == "Soup")
+            {
+                animator.SetTrigger("EatSoup");
+            }
             currHeal++; //increase current heal state
         }
 
