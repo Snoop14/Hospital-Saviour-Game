@@ -32,11 +32,13 @@ public class Patient : MonoBehaviour
     GameObject healingIconObject;
     Image healingIcon;
     List<Sprite> healingOrderIcons;
+    GameObject FillObject;
+    Image fillImage;
     //int to hold current position in icons
     private int currHeal;
 
-    public int happinessLvl { get; private set; } = 100;
-    private int happinessDrop;
+    public float happinessLvl { get; private set; } = 100f;
+    private float happinessDrop;
 
     void Start()
     {
@@ -44,7 +46,9 @@ public class Patient : MonoBehaviour
         agent = gameObject.GetComponent<NavMeshAgent>();
 
         targetPosition = queuePosition;
-        icon = Instantiate(iconPrefab, FindObjectOfType<Canvas>().transform, true);
+        
+        //icon = Instantiate(iconPrefab, FindObjectOfType<Canvas>().transform, true);
+        icon = Instantiate(iconPrefab, GameObject.Find("IconCanvas").transform, true);
 
         sicknessIconBackground = icon.transform.GetChild(0).GetComponent<Image>();
         sicknessIconObject = icon.transform.GetChild(1).gameObject;
@@ -59,19 +63,32 @@ public class Patient : MonoBehaviour
         healingIcon.SetNativeSize();
         healingIconObject.transform.localScale = new Vector3(0.3f, 0.3f, 1);
 
+        FillObject = icon.transform.GetChild(3).GetChild(0).GetChild(0).gameObject;
+        fillImage = FillObject.GetComponent<Image>();
+        fillImage.color = Color.green;
         happinessDrop = sickness.happinessDropLevel;
 
         //function starts after 10s and repeats every 5s
-        InvokeRepeating("dropHappinessLvl", 10, 5);
+        InvokeRepeating("dropHappinessLvl", 10, 1);
     }
 
     /// <summary>
     /// Drop happiness level based on sickness type
+    /// https://docs.unity3d.com/ScriptReference/Color.Lerp.html
     /// </summary>
     private void dropHappinessLvl()
     {
         //drop happiness level based on sickness
         happinessLvl -= happinessDrop;
+        float startPos = -5.5f;
+        float endPos = -40f;
+        float percentage = 1 - (happinessLvl / 100f);
+        FillObject.transform.localPosition = new Vector3((endPos-startPos)* percentage + startPos, 0,0);
+        if(percentage < 0.5f)
+            fillImage.color = Color.Lerp(Color.green,Color.yellow,percentage*2);
+        else
+            fillImage.color = Color.Lerp(Color.yellow, Color.red, (percentage - 0.5f)*2f);
+
     }
 
     void Update()
@@ -216,15 +233,14 @@ public class Patient : MonoBehaviour
         agent.enabled = true; //re-enable navmesh ageny
         StartCoroutine(DisplayHappy());// show happy icon for a few seconds
         agent.SetDestination(ExitTransform.position); //patient heads to exit loc
-        manager.currScore += happinessLvl; // increase score
-        
-        Debug.Log(manager.currScore);
+        manager.UpdateScore(happinessLvl); // increase score
     }
 
     IEnumerator DisplayHappy()
     {
         sicknessIconBackground.gameObject.SetActive(false);
         healingIconObject.SetActive(false);
+        FillObject.SetActive(false);
         icon.transform.GetChild(4).gameObject.SetActive(true); //enable happy icon
         yield return new WaitForSeconds(2f);
         icon.gameObject.SetActive(false); //disable icons above head
@@ -259,5 +275,10 @@ public class Patient : MonoBehaviour
             icon.transform.GetChild(2).gameObject.SetActive(true);
         }
 
+    }
+
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
     }
 }
