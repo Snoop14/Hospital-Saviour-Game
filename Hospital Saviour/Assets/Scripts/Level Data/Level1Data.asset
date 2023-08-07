@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8353ef2f05695346912b4a78b0d2e3b, type: 3}
-  m_Name: Level1
+  m_Name: Level1Data
   m_EditorClassIdentifier: 
   patientCount: 2
   sicknessType:

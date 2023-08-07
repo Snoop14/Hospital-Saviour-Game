@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+//https://www.c-sharpcorner.com/article/unity-change-scene-on-button-click-using-c-sharp-scripts-in-unity/
+using UnityEngine.SceneManagement;
 
 public class MenuSelection : MonoBehaviour
 {
+    public static int levelNum;
+    public static int playerNum;
+
     //holder for current level selected
     private int levelSet = 1;
 
@@ -31,6 +36,17 @@ public class MenuSelection : MonoBehaviour
 
     public void StartGame()
     {
+        SetLevelNum(levelSet, playersSet);
         Debug.Log("Starting Level " + levelSet + " with " + playersSet + " players");
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public static void SetLevelNum(int _level, int _players)
+    {
+        levelNum = _level;
+        playerNum = _players;
+
+        PlayerPrefs.SetInt("LevelNum", levelNum);
+        PlayerPrefs.SetInt("PlayerNum", playerNum);
     }
 }
