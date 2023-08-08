@@ -70,6 +70,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     Levels currentLevel;
 
+    private bool ScalpelDispenser;
+    private bool TweezerDispenser;
+    private bool Surgery;
+    private bool XRayMachine;
+    private bool ECGMachine;
+
     private void Awake()
     {
         GetLevelData();
@@ -117,6 +123,12 @@ public class GameManager : MonoBehaviour
         activeBedCount = currentLevel.activeBedCount;
         inActiveBedCount = currentLevel.inActiveBedCount;
         //May need to initialize more here later
+
+        ScalpelDispenser = false;
+        TweezerDispenser = false;
+        Surgery = false;
+        XRayMachine = false;
+        ECGMachine = false;
     }
 
     void generateObjects()
@@ -154,14 +166,71 @@ public class GameManager : MonoBehaviour
         //Instatiate Patients and folders
         StartCoroutine(CreatePatient());
 
-        GameObject tempObj = GameObject.Find("SoupMachine");
-        objectList.Add(tempObj);
+        GameObject tempObj1 = GameObject.Find("SoupMachine");
+        objectList.Add(tempObj1);
 
-        tempObj = GameObject.Find("PillDispenser");
-        objectList.Add(tempObj);
+        tempObj1 = GameObject.Find("PillDispenser");
+        objectList.Add(tempObj1);
 
-        tempObj = GameObject.Find("Medkit");
-        objectList.Add(tempObj);
+        tempObj1 = GameObject.Find("Medkit");
+        objectList.Add(tempObj1);
+
+
+        if (ScalpelDispenser)
+        {
+            GameObject tempObj = GameObject.Find("ScalpelDispenser");
+            objectList.Add(tempObj);
+        }
+        else
+        {
+            GameObject tempObj = GameObject.Find("ScalpelDispenser");
+            tempObj.GetComponent<ScalpelMachine>().disableSelf();
+        }
+
+        if (TweezerDispenser)
+        {
+            GameObject tempObj = GameObject.Find("TweezerDispenser");
+            objectList.Add(tempObj);
+        }
+        else
+        {
+            GameObject tempObj = GameObject.Find("TweezerDispenser");
+            tempObj.GetComponent<TweezerMachine>().disableSelf();
+        }
+
+        if (Surgery)
+        {
+            GameObject tempObj = GameObject.Find("Surgery");
+            objectList.Add(tempObj);
+        }
+        else
+        {
+            GameObject tempObj = GameObject.Find("Surgery");
+            tempObj.GetComponent<SurgeryMachine>().disableSelf();
+        }
+
+        if (XRayMachine)
+        {
+            GameObject tempObj = GameObject.Find("X-Ray");
+            objectList.Add(tempObj);
+        }
+        else
+        {
+            GameObject tempObj = GameObject.Find("X-Ray");
+            tempObj.GetComponent<XRayMachine>().disableSelf();
+        }
+
+        if (ECGMachine)
+        {
+            GameObject tempObj = GameObject.Find("ECG");
+            objectList.Add(tempObj);
+        }
+        else
+        {
+            GameObject tempObj = GameObject.Find("ECG");
+            tempObj.GetComponent<ECGMachine>().disableSelf();
+        }
+
     }
 
     IEnumerator CreatePatient()
