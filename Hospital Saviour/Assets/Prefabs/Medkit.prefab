@@ -843,6 +843,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bandagePrefab: {fileID: 310469712306843180, guid: 26e9eda1492af57428ba6b111f91d1ec,
     type: 3}
+  isInteractable: 1
+  inactiveObjectMaterial: {fileID: 2100000, guid: 26c55f76337d8bc4ca3545d976ea8773,
+    type: 2}
 --- !u!65 &7646275085238183691
 BoxCollider:
   m_ObjectHideFlags: 0

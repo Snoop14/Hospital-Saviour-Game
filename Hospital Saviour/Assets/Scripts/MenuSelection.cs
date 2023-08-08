@@ -19,7 +19,7 @@ public class MenuSelection : MonoBehaviour
     public void StartLevel(int level)
     {
         levelSet = level;
-        Debug.Log("Loading Level " + levelSet);
+        //Debug.Log("Loading Level " + levelSet);
     }
 
 
@@ -31,7 +31,7 @@ public class MenuSelection : MonoBehaviour
         playersSet = (int)players.value;
 
         //Debug.Log(players + " Player(s)");
-        Debug.Log(playersSet + " Player(s)");
+        //Debug.Log(playersSet + " Player(s)");
     }
 
     public void StartGame()

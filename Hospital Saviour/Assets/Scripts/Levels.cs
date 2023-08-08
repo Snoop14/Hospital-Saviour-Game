@@ -13,4 +13,11 @@ public class Levels : ScriptableObject
     public int inActiveBedCount;
     public int activeBedCount;
     public int[] stars = new int[3];
+
+    //bools to hold interactable status of machines
+    public bool soupMachine;
+    public bool pharmacy;
+    public bool bandageDispenser;
+
+
 }
