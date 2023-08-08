@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 8932268286336035967}
   - component: {fileID: -1140215495529084502}
   m_Layer: 8
-  m_Name: Patient
+  m_Name: Patient2
   m_TagString: Patient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,7 +199,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f106cd4e3e0754e469110e6c2d991491, type: 2}
+  - {fileID: 2100000, guid: ed6b4cd193cbd14448bdb0229625800b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -278,7 +278,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f106cd4e3e0754e469110e6c2d991491, type: 2}
+  - {fileID: 2100000, guid: ed6b4cd193cbd14448bdb0229625800b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
