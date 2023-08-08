@@ -187,20 +187,11 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            GameObject tempObj = GameObject.Find("PillDispenser");
+            GameObject tempObj = GameObject.Find("SoupMachine");
             tempObj.GetComponent<SoupMachine>().disableSelf();
             //Debug.Log("soup" + tempObj.GetComponent<SoupMachine>().isInteractable);
         }
-        GameObject tempObj1 = GameObject.Find("SoupMachine");
-        objectList.Add(tempObj1);
-
-        tempObj1 = GameObject.Find("PillDispenser");
-        objectList.Add(tempObj1);
-
-        tempObj1 = GameObject.Find("Medkit");
-        objectList.Add(tempObj1);
-
-
+        
         if (ScalpelDispenser)
         {
             GameObject tempObj = GameObject.Find("ScalpelDispenser");
@@ -271,7 +262,6 @@ public class GameManager : MonoBehaviour
 
         }
 
-    }
         if (ECGMachine)
         {
             GameObject tempObj = GameObject.Find("ECG");
