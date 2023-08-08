@@ -175,7 +175,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            GameObject tempObj = GameObject.Find("PillDispenser");
+            GameObject tempObj = GameObject.Find("SoupMachine");
             tempObj.GetComponent<SoupMachine>().disableSelf();
             //Debug.Log("soup" + tempObj.GetComponent<SoupMachine>().isInteractable);
         }
