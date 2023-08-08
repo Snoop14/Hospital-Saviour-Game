@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 77909752769188}
   - component: {fileID: 6649482076042098529}
+  - component: {fileID: 7478527659966498503}
   m_Layer: 0
   m_Name: Surgery
   m_TagString: Untagged
@@ -46,6 +47,21 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7478527659966498503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274881319548617063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8dc58f6dea674d4a8d050fd9fe8ca6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInteractable: 1
+  inactiveObjectMaterial: {fileID: 2100000, guid: 26c55f76337d8bc4ca3545d976ea8773,
+    type: 2}
 --- !u!1 &4099481268499932044
 GameObject:
   m_ObjectHideFlags: 0
