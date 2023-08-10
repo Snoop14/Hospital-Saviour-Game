@@ -304,7 +304,7 @@ public class GameManager : MonoBehaviour
             p.ExitTransform = ExitTransform;
 
             patientQueue.Add(newPatient);
-            queuePositions.Add(EnterTransform.position + new Vector3(patientSeperation * (patientCount - i + 1), 0, 0));
+            queuePositions.Add(EnterTransform.position + new Vector3(18 - patientSeperation * i, 0, 0));
             p.queuePosition = queuePositions[patientQueue.Count - 1];
         }
     }
