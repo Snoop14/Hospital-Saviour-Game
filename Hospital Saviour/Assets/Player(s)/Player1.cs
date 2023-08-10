@@ -122,10 +122,8 @@ public class Player1 : MonoBehaviour
                         }
 
                         Bin t = go.GetComponent<Bin>();
-                        Debug.Log(t);
                         if (t)
                         {
-                            Debug.Log("Soup to bin");
                             Soup s = item.GetComponent<Soup>();
                             s.transferTo(go);
                             StartCoroutine(s.destroySelf());
