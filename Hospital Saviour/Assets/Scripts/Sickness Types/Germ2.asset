@@ -15,4 +15,4 @@ MonoBehaviour:
   sicknessBase: {fileID: 11400000, guid: fcdaa6183a4bcca4eb5036f2f8e49bfd, type: 2}
   healingOrderIcons:
   - {fileID: 5142614496686598639, guid: 9ff7471cab857854198d8e66b2f24c1e, type: 3}
-  happinessDropLevel: 5
+  happinessDropLevel: 0.5

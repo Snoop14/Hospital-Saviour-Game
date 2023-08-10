@@ -16,4 +16,4 @@ MonoBehaviour:
   healingOrderIcons:
   - {fileID: 5608346624214886593, guid: 9ff7471cab857854198d8e66b2f24c1e, type: 3}
   - {fileID: 5142614496686598639, guid: 9ff7471cab857854198d8e66b2f24c1e, type: 3}
-  happinessDropLevel: 5
+  happinessDropLevel: 1
