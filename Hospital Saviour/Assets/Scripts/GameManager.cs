@@ -273,7 +273,12 @@ public class GameManager : MonoBehaviour
             tempObj.GetComponent<ECGMachine>().disableSelf();
         }
 
+
+        GameObject tempBin = GameObject.Find("Bin");
+        objectList.Add(tempBin);
     }
+
+//}
 
     IEnumerator CreatePatient()
     {
