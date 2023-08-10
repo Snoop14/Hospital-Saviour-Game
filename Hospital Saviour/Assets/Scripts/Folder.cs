@@ -34,6 +34,16 @@ public class Folder : MonoBehaviour
     }
 
     /// <summary>
+    /// Changes position of folder to the players hands
+    /// </summary>
+    public void changePosToPatient()
+    {
+        transform.localPosition = new Vector3(0f, 0.5f, 0.85f);
+        transform.localRotation = new Quaternion(0f, 0f, 0f, 0f); //resets rotation
+    }
+
+
+    /// <summary>
     /// Destroy self 
     /// </summary>
     public void destroySelf()

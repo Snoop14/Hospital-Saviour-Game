@@ -66,9 +66,37 @@ public class Player1 : MonoBehaviour
 
                             break;
                         }
+
+                        Patient p = go.GetComponent<Patient>();
+                        //may also need a check to confirm folder belongs to this patient
+                        if (p && p.isInteractable && p.isInQueue && !p.isHoldingFolder)
+                        {
+                            Folder f = item.GetComponent<Folder>();
+
+                            //check if the patient is the owner of the notes
+                            if (f.patientOwner.GetComponent<Patient>() == p)
+                            {
+
+                                Debug.Log("true");
+                                
+                                //change to patient 
+                                f.transferTo(go);
+                                f.changePosToPatient();
+                                p.retakeFolder();
+                                
+                                isCarrying = false;
+                                item = null;
+                                itemType = "";
+
+                                break;
+                            }
+                            
+                        }
+
                     }
                 }
             }
+            
             else if (itemType == "Soup")
             {
                 foreach (GameObject go in collidingObjects)
@@ -87,6 +115,21 @@ public class Player1 : MonoBehaviour
                             //Stuff needs to be done here to actually continue with soup hand off
                             patient.healOnBed(itemType);
 
+                            isCarrying = false;
+                            item = null;
+                            itemType = "";
+                            break;
+                        }
+
+                        Bin t = go.GetComponent<Bin>();
+                        Debug.Log(t);
+                        if (t)
+                        {
+                            Debug.Log("Soup to bin");
+                            Soup s = item.GetComponent<Soup>();
+                            s.transferTo(go);
+                            StartCoroutine(s.destroySelf());
+                            
                             isCarrying = false;
                             item = null;
                             itemType = "";
@@ -117,6 +160,20 @@ public class Player1 : MonoBehaviour
                             itemType = "";
                             break;
                         }
+
+
+                        Bin t = go.GetComponent<Bin>();
+                        if (t)
+                        {
+                            Pill p = item.GetComponent<Pill>();
+                            p.transferTo(go);
+                            StartCoroutine(p.destroySelf());
+
+                            isCarrying = false;
+                            item = null;
+                            itemType = "";
+                            break;
+                        }
                     }
                 }
             }
@@ -136,6 +193,19 @@ public class Player1 : MonoBehaviour
 
                             //Stuff needs to be done here to actually continue with soup hand off
                             b.currentPatient.GetComponent<Patient>().healOnBed(itemType);
+
+                            isCarrying = false;
+                            item = null;
+                            itemType = "";
+                            break;
+                        }
+
+                        Bin t = go.GetComponent<Bin>();
+                        if (t)
+                        {
+                            Bandage band = item.GetComponent<Bandage>();
+                            band.transferTo(go);
+                            StartCoroutine(band.destroySelf());
 
                             isCarrying = false;
                             item = null;
@@ -243,4 +313,7 @@ public class Player1 : MonoBehaviour
             //print(other.gameObject.name + " left collider");
         }
     }
+
 }
+
+
