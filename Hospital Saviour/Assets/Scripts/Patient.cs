@@ -55,6 +55,8 @@ public class Patient : MonoBehaviour
         icon = Instantiate(iconPrefab, GameObject.Find("IconCanvas").transform, true);
 
         sicknessIconBackground = icon.transform.GetChild(0).GetComponent<Image>();
+        sicknessIconBackground.SetNativeSize();
+        sicknessIconBackground.transform.localScale = new Vector3(0.8f, 0.8f, 1);
         sicknessIconObject = icon.transform.GetChild(1).gameObject;
         sicknessIcon = sicknessIconObject.GetComponent<Image>();
         sicknessIcon.SetNativeSize();
@@ -102,7 +104,7 @@ public class Patient : MonoBehaviour
 
     void Update()
     {
-        Vector3 offset = new Vector3(0, 2.5f, 0);
+        Vector3 offset = new Vector3(0, 2.5f, 1.5f);
         Vector2 positionOnScreen = Camera.main.WorldToScreenPoint(transform.position + offset);
         icon.transform.position = positionOnScreen;
     }
