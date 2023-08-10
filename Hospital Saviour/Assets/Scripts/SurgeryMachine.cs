@@ -2,44 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoupMachine : MonoBehaviour
+public class SurgeryMachine : MonoBehaviour
 {
-
-    [SerializeField] GameObject soupPrefab;
+    //[SerializeField] GameObject bandagePrefab;
 
     public bool isInteractable = true;
     [SerializeField]
     Material inactiveObjectMaterial;
 
-    public GameObject currentSoup { get; private set; } = null;
+
+
+    //public GameObject currentBandage { get; private set; } = null;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(generateSoup());
+        //StartCoroutine(generateBandage());
     }
 
     /// <summary>
-    /// Called when player picks up the soup
+    /// Called when player picks up the bandage
     /// </summary>
-    public void soupPickUp()
-    {
-        currentSoup = null;
-        StartCoroutine(generateSoup());
-    }
+    //public void bandagePickUp()
+    //{
+    //  currentBandage = null;
+    //StartCoroutine(generateBandage());
+    //}
 
     /// <summary>
-    /// Regenerates soup after a certain amount of time
+    /// Regenerates bandages after a certain amount of time
     /// </summary>
-    IEnumerator generateSoup()
-    {
-        yield return new WaitForSeconds(1.0f);
-        Vector3 spawnLoc = new Vector3(transform.localPosition.x, 
-                                       transform.localPosition.y + 1.1255f, 
-                                       transform.localPosition.z - 0.1f);
-        Quaternion spawnRot = new Quaternion();
-        currentSoup = Instantiate(soupPrefab, spawnLoc, spawnRot, transform);
-    }
+    //IEnumerator generateBandage()
+    //{
+    //  yield return new WaitForSeconds(1.0f);
+    //Vector3 spawnLoc = new Vector3(transform.localPosition.x,
+    //                             transform.localPosition.y + 0.95f,
+    //                           transform.localPosition.z);
+    //Quaternion spawnRot = new Quaternion();
+    //spawnRot.eulerAngles = new Vector3(90, 0, 0);
+    //currentBandage = Instantiate(bandagePrefab, spawnLoc, spawnRot, transform);
+    //}
 
     public void disableSelf()
     {
@@ -47,8 +50,6 @@ public class SoupMachine : MonoBehaviour
         isInteractable = false;
 
         changeMaterial(transform);
-
-
     }
 
     private void changeMaterial(Transform objectToChange)
