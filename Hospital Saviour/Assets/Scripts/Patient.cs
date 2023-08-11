@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,6 +40,10 @@ public class Patient : MonoBehaviour
     public float happinessLvl { get; private set; } = 100f;
     private float happinessDrop;
 
+    private Animator animator;
+    private int toBedHash;
+    private int fromBedHash;
+
     void Start()
     {
         manager = GameObject.Find("Manager").GetComponent<GameManager>();
@@ -51,6 +55,8 @@ public class Patient : MonoBehaviour
         icon = Instantiate(iconPrefab, GameObject.Find("IconCanvas").transform, true);
 
         sicknessIconBackground = icon.transform.GetChild(0).GetComponent<Image>();
+        sicknessIconBackground.SetNativeSize();
+        sicknessIconBackground.transform.localScale = new Vector3(0.8f, 0.8f, 1);
         sicknessIconObject = icon.transform.GetChild(1).gameObject;
         sicknessIcon = sicknessIconObject.GetComponent<Image>();
         sicknessIcon.SetNativeSize();
@@ -70,6 +76,11 @@ public class Patient : MonoBehaviour
 
         //function starts after 10s and repeats every 5s
         InvokeRepeating("dropHappinessLvl", 10, 1);
+        
+        //animator = GetComponent<Animator>();
+        animator = gameObject.GetComponentInChildren<Animator>();
+        toBedHash = Animator.StringToHash("ToBed");
+        fromBedHash = Animator.StringToHash("FromBed");
     }
 
     /// <summary>
@@ -97,16 +108,33 @@ public class Patient : MonoBehaviour
 
     void Update()
     {
-        Vector3 offset = new Vector3(0, 2.5f, 0);
+        Vector3 offset = new Vector3(0, 2.5f, 1.5f);
         Vector2 positionOnScreen = Camera.main.WorldToScreenPoint(transform.position + offset);
         icon.transform.position = positionOnScreen;
     }
+
     void FixedUpdate()
     {
         //I am unsure if we need fixedUpdate for movement because i think the AI handles it?
-        if ((targetPosition - transform.position).sqrMagnitude > 1f && isInQueue)
+        if ((targetPosition - transform.position).sqrMagnitude > 1f)
         {
-            move();
+            if (isInQueue)
+            {
+                move();
+            }
+        }
+        else
+        {
+            //interact with bed is here now
+            if (assignedPlacement.TryGetComponent(out Bed b))
+            {
+                if (b.currentFolder == folder && b.currentPatient == null)
+                {
+                    b.NPCInteract(gameObject);
+                    changePosToBed();
+                    isInteractable = true;
+                }
+            }
         }
     }
 
@@ -114,10 +142,17 @@ public class Patient : MonoBehaviour
     {
         agent.SetDestination(targetPosition);
     }
-
+    /// <summary>
+    /// this function releases folder
+    /// </summary>
     public void releaseFolder()
     {
         isHoldingFolder = false;
+    }
+
+    public void retakeFolder()
+    {
+        isHoldingFolder = true;
     }
 
     /// <summary>
@@ -160,14 +195,11 @@ public class Patient : MonoBehaviour
     public void changePosToBed()
     {
         agent.enabled = false;//Disable AI movement
-        
-        //patients transform in my opinion does not need to be changed
-        //transform.parent = assignedPlacement.transform; //changes the parent of folder to the transfered object
-        
-        Vector3 pos = assignedPlacement.transform.position;
-        transform.position = new Vector3(pos.x, pos.y + 1f, pos.z);
+        transform.parent = assignedPlacement.transform; //changes the parent of folder to the transfered object
         transform.localRotation = new Quaternion(0f, 0f, 0f, 0f); //resets rotation
-        transform.localRotation = Quaternion.Euler(-90f, 90f, 180f); //resets rotation
+        animator.applyRootMotion = false; // true breaks animation, but false breaks spawning of patients
+        //animator.SetTrigger(toBedHash);
+        animator.SetTrigger("ToBed");
     }
 
     /// <summary>
@@ -176,7 +208,8 @@ public class Patient : MonoBehaviour
     /// <param name="item"></param>
     public void healOnBed(string item)
     {
-        //iif the sickenss icon is active
+        //animator.ResetTrigger(toBedHash);
+        //if the sickness icon is active
         if (sicknessIconObject.gameObject.activeSelf)
         {
             //end the function
@@ -186,6 +219,10 @@ public class Patient : MonoBehaviour
         //if given item is same as healing icon
         if (item == healingIcon.sprite.name)
         {
+            if (healingIcon.sprite.name == "Soup")
+            {
+                animator.SetTrigger("EatSoup");
+            }
             currHeal++; //increase current heal state
         }
 
@@ -219,7 +256,11 @@ public class Patient : MonoBehaviour
     /// <returns></returns>
     IEnumerator leaveBed(GameObject bed)
     {
+        targetPosition = ExitTransform.position;
         yield return new WaitForSeconds(1.5f);
+        //animator.SetTrigger(fromBedHash);
+        animator.SetTrigger("FromBed");
+        Debug.Log("leaving bed");
         Bed b = bed.GetComponent<Bed>();
         b.FolderPickUp();
         b.NPCLeaves();
@@ -234,6 +275,7 @@ public class Patient : MonoBehaviour
     /// </summary>
     private void leaveHospital()
     {
+        targetPosition = ExitTransform.position;
         agent.enabled = true; //re-enable navmesh ageny
         StartCoroutine(DisplayHappy());// show happy icon for a few seconds
         agent.SetDestination(ExitTransform.position); //patient heads to exit loc

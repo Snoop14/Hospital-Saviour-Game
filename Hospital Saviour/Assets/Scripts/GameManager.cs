@@ -1,10 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEditor;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -13,8 +16,14 @@ public class GameManager : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField]
     GameObject bedPrefab;
-    [SerializeField]
-    GameObject patientPrefab;
+
+    [Serializable]
+    public struct PatientsPrefab
+    {
+        public GameObject patientPrefab;
+    }
+
+    public PatientsPrefab[] patientPrefabs;
     [SerializeField]
     GameObject folderPrefab;
 
@@ -61,6 +70,17 @@ public class GameManager : MonoBehaviour
     private GameObject displayScore;
     [SerializeField]
     Levels currentLevel;
+
+    //bools to hold interactable status of machines
+    private bool soupMachine;
+    private bool pharmacy;
+    private bool bandageDispenser;
+
+    private bool ScalpelDispenser;
+    private bool TweezerDispenser;
+    private bool Surgery;
+    private bool XRayMachine;
+    private bool ECGMachine;
 
     private void Awake()
     {
@@ -111,6 +131,18 @@ public class GameManager : MonoBehaviour
         activeBedCount = currentLevel.activeBedCount;
         inActiveBedCount = currentLevel.inActiveBedCount;
         //May need to initialize more here later
+
+
+        //bools to hold interactable status of machines
+        soupMachine = currentLevel.soupMachine;
+        pharmacy = currentLevel.pharmacy;
+        bandageDispenser = currentLevel.bandageDispenser;
+
+        ScalpelDispenser = false;
+        TweezerDispenser = false;
+        Surgery = false;
+        XRayMachine = false;
+        ECGMachine = false;
     }
 
     void generateObjects()
@@ -148,22 +180,116 @@ public class GameManager : MonoBehaviour
         //Instatiate Patients and folders
         StartCoroutine(CreatePatient());
 
-        GameObject tempObj = GameObject.Find("SoupMachine");
-        objectList.Add(tempObj);
+        //for each interactable object, check if it's interactable and add to lit if it is, and
+        //if not, make if not interactable and change material
+        if (soupMachine)
+        {
+            GameObject tempObj = GameObject.Find("SoupMachine");
+            objectList.Add(tempObj);
+        }
+        else
+        {
+            GameObject tempObj = GameObject.Find("SoupMachine");
+            tempObj.GetComponent<SoupMachine>().disableSelf();
+            //Debug.Log("soup" + tempObj.GetComponent<SoupMachine>().isInteractable);
+        }
+        
+        if (ScalpelDispenser)
+        {
+            GameObject tempObj = GameObject.Find("ScalpelDispenser");
+            objectList.Add(tempObj);
+        }
+        else
+        {
+            GameObject tempObj = GameObject.Find("ScalpelDispenser");
+            tempObj.GetComponent<ScalpelMachine>().disableSelf();
+        }
 
-        tempObj = GameObject.Find("PillDispenser");
-        objectList.Add(tempObj);
+        if (TweezerDispenser)
+        {
+            GameObject tempObj = GameObject.Find("TweezerDispenser");
+            objectList.Add(tempObj);
+        }
+        else
+        {
+            GameObject tempObj = GameObject.Find("TweezerDispenser");
+            tempObj.GetComponent<TweezerMachine>().disableSelf();
+        }
 
-        tempObj = GameObject.Find("Medkit");
-        objectList.Add(tempObj);
+        
+        if (pharmacy)
+        {
+            GameObject tempObj = GameObject.Find("PillDispenser");
+            objectList.Add(tempObj);
+        }
+        else
+        {
+            GameObject tempObj = GameObject.Find("PillDispenser");
+            tempObj.GetComponent<PillMachine>().disableSelf();
+            //Debug.Log("pharmacy" + tempObj.GetComponent<PillMachine>().isInteractable);
+
+        }
+        if (Surgery)
+        {
+            GameObject tempObj = GameObject.Find("Surgery");
+            objectList.Add(tempObj);
+        }
+        else
+        {
+            GameObject tempObj = GameObject.Find("Surgery");
+            tempObj.GetComponent<SurgeryMachine>().disableSelf();
+        }
+
+        if (XRayMachine)
+        {
+            GameObject tempObj = GameObject.Find("X-Ray");
+            objectList.Add(tempObj);
+        }
+        else
+        {
+            GameObject tempObj = GameObject.Find("X-Ray");
+            tempObj.GetComponent<XRayMachine>().disableSelf();
+        }
+
+        if (bandageDispenser)
+        {
+            GameObject tempObj = GameObject.Find("Medkit");
+            objectList.Add(tempObj);
+        }
+        else
+        {
+            GameObject tempObj = GameObject.Find("Medkit");
+            tempObj.GetComponent<BandageMachine>().disableSelf();
+            //Debug.Log("bandage dispenser" + tempObj.GetComponent<BandageMachine>().isInteractable);
+
+        }
+
+        if (ECGMachine)
+        {
+            GameObject tempObj = GameObject.Find("ECG");
+            objectList.Add(tempObj);
+        }
+        else
+        {
+            GameObject tempObj = GameObject.Find("ECG");
+            tempObj.GetComponent<ECGMachine>().disableSelf();
+        }
+
+
+        GameObject tempBin = GameObject.Find("Bin");
+        objectList.Add(tempBin);
     }
+
+//}
 
     IEnumerator CreatePatient()
     {
+        
         for (int i = 0; i < patientCount; i++)
         {
             yield return new WaitForSeconds(currentLevel.spawnTimes[i]);
-            GameObject newPatient = Instantiate(patientPrefab, patientParent, false);
+            int prefabType = Random.Range(0, patientPrefabs.Length); 
+            GameObject newPatient = Instantiate(patientPrefabs[prefabType].patientPrefab, patientParent, false);
             newPatient.transform.position = EnterTransform.position;
             newPatient.transform.rotation = EnterTransform.rotation;
 
@@ -176,11 +302,16 @@ public class GameManager : MonoBehaviour
             objectList.Add(newPatient);
             Patient p = newPatient.GetComponent<Patient>();
             p.folder = newFolder;
-            p.sickness = currentLevel.sicknessType[i];
+
+            //get random value from sickness list for level
+            //https://docs.unity3d.com/ScriptReference/Random.Range.html accessed 7/8/23
+            int sickInt = Random.Range(0, currentLevel.sicknessType.Count);
+            //p.sickness = currentLevel.sicknessType[i];
+            p.sickness = currentLevel.sicknessType[sickInt];
             p.ExitTransform = ExitTransform;
 
             patientQueue.Add(newPatient);
-            queuePositions.Add(EnterTransform.position + new Vector3(patientSeperation * (patientCount - i + 1), 0, 0));
+            queuePositions.Add(EnterTransform.position + new Vector3(18 - patientSeperation * i, 0, 0));
             p.queuePosition = queuePositions[patientQueue.Count - 1];
         }
     }
