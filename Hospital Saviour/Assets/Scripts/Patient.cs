@@ -123,7 +123,7 @@ public class Patient : MonoBehaviour
                 move();
             }
         }
-        else
+        else if(assignedPlacement)
         {
             //interact with bed is here now
             if (assignedPlacement.TryGetComponent(out Bed b))

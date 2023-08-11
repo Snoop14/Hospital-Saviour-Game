@@ -289,9 +289,9 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(currentLevel.spawnTimes[i]);
             int prefabType = Random.Range(0, patientPrefabs.Length); 
-            GameObject newPatient = Instantiate(patientPrefabs[prefabType].patientPrefab, patientParent, false);
-            newPatient.transform.position = EnterTransform.position;
-            newPatient.transform.rotation = EnterTransform.rotation;
+            GameObject newPatient = Instantiate(patientPrefabs[prefabType].patientPrefab, EnterTransform.position, EnterTransform.rotation, patientParent);
+            //newPatient.transform.position = EnterTransform.position;
+            //newPatient.transform.rotation = EnterTransform.rotation;
 
             GameObject newFolder = Instantiate(folderPrefab, newPatient.transform, false);
             Folder f = newFolder.GetComponent<Folder>();
