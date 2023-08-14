@@ -38,6 +38,7 @@ public class Patient : MonoBehaviour
     GameObject EmojiAngry;
     //int to hold current position in icons
     private int currHeal;
+    bool inAction = false;
 
     public float happinessLvl { get; private set; } = 100f;
     private float happinessDrop;
@@ -106,6 +107,8 @@ public class Patient : MonoBehaviour
 
         if (happinessLvl <= 0)
         {
+            CancelInvoke();
+            print("Patient Mad");
             MadPatient();
         }
     }
@@ -225,7 +228,7 @@ public class Patient : MonoBehaviour
         {
             if (healingIcon.sprite.name == "Soup")
             {
-                animator.SetTrigger("EatSoup");
+                StartCoroutine(triggerAction("eat soup"));
             }
             currHeal++; //increase current heal state
         }
@@ -233,8 +236,10 @@ public class Patient : MonoBehaviour
         //if currHeal is greater than or equal to length of healingIcons
         if (currHeal >= healingOrderIcons.Count)
         {
+            CancelInvoke();
             //should be leaving hospital but changes to functions will need to be made
-            StartCoroutine(leaveBed(assignedPlacement));
+            StartCoroutine(triggerAction("leave placement"));
+            StartCoroutine(leaveHospital());
         }
         else
         {
@@ -258,18 +263,35 @@ public class Patient : MonoBehaviour
     /// </summary>
     /// <param name="bed"></param>
     /// <returns></returns>
-    IEnumerator leaveBed(GameObject bed)
+    IEnumerator triggerAction(string action)
     {
-        targetPosition = ExitTransform.position;
-        yield return new WaitForSeconds(1.5f);
-        //animator.SetTrigger(fromBedHash);
-        animator.SetTrigger("FromBed");
-        Debug.Log("leaving bed");
-        Bed b = bed.GetComponent<Bed>();
-        b.FolderPickUp();
-        b.NPCLeaves();
-        print("now null");
-        assignedPlacement = null;
+        while (inAction)
+        {
+            print("patient is in action");
+            yield return null;
+        }
+        if (action == "leave placement")
+        {
+            Debug.Log("starting leaving bed");
+            //animator.SetTrigger(fromBedHash);
+            inAction = true;
+            animator.SetTrigger("FromBed");
+            yield return new WaitForSeconds(1.5f);
+            inAction = false;
+            Debug.Log("leaving bed");
+            Bed b = assignedPlacement.GetComponent<Bed>();
+            b.FolderPickUp();
+            b.NPCLeaves();
+            print("now null");
+            assignedPlacement = null;
+        }
+        else if(action == "eat soup")
+        {
+            inAction = true;
+            animator.SetTrigger("EatSoup");
+            yield return new WaitForSeconds(1.5f);
+            inAction = false;
+        }
     }
 
     /// <summary>
@@ -277,11 +299,11 @@ public class Patient : MonoBehaviour
     /// </summary>
     IEnumerator leaveHospital()
     {
-        CancelInvoke();
         while (assignedPlacement != null)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return null;
         }
+        print("leaving Hospital");
         targetPosition = ExitTransform.position;
         agent.enabled = true; //re-enable navmesh ageny
         if (happinessLvl <= 0)
@@ -357,11 +379,10 @@ public class Patient : MonoBehaviour
     {
         if (assignedPlacement)
         {
-            if(assignedPlacement.TryGetComponent(out Bed b))
-            {
-                StartCoroutine(leaveBed(assignedPlacement));
-            }
+            print("patient will leave placement");
+            StartCoroutine(triggerAction("leave placement"));
         }
+        print("patient will leave hospital");
         StartCoroutine(leaveHospital());
     }
 
