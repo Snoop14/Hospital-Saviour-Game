@@ -100,10 +100,17 @@ public class GameManager : MonoBehaviour
         int levelNum = PlayerPrefs.GetInt("LevelNum");
         string levelName = "Level" + levelNum + "Data";
         //https://docs.unity3d.com/ScriptReference/AssetDatabase.FindAssets.html
-        string[] guids = AssetDatabase.FindAssets(levelName);
-        string assetPath = AssetDatabase.GUIDToAssetPath(guids[0]);
+        //string[] guids = AssetDatabase.FindAssets(levelName);
+
+        //https://docs.unity3d.com/2020.1/Documentation/ScriptReference/Resources.Load.html accessed 14/8/23
+        var levelToLoad = Resources.Load<Levels>("Level Data/" + levelName);
+        //Debug.Log(levelToLoad.activeBedCount);
+
+        //string assetPath = AssetDatabase.GUIDToAssetPath(guids[0]);
         //https://docs.unity3d.com/ScriptReference/AssetDatabase.LoadAssetAtPath.html
-        currentLevel = (Levels)AssetDatabase.LoadAssetAtPath(assetPath, typeof(Levels));
+        //currentLevel = (Levels)AssetDatabase.LoadAssetAtPath(assetPath, typeof(Levels));
+
+        currentLevel = levelToLoad;
     }
 
     // Start is called before the first frame update
