@@ -230,6 +230,10 @@ public class Patient : MonoBehaviour
             {
                 StartCoroutine(triggerAction("eat soup"));
             }
+            if (healingIcon.sprite.name == "Pill")
+            {
+                StartCoroutine(triggerAction("eat pill"));
+            }
             currHeal++; //increase current heal state
         }
 
@@ -286,6 +290,13 @@ public class Patient : MonoBehaviour
             assignedPlacement = null;
         }
         else if(action == "eat soup")
+        {
+            inAction = true;
+            animator.SetTrigger("EatSoup");
+            yield return new WaitForSeconds(1.5f);
+            inAction = false;
+        }
+        else if (action == "eat pill")
         {
             inAction = true;
             animator.SetTrigger("EatSoup");
