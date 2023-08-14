@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] NavMeshSurface surface;
 
+    GameObject player1;
+    [SerializeField] GameObject playerPrefab;
+
     [Header("Prefabs")]
     [SerializeField]
     GameObject bedPrefab;
@@ -147,6 +150,10 @@ public class GameManager : MonoBehaviour
 
     void generateObjects()
     {
+        player1 = Instantiate(playerPrefab);
+        player1.GetComponent<Player1>().gameManager = gameObject;
+        player1.transform.position += new Vector3(-7, 0, -2);
+
         //Instatiate Inactive beds
         for (int i = 0; i < inActiveBedCount; i++)
         {
@@ -334,7 +341,7 @@ public class GameManager : MonoBehaviour
         HUD = GameObject.Find("HUDCanvas");
         displayScore = HUD.transform.Find("DisplayScore").gameObject;
         UpdateScore(0);
-        HUD.transform.Find("DisplayScore").GetComponent<Text>().text = currScore.ToString();
+        displayScore.GetComponent<Text>().text = currScore.ToString();
     }
 
     /// <summary>
@@ -345,7 +352,6 @@ public class GameManager : MonoBehaviour
     {
         currScore += score;
         int displayVal = (int)currScore;
-        displayScore.GetComponent<Text>().text = displayVal.ToString();
     }
 
     /// <summary>
@@ -355,7 +361,9 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void EndGame()
     {
+        player1.GetComponent<Player1>().enabled = false;
         GameObject endDetails = HUD.transform.Find("EndDetails").gameObject;
+        endDetails.transform.Find("ScoreText").GetComponent<Text>().text = "Score: " + currScore.ToString();
         endDetails.SetActive(true);
     }
 

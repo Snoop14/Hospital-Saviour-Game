@@ -12,7 +12,7 @@ public class Player1 : MonoBehaviour
     private Rigidbody rbody;
 
     [SerializeField]
-    GameObject gameManager;
+    public GameObject gameManager;
     GameManager manager;
 
     public bool isCarrying = false;
