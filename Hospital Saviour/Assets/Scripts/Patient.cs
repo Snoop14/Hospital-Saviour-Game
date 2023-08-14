@@ -34,6 +34,8 @@ public class Patient : MonoBehaviour
     List<Sprite> healingOrderIcons;
     GameObject FillObject;
     Image fillImage;
+    GameObject EmojiHappy;
+    GameObject EmojiAngry;
     //int to hold current position in icons
     private int currHeal;
 
@@ -68,6 +70,8 @@ public class Patient : MonoBehaviour
         healingIcon.sprite = healingOrderIcons[currHeal];
         healingIcon.SetNativeSize();
         healingIconObject.transform.localScale = new Vector3(0.3f, 0.3f, 1);
+        EmojiHappy = icon.transform.GetChild(4).gameObject;
+        EmojiAngry = icon.transform.GetChild(5).gameObject;
 
         FillObject = icon.transform.GetChild(3).GetChild(0).GetChild(0).gameObject;
         fillImage = FillObject.GetComponent<Image>();
@@ -264,22 +268,35 @@ public class Patient : MonoBehaviour
         Bed b = bed.GetComponent<Bed>();
         b.FolderPickUp();
         b.NPCLeaves();
-        folder.GetComponent<Folder>().destroySelf();
-        
-        //may not necessarily leave the hospital after leaving bed
-        leaveHospital();
+        print("now null");
+        assignedPlacement = null;
     }
 
     /// <summary>
     /// called when patient is to leave the hospital
     /// </summary>
-    private void leaveHospital()
+    IEnumerator leaveHospital()
     {
+        CancelInvoke();
+        while (assignedPlacement != null)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
         targetPosition = ExitTransform.position;
         agent.enabled = true; //re-enable navmesh ageny
-        StartCoroutine(DisplayHappy());// show happy icon for a few seconds
+        if (happinessLvl <= 0)
+        {
+            StartCoroutine(DisplayMad());
+        }
+        else 
+        { 
+            StartCoroutine(DisplayHappy());// show happy icon for a few seconds
+        }
         agent.SetDestination(ExitTransform.position); //patient heads to exit loc
         manager.UpdateScore(happinessLvl); // increase score
+
+        folder.GetComponent<Folder>().destroySelf();
+        isInteractable = false;
     }
 
     IEnumerator DisplayHappy()
@@ -287,11 +304,21 @@ public class Patient : MonoBehaviour
         sicknessIconBackground.gameObject.SetActive(false);
         healingIconObject.SetActive(false);
         FillObject.SetActive(false);
-        icon.transform.GetChild(4).gameObject.SetActive(true); //enable happy icon
+        EmojiHappy.SetActive(true); //enable happy icon
         yield return new WaitForSeconds(2f);
         icon.gameObject.SetActive(false); //disable icons above head
     }
-    
+
+    IEnumerator DisplayMad()
+    {
+        sicknessIconBackground.gameObject.SetActive(false);
+        healingIconObject.SetActive(false);
+        FillObject.SetActive(false);
+        EmojiAngry.SetActive(true); //enable happy icon
+        yield return new WaitForSeconds(2f);
+        icon.gameObject.SetActive(false); //disable icons above head
+    }
+
 
     //managed interactions with player whilst on bed
     public void interactionOnBed(bool isCarrying)
@@ -328,20 +355,14 @@ public class Patient : MonoBehaviour
     /// </summary>
     private void MadPatient()
     {
-        CancelInvoke();
         if (assignedPlacement)
         {
             if(assignedPlacement.TryGetComponent(out Bed b))
             {
-                b.FolderPickUp();
-                b.NPCLeaves();
+                StartCoroutine(leaveBed(assignedPlacement));
             }
         }
-        folder.GetComponent<Folder>().destroySelf();
-        isInteractable = false;
-        agent.enabled = true; //re-enable navmesh agent
-        targetPosition = ExitTransform.position;
-        agent.SetDestination(targetPosition);
+        StartCoroutine(leaveHospital());
     }
 
     /// <summary>
