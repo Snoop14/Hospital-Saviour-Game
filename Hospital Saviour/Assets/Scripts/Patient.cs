@@ -108,7 +108,6 @@ public class Patient : MonoBehaviour
         if (happinessLvl <= 0)
         {
             CancelInvoke();
-            print("Patient Mad");
             MadPatient();
         }
     }
@@ -271,12 +270,10 @@ public class Patient : MonoBehaviour
     {
         while (inAction)
         {
-            print("patient is in action");
             yield return null;
         }
         if (action == "leave placement")
         {
-            Debug.Log("starting leaving bed");
             //animator.SetTrigger(fromBedHash);
             inAction = true;
             animator.SetTrigger("FromBed");
@@ -286,7 +283,6 @@ public class Patient : MonoBehaviour
             Bed b = assignedPlacement.GetComponent<Bed>();
             b.FolderPickUp();
             b.NPCLeaves();
-            print("now null");
             assignedPlacement = null;
         }
         else if(action == "eat soup")
@@ -314,7 +310,6 @@ public class Patient : MonoBehaviour
         {
             yield return null;
         }
-        print("leaving Hospital");
         targetPosition = ExitTransform.position;
         agent.enabled = true; //re-enable navmesh ageny
         if (happinessLvl <= 0)
@@ -390,10 +385,8 @@ public class Patient : MonoBehaviour
     {
         if (assignedPlacement)
         {
-            print("patient will leave placement");
             StartCoroutine(triggerAction("leave placement"));
         }
-        print("patient will leave hospital");
         StartCoroutine(leaveHospital());
     }
 
