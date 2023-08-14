@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] NavMeshSurface surface;
 
+    GameObject player1;
+    [SerializeField] GameObject playerPrefab;
+
     [Header("Prefabs")]
     [SerializeField]
     GameObject bedPrefab;
@@ -121,6 +124,8 @@ public class GameManager : MonoBehaviour
          * called when user clicks on a level, then pass the level data into 
          * generateObjects function as a parameter
         **/
+        //This actually works fine.
+
         InitializeLevelData();
         
         generateObjects();
@@ -128,7 +133,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Initalize the data from the current levels data into varaiables
+    /// Initalize the data from the current levels data into variables
     /// </summary>
     private void InitializeLevelData()
     {
@@ -152,6 +157,10 @@ public class GameManager : MonoBehaviour
 
     void generateObjects()
     {
+        player1 = Instantiate(playerPrefab);
+        player1.GetComponent<Player1>().gameManager = gameObject;
+        player1.transform.position += new Vector3(-7, 0, -2);
+
         //Instatiate Inactive beds
         for (int i = 0; i < inActiveBedCount; i++)
         {
@@ -294,9 +303,9 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(currentLevel.spawnTimes[i]);
             int prefabType = Random.Range(0, patientPrefabs.Length); 
-            GameObject newPatient = Instantiate(patientPrefabs[prefabType].patientPrefab, patientParent, false);
-            newPatient.transform.position = EnterTransform.position;
-            newPatient.transform.rotation = EnterTransform.rotation;
+            GameObject newPatient = Instantiate(patientPrefabs[prefabType].patientPrefab, EnterTransform.position, EnterTransform.rotation, patientParent);
+            //newPatient.transform.position = EnterTransform.position;
+            //newPatient.transform.rotation = EnterTransform.rotation;
 
             GameObject newFolder = Instantiate(folderPrefab, newPatient.transform, false);
             Folder f = newFolder.GetComponent<Folder>();
@@ -331,23 +340,47 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Generates the HUD at start of game
+    /// </summary>
     private void GenerateHUD()
     {
         HUD = GameObject.Find("HUDCanvas");
         displayScore = HUD.transform.Find("DisplayScore").gameObject;
         UpdateScore(0);
-        HUD.transform.Find("DisplayScore").GetComponent<Text>().text = currScore.ToString();
+        displayScore.GetComponent<Text>().text = currScore.ToString();
     }
 
+    /// <summary>
+    /// Updates the score in displayed in the HUD
+    /// </summary>
+    /// <param name="score"></param>
     public void UpdateScore(float score)
     {
         currScore += score;
         int displayVal = (int)currScore;
-        displayScore.GetComponent<Text>().text = displayVal.ToString();
     }
 
+    /// <summary>
+    /// This function ends the gameplay and
+    /// should then display the other end game info
+    /// e.g. Score and target completion
+    /// </summary>
     public void EndGame()
     {
-        Debug.Log("End game now");
+        player1.GetComponent<Player1>().enabled = false;
+        GameObject endDetails = HUD.transform.Find("EndDetails").gameObject;
+        endDetails.transform.Find("ScoreText").GetComponent<Text>().text = "Score: " + currScore.ToString();
+        endDetails.SetActive(true);
+    }
+
+    /// <summary>
+    /// This function returns the users to the menu.
+    /// It is called by a button when endDetails becomes active
+    /// </summary>
+    public void ReturnToMenu()
+    {
+        Debug.Log("Returning to Menu");
+        SceneManager.LoadScene("MenuScene");
     }
 }

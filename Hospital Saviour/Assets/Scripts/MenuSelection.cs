@@ -41,6 +41,13 @@ public class MenuSelection : MonoBehaviour
         SceneManager.LoadScene("GameScene");
     }
 
+    /// <summary>
+    /// Set the PlayerPrefs before starting a level.
+    /// PlayerPrefs are utilized to essentially transfer data between scenes.
+    /// https://docs.unity3d.com/ScriptReference/PlayerPrefs.html
+    /// </summary>
+    /// <param name="_level"></param>
+    /// <param name="_players"></param>
     public static void SetLevelNum(int _level, int _players)
     {
         levelNum = _level;

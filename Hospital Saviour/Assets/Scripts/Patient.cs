@@ -34,8 +34,11 @@ public class Patient : MonoBehaviour
     List<Sprite> healingOrderIcons;
     GameObject FillObject;
     Image fillImage;
+    GameObject EmojiHappy;
+    GameObject EmojiAngry;
     //int to hold current position in icons
     private int currHeal;
+    bool inAction = false;
 
     public float happinessLvl { get; private set; } = 100f;
     private float happinessDrop;
@@ -68,6 +71,8 @@ public class Patient : MonoBehaviour
         healingIcon.sprite = healingOrderIcons[currHeal];
         healingIcon.SetNativeSize();
         healingIconObject.transform.localScale = new Vector3(0.3f, 0.3f, 1);
+        EmojiHappy = icon.transform.GetChild(4).gameObject;
+        EmojiAngry = icon.transform.GetChild(5).gameObject;
 
         FillObject = icon.transform.GetChild(3).GetChild(0).GetChild(0).gameObject;
         fillImage = FillObject.GetComponent<Image>();
@@ -100,6 +105,11 @@ public class Patient : MonoBehaviour
         else
             fillImage.color = Color.Lerp(Color.yellow, Color.red, (percentage - 0.5f)*2f);
 
+        if (happinessLvl <= 0)
+        {
+            CancelInvoke();
+            MadPatient();
+        }
     }
 
     void Update()
@@ -119,7 +129,7 @@ public class Patient : MonoBehaviour
                 move();
             }
         }
-        else
+        else if(assignedPlacement)
         {
             //interact with bed is here now
             if (assignedPlacement.TryGetComponent(out Bed b))
@@ -217,7 +227,11 @@ public class Patient : MonoBehaviour
         {
             if (healingIcon.sprite.name == "Soup")
             {
-                animator.SetTrigger("EatSoup");
+                StartCoroutine(triggerAction("eat soup"));
+            }
+            if (healingIcon.sprite.name == "Pill")
+            {
+                StartCoroutine(triggerAction("eat pill"));
             }
             currHeal++; //increase current heal state
         }
@@ -225,8 +239,10 @@ public class Patient : MonoBehaviour
         //if currHeal is greater than or equal to length of healingIcons
         if (currHeal >= healingOrderIcons.Count)
         {
+            CancelInvoke();
             //should be leaving hospital but changes to functions will need to be made
-            StartCoroutine(leaveBed(assignedPlacement));
+            StartCoroutine(triggerAction("leave placement"));
+            StartCoroutine(leaveHospital());
         }
         else
         {
@@ -250,32 +266,65 @@ public class Patient : MonoBehaviour
     /// </summary>
     /// <param name="bed"></param>
     /// <returns></returns>
-    IEnumerator leaveBed(GameObject bed)
+    IEnumerator triggerAction(string action)
     {
-        targetPosition = ExitTransform.position;
-        yield return new WaitForSeconds(1.5f);
-        //animator.SetTrigger(fromBedHash);
-        animator.SetTrigger("FromBed");
-        Debug.Log("leaving bed");
-        Bed b = bed.GetComponent<Bed>();
-        b.FolderPickUp();
-        b.NPCLeaves();
-        folder.GetComponent<Folder>().destroySelf();
-        
-        //may not necessarily leave the hospital after leaving bed
-        leaveHospital();
+        while (inAction)
+        {
+            yield return null;
+        }
+        if (action == "leave placement")
+        {
+            //animator.SetTrigger(fromBedHash);
+            inAction = true;
+            animator.SetTrigger("FromBed");
+            yield return new WaitForSeconds(1.5f);
+            inAction = false;
+            Debug.Log("leaving bed");
+            Bed b = assignedPlacement.GetComponent<Bed>();
+            b.FolderPickUp();
+            b.NPCLeaves();
+            assignedPlacement = null;
+        }
+        else if(action == "eat soup")
+        {
+            inAction = true;
+            animator.SetTrigger("EatSoup");
+            yield return new WaitForSeconds(1.5f);
+            inAction = false;
+        }
+        else if (action == "eat pill")
+        {
+            inAction = true;
+            animator.SetTrigger("EatSoup");
+            yield return new WaitForSeconds(1.5f);
+            inAction = false;
+        }
     }
 
     /// <summary>
     /// called when patient is to leave the hospital
     /// </summary>
-    private void leaveHospital()
+    IEnumerator leaveHospital()
     {
+        while (assignedPlacement != null)
+        {
+            yield return null;
+        }
         targetPosition = ExitTransform.position;
         agent.enabled = true; //re-enable navmesh ageny
-        StartCoroutine(DisplayHappy());// show happy icon for a few seconds
+        if (happinessLvl <= 0)
+        {
+            StartCoroutine(DisplayMad());
+        }
+        else 
+        { 
+            StartCoroutine(DisplayHappy());// show happy icon for a few seconds
+        }
         agent.SetDestination(ExitTransform.position); //patient heads to exit loc
         manager.UpdateScore(happinessLvl); // increase score
+
+        folder.GetComponent<Folder>().destroySelf();
+        isInteractable = false;
     }
 
     IEnumerator DisplayHappy()
@@ -283,11 +332,21 @@ public class Patient : MonoBehaviour
         sicknessIconBackground.gameObject.SetActive(false);
         healingIconObject.SetActive(false);
         FillObject.SetActive(false);
-        icon.transform.GetChild(4).gameObject.SetActive(true); //enable happy icon
+        EmojiHappy.SetActive(true); //enable happy icon
         yield return new WaitForSeconds(2f);
         icon.gameObject.SetActive(false); //disable icons above head
     }
-    
+
+    IEnumerator DisplayMad()
+    {
+        sicknessIconBackground.gameObject.SetActive(false);
+        healingIconObject.SetActive(false);
+        FillObject.SetActive(false);
+        EmojiAngry.SetActive(true); //enable happy icon
+        yield return new WaitForSeconds(2f);
+        icon.gameObject.SetActive(false); //disable icons above head
+    }
+
 
     //managed interactions with player whilst on bed
     public void interactionOnBed(bool isCarrying)
@@ -319,6 +378,21 @@ public class Patient : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Called when patient isn't healed in time
+    /// </summary>
+    private void MadPatient()
+    {
+        if (assignedPlacement)
+        {
+            StartCoroutine(triggerAction("leave placement"));
+        }
+        StartCoroutine(leaveHospital());
+    }
+
+    /// <summary>
+    /// Destroys the entire patient
+    /// </summary>
     public void DestroySelf()
     {
         Destroy(gameObject);
