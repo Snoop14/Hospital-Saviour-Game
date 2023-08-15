@@ -295,7 +295,7 @@ public class Patient : MonoBehaviour
         else if (action == "eat pill")
         {
             inAction = true;
-            animator.SetTrigger("EatSoup");
+            animator.SetTrigger("EatPill");
             yield return new WaitForSeconds(1.5f);
             inAction = false;
         }
