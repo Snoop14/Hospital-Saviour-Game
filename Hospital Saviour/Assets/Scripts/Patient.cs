@@ -388,6 +388,8 @@ public class Patient : MonoBehaviour
             StartCoroutine(triggerAction("leave placement"));
         }
         StartCoroutine(leaveHospital());
+        
+        manager.MadPatient();
     }
 
     /// <summary>

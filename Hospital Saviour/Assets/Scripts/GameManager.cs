@@ -383,4 +383,14 @@ public class GameManager : MonoBehaviour
         Debug.Log("Returning to Menu");
         SceneManager.LoadScene("MenuScene");
     }
+
+    public void MadPatient()
+    {
+        int levelNum = PlayerPrefs.GetInt("LevelNum");
+        if (levelNum > 2)
+        {
+            EndGame();
+        }
+    }
+
 }
