@@ -85,6 +85,8 @@ public class GameManager : MonoBehaviour
     private bool XRayMachine;
     private bool ECGMachine;
 
+    private int timeForLevel;
+
     private void Awake()
     {
         GetLevelData();
@@ -130,6 +132,11 @@ public class GameManager : MonoBehaviour
         
         generateObjects();
         GenerateHUD();
+
+        if (timeForLevel > 0)
+        {
+            StartCoroutine(WaitForTimerRunOut());
+        }
     }
 
     /// <summary>
@@ -153,6 +160,8 @@ public class GameManager : MonoBehaviour
         Surgery = false;
         XRayMachine = false;
         ECGMachine = false;
+
+        timeForLevel = currentLevel.timer;
     }
 
     void generateObjects()
@@ -391,6 +400,12 @@ public class GameManager : MonoBehaviour
         {
             EndGame();
         }
+    }
+    
+    IEnumerator WaitForTimerRunOut()
+    {
+        yield return new WaitForSeconds(timeForLevel);
+        EndGame();
     }
 
 }

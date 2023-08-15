@@ -19,5 +19,5 @@ public class Levels : ScriptableObject
     public bool pharmacy;
     public bool bandageDispenser;
 
-
+    public int timer;
 }
