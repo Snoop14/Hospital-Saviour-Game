@@ -87,6 +87,8 @@ public class GameManager : MonoBehaviour
 
     private int timeForLevel;
 
+    [SerializeField] public Timer inGameTimer;
+
     private void Awake()
     {
         GetLevelData();
@@ -135,6 +137,9 @@ public class GameManager : MonoBehaviour
 
         if (timeForLevel > 0)
         {
+            inGameTimer.gameObject.SetActive(true);
+            inGameTimer.SetTimeFromSeconds(timeForLevel);
+            inGameTimer.StartTimer();
             StartCoroutine(WaitForTimerRunOut());
         }
     }

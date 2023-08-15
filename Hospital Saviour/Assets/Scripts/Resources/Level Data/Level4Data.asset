@@ -28,4 +28,9 @@ MonoBehaviour:
   soupMachine: 1
   pharmacy: 1
   bandageDispenser: 0
+  ScalpelDispenser: 0
+  TweezerDispenser: 0
+  Surgery: 0
+  XRayMachine: 0
+  ECGMachine: 0
   timer: 90
