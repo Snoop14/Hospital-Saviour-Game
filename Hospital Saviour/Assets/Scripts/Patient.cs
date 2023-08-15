@@ -279,7 +279,7 @@ public class Patient : MonoBehaviour
             animator.SetTrigger("FromBed");
             yield return new WaitForSeconds(1.5f);
             inAction = false;
-            Debug.Log("leaving bed");
+            //Debug.Log("leaving bed");
             Bed b = assignedPlacement.GetComponent<Bed>();
             b.FolderPickUp();
             b.NPCLeaves();
