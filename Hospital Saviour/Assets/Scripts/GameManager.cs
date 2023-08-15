@@ -147,12 +147,11 @@ public class GameManager : MonoBehaviour
         soupMachine = currentLevel.soupMachine;
         pharmacy = currentLevel.pharmacy;
         bandageDispenser = currentLevel.bandageDispenser;
-
-        ScalpelDispenser = false;
-        TweezerDispenser = false;
-        Surgery = false;
-        XRayMachine = false;
-        ECGMachine = false;
+        ScalpelDispenser = currentLevel.ScalpelDispenser; 
+        TweezerDispenser = currentLevel.TweezerDispenser;
+        Surgery = currentLevel.Surgery;
+        XRayMachine = currentLevel.XRayMachine;
+        ECGMachine = currentLevel.ECGMachine;
     }
 
     void generateObjects()

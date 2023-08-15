@@ -18,6 +18,11 @@ public class Levels : ScriptableObject
     public bool soupMachine;
     public bool pharmacy;
     public bool bandageDispenser;
+    public bool ScalpelDispenser;
+    public bool TweezerDispenser;
+    public bool Surgery;
+    public bool XRayMachine;
+    public bool ECGMachine;
 
 
 }
