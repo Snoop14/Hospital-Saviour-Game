@@ -152,13 +152,14 @@ public class Player1 : MonoBehaviour
                         Bed b = go.GetComponent<Bed>();
                         if (b && b.isActive && b.isInteractable && b.hasFolder && b.isOccupied)
                         {
+                            Patient patient = b.currentPatient.GetComponent<Patient>();
                             Pill p = item.GetComponent<Pill>();
-                            p.transferTo(go);
+                            p.transferTo(patient.gameObject);
                             p.changePosToBed();
                             StartCoroutine(p.destroySelf());
 
                             //Stuff needs to be done here to actually continue with soup hand off
-                            b.currentPatient.GetComponent<Patient>().healOnBed(itemType);
+                            patient.healOnBed(itemType);
 
                             isCarrying = false;
                             item = null;
