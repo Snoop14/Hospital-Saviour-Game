@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Level Controls")]
     public int scoreAim = 250;
-    private float currScore;
+    private int currScore;
 
     private GameObject HUD;
     private GameObject displayScore;
@@ -356,8 +356,8 @@ public class GameManager : MonoBehaviour
     /// <param name="score"></param>
     public void UpdateScore(float score)
     {
-        currScore += score;
-        int displayVal = (int)currScore;
+        currScore += (int)score;
+        displayScore.GetComponent<Text>().text = currScore.ToString();
     }
 
     /// <summary>
@@ -379,7 +379,6 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void ReturnToMenu()
     {
-        Debug.Log("Returning to Menu");
         SceneManager.LoadScene("MenuScene");
     }
 }
