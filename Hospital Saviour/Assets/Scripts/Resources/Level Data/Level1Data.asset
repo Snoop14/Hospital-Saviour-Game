@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8353ef2f05695346912b4a78b0d2e3b, type: 3}
   m_Name: Level1Data
   m_EditorClassIdentifier: 
+  levelName: Level 1
   patientCount: 2
   sicknessType:
   - {fileID: 11400000, guid: da30b2c4a3c6beb42b8fba32df99f028, type: 2}
@@ -24,3 +25,16 @@ MonoBehaviour:
   soupMachine: 1
   pharmacy: 0
   bandageDispenser: 0
+  ScalpelDispenser: 0
+  TweezerDispenser: 0
+  Surgery: 0
+  XRayMachine: 0
+  ECGMachine: 0
+  tutorialSteps:
+  - Use the Interact key to initiate Actions. Begin with this the Patient to take
+    his File.
+  - You may return the File to the Patient or place the File onto the Bed to begin
+    examining him.
+  - Now that he is on the Bed examine the Patient to figure out what he needs.
+  - This Patient needs Soup, head over to the Soup Machine
+  - You may now throw the Soup out in the Bin or give it to the Patient.

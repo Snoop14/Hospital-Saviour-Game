@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     Transform inActiveBedParent;
     [SerializeField]
     Transform activeBedParent;
+    [SerializeField]
+    GameObject tutorialObject;
 
     [Header("")]
     [SerializeField]
@@ -57,6 +59,7 @@ public class GameManager : MonoBehaviour
     public float patientSeperation = 5;
 
     List<GameObject> patientQueue;
+    List<GameObject> patients;
     List<Vector3> queuePositions;
     [SerializeField]
     Transform EnterTransform;
@@ -93,6 +96,7 @@ public class GameManager : MonoBehaviour
         patientQueue = new List<GameObject>();
         queuePositions = new List<Vector3>();
         objectList = new List<GameObject>();
+        patients = new List<GameObject>();
     }
 
     /// <summary>
@@ -152,12 +156,15 @@ public class GameManager : MonoBehaviour
         Surgery = currentLevel.Surgery;
         XRayMachine = currentLevel.XRayMachine;
         ECGMachine = currentLevel.ECGMachine;
+
+        tutorialObject.GetComponent<tutorial>().setupTutorial(currentLevel);
     }
 
     void generateObjects()
     {
         player1 = Instantiate(playerPrefab);
         player1.GetComponent<Player1>().gameManager = gameObject;
+        player1.GetComponent<Player1>().tutorial = tutorialObject.GetComponent<tutorial>();
         player1.transform.position += new Vector3(-7, 0, -2);
 
         //Instatiate Inactive beds
@@ -186,6 +193,11 @@ public class GameManager : MonoBehaviour
             Bed b = newBed.GetComponent<Bed>();
             b.isActive = true;
             b.isInteractable = true;
+
+            if (i == 0)
+                tutorialObject.GetComponent<tutorial>().bed1 = newBed;
+            else if (i == 1)
+                tutorialObject.GetComponent<tutorial>().bed2 = newBed;
         }
 
         surface.BuildNavMesh();
@@ -199,6 +211,7 @@ public class GameManager : MonoBehaviour
         {
             GameObject tempObj = GameObject.Find("SoupMachine");
             objectList.Add(tempObj);
+            tutorialObject.GetComponent<tutorial>().soupMachine = tempObj;
         }
         else
         {
@@ -291,6 +304,7 @@ public class GameManager : MonoBehaviour
 
         GameObject tempBin = GameObject.Find("Bin");
         objectList.Add(tempBin);
+        tutorialObject.GetComponent<tutorial>().bin = tempBin;
     }
 
 //}
@@ -326,7 +340,12 @@ public class GameManager : MonoBehaviour
             patientQueue.Add(newPatient);
             queuePositions.Add(EnterTransform.position + new Vector3(18 - patientSeperation * i, 0, 0));
             p.queuePosition = queuePositions[patientQueue.Count - 1];
+
+            patients.Add(newPatient);
         }
+
+        tutorialObject.GetComponent<tutorial>().patients = patients;
+        tutorialObject.GetComponent<tutorial>().changeStep(1);
     }
 
     public void removeFromQueue(GameObject p)

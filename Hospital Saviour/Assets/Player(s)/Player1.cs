@@ -21,6 +21,8 @@ public class Player1 : MonoBehaviour
 
     List<GameObject> collidingObjects;
 
+    public tutorial tutorial;
+
     void Start()
     {
         rbody = GetComponent<Rigidbody>();
@@ -71,6 +73,7 @@ public class Player1 : MonoBehaviour
                             item = null;
                             itemType = "";
 
+                            tutorial.interactedBed();
                             break;
                         }
 
@@ -95,6 +98,7 @@ public class Player1 : MonoBehaviour
                                 item = null;
                                 itemType = "";
 
+                                tutorial.interactedPatient();
                                 break;
                             }
                             
@@ -125,6 +129,8 @@ public class Player1 : MonoBehaviour
                             isCarrying = false;
                             item = null;
                             itemType = "";
+
+                            tutorial.interactedBed();
                             break;
                         }
 
@@ -138,6 +144,8 @@ public class Player1 : MonoBehaviour
                             isCarrying = false;
                             item = null;
                             itemType = "";
+
+                            tutorial.interactedBin();
                             break;
                         }
                     }
@@ -244,6 +252,7 @@ public class Player1 : MonoBehaviour
                                 i.transferTo(gameObject);
                                 i.changePosToPlayer();
 
+                                tutorial.interactedPatient();
                                 break;
                             }
                         }
@@ -259,6 +268,7 @@ public class Player1 : MonoBehaviour
                         i.transferTo(gameObject);
                         i.changePosToPlayer();
 
+                        tutorial.interactedSoup();
                         break;
                     }
 
@@ -290,6 +300,7 @@ public class Player1 : MonoBehaviour
                     {
                         b.interactWithPatient(isCarrying);
 
+                        tutorial.interactedBed();
                         break;
                     }
                 }
