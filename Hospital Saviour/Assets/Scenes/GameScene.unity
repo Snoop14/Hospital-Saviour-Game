@@ -213,6 +213,7 @@ RectTransform:
   m_Children:
   - {fileID: 1228581218}
   - {fileID: 963336889}
+  - {fileID: 834574102}
   m_Father: {fileID: 1342617858}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1425,6 +1426,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textPrefab: {fileID: 4801480417336536293, guid: 1e4014c619c881841ba21d0939b22659,
     type: 3}
+  patients: []
+  bed1: {fileID: 0}
+  bed2: {fileID: 0}
+  soupMachine: {fileID: 0}
+  bin: {fileID: 0}
 --- !u!1 &863202922
 GameObject:
   m_ObjectHideFlags: 0
@@ -1784,7 +1790,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.5, y: -0, z: -0, w: 0.8660254}
+  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
   m_LocalPosition: {x: -10.757454, y: 13.438055, z: -11.845225}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2284,6 +2290,7 @@ MonoBehaviour:
   ExitTransform: {fileID: 863202923}
   objectList: []
   scoreAim: 0
+  levelNo: 0
   currentLevel: {fileID: 11400000, guid: 03ef1b98c12a3e249abfea9ecc255193, type: 2}
 --- !u!4 &1362452446
 Transform:
