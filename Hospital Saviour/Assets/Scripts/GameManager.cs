@@ -89,6 +89,8 @@ public class GameManager : MonoBehaviour
     private bool XRayMachine;
     private bool ECGMachine;
 
+    private Animator animator;
+
     private void Awake()
     {
         GetLevelData();
@@ -136,6 +138,11 @@ public class GameManager : MonoBehaviour
         
         generateObjects();
         GenerateHUD();
+
+        //trigger start animations
+        animator = GameObject.Find("Scene").GetComponent<Animator>();
+        Debug.Log(levelNo);
+        animator.SetInteger("Level", levelNo);
     }
 
     /// <summary>
