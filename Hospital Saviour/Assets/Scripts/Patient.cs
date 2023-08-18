@@ -80,8 +80,12 @@ public class Patient : MonoBehaviour
         happinessDrop = sickness.happinessDropLevel;
 
         //function starts after 10s and repeats every 5s
-        InvokeRepeating("dropHappinessLvl", 10, 1);
-        
+        if (manager.levelNo > 2)
+        {
+            InvokeRepeating("dropHappinessLvl", 10, 5);
+        }
+
+
         //animator = GetComponent<Animator>();
         animator = gameObject.GetComponentInChildren<Animator>();
         toBedHash = Animator.StringToHash("ToBed");
