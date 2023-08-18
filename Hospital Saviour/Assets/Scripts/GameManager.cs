@@ -164,10 +164,9 @@ public class GameManager : MonoBehaviour
 
     void generateObjects()
     {
-        player1 = Instantiate(playerPrefab);
+        player1 = Instantiate(playerPrefab, GameObject.Find("Player1SpawnSite").transform);
         player1.GetComponent<Player1>().gameManager = gameObject;
-        player1.GetComponent<Player1>().tutorial = tutorialObject.GetComponent<tutorial>();
-        player1.transform.position += new Vector3(-7, 0, -2);
+        //player1.transform.position += new Vector3(-7, 0, -2);
 
         //Instatiate Inactive beds
         for (int i = 0; i < inActiveBedCount; i++)
