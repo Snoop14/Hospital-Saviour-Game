@@ -141,8 +141,8 @@ public class GameManager : MonoBehaviour
 
         //trigger start animations
         animator = GameObject.Find("Scene").GetComponent<Animator>();
-        Debug.Log(levelNo);
         animator.SetInteger("Level", levelNo);
+
     }
 
     /// <summary>
