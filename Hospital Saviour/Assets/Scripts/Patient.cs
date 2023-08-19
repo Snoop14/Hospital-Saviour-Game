@@ -47,6 +47,8 @@ public class Patient : MonoBehaviour
     private int toBedHash;
     private int fromBedHash;
 
+    public tutorial tutorial;
+
     void Start()
     {
         manager = GameObject.Find("Manager").GetComponent<GameManager>();
@@ -216,6 +218,7 @@ public class Patient : MonoBehaviour
         animator.applyRootMotion = false; // true breaks animation, but false breaks spawning of patients
         //animator.SetTrigger(toBedHash);
         animator.SetTrigger("ToBed");
+        tutorial.PatientInteractWithBed();
     }
 
     /// <summary>
@@ -345,6 +348,8 @@ public class Patient : MonoBehaviour
         EmojiHappy.SetActive(true); //enable happy icon
         yield return new WaitForSeconds(2f);
         icon.gameObject.SetActive(false); //disable icons above head
+
+        tutorial.updateGoal();
     }
 
     IEnumerator DisplayMad()
