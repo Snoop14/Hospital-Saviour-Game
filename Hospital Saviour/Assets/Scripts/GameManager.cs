@@ -67,7 +67,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Level Controls")]
     public int scoreAim = 250;
-    private int currScore;
+    private float currScore;
+    public int levelNo;
 
     private GameObject HUD;
     private GameObject displayScore;
@@ -114,6 +115,7 @@ public class GameManager : MonoBehaviour
         //currentLevel = (Levels)AssetDatabase.LoadAssetAtPath(assetPath, typeof(Levels));
 
         currentLevel = levelToLoad;
+        levelNo = levelNum;
     }
 
     // Start is called before the first frame update

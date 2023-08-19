@@ -79,9 +79,19 @@ public class Patient : MonoBehaviour
         fillImage.color = Color.green;
         happinessDrop = sickness.happinessDropLevel;
 
-        //function starts after 10s and repeats every 5s
-        InvokeRepeating("dropHappinessLvl", 10, 1);
-        
+        //if level is higher than 2, run the dropp happiness code
+        if (manager.levelNo > 2)
+        {
+            //function starts after 10s and repeats every 5s
+            InvokeRepeating("dropHappinessLvl", 10, 5);
+        }
+        //otherwise, don't display the bar
+        else
+        {
+            GameObject.Find("HappinessBackground").SetActive(false);
+        }
+
+
         //animator = GetComponent<Animator>();
         animator = gameObject.GetComponentInChildren<Animator>();
         toBedHash = Animator.StringToHash("ToBed");
