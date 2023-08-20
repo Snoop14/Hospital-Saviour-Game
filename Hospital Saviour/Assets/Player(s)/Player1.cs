@@ -73,7 +73,7 @@ public class Player1 : MonoBehaviour
                             item = null;
                             itemType = "";
 
-                            tutorial.interactedBed();
+                            tutorial.interactedBedFolder();
                             break;
                         }
 
