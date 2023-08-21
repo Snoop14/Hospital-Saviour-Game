@@ -28,5 +28,5 @@ public class Levels : ScriptableObject
     public List<string> tutorialSteps;
 
     [Header("Level Goals")]
-    public int patientsTreated;
+    public int patientsToBeTreated;
 }
