@@ -36,3 +36,4 @@ MonoBehaviour:
   ECGMachine: 0
   tutorialSteps:
   - Some patients need pills, get pills from the pill machine
+  patientsTreated: 4

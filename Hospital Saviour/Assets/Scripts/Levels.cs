@@ -26,4 +26,7 @@ public class Levels : ScriptableObject
     public bool ECGMachine;
 
     public List<string> tutorialSteps;
+
+    [Header("Level Goals")]
+    public int patientsTreated;
 }

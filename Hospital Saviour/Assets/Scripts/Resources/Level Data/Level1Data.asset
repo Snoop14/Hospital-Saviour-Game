@@ -39,3 +39,4 @@ MonoBehaviour:
   - Now that he is on the Bed examine the Patient to figure out what he needs.
   - This Patient needs Soup, head over to the Soup Machine
   - You may now throw the Soup out in the Bin or give it to the Patient.
+  patientsTreated: 2
