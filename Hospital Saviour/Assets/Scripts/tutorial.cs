@@ -53,7 +53,8 @@ public class tutorial : MonoBehaviour
         {
             goalPatients = levelData.patientsToBeTreated;
         }
-        
+        startGoals();
+
     }
 
     void FixTextSize()
@@ -71,6 +72,11 @@ public class tutorial : MonoBehaviour
             prevHeight = Screen.height;
             prevWidth = Screen.width;
         }
+    }
+
+    public void startGoals()
+    {
+        goals.GetComponent<Text>().text = patientsCured.ToString() + "/" + goalPatients.ToString() + " Patients Cured";
     }
 
     public void updateGoal()
