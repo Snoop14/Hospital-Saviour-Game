@@ -79,7 +79,10 @@ public class tutorial : MonoBehaviour
 
     public void startGoals()
     {
-        goals.GetComponent<Text>().text = patientsCured.ToString() + "/" + goalPatients.ToString() + " Patients Cured";
+        if (goalPatients > 0)
+        {
+            goals.GetComponent<Text>().text = patientsCured.ToString() + "/" + goalPatients.ToString() + " Patients Cured";
+        }
     }
 
     public void updateGoal()
