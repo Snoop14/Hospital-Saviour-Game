@@ -185,6 +185,8 @@ public class Player1 : MonoBehaviour
                             isCarrying = false;
                             item = null;
                             itemType = "";
+
+                            tutorial.interactedBin();
                             break;
                         }
                     }
@@ -282,6 +284,7 @@ public class Player1 : MonoBehaviour
                         i.transferTo(gameObject);
                         i.changePosToPlayer();
 
+                        tutorial.interactedPill();
                         break;
                     }
 

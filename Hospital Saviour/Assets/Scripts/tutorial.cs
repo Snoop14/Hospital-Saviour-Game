@@ -27,11 +27,14 @@ public class tutorial : MonoBehaviour
 
     int patientsCured = 0;
 
+    Levels level;
+
     //goal variables
     private int goalPatients = 0;
 
     public void setupTutorial(Levels levelData)
     {
+        level = levelData;
         texts = new List<Text>();
         Text header = transform.GetChild(0).GetComponent<Text>();
         header.text = levelData.levelName;
@@ -90,37 +93,73 @@ public class tutorial : MonoBehaviour
 
     public void interactedPatient()
     {
-        if (currentStep == 1)
-            changeStep(1);
-        else if (currentStep == 2)
-            changeStep(-1);
+        if (level.levelName == "Level 1")
+        {
+            if (currentStep == 1)
+                changeStep(1);
+            else if (currentStep == 2)
+                changeStep(-1);
+        }
     }
     public void interactedBedFolder()
     {
-        if (currentStep == 2)
-            changeStep(1);
+        if (level.levelName == "Level 1")
+        {
+            if (currentStep == 2)
+                changeStep(1);
+        }
     }
     public void interactedBed()
     {
-        if (currentStep == 4)
-            changeStep(1);
-        else if (currentStep == 6)
-            changeStep(1);
+        if (level.levelName == "Level 1")
+        {
+            if (currentStep == 4)
+                changeStep(1);
+            else if (currentStep == 6)
+                changeStep(1);
+        }
+        else if (level.levelName == "Level 2")
+        {
+            if (currentStep == 0)
+                changeStep(1);
+        }
     }
     public void interactedBin()
     {
-        if (currentStep == 6)
-            changeStep(-1);
+        if (level.levelName == "Level 1")
+        {
+            if (currentStep == 6)
+                changeStep(-1);
+        }
+        if (level.levelName == "Level 2")
+        {
+            if (currentStep == 2)
+                changeStep(-1);
+        }
+    }
+    public void interactedPill()
+    {
+        if (level.levelName == "Level 2")
+        {
+            if (currentStep == 1)
+                changeStep(1);
+        }
     }
     public void interactedSoup()
     {
-        if (currentStep == 5)
-            changeStep(1);
+        if (level.levelName == "Level 1")
+        {
+            if (currentStep == 5)
+                changeStep(1);
+        }
     }
     public void PatientInteractWithBed()
     {
-        if (currentStep == 3)
-            changeStep(1);
+            if (level.levelName == "Level 1")
+            {
+                if (currentStep == 3)
+                    changeStep(1);
+            }
     }
     public void changeStep(int s)
     {

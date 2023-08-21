@@ -316,15 +316,15 @@ public class GameManager : MonoBehaviour
         tutorialObject.GetComponent<tutorial>().bin = tempBin;
     }
 
-//}
+    //}
 
     IEnumerator CreatePatient()
     {
-        
+
         for (int i = 0; i < patientCount; i++)
         {
             yield return new WaitForSeconds(currentLevel.spawnTimes[i]);
-            int prefabType = Random.Range(0, patientPrefabs.Length); 
+            int prefabType = Random.Range(0, patientPrefabs.Length);
             GameObject newPatient = Instantiate(patientPrefabs[prefabType].patientPrefab, EnterTransform.position, EnterTransform.rotation, patientParent);
             //newPatient.transform.position = EnterTransform.position;
             //newPatient.transform.rotation = EnterTransform.rotation;
@@ -354,7 +354,9 @@ public class GameManager : MonoBehaviour
         }
 
         tutorialObject.GetComponent<tutorial>().patients = patients;
-        tutorialObject.GetComponent<tutorial>().changeStep(1);
+        if (currentLevel.levelName == "Level 1") {
+            tutorialObject.GetComponent<tutorial>().changeStep(1);
+        }
     }
 
     public void removeFromQueue(GameObject p)
