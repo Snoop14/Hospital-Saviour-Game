@@ -10,7 +10,14 @@ public class Pill : MonoBehaviour
     /// <param name="obj"></param>
     public void transferTo(GameObject obj)
     {
-        transform.parent = obj.transform; //changes the parent of folder to the transfered object
+        if (obj.name.Contains("Patient"))
+        {
+            transform.parent = obj.transform.GetChild(0);
+        }
+        else
+        {
+            transform.parent = obj.transform; //changes the parent of folder to the transferred object
+        }
     }
 
     /// <summary>
@@ -27,7 +34,7 @@ public class Pill : MonoBehaviour
     /// </summary>
     public void changePosToBed()
     {
-        transform.localPosition = new Vector3(0f, 1.75f, 0f); //Values will need to be changed
+        transform.localPosition = new Vector3(0f, 0.1f, 0.85f); //Values will need to be changed
         transform.localRotation = new Quaternion(0f, 0f, 0f, 0f); //resets rotation
     }
 
