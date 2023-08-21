@@ -27,6 +27,9 @@ public class tutorial : MonoBehaviour
 
     int patientsCured = 0;
 
+    //goal variables
+    private int goalPatients = 0;
+
     public void setupTutorial(Levels levelData)
     {
         texts = new List<Text>();
@@ -45,7 +48,13 @@ public class tutorial : MonoBehaviour
             texts[i + 1].text = steps[i];
         }
         InvokeRepeating("FixTextSize",0,0.5f);
-        
+
+        if (levelData.patientsToBeTreated > 0)
+        {
+            goalPatients = levelData.patientsToBeTreated;
+        }
+        startGoals();
+
     }
 
     void FixTextSize()
@@ -65,10 +74,18 @@ public class tutorial : MonoBehaviour
         }
     }
 
+    public void startGoals()
+    {
+        goals.GetComponent<Text>().text = patientsCured.ToString() + "/" + goalPatients.ToString() + " Patients Cured";
+    }
+
     public void updateGoal()
     {
         patientsCured += 1;
-        goals.GetComponent<Text>().text = patientsCured.ToString() + "/2 Patients Cured";
+        if (goalPatients > 0)
+        {
+            goals.GetComponent<Text>().text = patientsCured.ToString() + "/" + goalPatients.ToString() + " Patients Cured";
+        }
     }
 
     public void interactedPatient()
