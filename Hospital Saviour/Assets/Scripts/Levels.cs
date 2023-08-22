@@ -7,6 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Level", menuName = "Level")]
 public class Levels : ScriptableObject
 {
+    public string levelName;
     public int patientCount;
     public List<Sickness> sicknessType;
     public List<float> spawnTimes;
@@ -24,5 +25,9 @@ public class Levels : ScriptableObject
     public bool XRayMachine;
     public bool ECGMachine;
 
+    public List<string> tutorialSteps;
+
+    [Header("Level Goals")]
+    public int patientsToBeTreated;
     public int timer;
 }

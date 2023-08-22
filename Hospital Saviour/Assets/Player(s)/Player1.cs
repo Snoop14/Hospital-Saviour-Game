@@ -21,6 +21,8 @@ public class Player1 : MonoBehaviour
 
     List<GameObject> collidingObjects;
 
+    public tutorial tutorial;
+
     void Start()
     {
         rbody = GetComponent<Rigidbody>();
@@ -71,6 +73,7 @@ public class Player1 : MonoBehaviour
                             item = null;
                             itemType = "";
 
+                            tutorial.interactedBedFolder();
                             break;
                         }
 
@@ -95,6 +98,7 @@ public class Player1 : MonoBehaviour
                                 item = null;
                                 itemType = "";
 
+                                tutorial.interactedPatient();
                                 break;
                             }
                             
@@ -125,6 +129,8 @@ public class Player1 : MonoBehaviour
                             isCarrying = false;
                             item = null;
                             itemType = "";
+
+                            tutorial.interactedBed();
                             break;
                         }
 
@@ -138,6 +144,8 @@ public class Player1 : MonoBehaviour
                             isCarrying = false;
                             item = null;
                             itemType = "";
+
+                            tutorial.interactedBin();
                             break;
                         }
                     }
@@ -152,13 +160,14 @@ public class Player1 : MonoBehaviour
                         Bed b = go.GetComponent<Bed>();
                         if (b && b.isActive && b.isInteractable && b.hasFolder && b.isOccupied)
                         {
+                            Patient patient = b.currentPatient.GetComponent<Patient>();
                             Pill p = item.GetComponent<Pill>();
-                            p.transferTo(go);
+                            p.transferTo(patient.gameObject);
                             p.changePosToBed();
                             StartCoroutine(p.destroySelf());
 
                             //Stuff needs to be done here to actually continue with soup hand off
-                            b.currentPatient.GetComponent<Patient>().healOnBed(itemType);
+                            patient.healOnBed(itemType);
 
                             isCarrying = false;
                             item = null;
@@ -177,6 +186,8 @@ public class Player1 : MonoBehaviour
                             isCarrying = false;
                             item = null;
                             itemType = "";
+
+                            tutorial.interactedBin();
                             break;
                         }
                     }
@@ -244,6 +255,7 @@ public class Player1 : MonoBehaviour
                                 i.transferTo(gameObject);
                                 i.changePosToPlayer();
 
+                                tutorial.interactedPatient();
                                 break;
                             }
                         }
@@ -259,6 +271,7 @@ public class Player1 : MonoBehaviour
                         i.transferTo(gameObject);
                         i.changePosToPlayer();
 
+                        tutorial.interactedSoup();
                         break;
                     }
 
@@ -272,6 +285,7 @@ public class Player1 : MonoBehaviour
                         i.transferTo(gameObject);
                         i.changePosToPlayer();
 
+                        tutorial.interactedPill();
                         break;
                     }
 
@@ -290,6 +304,7 @@ public class Player1 : MonoBehaviour
                     {
                         b.interactWithPatient(isCarrying);
 
+                        tutorial.interactedBed();
                         break;
                     }
                 }

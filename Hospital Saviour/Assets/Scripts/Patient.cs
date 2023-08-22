@@ -47,6 +47,8 @@ public class Patient : MonoBehaviour
     private int toBedHash;
     private int fromBedHash;
 
+    public tutorial tutorial;
+
     void Start()
     {
         manager = GameObject.Find("Manager").GetComponent<GameManager>();
@@ -79,9 +81,19 @@ public class Patient : MonoBehaviour
         fillImage.color = Color.green;
         happinessDrop = sickness.happinessDropLevel;
 
-        //function starts after 10s and repeats every 5s
-        InvokeRepeating("dropHappinessLvl", 10, 1);
-        
+        //if level is higher than 2, run the dropp happiness code
+        if (manager.levelNo > 2)
+        {
+            //function starts after 10s and repeats every 5s
+            InvokeRepeating("dropHappinessLvl", 10, 5);
+        }
+        //otherwise, don't display the bar
+        else
+        {
+            GameObject.Find("HappinessBackground").SetActive(false);
+        }
+
+
         //animator = GetComponent<Animator>();
         animator = gameObject.GetComponentInChildren<Animator>();
         toBedHash = Animator.StringToHash("ToBed");
@@ -206,6 +218,7 @@ public class Patient : MonoBehaviour
         animator.applyRootMotion = false; // true breaks animation, but false breaks spawning of patients
         //animator.SetTrigger(toBedHash);
         animator.SetTrigger("ToBed");
+        tutorial.PatientInteractWithBed();
     }
 
     /// <summary>
@@ -295,7 +308,7 @@ public class Patient : MonoBehaviour
         else if (action == "eat pill")
         {
             inAction = true;
-            animator.SetTrigger("EatSoup");
+            animator.SetTrigger("EatPill");
             yield return new WaitForSeconds(1.5f);
             inAction = false;
         }
@@ -335,6 +348,8 @@ public class Patient : MonoBehaviour
         EmojiHappy.SetActive(true); //enable happy icon
         yield return new WaitForSeconds(2f);
         icon.gameObject.SetActive(false); //disable icons above head
+
+        tutorial.updateGoal();
     }
 
     IEnumerator DisplayMad()

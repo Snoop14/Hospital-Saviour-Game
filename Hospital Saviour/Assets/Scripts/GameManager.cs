@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     Transform inActiveBedParent;
     [SerializeField]
     Transform activeBedParent;
+    [SerializeField]
+    GameObject tutorialObject;
 
     [Header("")]
     [SerializeField]
@@ -57,6 +59,7 @@ public class GameManager : MonoBehaviour
     public float patientSeperation = 5;
 
     List<GameObject> patientQueue;
+    List<GameObject> patients;
     List<Vector3> queuePositions;
     [SerializeField]
     Transform EnterTransform;
@@ -68,6 +71,7 @@ public class GameManager : MonoBehaviour
     [Header("Level Controls")]
     public int scoreAim = 250;
     private float currScore;
+    public int levelNo;
 
     private GameObject HUD;
     private GameObject displayScore;
@@ -85,6 +89,8 @@ public class GameManager : MonoBehaviour
     private bool XRayMachine;
     private bool ECGMachine;
 
+    private Animator animator;
+
     private int timeForLevel;
 
     [SerializeField] public CustomTimer inGameTimer;
@@ -97,6 +103,7 @@ public class GameManager : MonoBehaviour
         patientQueue = new List<GameObject>();
         queuePositions = new List<Vector3>();
         objectList = new List<GameObject>();
+        patients = new List<GameObject>();
     }
 
     /// <summary>
@@ -118,6 +125,7 @@ public class GameManager : MonoBehaviour
         //currentLevel = (Levels)AssetDatabase.LoadAssetAtPath(assetPath, typeof(Levels));
 
         currentLevel = levelToLoad;
+        levelNo = levelNum;
     }
 
     // Start is called before the first frame update
@@ -134,6 +142,11 @@ public class GameManager : MonoBehaviour
         
         generateObjects();
         GenerateHUD();
+
+        //trigger start animations
+        animator = GameObject.Find("Scene").GetComponent<Animator>();
+        animator.SetInteger("Level", levelNo);
+
 
         if (timeForLevel > 0)
         {
@@ -165,14 +178,17 @@ public class GameManager : MonoBehaviour
         XRayMachine = currentLevel.XRayMachine;
         ECGMachine = currentLevel.ECGMachine;
 
+        tutorialObject.GetComponent<tutorial>().setupTutorial(currentLevel);
+
         timeForLevel = currentLevel.timer;
     }
 
     void generateObjects()
     {
-        player1 = Instantiate(playerPrefab);
+        player1 = Instantiate(playerPrefab, GameObject.Find("Player1SpawnSite").transform);
         player1.GetComponent<Player1>().gameManager = gameObject;
-        player1.transform.position += new Vector3(-7, 0, -2);
+        player1.GetComponent<Player1>().tutorial = tutorialObject.GetComponent<tutorial>();
+        //player1.transform.position += new Vector3(-7, 0, -2);
 
         //Instatiate Inactive beds
         for (int i = 0; i < inActiveBedCount; i++)
@@ -200,6 +216,11 @@ public class GameManager : MonoBehaviour
             Bed b = newBed.GetComponent<Bed>();
             b.isActive = true;
             b.isInteractable = true;
+
+            if (i == 0)
+                tutorialObject.GetComponent<tutorial>().bed1 = newBed;
+            else if (i == 1)
+                tutorialObject.GetComponent<tutorial>().bed2 = newBed;
         }
 
         surface.BuildNavMesh();
@@ -213,6 +234,7 @@ public class GameManager : MonoBehaviour
         {
             GameObject tempObj = GameObject.Find("SoupMachine");
             objectList.Add(tempObj);
+            tutorialObject.GetComponent<tutorial>().soupMachine = tempObj;
         }
         else
         {
@@ -305,17 +327,18 @@ public class GameManager : MonoBehaviour
 
         GameObject tempBin = GameObject.Find("Bin");
         objectList.Add(tempBin);
+        tutorialObject.GetComponent<tutorial>().bin = tempBin;
     }
 
-//}
+    //}
 
     IEnumerator CreatePatient()
     {
-        
+
         for (int i = 0; i < patientCount; i++)
         {
             yield return new WaitForSeconds(currentLevel.spawnTimes[i]);
-            int prefabType = Random.Range(0, patientPrefabs.Length); 
+            int prefabType = Random.Range(0, patientPrefabs.Length);
             GameObject newPatient = Instantiate(patientPrefabs[prefabType].patientPrefab, EnterTransform.position, EnterTransform.rotation, patientParent);
             //newPatient.transform.position = EnterTransform.position;
             //newPatient.transform.rotation = EnterTransform.rotation;
@@ -340,6 +363,13 @@ public class GameManager : MonoBehaviour
             patientQueue.Add(newPatient);
             queuePositions.Add(EnterTransform.position + new Vector3(18 - patientSeperation * i, 0, 0));
             p.queuePosition = queuePositions[patientQueue.Count - 1];
+            p.tutorial = tutorialObject.GetComponent<tutorial>();
+            patients.Add(newPatient);
+        }
+
+        tutorialObject.GetComponent<tutorial>().patients = patients;
+        if (currentLevel.levelName == "Level 1") {
+            tutorialObject.GetComponent<tutorial>().changeStep(1);
         }
     }
 
@@ -370,8 +400,8 @@ public class GameManager : MonoBehaviour
     /// <param name="score"></param>
     public void UpdateScore(float score)
     {
-        currScore += score;
-        int displayVal = (int)currScore;
+        currScore += (int)score;
+        displayScore.GetComponent<Text>().text = currScore.ToString();
     }
 
     /// <summary>
@@ -393,7 +423,6 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void ReturnToMenu()
     {
-        Debug.Log("Returning to Menu");
         SceneManager.LoadScene("MenuScene");
     }
 
