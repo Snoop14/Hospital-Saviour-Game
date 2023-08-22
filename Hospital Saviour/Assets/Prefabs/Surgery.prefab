@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 6650391563314470441}
   - component: {fileID: 3369739922092849700}
   m_Layer: 0
-  m_Name: Surgery
+  m_Name: SurgeryMachine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
