@@ -33,7 +33,6 @@ public class CustomTimer : MonoBehaviour
 
     void Start()
     {
-        Debug.Log(timerText);
         timerText.text = DisplayTime(ReturnTotalSeconds());
     }
 
@@ -100,8 +99,6 @@ public class CustomTimer : MonoBehaviour
         sFormatted = string.Format("{0:00}", seconds);
 
         time = mFormatted + sFormatted;
-        
-        Debug.Log(time);
 
         return time;
     }
