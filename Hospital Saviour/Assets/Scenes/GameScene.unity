@@ -3390,28 +3390,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Surgery
       objectReference: {fileID: 0}
+    - target: {fileID: 4099481268499932044, guid: 89a540f3a5e05ad4087f4a17c7670c30,
+        type: 3}
+      propertyPath: m_Name
+      value: SurgeryMachine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89a540f3a5e05ad4087f4a17c7670c30, type: 3}
---- !u!1 &3918760704682289918 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1274881319548617063, guid: 89a540f3a5e05ad4087f4a17c7670c30,
-    type: 3}
-  m_PrefabInstance: {fileID: 3918760704682289917}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3918760704682289919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3918760704682289918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8dc58f6dea674d4a8d050fd9fe8ca6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isInteractable: 1
-  inactiveObjectMaterial: {fileID: 0}
 --- !u!4 &3918760704682289920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 77909752769188, guid: 89a540f3a5e05ad4087f4a17c7670c30,
