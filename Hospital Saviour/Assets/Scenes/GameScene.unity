@@ -2017,6 +2017,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2088352481340939160, guid: feb02cee4119b9e46ad4c354ffb94d96,
         type: 3}
+      propertyPath: timerText
+      value: 
+      objectReference: {fileID: 1294522442}
+    - target: {fileID: 2088352481340939160, guid: feb02cee4119b9e46ad4c354ffb94d96,
+        type: 3}
       propertyPath: hoursDisplay
       value: 0
       objectReference: {fileID: 0}
@@ -2158,6 +2163,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ae392df589f1e8439316f88b61b2776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1294522442 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 724731817908773877, guid: feb02cee4119b9e46ad4c354ffb94d96,
+    type: 3}
+  m_PrefabInstance: {fileID: 1294522439}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1362452444

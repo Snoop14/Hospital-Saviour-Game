@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
 
     private int timeForLevel;
 
-    [SerializeField] public Timer inGameTimer;
+    [SerializeField] public CustomTimer inGameTimer;
 
     private void Awake()
     {
