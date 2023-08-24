@@ -29,4 +29,5 @@ public class Levels : ScriptableObject
 
     [Header("Level Goals")]
     public int patientsToBeTreated;
+    public int timer;
 }
