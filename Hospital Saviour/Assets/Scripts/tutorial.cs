@@ -65,12 +65,10 @@ public class tutorial : MonoBehaviour
         if (prevHeight != Screen.height || prevWidth != Screen.width)
         {
             int s = Mathf.Min(Screen.height, Screen.width);
-            print(texts[0].fontSize);
             foreach (Text t in texts)
             {
                 t.fontSize = (int)(s * fontScale);
-                print(t.fontSize);
-        }
+            }
             texts[0].fontSize = (int)(s * fontScale * 1.7f);
             prevHeight = Screen.height;
             prevWidth = Screen.width;
