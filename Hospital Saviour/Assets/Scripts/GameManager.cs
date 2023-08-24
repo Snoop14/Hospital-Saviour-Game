@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -91,6 +91,10 @@ public class GameManager : MonoBehaviour
 
     private Animator animator;
 
+    private int timeForLevel;
+
+    [SerializeField] public CustomTimer inGameTimer;
+
     private void Awake()
     {
         GetLevelData();
@@ -143,6 +147,14 @@ public class GameManager : MonoBehaviour
         animator = GameObject.Find("Scene").GetComponent<Animator>();
         animator.SetInteger("Level", levelNo);
 
+
+        if (timeForLevel > 0)
+        {
+            inGameTimer.gameObject.SetActive(true);
+            inGameTimer.SetTimeFromSeconds(timeForLevel);
+            inGameTimer.StartTimer();
+            StartCoroutine(WaitForTimerRunOut());
+        }
     }
 
     /// <summary>
@@ -167,6 +179,8 @@ public class GameManager : MonoBehaviour
         ECGMachine = currentLevel.ECGMachine;
 
         tutorialObject.GetComponent<tutorial>().setupTutorial(currentLevel);
+
+        timeForLevel = currentLevel.timer;
     }
 
     void generateObjects()
@@ -411,4 +425,20 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("MenuScene");
     }
+
+    public void MadPatient()
+    {
+        int levelNum = PlayerPrefs.GetInt("LevelNum");
+        if (levelNum > 2)
+        {
+            EndGame();
+        }
+    }
+    
+    IEnumerator WaitForTimerRunOut()
+    {
+        yield return new WaitForSeconds(timeForLevel);
+        EndGame();
+    }
+
 }
