@@ -37,7 +37,8 @@ MonoBehaviour:
     examining him.
   - Please Wait for the Patient to reach the Bed.
   - Now that he is on the Bed, examine the Patient to figure out what he needs.
-  - This Patient needs Soup, head over to the Soup Machine
+  - "Look, the patient\u2019s icon has changed to show that they need soup, head
+    over to the Soup Machine"
   - You may now throw the Soup out in the Bin or give it to the Patient.
   patientsToBeTreated: 2
   timer: 0
