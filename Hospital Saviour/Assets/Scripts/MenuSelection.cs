@@ -16,10 +16,16 @@ public class MenuSelection : MonoBehaviour
     //holder for players selected
     private int playersSet = 1;
 
+    //holder for high score to display
+    private int currHighScore;
+
+
     public void StartLevel(int level)
     {
         levelSet = level;
         //Debug.Log("Loading Level " + levelSet);
+
+        DisplayHighScore();
     }
 
 
@@ -37,7 +43,7 @@ public class MenuSelection : MonoBehaviour
     public void StartGame()
     {
         SetLevelNum(levelSet, playersSet);
-        Debug.Log("Starting Level " + levelSet + " with " + playersSet + " players");
+        //Debug.Log("Starting Level " + levelSet + " with " + playersSet + " players");
         SceneManager.LoadScene("GameScene");
     }
 
@@ -55,5 +61,26 @@ public class MenuSelection : MonoBehaviour
 
         PlayerPrefs.SetInt("LevelNum", levelNum);
         PlayerPrefs.SetInt("PlayerNum", playerNum);
+
+        //MenuSelection menu = new MenuSelection();
+        
+        //menu.DisplayHighScore();
+
+
     }
+
+    private void DisplayHighScore()
+    {
+        
+        
+        string levelName = "Level" + levelSet + "Data";
+        //https://docs.unity3d.com/2020.1/Documentation/ScriptReference/Resources.Load.html accessed 14/8/23
+        var levelToLoad = Resources.Load<Levels>("Level Data/" + levelName);
+        
+        currHighScore = levelToLoad.highScore;
+
+        Debug.Log(currHighScore);
+
+    }
+
 }

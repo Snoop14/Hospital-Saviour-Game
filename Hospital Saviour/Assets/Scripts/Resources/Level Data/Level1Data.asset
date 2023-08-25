@@ -21,6 +21,7 @@ MonoBehaviour:
   - 8
   inActiveBedCount: 4
   activeBedCount: 2
+  highScore: 0
   stars: 3200000064000000c8000000
   soupMachine: 1
   pharmacy: 0

@@ -417,7 +417,13 @@ public class GameManager : MonoBehaviour
         GameObject endDetails = HUD.transform.Find("EndDetails").gameObject;
         endDetails.transform.Find("ScoreText").GetComponent<Text>().text = "Score: " + currScore.ToString();
         endDetails.SetActive(true);
+
+        if (currentLevel.highScore < currScore)
+        {
+            currentLevel.highScore = (int)currScore;
+        }
     }
+    
 
     /// <summary>
     /// This function returns the users to the menu.

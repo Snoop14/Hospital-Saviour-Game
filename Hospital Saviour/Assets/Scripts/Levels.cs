@@ -13,6 +13,8 @@ public class Levels : ScriptableObject
     public List<float> spawnTimes;
     public int inActiveBedCount;
     public int activeBedCount;
+    //[HideInInspector]
+    public int highScore = new int();
     public int[] stars = new int[3];
 
     //bools to hold interactable status of machines
