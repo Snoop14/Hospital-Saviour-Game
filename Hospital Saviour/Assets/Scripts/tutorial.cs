@@ -175,6 +175,12 @@ public class tutorial : MonoBehaviour
             {
                 changeStep(1);
                 resetArrows();
+                 
+                //turn off spotlight
+                foreach (GameObject patient in patients)
+                {
+                    patient.GetComponent<Patient>().DeactivateLight();
+                }
             }
 
         }
