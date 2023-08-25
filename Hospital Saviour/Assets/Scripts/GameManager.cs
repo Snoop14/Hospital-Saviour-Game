@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Level Controls")]
     public int scoreAim = 250;
-    private float currScore;
+    private int currScore;
     public int levelNo;
 
     private GameObject HUD;
@@ -417,7 +417,17 @@ public class GameManager : MonoBehaviour
         GameObject endDetails = HUD.transform.Find("EndDetails").gameObject;
         endDetails.transform.Find("ScoreText").GetComponent<Text>().text = "Score: " + currScore.ToString();
         endDetails.SetActive(true);
+
+        //Update current high score for level
+        string levelName = currentLevel.levelName;
+        if (PlayerPrefs.GetInt(levelName) < currScore)
+        {
+            PlayerPrefs.SetInt(levelName, currScore);
+        }
+
+        PlayerPrefs.SetInt("Highest Level Complete", levelNo);
     }
+    
 
     /// <summary>
     /// This function returns the users to the menu.

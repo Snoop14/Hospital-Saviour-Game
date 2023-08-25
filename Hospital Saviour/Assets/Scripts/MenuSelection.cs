@@ -16,10 +16,34 @@ public class MenuSelection : MonoBehaviour
     //holder for players selected
     private int playersSet = 1;
 
+    //holder for high score to display
+    private int currHighScore;
+
+    [SerializeField]
+    Text scoreDisplay;
+
+    [SerializeField]
+    Transform levelsParent;
+
+    private void Start()
+    {
+        int numLevelsComplete = PlayerPrefs.GetInt("Highest Level Complete");
+        if(numLevelsComplete >= 1)
+        {
+            for (int i = 1; i <= numLevelsComplete; i++)
+            {
+                Button thisButton = levelsParent.GetChild(i).GetComponent<Button>();
+                thisButton.interactable = true;
+            }
+        }
+    }
+
     public void StartLevel(int level)
     {
         levelSet = level;
         //Debug.Log("Loading Level " + levelSet);
+
+        DisplayHighScore();
     }
 
 
@@ -37,7 +61,7 @@ public class MenuSelection : MonoBehaviour
     public void StartGame()
     {
         SetLevelNum(levelSet, playersSet);
-        Debug.Log("Starting Level " + levelSet + " with " + playersSet + " players");
+        //Debug.Log("Starting Level " + levelSet + " with " + playersSet + " players");
         SceneManager.LoadScene("GameScene");
     }
 
@@ -55,5 +79,22 @@ public class MenuSelection : MonoBehaviour
 
         PlayerPrefs.SetInt("LevelNum", levelNum);
         PlayerPrefs.SetInt("PlayerNum", playerNum);
+    }
+
+    private void DisplayHighScore()
+    {
+        string levelName = "Level " + levelSet;
+
+        currHighScore = PlayerPrefs.GetInt(levelName);
+
+        Debug.Log(currHighScore);
+
+        scoreDisplay.text = currHighScore.ToString();
+    }
+
+    public void ResetGame()
+    {
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene("MenuScene");
     }
 }
