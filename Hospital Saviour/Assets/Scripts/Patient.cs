@@ -390,7 +390,7 @@ public class Patient : MonoBehaviour
             //turn on healing icon
             icon.transform.GetChild(2).gameObject.SetActive(true);
         }
-
+        manager.iconChange(healingIcon.sprite);
     }
 
     /// <summary>

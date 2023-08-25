@@ -441,4 +441,15 @@ public class GameManager : MonoBehaviour
         EndGame();
     }
 
+    public void iconChange(Sprite s)
+    {
+        player1.GetComponent<Player1>().healingIconObject.GetComponent<Image>().sprite = s;
+        player1.GetComponent<Player1>().healingIconObject.SetActive(true);
+        StartCoroutine(showIcon());
+    }
+    IEnumerator showIcon()
+    {
+        yield return new WaitForSeconds(2f);
+        player1.GetComponent<Player1>().healingIconObject.SetActive(false);
+    }
 }

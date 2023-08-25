@@ -15,6 +15,8 @@ public class Player1 : MonoBehaviour
     public GameObject gameManager;
     GameManager manager;
 
+    public GameObject healingIconObject;
+
     public bool isCarrying = false;
     string itemType = "";
     GameObject item = null;
@@ -28,13 +30,25 @@ public class Player1 : MonoBehaviour
         rbody = GetComponent<Rigidbody>();
         collidingObjects = new List<GameObject>();
         manager = gameManager.GetComponent<GameManager>();
+        healingIconObject = GameObject.Find("PlayerIcon");
+        healingIconObject.GetComponent<Image>().SetNativeSize();
+        healingIconObject.transform.localScale = new Vector3(0.3f, 0.3f, 1);
+        healingIconObject.SetActive(false);
     }
 
     void FixedUpdate()
     {
         //Gets player to look in direction of movement
         transform.LookAt(transform.position + movementVec, new Vector3(0, 1, 0));
-        rbody.velocity = movementVec * speed; 
+        rbody.velocity = movementVec * speed;
+
+        if (healingIconObject.activeSelf)
+        {
+            Vector3 offset = new Vector3(0, 2.5f, 1.5f);
+            Vector2 positionOnScreen = Camera.main.WorldToScreenPoint(transform.position + offset);
+            healingIconObject.transform.position = positionOnScreen;
+        }
+        
     }
 
     /// <summary>
