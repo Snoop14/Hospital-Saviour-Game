@@ -794,7 +794,7 @@ RectTransform:
   m_GameObject: {fileID: 409601860}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9999606, y: 0.9999605, z: 0.9999605}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1418687209}
   m_Father: {fileID: 71179833}
@@ -802,7 +802,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 0.3, y: 0.8}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &409601862
@@ -826,6 +826,10 @@ MonoBehaviour:
   bin: {fileID: 0}
   goals: {fileID: 329742448}
   fontScale: 0.0218
+  arrowPrefab: {fileID: 8033013904663827094, guid: 811224e5ad9cf784e9d208e5182a4a92,
+    type: 3}
+  iconCanvas: {fileID: 291570399}
+  objectList: []
 --- !u!114 &409601863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1032,6 +1036,9 @@ MonoBehaviour:
   bin: {fileID: 0}
   goals: {fileID: 0}
   fontScale: 0.0218
+  arrowPrefab: {fileID: 0}
+  iconCanvas: {fileID: 0}
+  objectList: []
 --- !u!114 &692348120
 MonoBehaviour:
   m_ObjectHideFlags: 0

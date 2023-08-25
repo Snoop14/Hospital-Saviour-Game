@@ -155,6 +155,10 @@ public class GameManager : MonoBehaviour
             inGameTimer.StartTimer();
             StartCoroutine(WaitForTimerRunOut());
         }
+
+        tutorialObject.GetComponent<tutorial>().objectList = objectList;
+        tutorialObject.GetComponent<tutorial>().setupTutorial(currentLevel);
+
     }
 
     /// <summary>
@@ -178,8 +182,6 @@ public class GameManager : MonoBehaviour
         XRayMachine = currentLevel.XRayMachine;
         ECGMachine = currentLevel.ECGMachine;
 
-        tutorialObject.GetComponent<tutorial>().setupTutorial(currentLevel);
-
         timeForLevel = currentLevel.timer;
     }
 
@@ -201,7 +203,7 @@ public class GameManager : MonoBehaviour
                 renderer.material = inActiveMat;
             }
             //Place bed into object list
-            objectList.Add(newBed);
+            //objectList.Add(newBed);
 
         }
 
@@ -369,7 +371,7 @@ public class GameManager : MonoBehaviour
 
         tutorialObject.GetComponent<tutorial>().patients = patients;
         if (currentLevel.levelName == "Level 1") {
-            tutorialObject.GetComponent<tutorial>().changeStep(1);
+            tutorialObject.GetComponent<tutorial>().PatientsAdded();
         }
     }
 

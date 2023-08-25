@@ -32,6 +32,13 @@ public class tutorial : MonoBehaviour
     //goal variables
     private int goalPatients = 0;
 
+    Dictionary<GameObject, GameObject> arrows = new Dictionary<GameObject, GameObject>();
+    [SerializeField]
+    GameObject arrowPrefab;
+    public GameObject iconCanvas;
+    public List<GameObject> objectList;
+
+
     public void setupTutorial(Levels levelData)
     {
         level = levelData;
@@ -92,14 +99,66 @@ public class tutorial : MonoBehaviour
         }
     }
 
+    void setupArrows()
+    {
+        foreach (var o in objectList)
+        {
+            GameObject a = Instantiate(arrowPrefab,iconCanvas.transform, true);
+            a.SetActive(false);
+            a.GetComponent<Arrow>().assignObject(o.transform);
+            a.GetComponent<Image>().SetNativeSize();
+            a.transform.localScale = new Vector3(0.15f, 0.1f, 1);
+            arrows.Add(o,a);
+        }
+    }
+
+    void resetArrows()
+    {
+        foreach(var k_v in arrows)
+        {
+            k_v.Value.SetActive(false);
+        }
+    }
+    void displayArrows<T>() where T : Component
+    {
+        foreach (var k_v in arrows)
+        {
+            if (k_v.Key.GetComponent<T>())
+            {
+                k_v.Value.SetActive(true);
+            }
+        }
+    }
+
+    public void PatientsAdded()
+    {
+        if (level.levelName == "Level 1")
+        {
+            if (patients.Count == level.patientCount && currentStep == 0)
+            {
+                changeStep(1);
+                setupArrows();
+                displayArrows<Patient>();
+            }
+        }
+    }
     public void interactedPatient()
     {
         if (level.levelName == "Level 1")
         {
             if (currentStep == 1)
+            {
                 changeStep(1);
+                resetArrows();
+                displayArrows<Patient>();
+                displayArrows<Bed>();
+            }
             else if (currentStep == 2)
+            {
                 changeStep(-1);
+                resetArrows();
+                displayArrows<Patient>();
+            }
         }
     }
     public void interactedBedFolder()
@@ -107,7 +166,22 @@ public class tutorial : MonoBehaviour
         if (level.levelName == "Level 1")
         {
             if (currentStep == 2)
+            {
                 changeStep(1);
+                resetArrows();
+            }
+
+        }
+    }
+    public void PatientInteractWithBed()
+    {
+        if (level.levelName == "Level 1")
+        {
+            if (currentStep == 3)
+            {
+                changeStep(1);
+                displayArrows<Bed>();
+            }
         }
     }
     public void interactedBed()
@@ -115,14 +189,23 @@ public class tutorial : MonoBehaviour
         if (level.levelName == "Level 1")
         {
             if (currentStep == 4)
+            {
                 changeStep(1);
-            else if (currentStep == 6)
+                resetArrows();
+                displayArrows<SoupMachine>();
+            }
+            else if (currentStep == 6) 
+            { 
                 changeStep(1);
+                resetArrows();
+            }
         }
         else if (level.levelName == "Level 2")
         {
             if (currentStep == 0)
+            {
                 changeStep(1);
+            }
         }
     }
     public void interactedBin()
@@ -130,12 +213,18 @@ public class tutorial : MonoBehaviour
         if (level.levelName == "Level 1")
         {
             if (currentStep == 6)
+            {
                 changeStep(-1);
+                resetArrows();
+                displayArrows<SoupMachine>();
+            }
         }
         if (level.levelName == "Level 2")
         {
             if (currentStep == 2)
+            {
                 changeStep(-1);
+            }
         }
     }
     public void interactedPill()
@@ -143,7 +232,9 @@ public class tutorial : MonoBehaviour
         if (level.levelName == "Level 2")
         {
             if (currentStep == 1)
+            {
                 changeStep(1);
+            }
         }
     }
     public void interactedSoup()
@@ -151,16 +242,13 @@ public class tutorial : MonoBehaviour
         if (level.levelName == "Level 1")
         {
             if (currentStep == 5)
-                changeStep(1);
-        }
-    }
-    public void PatientInteractWithBed()
-    {
-            if (level.levelName == "Level 1")
             {
-                if (currentStep == 3)
-                    changeStep(1);
+                changeStep(1);
+                resetArrows();
+                displayArrows<Bed>();
+                displayArrows<Bin>();
             }
+        }
     }
     public void changeStep(int s)
     {
