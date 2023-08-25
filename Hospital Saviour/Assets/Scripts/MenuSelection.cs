@@ -20,8 +20,23 @@ public class MenuSelection : MonoBehaviour
     private int currHighScore;
 
     [SerializeField]
-    public Text scoreDisplay;
+    Text scoreDisplay;
 
+    [SerializeField]
+    Transform levelsParent;
+
+    private void Start()
+    {
+        int numLevelsComplete = PlayerPrefs.GetInt("Highest Level Complete");
+        if(numLevelsComplete >= 1)
+        {
+            for (int i = 1; i <= numLevelsComplete; i++)
+            {
+                Button thisButton = levelsParent.GetChild(i).GetComponent<Button>();
+                thisButton.interactable = true;
+            }
+        }
+    }
 
     public void StartLevel(int level)
     {
@@ -64,12 +79,6 @@ public class MenuSelection : MonoBehaviour
 
         PlayerPrefs.SetInt("LevelNum", levelNum);
         PlayerPrefs.SetInt("PlayerNum", playerNum);
-
-        //MenuSelection menu = new MenuSelection();
-        
-        //menu.DisplayHighScore();
-
-
     }
 
     private void DisplayHighScore()
@@ -81,5 +90,11 @@ public class MenuSelection : MonoBehaviour
         Debug.Log(currHighScore);
 
         scoreDisplay.text = currHighScore.ToString();
+    }
+
+    public void ResetGame()
+    {
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene("MenuScene");
     }
 }

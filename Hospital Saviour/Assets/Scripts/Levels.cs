@@ -17,7 +17,10 @@ public class Levels : ScriptableObject
     //public int highScore;
     public int[] stars = new int[3];
 
+    //public bool levelComplete;
+
     //bools to hold interactable status of machines
+    [Header("Machines")]
     public bool soupMachine;
     public bool pharmacy;
     public bool bandageDispenser;

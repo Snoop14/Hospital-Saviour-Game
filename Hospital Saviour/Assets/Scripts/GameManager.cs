@@ -418,11 +418,14 @@ public class GameManager : MonoBehaviour
         endDetails.transform.Find("ScoreText").GetComponent<Text>().text = "Score: " + currScore.ToString();
         endDetails.SetActive(true);
 
+        //Update current high score for level
         string levelName = currentLevel.levelName;
         if (PlayerPrefs.GetInt(levelName) < currScore)
         {
             PlayerPrefs.SetInt(levelName, currScore);
         }
+
+        PlayerPrefs.SetInt("Highest Level Complete", levelNo);
     }
     
 
