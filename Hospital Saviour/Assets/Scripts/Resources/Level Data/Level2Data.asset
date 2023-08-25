@@ -20,9 +20,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b65efb007cc28354682960938d9b4a5e, type: 2}
   spawnTimes:
   - 3
-  - 6
-  - 9
-  - 13
+  - 7
+  - 11
+  - 14
   inActiveBedCount: 4
   activeBedCount: 2
   stars: 3200000064000000c8000000
@@ -37,3 +37,4 @@ MonoBehaviour:
   tutorialSteps:
   - Some patients need pills, get pills from the pill machine
   patientsToBeTreated: 4
+  timer: 0

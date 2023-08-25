@@ -17,8 +17,8 @@ MonoBehaviour:
   sicknessType:
   - {fileID: 11400000, guid: da30b2c4a3c6beb42b8fba32df99f028, type: 2}
   spawnTimes:
-  - 3
   - 5
+  - 8
   inActiveBedCount: 4
   activeBedCount: 2
   stars: 3200000064000000c8000000
@@ -40,3 +40,4 @@ MonoBehaviour:
   - This Patient needs Soup, head over to the Soup Machine
   - You may now throw the Soup out in the Bin or give it to the Patient.
   patientsToBeTreated: 2
+  timer: 0
