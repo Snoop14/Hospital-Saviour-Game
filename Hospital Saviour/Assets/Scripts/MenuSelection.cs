@@ -19,6 +19,9 @@ public class MenuSelection : MonoBehaviour
     //holder for high score to display
     private int currHighScore;
 
+    [SerializeField]
+    public Text scoreDisplay;
+
 
     public void StartLevel(int level)
     {
@@ -71,16 +74,12 @@ public class MenuSelection : MonoBehaviour
 
     private void DisplayHighScore()
     {
-        
-        
-        string levelName = "Level" + levelSet + "Data";
-        //https://docs.unity3d.com/2020.1/Documentation/ScriptReference/Resources.Load.html accessed 14/8/23
-        var levelToLoad = Resources.Load<Levels>("Level Data/" + levelName);
-        
-        currHighScore = levelToLoad.highScore;
+        string levelName = "Level " + levelSet;
+
+        currHighScore = PlayerPrefs.GetInt(levelName);
 
         Debug.Log(currHighScore);
 
+        scoreDisplay.text = currHighScore.ToString();
     }
-
 }

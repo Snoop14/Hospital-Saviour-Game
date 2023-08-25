@@ -14,7 +14,7 @@ public class Levels : ScriptableObject
     public int inActiveBedCount;
     public int activeBedCount;
     //[HideInInspector]
-    public int highScore = new int();
+    //public int highScore;
     public int[] stars = new int[3];
 
     //bools to hold interactable status of machines
