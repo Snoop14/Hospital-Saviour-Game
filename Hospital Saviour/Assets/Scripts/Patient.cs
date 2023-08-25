@@ -414,4 +414,19 @@ public class Patient : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public void ActivateLight()
+    {    
+        GameObject light = this.gameObject.transform.Find("GFX").transform.Find("PointLight").gameObject;
+
+        light.SetActive(true);
+    }
+
+    public void DeactivateLight()
+    {
+         GameObject light = this.gameObject.transform.Find("GFX").transform.Find("PointLight").gameObject;
+
+        light.SetActive(false);
+    }
+
 }

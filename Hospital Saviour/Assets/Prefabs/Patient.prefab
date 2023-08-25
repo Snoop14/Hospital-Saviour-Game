@@ -233,12 +233,12 @@ GameObject:
   - component: {fileID: 6396420972626679923}
   - component: {fileID: 6153032937643068576}
   m_Layer: 0
-  m_Name: Point Light
+  m_Name: PointLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6396420972626679923
 Transform:
   m_ObjectHideFlags: 0

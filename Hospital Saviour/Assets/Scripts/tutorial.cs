@@ -139,6 +139,12 @@ public class tutorial : MonoBehaviour
                 changeStep(1);
                 setupArrows();
                 displayArrows<Patient>();
+
+                //turn on spotlight
+                foreach (GameObject patient in patients)
+                {
+                    patient.GetComponent<Patient>().ActivateLight();
+                }
             }
         }
     }
