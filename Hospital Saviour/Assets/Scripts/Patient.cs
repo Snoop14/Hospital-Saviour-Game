@@ -364,15 +364,13 @@ public class Patient : MonoBehaviour
 
 
     //managed interactions with player whilst on bed
-    public void interactionOnBed(bool isCarrying)
+    public void interactionOnBed(bool isCarrying, GameObject player)
     {
-
         //change icon
-        iterateIcons(isCarrying);
-
+        iterateIcons(isCarrying, player);
     }
 
-    private void iterateIcons(bool isCarrying)
+    private void iterateIcons(bool isCarrying, GameObject player)
     {
         if (icon.sprite == sickness.sicknessBase.sicknessIcon  && !isCarrying)
         {
@@ -390,7 +388,7 @@ public class Patient : MonoBehaviour
             //turn on healing icon
             icon.transform.GetChild(2).gameObject.SetActive(true);
         }
-        manager.iconChange(healingIcon.sprite);
+        player.GetComponent<Player>().IconChange(healingIcon.sprite);
     }
 
     /// <summary>
