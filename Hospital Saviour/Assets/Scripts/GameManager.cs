@@ -367,12 +367,16 @@ public class GameManager : MonoBehaviour
             p.queuePosition = queuePositions[patientQueue.Count - 1];
             p.tutorial = tutorialObject.GetComponent<tutorial>();
             patients.Add(newPatient);
+
+            if (currentLevel.levelName == "Level 3") {
+                tutorialObject.GetComponent<tutorial>().PatientsAdded();
+            }
         }
 
         tutorialObject.GetComponent<tutorial>().patients = patients;
-        //if (currentLevel.levelName == "Level 1") {
+        if (currentLevel.levelName == "Level 1") {
             tutorialObject.GetComponent<tutorial>().PatientsAdded();
-        //}
+        }
     }
 
     public void removeFromQueue(GameObject p)

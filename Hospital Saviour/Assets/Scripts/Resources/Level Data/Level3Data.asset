@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8353ef2f05695346912b4a78b0d2e3b, type: 3}
   m_Name: Level3Data
   m_EditorClassIdentifier: 
-  levelName: 
+  levelName: Level 3
   patientCount: 3
   sicknessType:
   - {fileID: 11400000, guid: da30b2c4a3c6beb42b8fba32df99f028, type: 2}
