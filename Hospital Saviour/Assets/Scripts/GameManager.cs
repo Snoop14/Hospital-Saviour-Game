@@ -370,9 +370,9 @@ public class GameManager : MonoBehaviour
         }
 
         tutorialObject.GetComponent<tutorial>().patients = patients;
-        if (currentLevel.levelName == "Level 1") {
+        //if (currentLevel.levelName == "Level 1") {
             tutorialObject.GetComponent<tutorial>().PatientsAdded();
-        }
+        //}
     }
 
     public void removeFromQueue(GameObject p)
@@ -419,7 +419,9 @@ public class GameManager : MonoBehaviour
         //disaply failed to complete if an angry patient in relevant level
         if (angryPatient)
         {
-            endDetails.transform.Find("ScoreText").GetComponent<Text>().text = endDetails.transform.Find("ScoreText").GetComponent<Text>().text + "\n" + "Sorry you had an angry patient, you did not complete this level, try again";
+            Debug.Log("angry");
+            endDetails.transform.Find("ScoreText").GetComponent<Text>().text = endDetails.transform.Find("ScoreText").GetComponent<Text>().text + "\n" + "Sorry, you had an angry patient, you did not complete this level, try again";
+
         }
         endDetails.SetActive(true);
 
@@ -430,7 +432,7 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt(levelName, currScore);
         }
 
-        //only nove on max level if successfully completed with no angry patients
+        //only move on max level if successfully completed with no angry patients
         if (!angryPatient)
         {
             PlayerPrefs.SetInt("Highest Level Complete", levelNo);

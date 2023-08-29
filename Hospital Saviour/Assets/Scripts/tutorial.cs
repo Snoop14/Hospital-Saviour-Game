@@ -177,6 +177,14 @@ public class tutorial : MonoBehaviour
                 displayArrows<Patient>();
             }
         }
+
+        if (level.levelName == "Level 3")
+        {
+            if (currentStep == 0)
+            {
+                changeStep(1);
+            }
+        }
     }
     public void interactedPatient()
     {
