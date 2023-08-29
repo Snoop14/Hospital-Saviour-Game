@@ -379,6 +379,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void RemovePatientFromList(GameObject _patient)
+    {
+        patients.Remove(_patient);
+    }
+
     public void removeFromQueue(GameObject p)
     {
         patientQueue.Remove(p);
@@ -424,12 +429,16 @@ public class GameManager : MonoBehaviour
         if (angryPatient)
         {
             Debug.Log("angry");
+<<<<<<< Updated upstream
             endDetails.transform.Find("ScoreText").GetComponent<Text>().text = endDetails.transform.Find("ScoreText").GetComponent<Text>().text + "\n" + "Sorry, you had an angry patient, you did not complete this level, try again";
 
 
             //disable patients
             //needs refining
             //GameObject.Find("Patients").SetActive(false);
+=======
+            endDetails.transform.Find("ErrorText").GetComponent<Text>().text = "Sorry, you had an angry patient, you did not complete this level, try again";
+>>>>>>> Stashed changes
         }
         endDetails.SetActive(true);
 
@@ -463,11 +472,29 @@ public class GameManager : MonoBehaviour
 
     public void MadPatient()
     {
-
         int levelNum = PlayerPrefs.GetInt("LevelNum");
         if (levelNum == 3)
         {
+            StopGameplay();
             EndGame(true);
+        }
+    }
+
+    private void StopGameplay()
+    {
+
+        for(int i = 0; i < patients.Count; i++)
+        {
+            try
+            {
+                patients[i].GetComponent<NavMeshAgent>().enabled = false;
+                patients[i].GetComponent<Patient>().CancelInvoke();
+                patients[i].GetComponent<Patient>().enabled = false;
+            }
+            catch(MissingReferenceException e)
+            {
+                throw e;
+            }
         }
     }
     

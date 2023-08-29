@@ -50,7 +50,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7
   gameManager: {fileID: 0}
+  healingIconObject: {fileID: 0}
   isCarrying: 0
+  tutorial: {fileID: 0}
 --- !u!54 &6797946521238593114
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -123,7 +125,7 @@ GameObject:
   - component: {fileID: 6797946521910365987}
   - component: {fileID: 6797946521910365986}
   - component: {fileID: 6797946521910365985}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +218,7 @@ GameObject:
   - component: {fileID: 6797946522546330382}
   - component: {fileID: 6797946522546330377}
   - component: {fileID: 6797946522546330376}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Nose
   m_TagString: Untagged
   m_Icon: {fileID: 0}

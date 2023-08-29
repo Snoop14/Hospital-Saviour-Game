@@ -24,6 +24,7 @@ public class RemovePatient : MonoBehaviour
     {
         if(other.tag == "Patient")
         {
+            manager.RemovePatientFromList(other.gameObject);
             other.GetComponent<Patient>().DestroySelf();
             removeCounter++;
         }
