@@ -411,11 +411,16 @@ public class GameManager : MonoBehaviour
     /// should then display the other end game info
     /// e.g. Score and target completion
     /// </summary>
-    public void EndGame()
+    public void EndGame(bool angryPatient = false)
     {
         player1.GetComponent<Player1>().enabled = false;
         GameObject endDetails = HUD.transform.Find("EndDetails").gameObject;
         endDetails.transform.Find("ScoreText").GetComponent<Text>().text = "Score: " + currScore.ToString();
+        //disaply failed to complete if an angry patient in relevant level
+        if (angryPatient)
+        {
+            endDetails.transform.Find("ScoreText").GetComponent<Text>().text = endDetails.transform.Find("ScoreText").GetComponent<Text>().text + "\n" + "Sorry you had an angry patient, you did not complete this level, try again";
+        }
         endDetails.SetActive(true);
 
         //Update current high score for level
@@ -425,7 +430,11 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt(levelName, currScore);
         }
 
-        PlayerPrefs.SetInt("Highest Level Complete", levelNo);
+        //only nove on max level if successfully completed with no angry patients
+        if (!angryPatient)
+        {
+            PlayerPrefs.SetInt("Highest Level Complete", levelNo);
+        }
     }
     
 
@@ -440,10 +449,11 @@ public class GameManager : MonoBehaviour
 
     public void MadPatient()
     {
+
         int levelNum = PlayerPrefs.GetInt("LevelNum");
-        if (levelNum > 2)
+        if (levelNum == 3)
         {
-            EndGame();
+            EndGame(true);
         }
     }
     
