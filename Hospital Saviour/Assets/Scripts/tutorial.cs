@@ -31,6 +31,7 @@ public class tutorial : MonoBehaviour
 
     //goal variables
     private int goalPatients = 0;
+    private bool angryNotAllowed;
 
     Dictionary<GameObject, GameObject> arrows = new Dictionary<GameObject, GameObject>();
     [SerializeField]
@@ -63,6 +64,8 @@ public class tutorial : MonoBehaviour
         {
             goalPatients = levelData.patientsToBeTreated;
         }
+        angryNotAllowed = levelData.angryNotAllowed;
+
         startGoals();
 
     }
@@ -88,6 +91,22 @@ public class tutorial : MonoBehaviour
         {
             goals.GetComponent<Text>().text = patientsCured.ToString() + "/" + goalPatients.ToString() + " Patients Cured";
         }
+        
+        //no anry patients allowed this level
+        if (angryNotAllowed)
+        {
+            //other conntent
+            if (goals.GetComponent<Text>().text.Length > 0)
+            {
+                goals.GetComponent<Text>().text = goals.GetComponent<Text>().text + "\n" + "Don't let any patients get angry and leave without treatment";
+
+            }
+            //no other content
+            else
+            {
+                goals.GetComponent<Text>().text = "Don't let any patients get angry and leave without treatment";
+            }
+        }
     }
 
     public void updateGoal()
@@ -96,6 +115,23 @@ public class tutorial : MonoBehaviour
         if (goalPatients > 0)
         {
             goals.GetComponent<Text>().text = patientsCured.ToString() + "/" + goalPatients.ToString() + " Patients Cured";
+        }
+
+        //no anry patients allowed this level
+        if (angryNotAllowed)
+        {
+       
+            //content  is only angry wording
+            if(goals.GetComponent<Text>().text == "Don't let any patients get angry and leave without treatment")
+            {
+                goals.GetComponent<Text>().text = "Don't let any patients get angry and leave without treatment";
+            }
+            //other conntent
+            else if (goals.GetComponent<Text>().text.Length > 0)
+            {
+                goals.GetComponent<Text>().text = goals.GetComponent<Text>().text + "\n" + "Don't let any patients get angry and leave without treatment";
+
+            }
         }
     }
 
@@ -139,6 +175,14 @@ public class tutorial : MonoBehaviour
                 changeStep(1);
                 setupArrows();
                 displayArrows<Patient>();
+            }
+        }
+
+        if (level.levelName == "Level 3")
+        {
+            if (currentStep == 0)
+            {
+                changeStep(1);
             }
         }
     }

@@ -18,11 +18,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: da30b2c4a3c6beb42b8fba32df99f028, type: 2}
   spawnTimes:
   - 5
-  - 8
+  - 2
   inActiveBedCount: 4
   activeBedCount: 2
   stars: 3200000064000000c8000000
-  levelComplete: 0
   soupMachine: 1
   pharmacy: 0
   bandageDispenser: 0

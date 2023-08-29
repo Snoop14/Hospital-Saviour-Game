@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8353ef2f05695346912b4a78b0d2e3b, type: 3}
   m_Name: Level3Data
   m_EditorClassIdentifier: 
-  levelName: 
+  levelName: Level 3
   patientCount: 3
   sicknessType:
   - {fileID: 11400000, guid: da30b2c4a3c6beb42b8fba32df99f028, type: 2}
@@ -23,7 +23,6 @@ MonoBehaviour:
   - 6
   inActiveBedCount: 4
   activeBedCount: 2
-  highScore: 25
   stars: 000000000000000000000000
   soupMachine: 1
   pharmacy: 1
@@ -33,6 +32,9 @@ MonoBehaviour:
   Surgery: 0
   XRayMachine: 0
   ECGMachine: 0
-  tutorialSteps: []
+  tutorialSteps:
+  - Patients now have Happiness Meters.  The Faster you trest them, the higher your
+    score.
   patientsToBeTreated: 0
   timer: 0
+  angryNotAllowed: 1
