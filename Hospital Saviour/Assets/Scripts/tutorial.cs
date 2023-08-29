@@ -31,6 +31,7 @@ public class tutorial : MonoBehaviour
 
     //goal variables
     private int goalPatients = 0;
+    private bool angryNotAllowed;
 
     Dictionary<GameObject, GameObject> arrows = new Dictionary<GameObject, GameObject>();
     [SerializeField]
@@ -63,6 +64,8 @@ public class tutorial : MonoBehaviour
         {
             goalPatients = levelData.patientsToBeTreated;
         }
+        angryNotAllowed = levelData.angryNotAllowed;
+
         startGoals();
 
     }
@@ -88,6 +91,21 @@ public class tutorial : MonoBehaviour
         {
             goals.GetComponent<Text>().text = patientsCured.ToString() + "/" + goalPatients.ToString() + " Patients Cured";
         }
+        
+        if (angryNotAllowed)
+        {
+            //other conntent
+            if (goals.GetComponent<Text>().text.Length > 0)
+            {
+                goals.GetComponent<Text>().text = goals.GetComponent<Text>().text + "\n" + "Don't let any patients get angry and leave without treatment";
+
+            }
+            //no other content
+            else
+            {
+                goals.GetComponent<Text>().text = "Don't let any patients get angry and leave without treatment";
+            }
+        }
     }
 
     public void updateGoal()
@@ -96,6 +114,21 @@ public class tutorial : MonoBehaviour
         if (goalPatients > 0)
         {
             goals.GetComponent<Text>().text = patientsCured.ToString() + "/" + goalPatients.ToString() + " Patients Cured";
+        }
+
+        if (angryNotAllowed)
+        {
+            //other conntent
+            if (goals.GetComponent<Text>().text.Length > 0)
+            {
+                goals.GetComponent<Text>().text = goals.GetComponent<Text>().text + "\n" + "Don't let any patients get angry and leave without treatment";
+
+            }
+            //no other content
+            else
+            {
+                goals.GetComponent<Text>().text = "Don't let any patients get angry and leave without treatment";
+            }
         }
     }
 

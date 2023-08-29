@@ -23,7 +23,6 @@ MonoBehaviour:
   - 6
   inActiveBedCount: 4
   activeBedCount: 2
-  highScore: 25
   stars: 000000000000000000000000
   soupMachine: 1
   pharmacy: 1
@@ -33,6 +32,9 @@ MonoBehaviour:
   Surgery: 0
   XRayMachine: 0
   ECGMachine: 0
-  tutorialSteps: []
+  tutorialSteps:
+  - Patients now have Happiness Meters.  The Faster you trest them, the higher your
+    score.
   patientsToBeTreated: 0
   timer: 0
+  angryNotAllowed: 1
