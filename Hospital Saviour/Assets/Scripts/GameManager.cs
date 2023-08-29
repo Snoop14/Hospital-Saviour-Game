@@ -426,6 +426,10 @@ public class GameManager : MonoBehaviour
             Debug.Log("angry");
             endDetails.transform.Find("ScoreText").GetComponent<Text>().text = endDetails.transform.Find("ScoreText").GetComponent<Text>().text + "\n" + "Sorry, you had an angry patient, you did not complete this level, try again";
 
+
+            //disable patients
+            //needs refining
+            //GameObject.Find("Patients").SetActive(false);
         }
         endDetails.SetActive(true);
 
@@ -436,11 +440,15 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt(levelName, currScore);
         }
 
-        //only move on max level if successfully completed with no angry patients
-        if (!angryPatient)
+        if (PlayerPrefs.GetInt("Highest Level Complete") < levelNo)
         {
-            PlayerPrefs.SetInt("Highest Level Complete", levelNo);
+            //only move on max level if successfully completed with no angry patients
+            if (!angryPatient)
+            {
+                PlayerPrefs.SetInt("Highest Level Complete", levelNo);
+            }
         }
+        
     }
     
 
