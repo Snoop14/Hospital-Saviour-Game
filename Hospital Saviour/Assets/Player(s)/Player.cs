@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class Player1 : MonoBehaviour
+public class Player : MonoBehaviour
 {
     [SerializeField] float speed;
     Vector3 movementVec;
@@ -27,6 +27,7 @@ public class Player1 : MonoBehaviour
 
     void Start()
     {
+        transform.localPosition = new Vector3(0, 1, 0);
         rbody = GetComponent<Rigidbody>();
         collidingObjects = new List<GameObject>();
         manager = gameManager.GetComponent<GameManager>();
@@ -316,7 +317,7 @@ public class Player1 : MonoBehaviour
 
                     if (go.TryGetComponent(out Bed b))
                     {
-                        b.interactWithPatient(isCarrying);
+                        b.interactWithPatient(isCarrying, gameObject);
 
                         tutorial.interactedBed();
                         break;
@@ -325,8 +326,6 @@ public class Player1 : MonoBehaviour
             }
         }
     }
-
-    
 
     //Called when the player enters in range of another object
     private void OnTriggerEnter(Collider other)
@@ -348,6 +347,16 @@ public class Player1 : MonoBehaviour
         }
     }
 
+    public void IconChange(Sprite s)
+    {
+        healingIconObject.GetComponent<Image>().sprite = s;
+        healingIconObject.SetActive(true);
+        StartCoroutine(HideIcon());
+    }
+
+    private IEnumerator HideIcon()
+    {
+        yield return new WaitForSeconds(2f);
+        healingIconObject.SetActive(false);
+    }
 }
-
-

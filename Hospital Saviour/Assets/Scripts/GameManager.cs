@@ -14,7 +14,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] NavMeshSurface surface;
 
     GameObject player1;
+    GameObject player2;
     [SerializeField] GameObject playerPrefab;
+    [SerializeField] GameObject player2Prefab;
 
     [Header("Prefabs")]
     [SerializeField]
@@ -188,9 +190,19 @@ public class GameManager : MonoBehaviour
     void generateObjects()
     {
         player1 = Instantiate(playerPrefab, GameObject.Find("Player1SpawnSite").transform);
-        player1.GetComponent<Player1>().gameManager = gameObject;
-        player1.GetComponent<Player1>().tutorial = tutorialObject.GetComponent<tutorial>();
+        player1.GetComponent<Player>().gameManager = gameObject;
+        player1.GetComponent<Player>().tutorial = tutorialObject.GetComponent<tutorial>();
         //player1.transform.position += new Vector3(-7, 0, -2);
+        if(PlayerPrefs.GetInt("PlayerNum") == 2)
+        {
+            player2 = Instantiate(player2Prefab, GameObject.Find("Player2SpawnSite").transform);
+            player2.GetComponent<Player>().gameManager = gameObject;
+            player2.GetComponent<Player>().tutorial = tutorialObject.GetComponent<tutorial>();
+        }
+        else
+        {
+            GameObject.Find("PlayerIcon").SetActive(false);
+        }
 
         //Instatiate Inactive beds
         for (int i = 0; i < inActiveBedCount; i++)
@@ -422,7 +434,13 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void EndGame(bool angryPatient = false)
     {
-        player1.GetComponent<Player1>().enabled = false;
+        player1.GetComponent<Player>().enabled = false;
+        
+        if(PlayerPrefs.GetInt("PlayerNum") == 2)
+        {
+            player2.GetComponent<Player>().enabled = false;
+        }
+        
         GameObject endDetails = HUD.transform.Find("EndDetails").gameObject;
         endDetails.transform.Find("ScoreText").GetComponent<Text>().text = "Score: " + currScore.ToString();
         //disaply failed to complete if an angry patient in relevant level
@@ -492,17 +510,5 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(timeForLevel);
         EndGame();
-    }
-
-    public void iconChange(Sprite s)
-    {
-        player1.GetComponent<Player1>().healingIconObject.GetComponent<Image>().sprite = s;
-        player1.GetComponent<Player1>().healingIconObject.SetActive(true);
-        StartCoroutine(showIcon());
-    }
-    IEnumerator showIcon()
-    {
-        yield return new WaitForSeconds(2f);
-        player1.GetComponent<Player1>().healingIconObject.SetActive(false);
     }
 }
