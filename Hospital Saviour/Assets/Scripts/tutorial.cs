@@ -92,6 +92,7 @@ public class tutorial : MonoBehaviour
             goals.GetComponent<Text>().text = patientsCured.ToString() + "/" + goalPatients.ToString() + " Patients Cured";
         }
         
+        //no anry patients allowed this level
         if (angryNotAllowed)
         {
             //other conntent
@@ -116,6 +117,7 @@ public class tutorial : MonoBehaviour
             goals.GetComponent<Text>().text = patientsCured.ToString() + "/" + goalPatients.ToString() + " Patients Cured";
         }
 
+        //no anry patients allowed this level
         if (angryNotAllowed)
         {
             //other conntent
