@@ -51,17 +51,16 @@ public class MenuSelection : MonoBehaviour
     //public void NumberPlayers(int players)
     public void NumberPlayers(Slider players)
     {
-        //playersSet = players;
         playersSet = (int)players.value;
-
-        //Debug.Log(players + " Player(s)");
-        //Debug.Log(playersSet + " Player(s)");
+        DisplayHighScore();
     }
 
+    /// <summary>
+    /// Loads the GameScene
+    /// </summary>
     public void StartGame()
     {
         SetLevelNum(levelSet, playersSet);
-        //Debug.Log("Starting Level " + levelSet + " with " + playersSet + " players");
         SceneManager.LoadScene("GameScene");
     }
 
@@ -81,9 +80,20 @@ public class MenuSelection : MonoBehaviour
         PlayerPrefs.SetInt("PlayerNum", playerNum);
     }
 
+    /// <summary>
+    /// Changes the score that is displayed on screen
+    /// </summary>
     private void DisplayHighScore()
     {
         string levelName = "Level " + levelSet;
+        if (playersSet == 1)
+        {
+            levelName += "_1p";
+        }
+        else if (playersSet == 2)
+        {
+            levelName += "_2p";
+        }
 
         currHighScore = PlayerPrefs.GetInt(levelName);
 

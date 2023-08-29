@@ -63,6 +63,10 @@ public class tutorial : MonoBehaviour
         if (levelData.patientsToBeTreated > 0)
         {
             goalPatients = levelData.patientsToBeTreated;
+            if(PlayerPrefs.GetInt("PlayerNum") == 2)
+            {
+                goalPatients *= 2;
+            }
         }
         angryNotAllowed = levelData.angryNotAllowed;
 
@@ -170,12 +174,9 @@ public class tutorial : MonoBehaviour
     {
         if (level.levelName == "Level 1")
         {
-            if (patients.Count == level.patientCount && currentStep == 0)
-            {
-                changeStep(1);
-                setupArrows();
-                displayArrows<Patient>();
-            }
+            changeStep(1);
+            setupArrows();
+            displayArrows<Patient>();
         }
 
         if (level.levelName == "Level 3")
