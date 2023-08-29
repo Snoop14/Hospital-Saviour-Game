@@ -120,16 +120,17 @@ public class tutorial : MonoBehaviour
         //no anry patients allowed this level
         if (angryNotAllowed)
         {
+       
+            //content  is only angry wording
+            if(goals.GetComponent<Text>().text == "Don't let any patients get angry and leave without treatment")
+            {
+                goals.GetComponent<Text>().text = "Don't let any patients get angry and leave without treatment";
+            }
             //other conntent
-            if (goals.GetComponent<Text>().text.Length > 0)
+            else if (goals.GetComponent<Text>().text.Length > 0)
             {
                 goals.GetComponent<Text>().text = goals.GetComponent<Text>().text + "\n" + "Don't let any patients get angry and leave without treatment";
 
-            }
-            //no other content
-            else
-            {
-                goals.GetComponent<Text>().text = "Don't let any patients get angry and leave without treatment";
             }
         }
     }
