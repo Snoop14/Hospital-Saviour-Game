@@ -436,7 +436,11 @@ public class GameManager : MonoBehaviour
     {
         player1.GetComponent<Player>().enabled = false;
         
-        player2.GetComponent<Player>().enabled = false;
+        if(PlayerPrefs.GetInt("PlayerNum") == 2)
+        {
+            player2.GetComponent<Player>().enabled = false;
+        }
+        
         GameObject endDetails = HUD.transform.Find("EndDetails").gameObject;
         endDetails.transform.Find("ScoreText").GetComponent<Text>().text = "Score: " + currScore.ToString();
         //disaply failed to complete if an angry patient in relevant level
