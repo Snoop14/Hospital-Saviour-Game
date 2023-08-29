@@ -428,17 +428,7 @@ public class GameManager : MonoBehaviour
         //disaply failed to complete if an angry patient in relevant level
         if (angryPatient)
         {
-            Debug.Log("angry");
-<<<<<<< Updated upstream
-            endDetails.transform.Find("ScoreText").GetComponent<Text>().text = endDetails.transform.Find("ScoreText").GetComponent<Text>().text + "\n" + "Sorry, you had an angry patient, you did not complete this level, try again";
-
-
-            //disable patients
-            //needs refining
-            //GameObject.Find("Patients").SetActive(false);
-=======
             endDetails.transform.Find("ErrorText").GetComponent<Text>().text = "Sorry, you had an angry patient, you did not complete this level, try again";
->>>>>>> Stashed changes
         }
         endDetails.SetActive(true);
 
