@@ -432,8 +432,9 @@ public class GameManager : MonoBehaviour
     /// should then display the other end game info
     /// e.g. Score and target completion
     /// </summary>
-    public void EndGame(bool angryPatient = false)
+    public void EndGame(bool angryPatient = false, bool patientGoalMet = false)
     {
+        Debug.Log(patientGoalMet);
         player1.GetComponent<Player>().enabled = false;
         
         if(PlayerPrefs.GetInt("PlayerNum") == 2)
@@ -509,6 +510,7 @@ public class GameManager : MonoBehaviour
     IEnumerator WaitForTimerRunOut()
     {
         yield return new WaitForSeconds(timeForLevel);
-        EndGame();
+        StopGameplay();
+        EndGame(false, tutorialObject.GetComponent<tutorial>().checkPatientGoal());
     }
 }

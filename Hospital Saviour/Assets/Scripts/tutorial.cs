@@ -315,4 +315,16 @@ public class tutorial : MonoBehaviour
             }
         }
     }
+
+    public bool checkPatientGoal()
+    {
+        if (goalPatients <= patientsCured)
+        {
+            return (true);
+        }
+        else
+        {
+            return (false);
+        }
+    }
 }
