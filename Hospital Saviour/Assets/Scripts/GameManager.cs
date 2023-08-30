@@ -502,7 +502,6 @@ public class GameManager : MonoBehaviour
             if (!angryPatient)
             {
                 PlayerPrefs.SetInt("Highest_Level_Complete_1p", levelNo);
-                Debug.Log("moving 1p");
             }
         }
         else if (PlayerPrefs.GetInt("PlayerNum") == 2 && PlayerPrefs.GetInt("Highest_Level_Complete_2p") < levelNo)
@@ -511,7 +510,6 @@ public class GameManager : MonoBehaviour
             if (!angryPatient && patientGoalMet)
             {
                 PlayerPrefs.SetInt("Highest_Level_Complete_2p", levelNo);
-                Debug.Log("moving 2p");
             }
 
         }
