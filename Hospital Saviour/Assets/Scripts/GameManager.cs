@@ -432,9 +432,8 @@ public class GameManager : MonoBehaviour
     /// should then display the other end game info
     /// e.g. Score and target completion
     /// </summary>
-    public void EndGame(bool angryPatient = false, bool patientGoalMet = false)
+    public void EndGame(bool angryPatient = false, bool patientGoalMet = true)
     {
-        Debug.Log(patientGoalMet);
         player1.GetComponent<Player>().enabled = false;
         
         if(PlayerPrefs.GetInt("PlayerNum") == 2)
@@ -449,6 +448,13 @@ public class GameManager : MonoBehaviour
         {
             endDetails.transform.Find("ErrorText").GetComponent<Text>().text = "Sorry, you had an angry patient, you did not complete this level, try again";
         }
+
+        //disaply failed to complete if an not enough patients treated in relevant level
+        if (!patientGoalMet)
+        {
+            endDetails.transform.Find("ErrorText").GetComponent<Text>().text = "Sorry, you didn't treat enough patients, you did not complete this level, try again";
+        }
+
         endDetails.SetActive(true);
 
         //Update current high score for level
@@ -460,11 +466,12 @@ public class GameManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt("Highest Level Complete") < levelNo)
         {
-            //only move on max level if successfully completed with no angry patients
-            if (!angryPatient)
+            //only move on max level if successfully completed with no angry patients and  patient goal met
+            if (!angryPatient && patientGoalMet)
             {
                 PlayerPrefs.SetInt("Highest Level Complete", levelNo);
             }
+
         }
         
     }
