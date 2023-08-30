@@ -179,7 +179,7 @@ public class tutorial : MonoBehaviour
             displayArrows<Patient>();
         }
 
-        if (level.levelName == "Level 3")
+        if (level.levelName == "Level 3" || level.levelName == "Level 4")
         {
             if (currentStep == 0)
             {
@@ -314,6 +314,18 @@ public class tutorial : MonoBehaviour
             {
                 texts[i].GetComponent<Text>().fontStyle = FontStyle.Bold;
             }
+        }
+    }
+
+    public bool checkPatientGoal()
+    {
+        if (goalPatients <= patientsCured)
+        {
+            return (true);
+        }
+        else
+        {
+            return (false);
         }
     }
 }

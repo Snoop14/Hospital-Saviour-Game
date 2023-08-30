@@ -400,9 +400,7 @@ public class GameManager : MonoBehaviour
             p.tutorial = tutorialObject.GetComponent<tutorial>();
             patients.Add(newPatient);
 
-            if(i == 0 && currentLevel.levelName == "Level 1")
-            {
-                Debug.Log(i);
+            if (currentLevel.levelName == "Level 3" || currentLevel.levelName == "Level 4") {
                 tutorialObject.GetComponent<tutorial>().PatientsAdded();
             }
 
@@ -453,7 +451,7 @@ public class GameManager : MonoBehaviour
     /// should then display the other end game info
     /// e.g. Score and target completion
     /// </summary>
-    public void EndGame(bool angryPatient = false)
+    public void EndGame(bool angryPatient = false, bool patientGoalMet = true)
     {
         player1.GetComponent<Player>().enabled = false;
         
@@ -469,6 +467,13 @@ public class GameManager : MonoBehaviour
         {
             endDetails.transform.Find("ErrorText").GetComponent<Text>().text = "Sorry, you had an angry patient, you did not complete this level, try again";
         }
+
+        //disaply failed to complete if an not enough patients treated in relevant level
+        if (!patientGoalMet)
+        {
+            endDetails.transform.Find("ErrorText").GetComponent<Text>().text = "Sorry, you didn't treat enough patients, you did not complete this level, try again";
+        }
+
         endDetails.SetActive(true);
 
         //Update current high score for level
@@ -500,12 +505,13 @@ public class GameManager : MonoBehaviour
         }
         else if (PlayerPrefs.GetInt("PlayerNum") == 2 && PlayerPrefs.GetInt("Highest_Level_Complete_2p") < levelNo)
         {
-            //only move on max level if successfully completed with no angry patients
-            if (!angryPatient)
+            //only move on max level if successfully completed with no angry patients and  patient goal met
+            if (!angryPatient && patientGoalMet)
             {
                 PlayerPrefs.SetInt("Highest_Level_Complete_2p", levelNo);
                 Debug.Log("moving 2p");
             }
+
         }
         //PlayerPrefs.SetInt("Highest Level Complete", levelNo);
 
@@ -555,6 +561,7 @@ public class GameManager : MonoBehaviour
     IEnumerator WaitForTimerRunOut()
     {
         yield return new WaitForSeconds(timeForLevel);
-        EndGame();
+        StopGameplay();
+        EndGame(false, tutorialObject.GetComponent<tutorial>().checkPatientGoal());
     }
 }
