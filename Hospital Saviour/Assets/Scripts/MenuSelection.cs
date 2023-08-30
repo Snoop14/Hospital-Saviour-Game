@@ -38,6 +38,14 @@ public class MenuSelection : MonoBehaviour
         //}
         ResetButtons();
 
+        //reset playersset to last value in playerprefs
+        if (PlayerPrefs.GetInt("PlayerNum") > 0)
+        {
+            playersSet = PlayerPrefs.GetInt("PlayerNum");
+        }
+
+        GameObject.Find("PlayersSlider").GetComponent<Slider>().value = playersSet;
+
     }
 
     public void StartLevel(int level)
