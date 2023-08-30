@@ -115,6 +115,8 @@ public class MenuSelection : MonoBehaviour
 
         for(int i = 0; i <= 2; i++)
         {
+            StarsDisplay.GetChild(3).GetChild(i).GetComponent<Text>().text = (stars[i] * playersSet).ToString();
+
             if(playersSet == 2)
             {
                 if(currHighScore >= (stars[i])*2)

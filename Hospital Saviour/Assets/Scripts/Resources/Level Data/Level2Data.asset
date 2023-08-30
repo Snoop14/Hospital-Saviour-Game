@@ -25,7 +25,7 @@ MonoBehaviour:
   - 14
   inActiveBedCount: 4
   activeBedCount: 2
-  stars: 3200000064000000c8000000
+  stars: 64000000fa00000090010000
   soupMachine: 1
   pharmacy: 1
   bandageDispenser: 0
@@ -38,3 +38,4 @@ MonoBehaviour:
   - Some patients need pills, get pills from the pill machine
   patientsToBeTreated: 4
   timer: 0
+  angryNotAllowed: 0
