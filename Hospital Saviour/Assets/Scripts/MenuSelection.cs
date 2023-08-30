@@ -27,15 +27,25 @@ public class MenuSelection : MonoBehaviour
 
     private void Start()
     {
-        int numLevelsComplete = PlayerPrefs.GetInt("Highest Level Complete");
-        if(numLevelsComplete >= 1)
+        //int numLevelsComplete = PlayerPrefs.GetInt("Highest_Level_Complete_" + playerNum + "p");
+        //if (numLevelsComplete >= 1)
+        //{
+          //  for (int i = 1; i <= numLevelsComplete; i++)
+            //{
+             //   Button thisButton = levelsParent.GetChild(i).GetComponent<Button>();
+             //   thisButton.interactable = true;
+            //}
+        //}
+        ResetButtons();
+
+        //reset playersset to last value in playerprefs
+        if (PlayerPrefs.GetInt("PlayerNum") > 0)
         {
-            for (int i = 1; i <= numLevelsComplete; i++)
-            {
-                Button thisButton = levelsParent.GetChild(i).GetComponent<Button>();
-                thisButton.interactable = true;
-            }
+            playersSet = PlayerPrefs.GetInt("PlayerNum");
         }
+
+        GameObject.Find("PlayersSlider").GetComponent<Slider>().value = playersSet;
+
     }
 
     public void StartLevel(int level)
@@ -51,17 +61,17 @@ public class MenuSelection : MonoBehaviour
     //public void NumberPlayers(int players)
     public void NumberPlayers(Slider players)
     {
-        //playersSet = players;
         playersSet = (int)players.value;
-
-        //Debug.Log(players + " Player(s)");
-        //Debug.Log(playersSet + " Player(s)");
+        ResetButtons();
+        DisplayHighScore();
     }
 
+    /// <summary>
+    /// Loads the GameScene
+    /// </summary>
     public void StartGame()
     {
         SetLevelNum(levelSet, playersSet);
-        //Debug.Log("Starting Level " + levelSet + " with " + playersSet + " players");
         SceneManager.LoadScene("GameScene");
     }
 
@@ -81,13 +91,24 @@ public class MenuSelection : MonoBehaviour
         PlayerPrefs.SetInt("PlayerNum", playerNum);
     }
 
+    /// <summary>
+    /// Changes the score that is displayed on screen
+    /// </summary>
     private void DisplayHighScore()
     {
         string levelName = "Level " + levelSet;
+        if (playersSet == 1)
+        {
+            levelName += "_1p";
+        }
+        else if (playersSet == 2)
+        {
+            levelName += "_2p";
+        }
 
         currHighScore = PlayerPrefs.GetInt(levelName);
 
-        Debug.Log(currHighScore);
+        //Debug.Log(currHighScore);
 
         scoreDisplay.text = currHighScore.ToString();
     }
@@ -96,5 +117,27 @@ public class MenuSelection : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         SceneManager.LoadScene("MenuScene");
+    }
+
+    private void ResetButtons()
+    {
+        //turn off buttons
+        for (int i = 1; i <= 4; i++)
+        {
+            Button thisButton = levelsParent.GetChild(i).GetComponent<Button>();
+            thisButton.interactable = false;
+        }
+
+        //Debug.Log("players"+playersSet);
+        int numLevelsComplete = PlayerPrefs.GetInt("Highest_Level_Complete_" + playersSet + "p");
+        //Debug.Log("levels" + numLevelsComplete);
+        if (numLevelsComplete >= 1)
+        {
+            for (int i = 1; i <= numLevelsComplete; i++)
+            {
+                Button thisButton = levelsParent.GetChild(i).GetComponent<Button>();
+                thisButton.interactable = true;
+            }
+        }
     }
 }

@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
     List<GameObject> patientQueue;
     List<GameObject> patients;
     List<Vector3> queuePositions;
+    List<float> spawnTimes;
     [SerializeField]
     Transform EnterTransform;
     [SerializeField]
@@ -106,6 +107,7 @@ public class GameManager : MonoBehaviour
         queuePositions = new List<Vector3>();
         objectList = new List<GameObject>();
         patients = new List<GameObject>();
+        spawnTimes = new List<float>();
     }
 
     /// <summary>
@@ -141,7 +143,7 @@ public class GameManager : MonoBehaviour
         //This actually works fine.
 
         InitializeLevelData();
-        
+
         generateObjects();
         GenerateHUD();
 
@@ -169,10 +171,29 @@ public class GameManager : MonoBehaviour
     private void InitializeLevelData()
     {
         patientCount = currentLevel.patientCount;
+        if(PlayerPrefs.GetInt("PlayerNum") == 2)
+        {
+            patientCount += patientCount;
+        }
+
+        spawnTimes = currentLevel.spawnTimes;
+        if (PlayerPrefs.GetInt("PlayerNum") == 2)
+        {
+            List<float> tempList = new List<float>();
+            tempList.Add(spawnTimes[0]);
+            for(int i = 1; i < spawnTimes.Count; i++)
+            {
+                float temp = (spawnTimes[i] + spawnTimes[i - 1]) / 2;
+                tempList.Add(temp);
+                tempList.Add(spawnTimes[i]);
+            }
+            tempList.Add(spawnTimes[spawnTimes.Count - 1] + 1f);
+            spawnTimes = tempList;
+        }
+
         activeBedCount = currentLevel.activeBedCount;
         inActiveBedCount = currentLevel.inActiveBedCount;
         //May need to initialize more here later
-
 
         //bools to hold interactable status of machines
         soupMachine = currentLevel.soupMachine;
@@ -348,10 +369,9 @@ public class GameManager : MonoBehaviour
 
     IEnumerator CreatePatient()
     {
-
         for (int i = 0; i < patientCount; i++)
         {
-            yield return new WaitForSeconds(currentLevel.spawnTimes[i]);
+            yield return new WaitForSeconds(spawnTimes[i]);
             int prefabType = Random.Range(0, patientPrefabs.Length);
             GameObject newPatient = Instantiate(patientPrefabs[prefabType].patientPrefab, EnterTransform.position, EnterTransform.rotation, patientParent);
             //newPatient.transform.position = EnterTransform.position;
@@ -380,14 +400,15 @@ public class GameManager : MonoBehaviour
             p.tutorial = tutorialObject.GetComponent<tutorial>();
             patients.Add(newPatient);
 
-            if (currentLevel.levelName == "Level 3" || currentLevel.levelName == "Level 4") {
+            if (currentLevel.levelName == "Level 3" || currentLevel.levelName == "Level 4") 
+            {
                 tutorialObject.GetComponent<tutorial>().PatientsAdded();
             }
-        }
 
-        tutorialObject.GetComponent<tutorial>().patients = patients;
-        if (currentLevel.levelName == "Level 1") {
-            tutorialObject.GetComponent<tutorial>().PatientsAdded();
+            if (i == 0 && currentLevel.levelName == "Level 1")
+            { 
+                tutorialObject.GetComponent<tutorial>().PatientsAdded();
+            }
         }
     }
 
@@ -459,23 +480,46 @@ public class GameManager : MonoBehaviour
 
         //Update current high score for level
         string levelName = currentLevel.levelName;
+        if(PlayerPrefs.GetInt("PlayerNum") == 1)
+        {
+            levelName += "_1p";
+        }
+        else if(PlayerPrefs.GetInt("PlayerNum") == 2)
+        {
+            levelName += "_2p";
+        }
+
         if (PlayerPrefs.GetInt(levelName) < currScore)
         {
             PlayerPrefs.SetInt(levelName, currScore);
         }
 
-        if (PlayerPrefs.GetInt("Highest Level Complete") < levelNo)
+
+
+        if (PlayerPrefs.GetInt("PlayerNum") == 1 && PlayerPrefs.GetInt("Highest_Level_Complete_1p") < levelNo)
+        {
+            //only move on max level if successfully completed with no angry patients
+            if (!angryPatient)
+            {
+                PlayerPrefs.SetInt("Highest_Level_Complete_1p", levelNo);
+            }
+        }
+        else if (PlayerPrefs.GetInt("PlayerNum") == 2 && PlayerPrefs.GetInt("Highest_Level_Complete_2p") < levelNo)
         {
             //only move on max level if successfully completed with no angry patients and  patient goal met
             if (!angryPatient && patientGoalMet)
             {
-                PlayerPrefs.SetInt("Highest Level Complete", levelNo);
+                PlayerPrefs.SetInt("Highest_Level_Complete_2p", levelNo);
             }
 
         }
-        
+        //PlayerPrefs.SetInt("Highest Level Complete", levelNo);
+
+
+
+
     }
-    
+
 
     /// <summary>
     /// This function returns the users to the menu.
