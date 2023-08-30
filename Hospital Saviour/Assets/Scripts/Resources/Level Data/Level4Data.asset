@@ -30,7 +30,7 @@ MonoBehaviour:
   - 4
   inActiveBedCount: 4
   activeBedCount: 2
-  stars: 000000000000000000000000
+  stars: 960000002c010000f4010000
   soupMachine: 1
   pharmacy: 1
   bandageDispenser: 0
