@@ -27,15 +27,17 @@ public class MenuSelection : MonoBehaviour
 
     private void Start()
     {
-        int numLevelsComplete = PlayerPrefs.GetInt("Highest Level Complete");
-        if(numLevelsComplete >= 1)
-        {
-            for (int i = 1; i <= numLevelsComplete; i++)
-            {
-                Button thisButton = levelsParent.GetChild(i).GetComponent<Button>();
-                thisButton.interactable = true;
-            }
-        }
+        //int numLevelsComplete = PlayerPrefs.GetInt("Highest_Level_Complete_" + playerNum + "p");
+        //if (numLevelsComplete >= 1)
+        //{
+          //  for (int i = 1; i <= numLevelsComplete; i++)
+            //{
+             //   Button thisButton = levelsParent.GetChild(i).GetComponent<Button>();
+             //   thisButton.interactable = true;
+            //}
+        //}
+        ResetButtons();
+
     }
 
     public void StartLevel(int level)
@@ -52,6 +54,7 @@ public class MenuSelection : MonoBehaviour
     public void NumberPlayers(Slider players)
     {
         playersSet = (int)players.value;
+        ResetButtons();
         DisplayHighScore();
     }
 
@@ -97,7 +100,7 @@ public class MenuSelection : MonoBehaviour
 
         currHighScore = PlayerPrefs.GetInt(levelName);
 
-        Debug.Log(currHighScore);
+        //Debug.Log(currHighScore);
 
         scoreDisplay.text = currHighScore.ToString();
     }
@@ -106,5 +109,27 @@ public class MenuSelection : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         SceneManager.LoadScene("MenuScene");
+    }
+
+    private void ResetButtons()
+    {
+        //turn off buttons
+        for (int i = 1; i <= 4; i++)
+        {
+            Button thisButton = levelsParent.GetChild(i).GetComponent<Button>();
+            thisButton.interactable = false;
+        }
+
+        //Debug.Log("players"+playersSet);
+        int numLevelsComplete = PlayerPrefs.GetInt("Highest_Level_Complete_" + playersSet + "p");
+        //Debug.Log("levels" + numLevelsComplete);
+        if (numLevelsComplete >= 1)
+        {
+            for (int i = 1; i <= numLevelsComplete; i++)
+            {
+                Button thisButton = levelsParent.GetChild(i).GetComponent<Button>();
+                thisButton.interactable = true;
+            }
+        }
     }
 }

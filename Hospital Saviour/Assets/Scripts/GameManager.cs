@@ -487,17 +487,33 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt(levelName, currScore);
         }
 
-        if (PlayerPrefs.GetInt("Highest Level Complete") < levelNo)
+
+
+        if (PlayerPrefs.GetInt("PlayerNum") == 1 && PlayerPrefs.GetInt("Highest_Level_Complete_1p") < levelNo)
         {
             //only move on max level if successfully completed with no angry patients
             if (!angryPatient)
             {
-                PlayerPrefs.SetInt("Highest Level Complete", levelNo);
+                PlayerPrefs.SetInt("Highest_Level_Complete_1p", levelNo);
+                Debug.Log("moving 1p");
             }
         }
-        
+        else if (PlayerPrefs.GetInt("PlayerNum") == 2 && PlayerPrefs.GetInt("Highest_Level_Complete_2p") < levelNo)
+        {
+            //only move on max level if successfully completed with no angry patients
+            if (!angryPatient)
+            {
+                PlayerPrefs.SetInt("Highest_Level_Complete_2p", levelNo);
+                Debug.Log("moving 2p");
+            }
+        }
+        //PlayerPrefs.SetInt("Highest Level Complete", levelNo);
+
+
+
+
     }
-    
+
 
     /// <summary>
     /// This function returns the users to the menu.
