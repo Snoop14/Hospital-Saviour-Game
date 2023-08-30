@@ -380,7 +380,7 @@ public class GameManager : MonoBehaviour
             p.tutorial = tutorialObject.GetComponent<tutorial>();
             patients.Add(newPatient);
 
-            if (currentLevel.levelName == "Level 3") {
+            if (currentLevel.levelName == "Level 3" || currentLevel.levelName == "Level 4") {
                 tutorialObject.GetComponent<tutorial>().PatientsAdded();
             }
         }

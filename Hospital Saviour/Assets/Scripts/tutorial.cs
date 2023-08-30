@@ -178,7 +178,7 @@ public class tutorial : MonoBehaviour
             }
         }
 
-        if (level.levelName == "Level 3")
+        if (level.levelName == "Level 3" || level.levelName == "Level 4")
         {
             if (currentStep == 0)
             {
