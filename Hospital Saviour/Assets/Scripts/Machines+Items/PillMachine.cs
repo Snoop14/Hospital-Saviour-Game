@@ -33,11 +33,11 @@ public class PillMachine : MonoBehaviour
     IEnumerator generatePill()
     {
         yield return new WaitForSeconds(1.0f);
-        Vector3 spawnLoc = new Vector3(transform.localPosition.x,
-                                       transform.localPosition.y + 1.2f,
-                                       transform.localPosition.z - 0.9f);
-        Quaternion spawnRot = new Quaternion();
-        currentPill = Instantiate(pillPrefab, spawnLoc, spawnRot, transform);
+        Vector3 spawnLoc = new Vector3(0,
+                                       1.2f,
+                                       -0.95f);
+        currentPill = Instantiate(pillPrefab, transform);
+        currentPill.transform.localPosition = spawnLoc;
     }
 
     public void disableSelf()
@@ -46,8 +46,6 @@ public class PillMachine : MonoBehaviour
         isInteractable = false;
 
         changeMaterial(transform);
-
-
     }
 
     private void changeMaterial(Transform objectToChange)
