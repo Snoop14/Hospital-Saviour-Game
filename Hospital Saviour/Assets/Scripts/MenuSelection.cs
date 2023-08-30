@@ -25,6 +25,9 @@ public class MenuSelection : MonoBehaviour
     [SerializeField]
     Transform levelsParent;
 
+    [SerializeField]
+    Transform StarsDisplay;
+
     private void Start()
     {
         //int numLevelsComplete = PlayerPrefs.GetInt("Highest_Level_Complete_" + playerNum + "p");
@@ -45,7 +48,6 @@ public class MenuSelection : MonoBehaviour
         }
 
         GameObject.Find("PlayersSlider").GetComponent<Slider>().value = playersSet;
-
     }
 
     public void StartLevel(int level)
@@ -108,7 +110,34 @@ public class MenuSelection : MonoBehaviour
 
         currHighScore = PlayerPrefs.GetInt(levelName);
 
-        //Debug.Log(currHighScore);
+        levelName = "Level" + levelSet + "Data";
+        int[] stars = Resources.Load<Levels>("Level Data/" + levelName).stars;
+
+        for(int i = 0; i <= 2; i++)
+        {
+            if(playersSet == 2)
+            {
+                if(currHighScore >= (stars[i])*2)
+                {
+                    StarsDisplay.GetChild(i).gameObject.SetActive(true);
+                }
+                else
+                {
+                    StarsDisplay.GetChild(i).gameObject.SetActive(false);
+                }
+            }
+            else if(playersSet == 1)
+            {
+                if (currHighScore >= stars[i])
+                {
+                    StarsDisplay.GetChild(i).gameObject.SetActive(true);
+                }
+                else
+                {
+                    StarsDisplay.GetChild(i).gameObject.SetActive(false);
+                }
+            }
+        }
 
         scoreDisplay.text = currHighScore.ToString();
     }

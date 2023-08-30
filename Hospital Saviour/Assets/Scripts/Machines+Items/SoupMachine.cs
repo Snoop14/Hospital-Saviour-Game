@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SoupMachine : MonoBehaviour
 {
-
     [SerializeField] GameObject soupPrefab;
 
     public bool isInteractable = true;
