@@ -95,6 +95,7 @@ public class MenuSelection : MonoBehaviour
 
     /// <summary>
     /// Changes the score that is displayed on screen
+    /// as well as the 'stars' for the level
     /// </summary>
     private void DisplayHighScore()
     {
@@ -117,33 +118,24 @@ public class MenuSelection : MonoBehaviour
         {
             StarsDisplay.GetChild(3).GetChild(i).GetComponent<Text>().text = (stars[i] * playersSet).ToString();
 
-            if(playersSet == 2)
+            if(currHighScore >= (stars[i])*playersSet)
             {
-                if(currHighScore >= (stars[i])*2)
-                {
-                    StarsDisplay.GetChild(i).gameObject.SetActive(true);
-                }
-                else
-                {
-                    StarsDisplay.GetChild(i).gameObject.SetActive(false);
-                }
+                StarsDisplay.GetChild(i).gameObject.SetActive(true);
             }
-            else if(playersSet == 1)
+            else
             {
-                if (currHighScore >= stars[i])
-                {
-                    StarsDisplay.GetChild(i).gameObject.SetActive(true);
-                }
-                else
-                {
-                    StarsDisplay.GetChild(i).gameObject.SetActive(false);
-                }
+                StarsDisplay.GetChild(i).gameObject.SetActive(false);
             }
+            
         }
 
         scoreDisplay.text = currHighScore.ToString();
     }
 
+    /// <summary>
+    /// Deletes all playerPrefs and reloads the scene
+    /// Should this be included in the final game?
+    /// </summary>
     public void ResetGame()
     {
         PlayerPrefs.DeleteAll();
