@@ -2488,9 +2488,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   surface: {fileID: 1023145089}
-  playerPrefab: {fileID: 2618188073631541129, guid: 51e437be22296b340954bf6591a60065,
+  playerPrefab: {fileID: 6797946521238593119, guid: bbe03b141e771654ba471d278ce4e049,
     type: 3}
-  bedPrefab: {fileID: 899872154592918461, guid: b9e9e632485353a4ea1a028b36a26d2e,
+  bedPrefab: {fileID: 8854363157470512984, guid: 964db6eede2727349ac7b0b319fc7662,
     type: 3}
   patientPrefabs:
   - patientPrefab: {fileID: 4354967415416081357, guid: 3d2577d9b91b22d479ea7ca799e0b313,

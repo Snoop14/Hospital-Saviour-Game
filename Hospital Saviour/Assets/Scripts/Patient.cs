@@ -213,8 +213,11 @@ public class Patient : MonoBehaviour
     public void changePosToBed()
     {
         agent.enabled = false;//Disable AI movement
+        gameObject.GetComponent<Collider>().enabled = false;
         transform.parent = assignedPlacement.transform; //changes the parent of folder to the transfered object
         transform.localRotation = new Quaternion(0f, 0f, 0f, 0f); //resets rotation
+        
+        transform.localPosition = new Vector3(-0.5f, 0.55f, -1.5f);
         animator.applyRootMotion = false; // true breaks animation, but false breaks spawning of patients
         //animator.SetTrigger(toBedHash);
         animator.SetTrigger("ToBed");
@@ -324,6 +327,7 @@ public class Patient : MonoBehaviour
             yield return null;
         }
         targetPosition = ExitTransform.position;
+        gameObject.GetComponent<Collider>().enabled = true;
         agent.enabled = true; //re-enable navmesh ageny
         if (happinessLvl <= 0)
         {
