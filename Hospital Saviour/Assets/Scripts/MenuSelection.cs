@@ -20,6 +20,9 @@ public class MenuSelection : MonoBehaviour
     private int currHighScore;
 
     [SerializeField]
+    Text infoDisplay;
+
+    [SerializeField]
     Text scoreDisplay;
 
     [SerializeField]
@@ -30,15 +33,6 @@ public class MenuSelection : MonoBehaviour
 
     private void Start()
     {
-        //int numLevelsComplete = PlayerPrefs.GetInt("Highest_Level_Complete_" + playerNum + "p");
-        //if (numLevelsComplete >= 1)
-        //{
-          //  for (int i = 1; i <= numLevelsComplete; i++)
-            //{
-             //   Button thisButton = levelsParent.GetChild(i).GetComponent<Button>();
-             //   thisButton.interactable = true;
-            //}
-        //}
         ResetButtons();
 
         //reset playersset to last value in playerprefs
@@ -46,7 +40,7 @@ public class MenuSelection : MonoBehaviour
         {
             playersSet = PlayerPrefs.GetInt("PlayerNum");
         }
-
+        levelSet = PlayerPrefs.GetInt("LevelNum");
         GameObject.Find("PlayersSlider").GetComponent<Slider>().value = playersSet;
     }
 
@@ -100,12 +94,15 @@ public class MenuSelection : MonoBehaviour
     private void DisplayHighScore()
     {
         string levelName = "Level " + levelSet;
+
         if (playersSet == 1)
         {
+            infoDisplay.text = levelName + " Solo";
             levelName += "_1p";
         }
         else if (playersSet == 2)
         {
+            infoDisplay.text = levelName + " Duo";
             levelName += "_2p";
         }
 
