@@ -29,7 +29,6 @@ public class WithPatient : MonoBehaviour
 
     void PlayInteractionSound()
     {
-        Debug.Log("Ineractied");
         sound.PlayOneShot(TalkWithPatient);
     }
 }
