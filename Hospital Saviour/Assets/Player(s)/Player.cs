@@ -25,6 +25,10 @@ public class Player : MonoBehaviour
 
     public tutorial tutorial;
 
+    //Events"
+    public delegate void InteractWithPatient();
+    public event InteractWithPatient OnInteractWithPatient;
+
     void Start()
     {
         transform.localPosition = new Vector3(0, 1, 0);
@@ -114,6 +118,11 @@ public class Player : MonoBehaviour
                                 itemType = "";
 
                                 tutorial.interactedPatient();
+
+                                OnInteractWithPatient?.Invoke();
+
+
+
                                 break;
                             }
                             
@@ -271,6 +280,10 @@ public class Player : MonoBehaviour
                                 i.changePosToPlayer();
 
                                 tutorial.interactedPatient();
+
+                                OnInteractWithPatient?.Invoke();
+
+
                                 break;
                             }
                         }
@@ -320,6 +333,9 @@ public class Player : MonoBehaviour
                         b.interactWithPatient(isCarrying, gameObject);
 
                         tutorial.interactedBed();
+
+                        OnInteractWithPatient?.Invoke();
+
                         break;
                     }
                 }
