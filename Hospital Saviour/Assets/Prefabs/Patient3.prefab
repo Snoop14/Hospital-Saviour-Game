@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5687459640194022613}
   - component: {fileID: 7064008775189134472}
   - component: {fileID: 1108650014825240413}
-  - component: {fileID: 7016809519234101548}
   m_Layer: 0
   m_Name: Hat_Brim
   m_TagString: Untagged
@@ -80,20 +79,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &7016809519234101548
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 192598692555549438}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &664391691266270285
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,7 +459,6 @@ GameObject:
   - component: {fileID: 5114261728288474171}
   - component: {fileID: 3306125274550373133}
   - component: {fileID: 1827831892502549998}
-  - component: {fileID: 1900829996736744483}
   m_Layer: 0
   m_Name: Button (1)
   m_TagString: Untagged
@@ -543,19 +527,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &1900829996736744483
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1161997955924837167}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1250740576040337540
 GameObject:
   m_ObjectHideFlags: 0
@@ -1005,7 +976,6 @@ GameObject:
   - component: {fileID: 6443922024463981727}
   - component: {fileID: 5059001489490690518}
   - component: {fileID: 467873761320943374}
-  - component: {fileID: 3406287839729189695}
   m_Layer: 0
   m_Name: Buckle_Outer (1)
   m_TagString: Untagged
@@ -1074,19 +1044,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &3406287839729189695
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3484302170885258088}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3560719687883019497
 GameObject:
   m_ObjectHideFlags: 0
@@ -1098,7 +1055,6 @@ GameObject:
   - component: {fileID: 8095348615370738078}
   - component: {fileID: 3003304668813397795}
   - component: {fileID: 7110899806579722956}
-  - component: {fileID: 6626819652625264859}
   m_Layer: 0
   m_Name: Buckle_Inner
   m_TagString: Untagged
@@ -1167,19 +1123,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &6626819652625264859
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3560719687883019497}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4354967415416081357
 GameObject:
   m_ObjectHideFlags: 0
@@ -1360,7 +1303,6 @@ GameObject:
   - component: {fileID: 199687246473611103}
   - component: {fileID: 6354114362258407542}
   - component: {fileID: 5090414029964788589}
-  - component: {fileID: 1935427747592585691}
   m_Layer: 0
   m_Name: Button (2)
   m_TagString: Untagged
@@ -1429,19 +1371,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &1935427747592585691
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6157054293573993513}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6294339623759298031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1690,7 +1619,6 @@ GameObject:
   - component: {fileID: 1401286433102807540}
   - component: {fileID: 6176590846328661057}
   - component: {fileID: 7564706934502641572}
-  - component: {fileID: 5461050050857183372}
   m_Layer: 0
   m_Name: Button (3)
   m_TagString: Untagged
@@ -1759,19 +1687,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &5461050050857183372
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7536050329551097154}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8328628834628086598
 GameObject:
   m_ObjectHideFlags: 0
@@ -1783,7 +1698,6 @@ GameObject:
   - component: {fileID: 6995876823325213000}
   - component: {fileID: 2395708841201476901}
   - component: {fileID: 1949855737721065022}
-  - component: {fileID: 6973510974216665560}
   m_Layer: 0
   m_Name: Buttons
   m_TagString: Untagged
@@ -1855,20 +1769,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &6973510974216665560
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8328628834628086598}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8546580213397943984
 GameObject:
   m_ObjectHideFlags: 0
@@ -1961,7 +1861,6 @@ GameObject:
   - component: {fileID: 2612727475400332233}
   - component: {fileID: 1162332205931583078}
   - component: {fileID: 3202913739142402049}
-  - component: {fileID: 6279640929821965581}
   m_Layer: 0
   m_Name: Buckle_Inner (1)
   m_TagString: Untagged
@@ -2030,19 +1929,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &6279640929821965581
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8728992267519712275}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9130852633742202160
 GameObject:
   m_ObjectHideFlags: 0
@@ -2054,7 +1940,6 @@ GameObject:
   - component: {fileID: 5232540831959264537}
   - component: {fileID: 3340727775238221221}
   - component: {fileID: 4095009339628572951}
-  - component: {fileID: 2893142483625537691}
   m_Layer: 0
   m_Name: Buckle_Outer
   m_TagString: Untagged
@@ -2123,16 +2008,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &2893142483625537691
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9130852633742202160}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}

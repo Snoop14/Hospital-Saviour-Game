@@ -496,7 +496,6 @@ GameObject:
   - component: {fileID: 3233676398249689278}
   - component: {fileID: 7838883578558506195}
   - component: {fileID: 6267124043574661064}
-  - component: {fileID: 3256357764287707182}
   m_Layer: 0
   m_Name: ShoulderStrapL
   m_TagString: Untagged
@@ -565,20 +564,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &3256357764287707182
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4495490346001230512}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4637818582635420021
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,7 +614,6 @@ GameObject:
   - component: {fileID: 985270137971576238}
   - component: {fileID: 7760035908188014804}
   - component: {fileID: 5668887326896848894}
-  - component: {fileID: 1944897963673490754}
   m_Layer: 0
   m_Name: ShoulderStrapR
   m_TagString: Untagged
@@ -698,20 +682,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &1944897963673490754
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4811364110723947696}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4869029885687442957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,7 +1024,6 @@ GameObject:
   - component: {fileID: 224020006645431587}
   - component: {fileID: 3458322404817714558}
   - component: {fileID: 4797666460743702187}
-  - component: {fileID: 3212962635071615194}
   m_Layer: 0
   m_Name: HatBrim
   m_TagString: Untagged
@@ -1123,20 +1092,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &3212962635071615194
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5717939950615702280}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &6678150536212087154
 GameObject:
   m_ObjectHideFlags: 0
