@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] float speed;
+    public float speed;
     Vector3 movementVec;
     
     private Rigidbody rbody;

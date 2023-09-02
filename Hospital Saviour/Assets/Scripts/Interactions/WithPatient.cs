@@ -12,13 +12,14 @@ public class WithPatient : MonoBehaviour
 
     private void OnEnable()
     {
-        FindObjectOfType<Player>().OnInteractWithPatient += PlayInteractionSound;
+        gameObject.GetComponent<Player>().OnInteractWithPatient += PlayInteractionSound;
+        //FindObjectOfType<Player>().OnInteractWithPatient += PlayInteractionSound;
     }
 
     private void OnDisable()
     {
-        FindObjectOfType<Player>().OnInteractWithPatient -= PlayInteractionSound;
-
+        gameObject.GetComponent<Player>().OnInteractWithPatient += PlayInteractionSound;
+        //FindObjectOfType<Player>().OnInteractWithPatient -= PlayInteractionSound;
     }
 
     // Start is called before the first frame update
