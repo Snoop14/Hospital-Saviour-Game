@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SoupMachine : MonoBehaviour
 {
-
     [SerializeField] GameObject soupPrefab;
 
     public bool isInteractable = true;
@@ -34,11 +33,11 @@ public class SoupMachine : MonoBehaviour
     IEnumerator generateSoup()
     {
         yield return new WaitForSeconds(1.0f);
-        Vector3 spawnLoc = new Vector3(transform.localPosition.x, 
-                                       transform.localPosition.y + 1.69f, 
-                                       transform.localPosition.z);
-        Quaternion spawnRot = new Quaternion();
-        currentSoup = Instantiate(soupPrefab, spawnLoc, spawnRot, transform);
+        Vector3 spawnLoc = new Vector3(0, 
+                                       1.125f, 
+                                       0.1f);
+        currentSoup = Instantiate(soupPrefab, transform);
+        currentSoup.transform.localPosition = spawnLoc;
     }
 
     public void disableSelf()
@@ -47,8 +46,6 @@ public class SoupMachine : MonoBehaviour
         isInteractable = false;
 
         changeMaterial(transform);
-
-
     }
 
     private void changeMaterial(Transform objectToChange)
