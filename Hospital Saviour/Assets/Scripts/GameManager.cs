@@ -95,6 +95,7 @@ public class GameManager : MonoBehaviour
     private Animator animator;
 
     private int timeForLevel;
+    private bool angryNotAllowed;
 
     [SerializeField] public CustomTimer inGameTimer;
 
@@ -206,6 +207,8 @@ public class GameManager : MonoBehaviour
         ECGMachine = currentLevel.ECGMachine;
 
         timeForLevel = currentLevel.timer;
+
+        angryNotAllowed = currentLevel.angryNotAllowed;
     }
 
     void generateObjects()
@@ -531,8 +534,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void MadPatient()
     {
-        int levelNum = PlayerPrefs.GetInt("LevelNum");
-        if (levelNum == 3)
+        //int levelNum = PlayerPrefs.GetInt("LevelNum");
+        if (angryNotAllowed)
         {
             StopGameplay();
             EndGame(true);

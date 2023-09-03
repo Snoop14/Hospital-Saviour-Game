@@ -148,12 +148,19 @@ public class MenuSelection : MonoBehaviour
             thisButton.interactable = false;
         }
 
-        //Debug.Log("players"+playersSet);
         int numLevelsComplete = PlayerPrefs.GetInt("Highest_Level_Complete_" + playersSet + "p");
-        //Debug.Log("levels" + numLevelsComplete);
-        if (numLevelsComplete >= 1)
+        //ensure button unlock remains within set buttons
+        if (numLevelsComplete >= 1 && numLevelsComplete <= 4)
         {
             for (int i = 1; i <= numLevelsComplete; i++)
+            {
+                Button thisButton = levelsParent.GetChild(i).GetComponent<Button>();
+                thisButton.interactable = true;
+            }
+        }
+        else if (numLevelsComplete >= 1 && numLevelsComplete == 5)
+        {
+            for (int i = 1; i <= 4; i++)
             {
                 Button thisButton = levelsParent.GetChild(i).GetComponent<Button>();
                 thisButton.interactable = true;
