@@ -28,6 +28,7 @@ public class WithPatient : MonoBehaviour
 
     void PlayInteractionSound()
     {
+        
         sound.PlayOneShot(TalkWithPatient);
     }
 }

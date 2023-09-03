@@ -1565,7 +1565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52106991723ddda4d9913096adf5bb52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TalkWithPatient: {fileID: 8300000, guid: f8b7757d1f87e3f43976087b46dc02ea, type: 3}
+  TalkWithPatient: {fileID: 8300000, guid: 5ee3d644981f42447bb36832c709651a, type: 3}
 --- !u!114 &2566606815958872811
 MonoBehaviour:
   m_ObjectHideFlags: 0
