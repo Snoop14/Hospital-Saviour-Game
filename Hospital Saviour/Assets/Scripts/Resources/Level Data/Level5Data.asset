@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8353ef2f05695346912b4a78b0d2e3b, type: 3}
+  m_Name: Level5Data
+  m_EditorClassIdentifier: 
+  levelName: Level 5
+  patientCount: 6
+  sicknessType:
+  - {fileID: 11400000, guid: da30b2c4a3c6beb42b8fba32df99f028, type: 2}
+  - {fileID: 11400000, guid: b65efb007cc28354682960938d9b4a5e, type: 2}
+  - {fileID: 11400000, guid: 754190210261d2843a7af9ba1dfd4c56, type: 2}
+  spawnTimes:
+  - 0
+  - 3
+  - 5
+  - 6
+  - 6
+  - 6
+  inActiveBedCount: 2
+  activeBedCount: 4
+  stars: 64000000fa00000090010000
+  soupMachine: 1
+  pharmacy: 1
+  bandageDispenser: 0
+  ScalpelDispenser: 0
+  TweezerDispenser: 0
+  Surgery: 0
+  XRayMachine: 0
+  ECGMachine: 0
+  tutorialSteps: []
+  patientsToBeTreated: 6
+  timer: 0
+  angryNotAllowed: 1
