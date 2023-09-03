@@ -92,6 +92,8 @@ GameObject:
   - component: {fileID: 2643532029075053020}
   - component: {fileID: 2643532029075053021}
   - component: {fileID: 2091662507230660528}
+  - component: {fileID: 8419915159074919325}
+  - component: {fileID: 763907684748261868}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -192,6 +194,32 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 1}
+--- !u!114 &8419915159074919325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2643532029075053017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52106991723ddda4d9913096adf5bb52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TalkWithPatient: {fileID: 8300000, guid: f8b7757d1f87e3f43976087b46dc02ea, type: 3}
+--- !u!114 &763907684748261868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2643532029075053017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0033a2ec48d5f94f8c184d4cf5d83a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollectSoup: {fileID: 8300000, guid: b34be37823157c14095d7e62e807e114, type: 3}
 --- !u!1 &2643532029478848678
 GameObject:
   m_ObjectHideFlags: 0

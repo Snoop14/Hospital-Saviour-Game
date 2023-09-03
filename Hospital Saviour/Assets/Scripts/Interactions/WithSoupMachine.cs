@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WithPatient : MonoBehaviour
+public class WithSoupMachine : MonoBehaviour
 {
-
     [SerializeField]
-    AudioClip TalkWithPatient;
+    AudioClip CollectSoup;
 
     AudioSource sound;
 
     private void OnEnable()
     {
-       gameObject.GetComponent<Player>().OnInteractWithPatient += PlayInteractionSound;
+        gameObject.GetComponent<Player>().OnInteractWitSoupMachine += PlayInteractionSound;
     }
 
     private void OnDisable()
     {
-        gameObject.GetComponent<Player>().OnInteractWithPatient -= PlayInteractionSound;
+        gameObject.GetComponent<Player>().OnInteractWitSoupMachine -= PlayInteractionSound;
+
     }
 
     // Start is called before the first frame update
@@ -28,6 +28,6 @@ public class WithPatient : MonoBehaviour
 
     void PlayInteractionSound()
     {
-        sound.PlayOneShot(TalkWithPatient);
+        sound.PlayOneShot(CollectSoup);
     }
 }

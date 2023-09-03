@@ -27,7 +27,9 @@ public class Player : MonoBehaviour
 
     //Events"
     public delegate void InteractWithPatient();
-    public event InteractWithPatient OnInteractWithPatient;
+    public event InteractWithPatient OnInteractWithPatient; 
+    public delegate void InteractWitSoupMachine();
+    public event InteractWithPatient OnInteractWitSoupMachine;
 
     void Start()
     {
@@ -300,6 +302,9 @@ public class Player : MonoBehaviour
                         i.changePosToPlayer();
 
                         tutorial.interactedSoup();
+
+                        OnInteractWitSoupMachine?.Invoke();
+
                         break;
                     }
 

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7493864367245033526}
   - component: {fileID: 159584363607696903}
   - component: {fileID: 3194505549976682846}
+  - component: {fileID: 3837560099416308580}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -224,6 +225,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TalkWithPatient: {fileID: 8300000, guid: f8b7757d1f87e3f43976087b46dc02ea, type: 3}
+--- !u!114 &3837560099416308580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6797946521238593119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0033a2ec48d5f94f8c184d4cf5d83a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollectSoup: {fileID: 8300000, guid: b34be37823157c14095d7e62e807e114, type: 3}
 --- !u!1 &6797946521910365984
 GameObject:
   m_ObjectHideFlags: 0
