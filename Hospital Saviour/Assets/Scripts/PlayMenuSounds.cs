@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayMenuSounds : MonoBehaviour
 {
-    public AudioClip selectSound;
+    [SerializeField]
+    AudioClip selectSound;
+    //public AudioClip selectSound;
 
     AudioSource sound;
 
