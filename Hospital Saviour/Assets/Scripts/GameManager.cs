@@ -365,8 +365,6 @@ public class GameManager : MonoBehaviour
         tutorialObject.GetComponent<tutorial>().bin = tempBin;
     }
 
-    //}
-
     IEnumerator CreatePatient()
     {
         for (int i = 0; i < patientCount; i++)
@@ -395,7 +393,7 @@ public class GameManager : MonoBehaviour
             p.ExitTransform = ExitTransform;
 
             patientQueue.Add(newPatient);
-            queuePositions.Add(EnterTransform.position + new Vector3(18 - patientSeperation * i, 0, 0));
+            queuePositions.Add(EnterTransform.position + new Vector3(25 - patientSeperation * i, 0, 0));
             p.queuePosition = queuePositions[patientQueue.Count - 1];
             p.tutorial = tutorialObject.GetComponent<tutorial>();
             patients.Add(newPatient);
@@ -412,6 +410,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Removes the specific patient from the list of patients
+    /// </summary>
+    /// <param name="_patient"></param>
     public void RemovePatientFromList(GameObject _patient)
     {
         patients.Remove(_patient);
@@ -497,7 +499,6 @@ public class GameManager : MonoBehaviour
         }
 
 
-
         if (PlayerPrefs.GetInt("PlayerNum") == 1 && PlayerPrefs.GetInt("Highest_Level_Complete_1p") < levelNo)
         {
             //only move on max level if successfully completed with no angry patients
@@ -515,11 +516,6 @@ public class GameManager : MonoBehaviour
             }
 
         }
-        //PlayerPrefs.SetInt("Highest Level Complete", levelNo);
-
-
-
-
     }
 
 
@@ -532,6 +528,9 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("MenuScene");
     }
 
+    /// <summary>
+    /// If the patient gets mad, check to end the level early
+    /// </summary>
     public void MadPatient()
     {
         int levelNum = PlayerPrefs.GetInt("LevelNum");
@@ -542,6 +541,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Disable the patients that are still on screen
+    /// </summary>
     private void StopGameplay()
     {
 

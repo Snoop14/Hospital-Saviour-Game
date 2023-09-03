@@ -20,22 +20,19 @@ public class MenuSelection : MonoBehaviour
     private int currHighScore;
 
     [SerializeField]
+    Text infoDisplay;
+
+    [SerializeField]
     Text scoreDisplay;
 
     [SerializeField]
     Transform levelsParent;
 
+    [SerializeField]
+    Transform StarsDisplay;
+
     private void Start()
     {
-        //int numLevelsComplete = PlayerPrefs.GetInt("Highest_Level_Complete_" + playerNum + "p");
-        //if (numLevelsComplete >= 1)
-        //{
-          //  for (int i = 1; i <= numLevelsComplete; i++)
-            //{
-             //   Button thisButton = levelsParent.GetChild(i).GetComponent<Button>();
-             //   thisButton.interactable = true;
-            //}
-        //}
         ResetButtons();
 
         //reset playersset to last value in playerprefs
@@ -43,9 +40,8 @@ public class MenuSelection : MonoBehaviour
         {
             playersSet = PlayerPrefs.GetInt("PlayerNum");
         }
-
+        levelSet = PlayerPrefs.GetInt("LevelNum");
         GameObject.Find("PlayersSlider").GetComponent<Slider>().value = playersSet;
-
     }
 
     public void StartLevel(int level)
@@ -93,26 +89,50 @@ public class MenuSelection : MonoBehaviour
 
     /// <summary>
     /// Changes the score that is displayed on screen
+    /// as well as the 'stars' for the level
     /// </summary>
     private void DisplayHighScore()
     {
         string levelName = "Level " + levelSet;
+
         if (playersSet == 1)
         {
+            infoDisplay.text = levelName + " Solo";
             levelName += "_1p";
         }
         else if (playersSet == 2)
         {
+            infoDisplay.text = levelName + " Duo";
             levelName += "_2p";
         }
 
         currHighScore = PlayerPrefs.GetInt(levelName);
 
-        //Debug.Log(currHighScore);
+        levelName = "Level" + levelSet + "Data";
+        int[] stars = Resources.Load<Levels>("Level Data/" + levelName).stars;
+
+        for(int i = 0; i <= 2; i++)
+        {
+            StarsDisplay.GetChild(3).GetChild(i).GetComponent<Text>().text = (stars[i] * playersSet).ToString();
+
+            if(currHighScore >= (stars[i])*playersSet)
+            {
+                StarsDisplay.GetChild(i).gameObject.SetActive(true);
+            }
+            else
+            {
+                StarsDisplay.GetChild(i).gameObject.SetActive(false);
+            }
+            
+        }
 
         scoreDisplay.text = currHighScore.ToString();
     }
 
+    /// <summary>
+    /// Deletes all playerPrefs and reloads the scene
+    /// Should this be included in the final game?
+    /// </summary>
     public void ResetGame()
     {
         PlayerPrefs.DeleteAll();

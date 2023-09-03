@@ -36,12 +36,13 @@ public class BandageMachine : MonoBehaviour
     IEnumerator generateBandage()
     {
         yield return new WaitForSeconds(1.0f);
-        Vector3 spawnLoc = new Vector3(transform.localPosition.x,
-                                       transform.localPosition.y + 0.95f,
-                                       transform.localPosition.z);
+        Vector3 spawnLoc = new Vector3(0,
+                                       0.95f,
+                                       0);
         Quaternion spawnRot = new Quaternion();
         spawnRot.eulerAngles = new Vector3(90, 0, 0);
         currentBandage = Instantiate(bandagePrefab, spawnLoc, spawnRot, transform);
+        currentBandage.transform.localPosition = spawnLoc;
     }
 
     public void disableSelf()
@@ -50,8 +51,6 @@ public class BandageMachine : MonoBehaviour
         isInteractable = false;
 
         changeMaterial(transform);
-
-
     }
 
     private void changeMaterial(Transform objectToChange)
