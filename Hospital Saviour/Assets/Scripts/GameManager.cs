@@ -155,6 +155,10 @@ public class GameManager : MonoBehaviour
 
         if (timeForLevel > 0)
         {
+            if(PlayerPrefs.GetInt("PlayerNum") == 2)
+            {
+                timeForLevel += 30;
+            }
             inGameTimer.gameObject.SetActive(true);
             inGameTimer.SetTimeFromSeconds(timeForLevel);
             inGameTimer.StartTimer();
