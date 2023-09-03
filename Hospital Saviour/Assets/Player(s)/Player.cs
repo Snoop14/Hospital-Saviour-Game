@@ -28,8 +28,10 @@ public class Player : MonoBehaviour
     //Events"
     public delegate void InteractWithPatient();
     public event InteractWithPatient OnInteractWithPatient; 
-    public delegate void InteractWitSoupMachine();
-    public event InteractWithPatient OnInteractWitSoupMachine;
+    public delegate void InteractWithSoupMachine();
+    public event InteractWithSoupMachine OnInteractWithSoupMachine;
+    public delegate void InteractWithPillMachine();
+    public event InteractWithPillMachine OnInteractWithPillMachine;
 
     void Start()
     {
@@ -303,7 +305,7 @@ public class Player : MonoBehaviour
 
                         tutorial.interactedSoup();
 
-                        OnInteractWitSoupMachine?.Invoke();
+                        OnInteractWithSoupMachine?.Invoke();
 
                         break;
                     }
@@ -319,6 +321,8 @@ public class Player : MonoBehaviour
                         i.changePosToPlayer();
 
                         tutorial.interactedPill();
+
+                        OnInteractWithPillMachine?.Invoke();
                         break;
                     }
 

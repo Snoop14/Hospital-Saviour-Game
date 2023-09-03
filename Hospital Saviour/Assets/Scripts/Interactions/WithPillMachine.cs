@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WithSoupMachine : MonoBehaviour
+public class WithPillMachine : MonoBehaviour
 {
     [SerializeField]
-    AudioClip CollectSoup;
+    AudioClip CollectPill;
 
     AudioSource sound;
 
     private void OnEnable()
     {
-        gameObject.GetComponent<Player>().OnInteractWithSoupMachine += PlayInteractionSound;
+        gameObject.GetComponent<Player>().OnInteractWithPillMachine += PlayInteractionSound;
     }
 
     private void OnDisable()
     {
-        gameObject.GetComponent<Player>().OnInteractWithSoupMachine -= PlayInteractionSound;
+        gameObject.GetComponent<Player>().OnInteractWithPillMachine -= PlayInteractionSound;
 
     }
 
@@ -28,6 +28,6 @@ public class WithSoupMachine : MonoBehaviour
 
     void PlayInteractionSound()
     {
-        sound.PlayOneShot(CollectSoup);
+        sound.PlayOneShot(CollectPill);
     }
 }

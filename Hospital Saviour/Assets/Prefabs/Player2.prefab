@@ -683,6 +683,7 @@ GameObject:
   - component: {fileID: 2818318777377387970}
   - component: {fileID: 231898901245482117}
   - component: {fileID: 6718966925327793901}
+  - component: {fileID: 4061131264794316247}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -904,6 +905,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollectSoup: {fileID: 8300000, guid: b34be37823157c14095d7e62e807e114, type: 3}
+--- !u!114 &4061131264794316247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2643532029075053017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b875de2dc6a087b4d9c633e59d277efb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollectPill: {fileID: 8300000, guid: d1c3096b775ae014e962c2e202cae630, type: 3}
 --- !u!1 &2762917208124581890
 GameObject:
   m_ObjectHideFlags: 0
