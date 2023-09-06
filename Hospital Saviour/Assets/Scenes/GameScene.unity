@@ -2649,6 +2649,8 @@ MonoBehaviour:
     type: 3}
   bedPrefab: {fileID: 8854363157470512984, guid: 964db6eede2727349ac7b0b319fc7662,
     type: 3}
+  coveredBedPrefab: {fileID: 6306507448946129921, guid: e7ca3b7445bf1504680e95f3ed2c3eef,
+    type: 3}
   patientPrefabs:
   - patientPrefab: {fileID: 4354967415416081357, guid: 3d2577d9b91b22d479ea7ca799e0b313,
       type: 3}
@@ -3216,7 +3218,7 @@ PrefabInstance:
     - target: {fileID: 2209753574270409438, guid: b8d98507dac97cd4ab1aa277d31d8518,
         type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 2209753574270409438, guid: b8d98507dac97cd4ab1aa277d31d8518,
         type: 3}
@@ -3273,6 +3275,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: TweezerDispenser
       objectReference: {fileID: 0}
+    - target: {fileID: 3908480048093938259, guid: b8d98507dac97cd4ab1aa277d31d8518,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7415317681424345421, guid: b8d98507dac97cd4ab1aa277d31d8518,
+        type: 3}
+      propertyPath: coveredObject
+      value: 
+      objectReference: {fileID: 598563499412953043, guid: 561e9b176f83a464f9767d5ade1c1f58,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8d98507dac97cd4ab1aa277d31d8518, type: 3}
 --- !u!4 &3111185482775351834 stripped
@@ -3439,7 +3452,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 77909752769188, guid: 89a540f3a5e05ad4087f4a17c7670c30, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 77909752769188, guid: 89a540f3a5e05ad4087f4a17c7670c30, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3511,10 +3524,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScalpelDispenser
       objectReference: {fileID: 0}
+    - target: {fileID: 5994795086546509155, guid: 2d9919e7beb67eb47b62179205fe479f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6584948461256986240, guid: 2d9919e7beb67eb47b62179205fe479f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 22
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 6584948461256986240, guid: 2d9919e7beb67eb47b62179205fe479f,
         type: 3}
@@ -3566,6 +3584,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8413853074778865333, guid: 2d9919e7beb67eb47b62179205fe479f,
+        type: 3}
+      propertyPath: coveredObject
+      value: 
+      objectReference: {fileID: 5789722260896449878, guid: a9c15b2e2662e9449b22c3bf4f6a9a2a,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d9919e7beb67eb47b62179205fe479f, type: 3}
 --- !u!4 &4698394004803184881 stripped
@@ -3659,7 +3683,7 @@ PrefabInstance:
     - target: {fileID: 1069840202763987210, guid: 04b95c2eb17ec24459a757f60ade57e6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 1069840202763987210, guid: 04b95c2eb17ec24459a757f60ade57e6,
         type: 3}
@@ -3716,6 +3740,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: ECG
       objectReference: {fileID: 0}
+    - target: {fileID: 2169072421174802385, guid: 04b95c2eb17ec24459a757f60ade57e6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875778169525456319, guid: 04b95c2eb17ec24459a757f60ade57e6,
+        type: 3}
+      propertyPath: coveredObject
+      value: 
+      objectReference: {fileID: 4452508544987253593, guid: ca5ee984566f71a49a1811bff1a251be,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04b95c2eb17ec24459a757f60ade57e6, type: 3}
 --- !u!4 &6329097646118670268 stripped
@@ -3791,6 +3826,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: X-Ray
       objectReference: {fileID: 0}
+    - target: {fileID: 1279734314122547273, guid: 4b98844bd7e7d98418cf033494829586,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722838069747234594, guid: 4b98844bd7e7d98418cf033494829586,
+        type: 3}
+      propertyPath: coveredObject
+      value: 
+      objectReference: {fileID: 4334401821689052868, guid: 0edf514fef1384644a7e734930c14b07,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b98844bd7e7d98418cf033494829586, type: 3}
 --- !u!4 &7114162196918674459 stripped
@@ -3866,6 +3912,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7576948245159784983, guid: bc088fa1e6b5900439805f81381ee4b4,
+        type: 3}
+      propertyPath: coveredObject
+      value: 
+      objectReference: {fileID: 2577788658633878857, guid: 416fbf4c3601cb34ab965d7e97eaa536,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc088fa1e6b5900439805f81381ee4b4, type: 3}
 --- !u!4 &7576948245741877441 stripped
