@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4452508544987253590}
   - component: {fileID: 4452508544987253588}
   - component: {fileID: 4452508544987253591}
+  - component: {fileID: -1489458306781020908}
   m_Layer: 0
   m_Name: covered_ECG
   m_TagString: Untagged
@@ -79,3 +80,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &-1489458306781020908
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4452508544987253593}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1831332, y: 1.3998653, z: 1.008489}
+  m_Center: {x: -0.19469164, y: -0.0688808, z: 0.4906882}
