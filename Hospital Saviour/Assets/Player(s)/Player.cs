@@ -79,6 +79,8 @@ public class Player : MonoBehaviour
         {
             if (xyInput.x > 0)
                 tutorial.nextPage();
+            else if(xyInput.x < 0)
+                tutorial.prevPage();
             return;
         }
         movementVec = new Vector3(xyInput.x, 0, xyInput.y);

@@ -52,28 +52,13 @@ public class tutorial : MonoBehaviour
         header.text = level.levelName + " Tutorials";
 
         steps = new List<TutorialMessage>();
-        page = transform.GetChild(1).gameObject;
-        page2 = transform.GetChild(2).gameObject;
-
-        for (int i = 0; i < page.transform.childCount; i++)
+        pages = new List<GameObject>();
+        for(int i = 1; i <= 2; i++)
         {
-            Transform child = page.transform.GetChild(i);
-            TMP_Text _t;
-            TutorialMessage tm = new TutorialMessage();
-            child.TryGetComponent<TMP_Text>(out _t);
-            if (_t)
-            {
-                tm.type = messageType.Text;
-            }
-            else
-            {
-                tm.type = messageType.Image;
-            }
-            tm.obj = child;
-            steps.Add(tm);
+            pages.Add(transform.GetChild(i).gameObject);
         }
 
-        StartCoroutine(textOverTime());
+        nextPage();
         //InvokeRepeating("FixTextSize",0,0.5f);
 
         if (levelData.patientsToBeTreated > 0)
@@ -99,17 +84,29 @@ public class tutorial : MonoBehaviour
 
     bool ongoing = false;
     bool rush = false;
-    GameObject page;
-    GameObject page2;
+    List<GameObject> pages;
+    int maxPage = 0;
+    int currentPage = 0;
 
     public void nextPage()
     {
-        steps.Clear();
-        page.SetActive(false);
-        page2.SetActive(true);
-        for (int i = 0; i < page2.transform.childCount; i++)
+        if (currentPage != maxPage)
         {
-            Transform child = page2.transform.GetChild(i);
+            pages[currentPage - 1].SetActive(false);
+            pages[currentPage].SetActive(true);
+            currentPage++;
+            return;
+        }
+        if (maxPage >= pages.Count)
+            return;
+
+        steps.Clear();
+        if(maxPage!= 0)
+            pages[maxPage-1].SetActive(false);
+        pages[maxPage].SetActive(true);
+        for (int i = 0; i < pages[maxPage].transform.childCount; i++)
+        {
+            Transform child = pages[maxPage].transform.GetChild(i);
             TMP_Text _t;
             TutorialMessage tm = new TutorialMessage();
             child.TryGetComponent<TMP_Text>(out _t);
@@ -126,6 +123,16 @@ public class tutorial : MonoBehaviour
         }
 
         StartCoroutine(textOverTime());
+    }
+    public void prevPage()
+    {
+        print(currentPage);
+        if (currentPage <= 1)
+            return;
+        pages[currentPage-1].SetActive(false);
+        pages[currentPage-2].SetActive(true);
+        currentPage--;
+
     }
     IEnumerator textOverTime()
     {
@@ -165,6 +172,8 @@ public class tutorial : MonoBehaviour
         ongoing = false;
         rush = false;
         currentStepIndex = 0;
+        maxPage++;
+        currentPage++;
     }
 
     public void changeActive()
