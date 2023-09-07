@@ -149,8 +149,8 @@ public class GameManager : MonoBehaviour
         GenerateHUD();
 
         //trigger start animations
-        animator = GameObject.Find("Scene").GetComponent<Animator>();
-        animator.SetInteger("Level", levelNo);
+        //animator = GameObject.Find("Scene").GetComponent<Animator>();
+        //animator.SetInteger("Level", levelNo);
 
 
         if (timeForLevel > 0)

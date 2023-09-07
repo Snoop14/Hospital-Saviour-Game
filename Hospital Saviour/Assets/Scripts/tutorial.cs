@@ -27,12 +27,7 @@ public class tutorial : MonoBehaviour
     public GameObject bin = null;
 
     public GameObject goals;
-
-    [SerializeField, Range(0.0005f, 0.05f)]
-    float fontScale = 0.01f;
-
-    float prevHeight = 0;
-    float prevWidth = 0;
+    public GameObject bg;
 
     int patientsCured = 0;
 
@@ -97,13 +92,18 @@ public class tutorial : MonoBehaviour
     int currentStepIndex = 0;
     int currentTextInstruction = 0;
     int currentCharIndex = 0;
-    public float typingSpeed = 0.005f;
+    public float typingSpeed = 0.01f;
     public float imageDisplayDuration = 0.4f;
     public GameObject textAudio;
 
+    bool ongoing = false;
+    bool rush = false;
+
     IEnumerator textOverTime()
     {
+        ongoing = true;
         textAudio.GetComponent<AudioSource>().Play();
+
         while (currentStepIndex < steps.Count)
         {
             TutorialMessage currentStep = steps[currentStepIndex];
@@ -119,29 +119,39 @@ public class tutorial : MonoBehaviour
                 {
                     textComponent.text += currentString[currentCharIndex];
                     currentCharIndex++;
-                    yield return new WaitForSeconds(typingSpeed);
+                    if(!rush)
+                        yield return new WaitForSeconds(typingSpeed);
                 }
             }
             else if (currentStep.type == messageType.Image)
             {
                 // Assuming the image is a child of the text and it's initially set to inactive
                 currentStep.obj.gameObject.SetActive(true);
-                yield return new WaitForSeconds(imageDisplayDuration); // Pause for some time to show image
+                if(!rush)
+                    yield return new WaitForSeconds(imageDisplayDuration); // Pause for some time to show image
             }
             currentStepIndex++;
             currentCharIndex = 0;
         }
         textAudio.GetComponent<AudioSource>().Stop();
+        ongoing = false;
+        rush = false;
     }
 
     public void changeActive()
     {
-        if (gameObject.activeSelf)
+        if (ongoing)
         {
+            rush = true;
+        }
+        else if (gameObject.activeSelf)
+        {
+            bg.SetActive(false);
             gameObject.SetActive(false);
         }
         else
         {
+            bg.SetActive(true);
             gameObject.SetActive(true);
         }
     }
@@ -165,22 +175,22 @@ public class tutorial : MonoBehaviour
     {
         if (goalPatients > 0)
         {
-            goals.GetComponent<Text>().text = patientsCured.ToString() + "/" + goalPatients.ToString() + " Patients Cured";
+            goals.GetComponent<TMP_Text>().text = patientsCured.ToString() + "/" + goalPatients.ToString() + " Patients Cured";
         }
         
         //no anry patients allowed this level
         if (angryNotAllowed)
         {
             //other conntent
-            if (goals.GetComponent<Text>().text.Length > 0)
+            if (goals.GetComponent<TMP_Text>().text.Length > 0)
             {
-                goals.GetComponent<Text>().text = goals.GetComponent<Text>().text + "\n" + "Don't let any patients get angry and leave without treatment";
+                goals.GetComponent<TMP_Text>().text = goals.GetComponent<TMP_Text>().text + "\n" + "Don't let any patients get angry and leave without treatment";
 
             }
             //no other content
             else
             {
-                goals.GetComponent<Text>().text = "Don't let any patients get angry and leave without treatment";
+                goals.GetComponent<TMP_Text>().text = "Don't let any patients get angry and leave without treatment";
             }
         }
     }
