@@ -52,7 +52,8 @@ public class tutorial : MonoBehaviour
         header.text = level.levelName + " Tutorials";
 
         steps = new List<TutorialMessage>();
-        GameObject page = transform.GetChild(1).gameObject;
+        page = transform.GetChild(1).gameObject;
+        page2 = transform.GetChild(2).gameObject;
 
         for (int i = 0; i < page.transform.childCount; i++)
         {
@@ -98,7 +99,34 @@ public class tutorial : MonoBehaviour
 
     bool ongoing = false;
     bool rush = false;
+    GameObject page;
+    GameObject page2;
 
+    public void nextPage()
+    {
+        steps.Clear();
+        page.SetActive(false);
+        page2.SetActive(true);
+        for (int i = 0; i < page2.transform.childCount; i++)
+        {
+            Transform child = page2.transform.GetChild(i);
+            TMP_Text _t;
+            TutorialMessage tm = new TutorialMessage();
+            child.TryGetComponent<TMP_Text>(out _t);
+            if (_t)
+            {
+                tm.type = messageType.Text;
+            }
+            else
+            {
+                tm.type = messageType.Image;
+            }
+            tm.obj = child;
+            steps.Add(tm);
+        }
+
+        StartCoroutine(textOverTime());
+    }
     IEnumerator textOverTime()
     {
         ongoing = true;
@@ -136,6 +164,7 @@ public class tutorial : MonoBehaviour
         textAudio.GetComponent<AudioSource>().Stop();
         ongoing = false;
         rush = false;
+        currentStepIndex = 0;
     }
 
     public void changeActive()
