@@ -40,5 +40,15 @@ MonoBehaviour:
   - "Look, the patient\u2019s icon has changed to show that they need soup, head
     over to the Soup Machine"
   - You may now throw the Soup out in the Bin or give it to the Patient.
+  tutorialPages: {fileID: 5174242530422605464, guid: 82072609d9c9ec2498dd38f70b3a9533,
+    type: 3}
+  instructions:
+  - Welcome to Hospital Savior where you play as a Doctor to cure Patients.
+  - Feel Free to Press
+  - to open and close
+  - these tutorials.
+  - To view the previous / next available instruction, Press
+  - or
   patientsToBeTreated: 2
   timer: 0
+  angryNotAllowed: 0

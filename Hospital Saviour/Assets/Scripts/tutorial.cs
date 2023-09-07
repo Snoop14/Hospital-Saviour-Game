@@ -2,11 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
+enum messageType
+{
+    Image, Text
+}
+class TutorialMessage
+{
+    public messageType type;
+    public Transform obj;
+}
 public class tutorial : MonoBehaviour
 {
-    List<string> steps;
-    List<Text> texts;
+    List<TutorialMessage> steps;
+    List<string> instructions;
     [SerializeField]
     GameObject textPrefab;
     int currentStep = 0;
@@ -38,27 +48,39 @@ public class tutorial : MonoBehaviour
     GameObject arrowPrefab;
     public GameObject iconCanvas;
     public List<GameObject> objectList;
-
+    public Transform headerobj;
 
     public void setupTutorial(Levels levelData)
     {
         level = levelData;
-        texts = new List<Text>();
-        Text header = transform.GetChild(0).GetComponent<Text>();
-        header.text = levelData.levelName;
-        texts.Add(header);
 
-        steps = levelData.tutorialSteps;
-        for(int i = 0; i < steps.Count; i++)
+        TMP_Text header = headerobj.GetComponent<TMP_Text>();
+        header.text = level.levelName + " Tutorials";
+
+        steps = new List<TutorialMessage>();
+        GameObject page = level.tutorialPages;
+        instructions = level.instructions;
+
+        for (int i = 0; i < page.transform.childCount; i++)
         {
-            GameObject textObject = Instantiate(textPrefab, transform);
-            texts.Add(textObject.GetComponent<Text>());
-            textObject.SetActive(false);
-            texts[i + 1].GetComponent<RectTransform>().anchorMax = new Vector2(0.9f, 0.8f - (0.1f * i));
-            texts[i + 1].GetComponent<RectTransform>().anchorMin = new Vector2(0.1f, 0.7f - (0.1f * i));
-            texts[i + 1].text = steps[i];
+            Transform child = page.transform.GetChild(i);
+            TMP_Text _t;
+            TutorialMessage tm = new TutorialMessage();
+            child.TryGetComponent<TMP_Text>(out _t);
+            if (_t)
+            {
+                tm.type = messageType.Text;
+            }
+            else
+            {
+                tm.type = messageType.Image;
+            }
+            tm.obj = child;
+            steps.Add(tm);
         }
-        InvokeRepeating("FixTextSize",0,0.5f);
+
+        StartCoroutine(textOverTime());
+        //InvokeRepeating("FixTextSize",0,0.5f);
 
         if (levelData.patientsToBeTreated > 0)
         {
@@ -74,7 +96,42 @@ public class tutorial : MonoBehaviour
 
     }
 
-    void FixTextSize()
+    int currentStepIndex = 0;
+    int currentTextInstruction = 0;
+    int currentCharIndex = 0;
+    public float typingSpeed = 0.1f;
+    public float imageDisplayDuration = 0.4f;
+
+    IEnumerator textOverTime()
+    {
+        while (currentStepIndex < steps.Count)
+        {
+            TutorialMessage currentStep = steps[currentStepIndex];
+            print(currentStep.type + " " + currentStep.obj.name);
+            if (currentStep.type == messageType.Text)
+            {
+                TMP_Text textComponent = currentStep.obj.GetComponent<TMP_Text>();
+                string currentString = instructions[currentTextInstruction];
+                currentTextInstruction++;
+                while (currentCharIndex < currentString.Length)
+                {
+                    textComponent.text += currentString[currentCharIndex];
+                    currentCharIndex++;
+                    yield return new WaitForSeconds(typingSpeed);
+                }
+            }
+            else if (currentStep.type == messageType.Image)
+            {
+                // Assuming the image is a child of the text and it's initially set to inactive
+                currentStep.obj.gameObject.SetActive(true);
+                yield return new WaitForSeconds(imageDisplayDuration); // Pause for some time to show image
+            }
+            currentStepIndex++;
+            currentCharIndex = 0;
+        }
+    }
+
+    /*void FixTextSize()
     {
         if (prevHeight != Screen.height || prevWidth != Screen.width)
         {
@@ -87,7 +144,7 @@ public class tutorial : MonoBehaviour
             prevHeight = Screen.height;
             prevWidth = Screen.width;
         }
-    }
+    }*/
 
     public void startGoals()
     {
@@ -297,7 +354,7 @@ public class tutorial : MonoBehaviour
     }
     public void changeStep(int s)
     {
-        currentStep += s;
+        /*currentStep += s;
         for (int i = 1; i < texts.Count; i++)
         {
             texts[i].gameObject.SetActive(false);
@@ -314,7 +371,7 @@ public class tutorial : MonoBehaviour
             {
                 texts[i].GetComponent<Text>().fontStyle = FontStyle.Bold;
             }
-        }
+        }*/
     }
 
     public bool checkPatientGoal()
