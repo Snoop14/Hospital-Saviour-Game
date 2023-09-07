@@ -1183,6 +1183,8 @@ MonoBehaviour:
   typingSpeed: 0.04
   imageDisplayDuration: 0.6
   textAudio: {fileID: 1783318528}
+  prev: {fileID: 1543916723}
+  next: {fileID: 786631191}
 --- !u!114 &409601863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1614,6 +1616,8 @@ MonoBehaviour:
   typingSpeed: 0.1
   imageDisplayDuration: 0.4
   textAudio: {fileID: 0}
+  prev: {fileID: 0}
+  next: {fileID: 0}
 --- !u!114 &692348120
 MonoBehaviour:
   m_ObjectHideFlags: 0

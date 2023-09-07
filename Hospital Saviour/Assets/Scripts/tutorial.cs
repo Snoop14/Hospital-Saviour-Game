@@ -58,8 +58,16 @@ public class tutorial : MonoBehaviour
             pages.Add(transform.GetChild(i).gameObject);
         }
 
-        nextPage();
-        //InvokeRepeating("FixTextSize",0,0.5f);
+        int skipToPage = 0;
+        if (level.levelName == "Level 1")
+            nextPage();
+        if (level.levelName == "Level 2")
+            skipToPage = 5;
+        for (int i = 0; i < skipToPage; i++)
+        {
+            rush = true;
+            nextPage();
+        }
 
         if (levelData.patientsToBeTreated > 0)
         {
@@ -76,7 +84,6 @@ public class tutorial : MonoBehaviour
     }
 
     int currentStepIndex = 0;
-    int currentTextInstruction = 0;
     int currentCharIndex = 0;
     public float typingSpeed = 0.01f;
     public float imageDisplayDuration = 0.4f;
@@ -87,6 +94,8 @@ public class tutorial : MonoBehaviour
     List<GameObject> pages;
     int maxPage = 0;
     int currentPage = 0;
+    public Image prev;
+    public Image next;
 
     public void nextPage()
     {
@@ -99,6 +108,13 @@ public class tutorial : MonoBehaviour
         }
         if (maxPage >= pages.Count)
             return;
+
+        prev.color = new Color(1, 1, 1, 1);
+
+        if (currentPage < maxPage)
+            next.color = new Color(1, 1, 1, 1);
+        else
+            next.color = new Color(1, 1, 1, 0.5f);
 
         steps.Clear();
         if(maxPage!= 0)
@@ -133,6 +149,16 @@ public class tutorial : MonoBehaviour
         pages[currentPage-2].SetActive(true);
         currentPage--;
 
+        if(currentPage <= 1)
+            prev.color = new Color(1, 1, 1, 0.5f);
+        else
+            prev.color = new Color(1, 1, 1, 1);
+
+        if (currentPage < maxPage)
+            next.color = new Color(1, 1, 1, 1);
+        else
+            next.color = new Color(1, 1, 1, 0.5f);
+
     }
     IEnumerator textOverTime()
     {
@@ -147,7 +173,6 @@ public class tutorial : MonoBehaviour
             {
                 TMP_Text textComponent = currentStep.obj.GetComponent<TMP_Text>();
                 string currentString = textComponent.text;
-                currentTextInstruction++;
                 textComponent.text = "";
                 currentStep.obj.gameObject.SetActive(true);
                 while (currentCharIndex < currentString.Length)
@@ -193,21 +218,6 @@ public class tutorial : MonoBehaviour
             gameObject.SetActive(true);
         }
     }
-
-    /*void FixTextSize()
-    {
-        if (prevHeight != Screen.height || prevWidth != Screen.width)
-        {
-            int s = Mathf.Min(Screen.height, Screen.width);
-            foreach (Text t in texts)
-            {
-                t.fontSize = (int)(s * fontScale);
-            }
-            texts[0].fontSize = (int)(s * fontScale * 1.7f);
-            prevHeight = Screen.height;
-            prevWidth = Screen.width;
-        }
-    }*/
 
     public void startGoals()
     {
@@ -259,7 +269,7 @@ public class tutorial : MonoBehaviour
         }
     }
 
-    void setupArrows()
+    /*void setupArrows()
     {
         foreach (var o in objectList)
         {
@@ -288,15 +298,15 @@ public class tutorial : MonoBehaviour
                 k_v.Value.SetActive(true);
             }
         }
-    }
+    }*/
 
     public void PatientsAdded()
     {
         if (level.levelName == "Level 1")
         {
             changeStep(1);
-            setupArrows();
-            displayArrows<Patient>();
+            //setupArrows();
+            //displayArrows<Patient>();
         }
 
         if (level.levelName == "Level 3" || level.levelName == "Level 4")
@@ -314,15 +324,15 @@ public class tutorial : MonoBehaviour
             if (currentStep == 1)
             {
                 changeStep(1);
-                resetArrows();
-                displayArrows<Patient>();
-                displayArrows<Bed>();
+                //resetArrows();
+                //displayArrows<Patient>();
+                //displayArrows<Bed>();
             }
             else if (currentStep == 2)
             {
                 changeStep(-1);
-                resetArrows();
-                displayArrows<Patient>();
+                //resetArrows();
+                //displayArrows<Patient>();
             }
         }
     }
@@ -333,7 +343,7 @@ public class tutorial : MonoBehaviour
             if (currentStep == 2)
             {
                 changeStep(1);
-                resetArrows();
+                //resetArrows();
             }
 
         }
@@ -345,7 +355,7 @@ public class tutorial : MonoBehaviour
             if (currentStep == 3)
             {
                 changeStep(1);
-                displayArrows<Bed>();
+                //displayArrows<Bed>();
             }
         }
     }
@@ -356,13 +366,13 @@ public class tutorial : MonoBehaviour
             if (currentStep == 4)
             {
                 changeStep(1);
-                resetArrows();
-                displayArrows<SoupMachine>();
+                //resetArrows();
+                //displayArrows<SoupMachine>();
             }
             else if (currentStep == 6) 
             { 
                 changeStep(1);
-                resetArrows();
+                //resetArrows();
             }
         }
         else if (level.levelName == "Level 2")
@@ -380,8 +390,8 @@ public class tutorial : MonoBehaviour
             if (currentStep == 6)
             {
                 changeStep(-1);
-                resetArrows();
-                displayArrows<SoupMachine>();
+                //resetArrows();
+                //displayArrows<SoupMachine>();
             }
         }
         if (level.levelName == "Level 2")
@@ -409,9 +419,9 @@ public class tutorial : MonoBehaviour
             if (currentStep == 5)
             {
                 changeStep(1);
-                resetArrows();
-                displayArrows<Bed>();
-                displayArrows<Bin>();
+                //resetArrows();
+                //displayArrows<Bed>();
+                //displayArrows<Bin>();
             }
         }
     }
