@@ -9,8 +9,8 @@ public class BandageMachine : MonoBehaviour
     public bool isInteractable = true;
     [SerializeField]
     Material inactiveObjectMaterial;
-
-
+    [SerializeField]
+    GameObject coveredObject;
 
     public GameObject currentBandage { get; private set; } = null;
 
@@ -40,7 +40,7 @@ public class BandageMachine : MonoBehaviour
                                        0.95f,
                                        0);
         Quaternion spawnRot = new Quaternion();
-        spawnRot.eulerAngles = new Vector3(90, 0, 0);
+        spawnRot.eulerAngles = new Vector3(0, 0, 0);
         currentBandage = Instantiate(bandagePrefab, spawnLoc, spawnRot, transform);
         currentBandage.transform.localPosition = spawnLoc;
     }
@@ -50,7 +50,19 @@ public class BandageMachine : MonoBehaviour
         //disable the interactable variable
         isInteractable = false;
 
-        changeMaterial(transform);
+        coverObject();
+        //changeMaterial(transform);
+    }
+
+    private void coverObject()
+    {
+        Vector3 spawnLoc = new Vector3(transform.position.x - .19f,
+                                       transform.position.y,
+                                       transform.position.z);
+        Quaternion spawnRot = new Quaternion();
+        spawnRot.eulerAngles = new Vector3(-90, 0, 180);
+        Instantiate(coveredObject, spawnLoc, spawnRot);
+        gameObject.SetActive(false);
     }
 
     private void changeMaterial(Transform objectToChange)
