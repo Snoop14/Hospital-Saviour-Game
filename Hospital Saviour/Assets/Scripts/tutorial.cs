@@ -16,7 +16,6 @@ class TutorialMessage
 public class tutorial : MonoBehaviour
 {
     List<TutorialMessage> steps;
-    List<string> instructions;
     [SerializeField]
     GameObject textPrefab;
     int currentStep = 0;
@@ -58,8 +57,7 @@ public class tutorial : MonoBehaviour
         header.text = level.levelName + " Tutorials";
 
         steps = new List<TutorialMessage>();
-        GameObject page = level.tutorialPages;
-        instructions = level.instructions;
+        GameObject page = transform.GetChild(1).gameObject;
 
         for (int i = 0; i < page.transform.childCount; i++)
         {
@@ -99,11 +97,13 @@ public class tutorial : MonoBehaviour
     int currentStepIndex = 0;
     int currentTextInstruction = 0;
     int currentCharIndex = 0;
-    public float typingSpeed = 0.1f;
+    public float typingSpeed = 0.005f;
     public float imageDisplayDuration = 0.4f;
+    public GameObject textAudio;
 
     IEnumerator textOverTime()
     {
+        textAudio.GetComponent<AudioSource>().Play();
         while (currentStepIndex < steps.Count)
         {
             TutorialMessage currentStep = steps[currentStepIndex];
@@ -111,8 +111,10 @@ public class tutorial : MonoBehaviour
             if (currentStep.type == messageType.Text)
             {
                 TMP_Text textComponent = currentStep.obj.GetComponent<TMP_Text>();
-                string currentString = instructions[currentTextInstruction];
+                string currentString = textComponent.text;
                 currentTextInstruction++;
+                textComponent.text = "";
+                currentStep.obj.gameObject.SetActive(true);
                 while (currentCharIndex < currentString.Length)
                 {
                     textComponent.text += currentString[currentCharIndex];
@@ -129,6 +131,7 @@ public class tutorial : MonoBehaviour
             currentStepIndex++;
             currentCharIndex = 0;
         }
+        textAudio.GetComponent<AudioSource>().Stop();
     }
 
     /*void FixTextSize()

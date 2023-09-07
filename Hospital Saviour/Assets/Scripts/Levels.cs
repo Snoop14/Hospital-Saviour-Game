@@ -32,7 +32,6 @@ public class Levels : ScriptableObject
 
     public List<string> tutorialSteps;
     public GameObject tutorialPages;
-    public List<string> instructions;
 
     [Header("Level Goals")]
     public int patientsToBeTreated;
