@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] float speed;
+    public float speed;
     Vector3 movementVec;
     
     private Rigidbody rbody;
@@ -24,6 +24,14 @@ public class Player : MonoBehaviour
     List<GameObject> collidingObjects;
 
     public tutorial tutorial;
+
+    //Events"
+    public delegate void InteractWithPatient();
+    public event InteractWithPatient OnInteractWithPatient; 
+    public delegate void InteractWithSoupMachine();
+    public event InteractWithSoupMachine OnInteractWithSoupMachine;
+    public delegate void InteractWithPillMachine();
+    public event InteractWithPillMachine OnInteractWithPillMachine;
 
     void Start()
     {
@@ -114,6 +122,11 @@ public class Player : MonoBehaviour
                                 itemType = "";
 
                                 tutorial.interactedPatient();
+
+                                OnInteractWithPatient?.Invoke();
+
+
+
                                 break;
                             }
                             
@@ -271,6 +284,10 @@ public class Player : MonoBehaviour
                                 i.changePosToPlayer();
 
                                 tutorial.interactedPatient();
+
+                                OnInteractWithPatient?.Invoke();
+
+
                                 break;
                             }
                         }
@@ -287,6 +304,9 @@ public class Player : MonoBehaviour
                         i.changePosToPlayer();
 
                         tutorial.interactedSoup();
+
+                        OnInteractWithSoupMachine?.Invoke();
+
                         break;
                     }
 
@@ -301,6 +321,8 @@ public class Player : MonoBehaviour
                         i.changePosToPlayer();
 
                         tutorial.interactedPill();
+
+                        OnInteractWithPillMachine?.Invoke();
                         break;
                     }
 
@@ -320,6 +342,9 @@ public class Player : MonoBehaviour
                         b.interactWithPatient(isCarrying, gameObject);
 
                         tutorial.interactedBed();
+
+                        OnInteractWithPatient?.Invoke();
+
                         break;
                     }
                 }

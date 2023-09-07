@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 //https://www.c-sharpcorner.com/article/unity-change-scene-on-button-click-using-c-sharp-scripts-in-unity/
 using UnityEngine.SceneManagement;
+//https://www.kindacode.com/snippet/unity-how-to-show-a-confirmation-dialog/ accessed 3/9/23
+using UnityEditor;
 
 public class MenuSelection : MonoBehaviour
 {
@@ -135,8 +137,20 @@ public class MenuSelection : MonoBehaviour
     /// </summary>
     public void ResetGame()
     {
-        PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene("MenuScene");
+        //https://www.kindacode.com/snippet/unity-how-to-show-a-confirmation-dialog/ accessed 3/9/23
+        bool decision = EditorUtility.DisplayDialog(
+            "Reset Game", // title
+            "Are you sure want to reset all game data?", // description
+            "Yes", // OK button
+            "No" // Cancel button
+        );
+
+        if (decision)
+        {
+            PlayerPrefs.DeleteAll();
+            SceneManager.LoadScene("MenuScene");
+        }
+                
     }
 
     private void ResetButtons()
@@ -148,10 +162,9 @@ public class MenuSelection : MonoBehaviour
             thisButton.interactable = false;
         }
 
-        //Debug.Log("players"+playersSet);
         int numLevelsComplete = PlayerPrefs.GetInt("Highest_Level_Complete_" + playersSet + "p");
-        //Debug.Log("levels" + numLevelsComplete);
-        if (numLevelsComplete >= 1)
+        //ensure button unlock remains within set buttons
+        if (numLevelsComplete >= 1 && numLevelsComplete <= 4)
         {
             for (int i = 1; i <= numLevelsComplete; i++)
             {
@@ -159,5 +172,15 @@ public class MenuSelection : MonoBehaviour
                 thisButton.interactable = true;
             }
         }
+        else if (numLevelsComplete >= 1 && numLevelsComplete == 5)
+        {
+            for (int i = 1; i <= 4; i++)
+            {
+                Button thisButton = levelsParent.GetChild(i).GetComponent<Button>();
+                thisButton.interactable = true;
+            }
+        }
     }
+
+
 }

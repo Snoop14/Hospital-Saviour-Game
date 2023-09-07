@@ -97,6 +97,7 @@ public class GameManager : MonoBehaviour
     private Animator animator;
 
     private int timeForLevel;
+    private bool angryNotAllowed;
 
     [SerializeField] public CustomTimer inGameTimer;
 
@@ -156,6 +157,10 @@ public class GameManager : MonoBehaviour
 
         if (timeForLevel > 0)
         {
+            if(PlayerPrefs.GetInt("PlayerNum") == 2)
+            {
+                timeForLevel += 30;
+            }
             inGameTimer.gameObject.SetActive(true);
             inGameTimer.SetTimeFromSeconds(timeForLevel);
             inGameTimer.StartTimer();
@@ -208,6 +213,8 @@ public class GameManager : MonoBehaviour
         ECGMachine = currentLevel.ECGMachine;
 
         timeForLevel = currentLevel.timer;
+
+        angryNotAllowed = currentLevel.angryNotAllowed;
     }
 
     void generateObjects()
@@ -461,13 +468,15 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void EndGame(bool angryPatient = false, bool patientGoalMet = true)
     {
-        player1.GetComponent<Player>().enabled = false;
+        
+        player1.GetComponent<Player>().speed = 0;
         
         if(PlayerPrefs.GetInt("PlayerNum") == 2)
         {
-            player2.GetComponent<Player>().enabled = false;
+            player2.GetComponent<Player>().speed = 0;
         }
         
+
         GameObject endDetails = HUD.transform.Find("EndDetails").gameObject;
         endDetails.transform.Find("ScoreText").GetComponent<Text>().text = "Score: " + currScore.ToString();
         //disaply failed to complete if an angry patient in relevant level
@@ -535,8 +544,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void MadPatient()
     {
-        int levelNum = PlayerPrefs.GetInt("LevelNum");
-        if (levelNum == 3)
+        //int levelNum = PlayerPrefs.GetInt("LevelNum");
+        if (angryNotAllowed)
         {
             StopGameplay();
             EndGame(true);
