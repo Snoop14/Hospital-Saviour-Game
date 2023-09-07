@@ -36,8 +36,8 @@ public class PillMachine : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
         Vector3 spawnLoc = new Vector3(0,
-                                       1.2f,
-                                       -0.95f);
+                                       1.8f,
+                                       -0.55f);
         currentPill = Instantiate(pillPrefab, transform);
         currentPill.transform.localPosition = spawnLoc;
     }
