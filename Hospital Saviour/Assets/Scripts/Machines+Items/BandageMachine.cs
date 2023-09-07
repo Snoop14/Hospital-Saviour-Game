@@ -36,11 +36,11 @@ public class BandageMachine : MonoBehaviour
     IEnumerator generateBandage()
     {
         yield return new WaitForSeconds(1.0f);
-        Vector3 spawnLoc = new Vector3(0,
-                                       0.95f,
-                                       0);
+        Vector3 spawnLoc = new Vector3(-0.28f,
+                                       1.94f,
+                                       0.28f);
         Quaternion spawnRot = new Quaternion();
-        spawnRot.eulerAngles = new Vector3(0, 0, 0);
+        spawnRot.eulerAngles = new Vector3(0, 0, 90);
         currentBandage = Instantiate(bandagePrefab, spawnLoc, spawnRot, transform);
         currentBandage.transform.localPosition = spawnLoc;
     }

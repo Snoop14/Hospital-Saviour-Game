@@ -42,3 +42,4 @@ MonoBehaviour:
   - You may now throw the Soup out in the Bin or give it to the Patient.
   patientsToBeTreated: 2
   timer: 0
+  angryNotAllowed: 0

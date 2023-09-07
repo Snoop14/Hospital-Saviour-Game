@@ -28,7 +28,7 @@ MonoBehaviour:
   stars: 64000000fa00000090010000
   soupMachine: 1
   pharmacy: 1
-  bandageDispenser: 0
+  bandageDispenser: 1
   ScalpelDispenser: 0
   TweezerDispenser: 0
   Surgery: 0
