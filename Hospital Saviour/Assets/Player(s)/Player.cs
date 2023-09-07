@@ -61,11 +61,21 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
+    /// Called when the interact button is pressed.
+    /// </summary>
+    public void OnToggleTutorial()
+    {
+        tutorial.changeActive();
+    }
+
+    /// <summary>
     /// Called when the movement keys are pressed.
     /// </summary>
     /// <param name="input"></param>
     public void OnMove(InputValue input)
     {
+        if (tutorial.gameObject.activeSelf)
+            return;
         Vector2 xyInput = input.Get<Vector2>();
         movementVec = new Vector3(xyInput.x, 0, xyInput.y);
     }
@@ -75,6 +85,8 @@ public class Player : MonoBehaviour
     /// </summary>
     public void OnInteract()
     {
+        if (tutorial.gameObject.activeSelf)
+            return;
         if (isCarrying)
         {
             if(itemType == "Folder")

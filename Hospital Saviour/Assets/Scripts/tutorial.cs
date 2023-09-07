@@ -134,6 +134,18 @@ public class tutorial : MonoBehaviour
         textAudio.GetComponent<AudioSource>().Stop();
     }
 
+    public void changeActive()
+    {
+        if (gameObject.activeSelf)
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(true);
+        }
+    }
+
     /*void FixTextSize()
     {
         if (prevHeight != Screen.height || prevWidth != Screen.width)
