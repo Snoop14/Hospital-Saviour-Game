@@ -312,6 +312,16 @@ public class Patient : MonoBehaviour
         {
             inAction = true;
             animator.SetTrigger("EatPill");
+
+            yield return new WaitForSeconds(1.5f);
+            inAction = false;
+        }
+        else if (action == "bandage head")
+        {
+            inAction = true;
+            //animator.SetTrigger("EatPill");
+            gameObject.transform.Find("Bandages"). = true;
+
             yield return new WaitForSeconds(1.5f);
             inAction = false;
         }
