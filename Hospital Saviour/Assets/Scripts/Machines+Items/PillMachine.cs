@@ -9,6 +9,8 @@ public class PillMachine : MonoBehaviour
     public bool isInteractable = true;
     [SerializeField]
     Material inactiveObjectMaterial;
+    [SerializeField]
+    GameObject coveredObject;
 
     public GameObject currentPill { get; private set; } = null;
 
@@ -34,8 +36,8 @@ public class PillMachine : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
         Vector3 spawnLoc = new Vector3(0,
-                                       1.2f,
-                                       -0.95f);
+                                       1.8f,
+                                       -0.55f);
         currentPill = Instantiate(pillPrefab, transform);
         currentPill.transform.localPosition = spawnLoc;
     }
@@ -45,7 +47,19 @@ public class PillMachine : MonoBehaviour
         //disable the interactable variable
         isInteractable = false;
 
-        changeMaterial(transform);
+        coverObject();
+        //changeMaterial(transform);
+    }
+
+    private void coverObject()
+    {
+        Vector3 spawnLoc = new Vector3(transform.position.x - .1f,
+                                       transform.position.y,
+                                       transform.position.z + .4f);
+        Quaternion spawnRot = new Quaternion();
+        spawnRot.eulerAngles = new Vector3(-90, 0, 180);
+        Instantiate(coveredObject, spawnLoc, spawnRot);
+        gameObject.SetActive(false);
     }
 
     private void changeMaterial(Transform objectToChange)

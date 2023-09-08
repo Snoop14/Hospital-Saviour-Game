@@ -35,7 +35,7 @@ public class SoupMachine : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         Vector3 spawnLoc = new Vector3(0, 
                                        1.125f, 
-                                       0.1f);
+                                       0.3f);
         currentSoup = Instantiate(soupPrefab, transform);
         currentSoup.transform.localPosition = spawnLoc;
     }
