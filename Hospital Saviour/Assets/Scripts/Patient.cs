@@ -382,7 +382,6 @@ public class Patient : MonoBehaviour
         }
         else if (currHeal == 0)
         {
-            Debug.Log(currHeal);
             currHeal = 0;
             healingIcon.sprite = healingOrderIcons[currHeal];
             healingIcon.SetNativeSize();
