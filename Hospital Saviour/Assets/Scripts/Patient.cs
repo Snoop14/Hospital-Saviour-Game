@@ -331,8 +331,12 @@ public class Patient : MonoBehaviour
     {
         Transform bandagesParent = transform.GetChild(0).Find("BaseCharacter/Specifics/Bandages");
         Transform hatObject = transform.GetChild(0).Find("BaseCharacter/Specifics/Hat");
-        hatObject.gameObject.SetActive(false);
-        for(int i = 0; i < 10; i++)
+
+        if (hatObject != null)
+        {
+            hatObject.gameObject.SetActive(false);
+        }
+        for (int i = 0; i < 10; i++)
         {
             bandagesParent.GetChild(i).gameObject.SetActive(true);
             yield return new WaitForSeconds(0.15f);
