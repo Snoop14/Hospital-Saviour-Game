@@ -380,7 +380,7 @@ public class Patient : MonoBehaviour
         {
             icon = healingIcon;
         }
-        else
+        else if (currHeal == 0)
         {
             currHeal = 0;
             healingIcon.sprite = healingOrderIcons[currHeal];
