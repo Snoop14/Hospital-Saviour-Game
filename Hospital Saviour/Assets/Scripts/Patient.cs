@@ -249,6 +249,10 @@ public class Patient : MonoBehaviour
             {
                 StartCoroutine(triggerAction("eat pill"));
             }
+            if (healingIcon.sprite.name == "Bandage")
+            {
+                StartCoroutine(triggerAction("bandage head"));
+            }
             currHeal++; //increase current heal state
         }
 
@@ -314,6 +318,28 @@ public class Patient : MonoBehaviour
             animator.SetTrigger("EatPill");
             yield return new WaitForSeconds(1.5f);
             inAction = false;
+        }
+        else if (action == "bandage head")
+        {
+            inAction = true;
+            StartCoroutine("applyBandages");
+            inAction = false;
+        }
+    }
+
+    IEnumerator applyBandages()
+    {
+        Transform bandagesParent = transform.GetChild(0).Find("BaseCharacter/Specifics/Bandages");
+        Transform hatObject = transform.GetChild(0).Find("BaseCharacter/Specifics/Hat");
+
+        if (hatObject != null)
+        {
+            hatObject.gameObject.SetActive(false);
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            bandagesParent.GetChild(i).gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.15f);
         }
     }
 
