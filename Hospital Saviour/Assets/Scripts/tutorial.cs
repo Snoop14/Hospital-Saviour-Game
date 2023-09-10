@@ -106,6 +106,7 @@ public class tutorial : MonoBehaviour
     int currentPage = 0;
     public Image prev;
     public Image next;
+    public GameObject footer;
 
     public void nextPage()
     {
@@ -176,6 +177,7 @@ public class tutorial : MonoBehaviour
             next.color = new Color(1, 1, 1, 1);
         else
             next.color = new Color(1, 1, 1, 0.5f);
+        footer.GetComponent<TMP_Text>().text = "Page " + currentPage + " of " + pages.Count;
     }
     IEnumerator textOverTime()
     {

@@ -347,6 +347,7 @@ MonoBehaviour:
   textAudio: {fileID: 569010207}
   prev: {fileID: 1491955643}
   next: {fileID: 1802789093}
+  footer: {fileID: 1859226702}
 --- !u!114 &139725531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3910,7 +3911,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1420807682
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5649,6 +5650,7 @@ MonoBehaviour:
   textAudio: {fileID: 0}
   prev: {fileID: 0}
   next: {fileID: 0}
+  footer: {fileID: 0}
 --- !u!114 &2137018022
 MonoBehaviour:
   m_ObjectHideFlags: 0
