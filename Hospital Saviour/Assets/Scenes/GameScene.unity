@@ -337,12 +337,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d8c8383f89c0004e8a146d52005d504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textPrefab: {fileID: 4801480417336536293, guid: 1e4014c619c881841ba21d0939b22659,
-    type: 3}
-  bed1: {fileID: 0}
-  bed2: {fileID: 0}
-  soupMachine: {fileID: 0}
-  bin: {fileID: 0}
   goals: {fileID: 965621969}
   bg: {fileID: 646597509}
   iconCanvas: {fileID: 0}
@@ -2664,7 +2658,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1362452445}
         m_MethodName: ReturnToMenu
         m_Mode: 1
         m_Arguments:
@@ -5439,7 +5433,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1362452445}
         m_MethodName: ReturnToMenu
         m_Mode: 1
         m_Arguments:
@@ -5644,12 +5638,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d8c8383f89c0004e8a146d52005d504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textPrefab: {fileID: 4801480417336536293, guid: 1e4014c619c881841ba21d0939b22659,
-    type: 3}
-  bed1: {fileID: 0}
-  bed2: {fileID: 0}
-  soupMachine: {fileID: 0}
-  bin: {fileID: 0}
   goals: {fileID: 0}
   bg: {fileID: 0}
   iconCanvas: {fileID: 0}
