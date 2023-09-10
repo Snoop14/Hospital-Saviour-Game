@@ -57,7 +57,7 @@ public class tutorial : MonoBehaviour
         if (level.levelName == "Level 5")
         {
             skipToPage = 10;
-            addPage += 3;
+            addPage += 4;
         }
         for (int i = 1; i <= addPage; i++)
         {
@@ -78,10 +78,7 @@ public class tutorial : MonoBehaviour
         }
 
         nextPage();
-        if (level.levelName == "Level 5")
-        {
-            changeActive();
-        }
+
         if (levelData.patientsToBeTreated > 0)
         {
             goalPatients = levelData.patientsToBeTreated;
