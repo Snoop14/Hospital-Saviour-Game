@@ -16,14 +16,6 @@ class TutorialMessage
 public class tutorial : MonoBehaviour
 {
     List<TutorialMessage> steps;
-    [SerializeField]
-    GameObject textPrefab;
-    int currentStep = 0;
-
-    public GameObject bed1 = null;
-    public GameObject bed2 = null;
-    public GameObject soupMachine = null;
-    public GameObject bin = null;
 
     public GameObject goals;
     public GameObject bg;
@@ -35,13 +27,8 @@ public class tutorial : MonoBehaviour
     //goal variables
     private int goalPatients = 0;
     private bool angryNotAllowed;
-
-    //Dictionary<GameObject, GameObject> arrows = new Dictionary<GameObject, GameObject>();
-    //[SerializeField]
-    //GameObject arrowPrefab;
     public GameObject iconCanvas;
     public GameObject timeCanvas;
-    //public List<GameObject> objectList;
 
     public void setupTutorial(Levels levelData)
     {
@@ -204,7 +191,6 @@ public class tutorial : MonoBehaviour
         while (currentStepIndex < steps.Count)
         {
             TutorialMessage currentStep = steps[currentStepIndex];
-            print(currentStep.type + " " + currentStep.obj.name);
             if (currentStep.type == messageType.Text)
             {
                 TMP_Text textComponent = currentStep.obj.GetComponent<TMP_Text>();
@@ -293,7 +279,7 @@ public class tutorial : MonoBehaviour
         patientsCured += 1;
         if (goalPatients > 0)
         {
-            goals.GetComponent<Text>().text = patientsCured.ToString() + "/" + goalPatients.ToString() + " Patients Cured";
+            goals.GetComponent<TMP_Text>().text = patientsCured.ToString() + "/" + goalPatients.ToString() + " Patients Cured";
         }
 
         //no anry patients allowed this level
@@ -301,195 +287,17 @@ public class tutorial : MonoBehaviour
         {
        
             //content  is only angry wording
-            if(goals.GetComponent<Text>().text == "Don't let any patients get angry and leave without treatment")
+            if(goals.GetComponent<TMP_Text>().text == "Don't let any patients get angry and leave without treatment")
             {
-                goals.GetComponent<Text>().text = "Don't let any patients get angry and leave without treatment";
+                goals.GetComponent<TMP_Text>().text = "Don't let any patients get angry and leave without treatment";
             }
             //other conntent
-            else if (goals.GetComponent<Text>().text.Length > 0)
+            else if (goals.GetComponent<TMP_Text>().text.Length > 0)
             {
-                goals.GetComponent<Text>().text = goals.GetComponent<Text>().text + "\n" + "Don't let any patients get angry and leave without treatment";
+                goals.GetComponent<TMP_Text>().text = goals.GetComponent<TMP_Text>().text + "\n" + "Don't let any patients get angry and leave without treatment";
 
             }
         }
-    }
-
-    /*void setupArrows()
-    {
-        foreach (var o in objectList)
-        {
-            GameObject a = Instantiate(arrowPrefab,iconCanvas.transform, true);
-            a.SetActive(false);
-            a.GetComponent<Arrow>().assignObject(o.transform);
-            a.GetComponent<Image>().SetNativeSize();
-            a.transform.localScale = new Vector3(0.15f, 0.1f, 1);
-            arrows.Add(o,a);
-        }
-    }
-
-    void resetArrows()
-    {
-        foreach(var k_v in arrows)
-        {
-            k_v.Value.SetActive(false);
-        }
-    }
-    void displayArrows<T>() where T : Component
-    {
-        foreach (var k_v in arrows)
-        {
-            if (k_v.Key.GetComponent<T>())
-            {
-                k_v.Value.SetActive(true);
-            }
-        }
-    }*/
-
-    public void PatientsAdded()
-    {
-        if (level.levelName == "Level 1")
-        {
-            changeStep(1);
-            //setupArrows();
-            //displayArrows<Patient>();
-        }
-
-        if (level.levelName == "Level 3" || level.levelName == "Level 4")
-        {
-            if (currentStep == 0)
-            {
-                changeStep(1);
-            }
-        }
-    }
-    public void interactedPatient()
-    {
-        if (level.levelName == "Level 1")
-        {
-            if (currentStep == 1)
-            {
-                changeStep(1);
-                //resetArrows();
-                //displayArrows<Patient>();
-                //displayArrows<Bed>();
-            }
-            else if (currentStep == 2)
-            {
-                changeStep(-1);
-                //resetArrows();
-                //displayArrows<Patient>();
-            }
-        }
-    }
-    public void interactedBedFolder()
-    {
-        if (level.levelName == "Level 1")
-        {
-            if (currentStep == 2)
-            {
-                changeStep(1);
-                //resetArrows();
-            }
-
-        }
-    }
-    public void PatientInteractWithBed()
-    {
-        if (level.levelName == "Level 1")
-        {
-            if (currentStep == 3)
-            {
-                changeStep(1);
-                //displayArrows<Bed>();
-            }
-        }
-    }
-    public void interactedBed()
-    {
-        if (level.levelName == "Level 1")
-        {
-            if (currentStep == 4)
-            {
-                changeStep(1);
-                //resetArrows();
-                //displayArrows<SoupMachine>();
-            }
-            else if (currentStep == 6) 
-            { 
-                changeStep(1);
-                //resetArrows();
-            }
-        }
-        else if (level.levelName == "Level 2")
-        {
-            if (currentStep == 0)
-            {
-                changeStep(1);
-            }
-        }
-    }
-    public void interactedBin()
-    {
-        if (level.levelName == "Level 1")
-        {
-            if (currentStep == 6)
-            {
-                changeStep(-1);
-                //resetArrows();
-                //displayArrows<SoupMachine>();
-            }
-        }
-        if (level.levelName == "Level 2")
-        {
-            if (currentStep == 2)
-            {
-                changeStep(-1);
-            }
-        }
-    }
-    public void interactedPill()
-    {
-        if (level.levelName == "Level 2")
-        {
-            if (currentStep == 1)
-            {
-                changeStep(1);
-            }
-        }
-    }
-    public void interactedSoup()
-    {
-        if (level.levelName == "Level 1")
-        {
-            if (currentStep == 5)
-            {
-                changeStep(1);
-                //resetArrows();
-                //displayArrows<Bed>();
-                //displayArrows<Bin>();
-            }
-        }
-    }
-    public void changeStep(int s)
-    {
-        /*currentStep += s;
-        for (int i = 1; i < texts.Count; i++)
-        {
-            texts[i].gameObject.SetActive(false);
-            texts[i].GetComponent<Text>().fontStyle = FontStyle.Normal;
-        }
-        for (int i = 1; i <= currentStep; i++)
-        {
-            if ( i == currentStep && currentStep == texts.Count)
-            {
-                break;
-            }
-            texts[i].gameObject.SetActive(true);
-            if (i == currentStep)
-            {
-                texts[i].GetComponent<Text>().fontStyle = FontStyle.Bold;
-            }
-        }*/
     }
 
     public bool checkPatientGoal()

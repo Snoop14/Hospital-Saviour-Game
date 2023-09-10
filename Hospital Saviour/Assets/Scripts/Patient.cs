@@ -221,7 +221,6 @@ public class Patient : MonoBehaviour
         animator.applyRootMotion = false; // true breaks animation, but false breaks spawning of patients
         //animator.SetTrigger(toBedHash);
         animator.SetTrigger("ToBed");
-        tutorial.PatientInteractWithBed();
     }
 
     /// <summary>

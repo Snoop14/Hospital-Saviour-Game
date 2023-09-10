@@ -115,7 +115,6 @@ public class Player : MonoBehaviour
                             item = null;
                             itemType = "";
 
-                            tutorial.interactedBedFolder();
                             break;
                         }
 
@@ -140,7 +139,6 @@ public class Player : MonoBehaviour
                                 item = null;
                                 itemType = "";
 
-                                tutorial.interactedPatient();
 
                                 OnInteractWithPatient?.Invoke();
 
@@ -177,7 +175,6 @@ public class Player : MonoBehaviour
                             item = null;
                             itemType = "";
 
-                            tutorial.interactedBed();
                             break;
                         }
 
@@ -192,7 +189,6 @@ public class Player : MonoBehaviour
                             item = null;
                             itemType = "";
 
-                            tutorial.interactedBin();
                             break;
                         }
                     }
@@ -234,7 +230,6 @@ public class Player : MonoBehaviour
                             item = null;
                             itemType = "";
 
-                            tutorial.interactedBin();
                             break;
                         }
                     }
@@ -302,7 +297,6 @@ public class Player : MonoBehaviour
                                 i.transferTo(gameObject);
                                 i.changePosToPlayer();
 
-                                tutorial.interactedPatient();
 
                                 OnInteractWithPatient?.Invoke();
 
@@ -322,7 +316,6 @@ public class Player : MonoBehaviour
                         i.transferTo(gameObject);
                         i.changePosToPlayer();
 
-                        tutorial.interactedSoup();
 
                         OnInteractWithSoupMachine?.Invoke();
 
@@ -339,7 +332,6 @@ public class Player : MonoBehaviour
                         i.transferTo(gameObject);
                         i.changePosToPlayer();
 
-                        tutorial.interactedPill();
 
                         OnInteractWithPillMachine?.Invoke();
                         break;
@@ -359,8 +351,6 @@ public class Player : MonoBehaviour
                     if (go.TryGetComponent(out Bed b))
                     {
                         b.interactWithPatient(isCarrying, gameObject);
-
-                        tutorial.interactedBed();
 
                         OnInteractWithPatient?.Invoke();
 
