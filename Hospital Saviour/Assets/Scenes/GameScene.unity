@@ -3768,6 +3768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b85313462495c9446b819b6086120749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playStartingAnimations: 0
   surface: {fileID: 1023145089}
   playerPrefab: {fileID: 6797946521238593119, guid: bbe03b141e771654ba471d278ce4e049,
     type: 3}

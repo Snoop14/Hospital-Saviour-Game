@@ -11,6 +11,7 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
+    public bool playStartingAnimations = false;
     [SerializeField] NavMeshSurface surface;
 
     GameObject player1;
@@ -150,9 +151,12 @@ public class GameManager : MonoBehaviour
         generateObjects();
         GenerateHUD();
 
-        //trigger start animations
-        //animator = GameObject.Find("Scene").GetComponent<Animator>();
-        //animator.SetInteger("Level", levelNo);
+        if (playStartingAnimations)
+        {
+            //trigger start animations
+            animator = GameObject.Find("Scene").GetComponent<Animator>();
+            animator.SetInteger("Level", levelNo);
+        }
 
 
         if (timeForLevel > 0)
