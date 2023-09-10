@@ -19,8 +19,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b65efb007cc28354682960938d9b4a5e, type: 2}
   spawnTimes:
   - 3
-  - 3
   - 6
+  - 9
   inActiveBedCount: 3
   activeBedCount: 3
   stars: 320000006400000096000000
