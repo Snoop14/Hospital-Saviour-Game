@@ -20,7 +20,6 @@ public class tutorial : MonoBehaviour
     GameObject textPrefab;
     int currentStep = 0;
 
-    public List<GameObject> patients = null;
     public GameObject bed1 = null;
     public GameObject bed2 = null;
     public GameObject soupMachine = null;
@@ -37,38 +36,65 @@ public class tutorial : MonoBehaviour
     private int goalPatients = 0;
     private bool angryNotAllowed;
 
-    Dictionary<GameObject, GameObject> arrows = new Dictionary<GameObject, GameObject>();
-    [SerializeField]
-    GameObject arrowPrefab;
+    //Dictionary<GameObject, GameObject> arrows = new Dictionary<GameObject, GameObject>();
+    //[SerializeField]
+    //GameObject arrowPrefab;
     public GameObject iconCanvas;
-    public List<GameObject> objectList;
-    public Transform headerobj;
+    public GameObject timeCanvas;
+    //public List<GameObject> objectList;
 
     public void setupTutorial(Levels levelData)
     {
         level = levelData;
 
-        TMP_Text header = headerobj.GetComponent<TMP_Text>();
-        header.text = level.levelName + " Tutorials";
-
         steps = new List<TutorialMessage>();
         pages = new List<GameObject>();
-        for(int i = 1; i <= 2; i++)
+
+        int skipToPage = 0;
+        int addPage = 7;
+        if (level.levelName == "Level 2")
+        {
+            skipToPage = 7;
+            addPage += 1;
+        }
+        if (level.levelName == "Level 3")
+        {
+            skipToPage = 8;
+            addPage += 2;
+        }
+        if (level.levelName == "Level 4")
+        {
+            skipToPage = 9;
+            addPage += 3;
+        }
+        if (level.levelName == "Level 5")
+        {
+            skipToPage = 10;
+            addPage += 3;
+        }
+        for (int i = 1; i <= addPage; i++)
         {
             pages.Add(transform.GetChild(i).gameObject);
         }
-
-        int skipToPage = 0;
-        if (level.levelName == "Level 1")
-            nextPage();
-        if (level.levelName == "Level 2")
-            skipToPage = 5;
         for (int i = 0; i < skipToPage; i++)
         {
-            rush = true;
-            nextPage();
+            setPageActive(pages[i]);
+            pages[i].SetActive(false);
+            currentPage++;
+            maxPage++;
         }
 
+        if (level.levelName != "Level 1")
+        {
+            pages[maxPage - 1].SetActive(true);
+            backForthCheck();
+        }
+
+        nextPage();
+        if (level.levelName == "Level 5")
+        {
+            changeActive();
+        }
         if (levelData.patientsToBeTreated > 0)
         {
             goalPatients = levelData.patientsToBeTreated;
@@ -85,8 +111,8 @@ public class tutorial : MonoBehaviour
 
     int currentStepIndex = 0;
     int currentCharIndex = 0;
-    public float typingSpeed = 0.01f;
-    public float imageDisplayDuration = 0.4f;
+    public float typingSpeed = 0.05f;
+    public float imageDisplayDuration = 0.3f;
     public GameObject textAudio;
 
     bool ongoing = false;
@@ -104,17 +130,17 @@ public class tutorial : MonoBehaviour
             pages[currentPage - 1].SetActive(false);
             pages[currentPage].SetActive(true);
             currentPage++;
+            backForthCheck();
             return;
         }
         if (maxPage >= pages.Count)
             return;
 
-        prev.color = new Color(1, 1, 1, 1);
-
-        if (currentPage < maxPage)
-            next.color = new Color(1, 1, 1, 1);
-        else
-            next.color = new Color(1, 1, 1, 0.5f);
+        if (ongoing)
+        {
+            rush = true;
+            return;
+        }
 
         steps.Clear();
         if(maxPage!= 0)
@@ -142,26 +168,36 @@ public class tutorial : MonoBehaviour
     }
     public void prevPage()
     {
-        print(currentPage);
         if (currentPage <= 1)
             return;
+        if (ongoing)
+        {
+            rush = true;
+            return;
+        }
         pages[currentPage-1].SetActive(false);
         pages[currentPage-2].SetActive(true);
         currentPage--;
+        backForthCheck();
 
-        if(currentPage <= 1)
+    }
+    void backForthCheck()
+    {
+        if (currentPage <= 1)
             prev.color = new Color(1, 1, 1, 0.5f);
         else
             prev.color = new Color(1, 1, 1, 1);
 
-        if (currentPage < maxPage)
+        if (currentPage < maxPage || maxPage < pages.Count)
             next.color = new Color(1, 1, 1, 1);
         else
             next.color = new Color(1, 1, 1, 0.5f);
-
     }
     IEnumerator textOverTime()
     {
+        maxPage++;
+        currentPage++;
+        backForthCheck();
         ongoing = true;
         textAudio.GetComponent<AudioSource>().Play();
 
@@ -197,8 +233,16 @@ public class tutorial : MonoBehaviour
         ongoing = false;
         rush = false;
         currentStepIndex = 0;
-        maxPage++;
-        currentPage++;
+    }
+
+    void setPageActive(GameObject item)
+    {
+        Transform parent = item.transform;
+        foreach(Transform child in parent)
+        {
+            setPageActive(child.gameObject);
+            child.gameObject.SetActive(true);
+        }
     }
 
     public void changeActive()
@@ -214,6 +258,7 @@ public class tutorial : MonoBehaviour
         }
         else
         {
+            backForthCheck();
             bg.SetActive(true);
             gameObject.SetActive(true);
         }

@@ -74,6 +74,7 @@ public class Player : MonoBehaviour
     /// <param name="input"></param>
     public void OnMove(InputValue input)
     {
+        movementVec = Vector3.zero;
         Vector2 xyInput = input.Get<Vector2>();
         if (tutorial.gameObject.activeSelf)
         {

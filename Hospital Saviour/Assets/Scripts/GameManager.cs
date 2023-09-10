@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour
             StartCoroutine(WaitForTimerRunOut());
         }
 
-        tutorialObject.GetComponent<tutorial>().objectList = objectList;
+        //tutorialObject.GetComponent<tutorial>().objectList = objectList;
         tutorialObject.GetComponent<tutorial>().setupTutorial(currentLevel);
 
     }
