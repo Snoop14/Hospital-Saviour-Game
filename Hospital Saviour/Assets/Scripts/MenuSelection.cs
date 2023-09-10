@@ -135,6 +135,7 @@ public class MenuSelection : MonoBehaviour
     /// Deletes all playerPrefs and reloads the scene
     /// Should this be included in the final game?
     /// </summary>
+    /*
     public void ResetGame()
     {
         //https://www.kindacode.com/snippet/unity-how-to-show-a-confirmation-dialog/ accessed 3/9/23
@@ -152,6 +153,7 @@ public class MenuSelection : MonoBehaviour
         }
                 
     }
+    */
 
     private void ResetButtons()
     {
