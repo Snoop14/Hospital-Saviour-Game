@@ -20,7 +20,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 754190210261d2843a7af9ba1dfd4c56, type: 2}
   - {fileID: 11400000, guid: dd31ea45492c3ee42af4e7a07217667a, type: 2}
   spawnTimes:
-  - 0
+  - 2
   - 3
   - 5
   - 6
@@ -38,6 +38,7 @@ MonoBehaviour:
   XRayMachine: 0
   ECGMachine: 0
   tutorialSteps: []
+  tutorialPages: {fileID: 0}
   patientsToBeTreated: 6
   timer: 0
   angryNotAllowed: 1
