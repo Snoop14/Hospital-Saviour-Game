@@ -18,7 +18,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: da30b2c4a3c6beb42b8fba32df99f028, type: 2}
   - {fileID: 11400000, guid: b65efb007cc28354682960938d9b4a5e, type: 2}
   spawnTimes:
-  - 1
+  - 3
   - 3
   - 6
   inActiveBedCount: 3
@@ -35,6 +35,7 @@ MonoBehaviour:
   tutorialSteps:
   - Patients now have Happiness Meters.  The Faster you trest them, the higher your
     score.
+  tutorialPages: {fileID: 0}
   patientsToBeTreated: 0
   timer: 0
   angryNotAllowed: 1
