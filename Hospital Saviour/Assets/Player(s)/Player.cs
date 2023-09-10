@@ -61,12 +61,29 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
+    /// Called when the interact button is pressed.
+    /// </summary>
+    public void OnToggleTutorial()
+    {
+        tutorial.changeActive();
+    }
+
+    /// <summary>
     /// Called when the movement keys are pressed.
     /// </summary>
     /// <param name="input"></param>
     public void OnMove(InputValue input)
     {
+        movementVec = Vector3.zero;
         Vector2 xyInput = input.Get<Vector2>();
+        if (tutorial.gameObject.activeSelf)
+        {
+            if (xyInput.x > 0)
+                tutorial.nextPage();
+            else if(xyInput.x < 0)
+                tutorial.prevPage();
+            return;
+        }
         movementVec = new Vector3(xyInput.x, 0, xyInput.y);
     }
 
@@ -75,6 +92,8 @@ public class Player : MonoBehaviour
     /// </summary>
     public void OnInteract()
     {
+        if (tutorial.gameObject.activeSelf)
+            return;
         if (isCarrying)
         {
             if(itemType == "Folder")
@@ -96,7 +115,6 @@ public class Player : MonoBehaviour
                             item = null;
                             itemType = "";
 
-                            tutorial.interactedBedFolder();
                             break;
                         }
 
@@ -121,7 +139,6 @@ public class Player : MonoBehaviour
                                 item = null;
                                 itemType = "";
 
-                                tutorial.interactedPatient();
 
                                 OnInteractWithPatient?.Invoke();
 
@@ -158,7 +175,6 @@ public class Player : MonoBehaviour
                             item = null;
                             itemType = "";
 
-                            tutorial.interactedBed();
                             break;
                         }
 
@@ -173,7 +189,6 @@ public class Player : MonoBehaviour
                             item = null;
                             itemType = "";
 
-                            tutorial.interactedBin();
                             break;
                         }
                     }
@@ -215,7 +230,6 @@ public class Player : MonoBehaviour
                             item = null;
                             itemType = "";
 
-                            tutorial.interactedBin();
                             break;
                         }
                     }
@@ -283,7 +297,6 @@ public class Player : MonoBehaviour
                                 i.transferTo(gameObject);
                                 i.changePosToPlayer();
 
-                                tutorial.interactedPatient();
 
                                 OnInteractWithPatient?.Invoke();
 
@@ -303,7 +316,6 @@ public class Player : MonoBehaviour
                         i.transferTo(gameObject);
                         i.changePosToPlayer();
 
-                        tutorial.interactedSoup();
 
                         OnInteractWithSoupMachine?.Invoke();
 
@@ -320,7 +332,6 @@ public class Player : MonoBehaviour
                         i.transferTo(gameObject);
                         i.changePosToPlayer();
 
-                        tutorial.interactedPill();
 
                         OnInteractWithPillMachine?.Invoke();
                         break;
@@ -340,8 +351,6 @@ public class Player : MonoBehaviour
                     if (go.TryGetComponent(out Bed b))
                     {
                         b.interactWithPatient(isCarrying, gameObject);
-
-                        tutorial.interactedBed();
 
                         OnInteractWithPatient?.Invoke();
 

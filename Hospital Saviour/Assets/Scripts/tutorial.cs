@@ -2,28 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
+enum messageType
+{
+    Image, Text
+}
+class TutorialMessage
+{
+    public messageType type;
+    public Transform obj;
+}
 public class tutorial : MonoBehaviour
 {
-    List<string> steps;
-    List<Text> texts;
-    [SerializeField]
-    GameObject textPrefab;
-    int currentStep = 0;
-
-    public List<GameObject> patients = null;
-    public GameObject bed1 = null;
-    public GameObject bed2 = null;
-    public GameObject soupMachine = null;
-    public GameObject bin = null;
+    List<TutorialMessage> steps;
 
     public GameObject goals;
-
-    [SerializeField, Range(0.0005f, 0.05f)]
-    float fontScale = 0.01f;
-
-    float prevHeight = 0;
-    float prevWidth = 0;
+    public GameObject bg;
 
     int patientsCured = 0;
 
@@ -32,33 +27,57 @@ public class tutorial : MonoBehaviour
     //goal variables
     private int goalPatients = 0;
     private bool angryNotAllowed;
-
-    Dictionary<GameObject, GameObject> arrows = new Dictionary<GameObject, GameObject>();
-    [SerializeField]
-    GameObject arrowPrefab;
     public GameObject iconCanvas;
-    public List<GameObject> objectList;
-
+    public GameObject timeCanvas;
 
     public void setupTutorial(Levels levelData)
     {
         level = levelData;
-        texts = new List<Text>();
-        Text header = transform.GetChild(0).GetComponent<Text>();
-        header.text = levelData.levelName;
-        texts.Add(header);
 
-        steps = levelData.tutorialSteps;
-        for(int i = 0; i < steps.Count; i++)
+        steps = new List<TutorialMessage>();
+        pages = new List<GameObject>();
+
+        int skipToPage = 0;
+        int addPage = 7;
+        if (level.levelName == "Level 2")
         {
-            GameObject textObject = Instantiate(textPrefab, transform);
-            texts.Add(textObject.GetComponent<Text>());
-            textObject.SetActive(false);
-            texts[i + 1].GetComponent<RectTransform>().anchorMax = new Vector2(0.9f, 0.8f - (0.1f * i));
-            texts[i + 1].GetComponent<RectTransform>().anchorMin = new Vector2(0.1f, 0.7f - (0.1f * i));
-            texts[i + 1].text = steps[i];
+            skipToPage = 7;
+            addPage += 1;
         }
-        InvokeRepeating("FixTextSize",0,0.5f);
+        if (level.levelName == "Level 3")
+        {
+            skipToPage = 8;
+            addPage += 2;
+        }
+        if (level.levelName == "Level 4")
+        {
+            skipToPage = 9;
+            addPage += 3;
+        }
+        if (level.levelName == "Level 5")
+        {
+            skipToPage = 10;
+            addPage += 4;
+        }
+        for (int i = 1; i <= addPage; i++)
+        {
+            pages.Add(transform.GetChild(i).gameObject);
+        }
+        for (int i = 0; i < skipToPage; i++)
+        {
+            setPageActive(pages[i]);
+            pages[i].SetActive(false);
+            currentPage++;
+            maxPage++;
+        }
+
+        if (level.levelName != "Level 1")
+        {
+            pages[maxPage - 1].SetActive(true);
+            backForthCheck();
+        }
+
+        nextPage();
 
         if (levelData.patientsToBeTreated > 0)
         {
@@ -74,18 +93,157 @@ public class tutorial : MonoBehaviour
 
     }
 
-    void FixTextSize()
+    int currentStepIndex = 0;
+    int currentCharIndex = 0;
+    public float typingSpeed = 0.05f;
+    public float imageDisplayDuration = 0.3f;
+    public GameObject textAudio;
+
+    bool ongoing = false;
+    bool rush = false;
+    List<GameObject> pages;
+    int maxPage = 0;
+    int currentPage = 0;
+    public Image prev;
+    public Image next;
+
+    public void nextPage()
     {
-        if (prevHeight != Screen.height || prevWidth != Screen.width)
+        if (currentPage != maxPage)
         {
-            int s = Mathf.Min(Screen.height, Screen.width);
-            foreach (Text t in texts)
+            pages[currentPage - 1].SetActive(false);
+            pages[currentPage].SetActive(true);
+            currentPage++;
+            backForthCheck();
+            return;
+        }
+        if (maxPage >= pages.Count)
+            return;
+
+        if (ongoing)
+        {
+            rush = true;
+            return;
+        }
+
+        steps.Clear();
+        if(maxPage!= 0)
+            pages[maxPage-1].SetActive(false);
+        pages[maxPage].SetActive(true);
+        for (int i = 0; i < pages[maxPage].transform.childCount; i++)
+        {
+            Transform child = pages[maxPage].transform.GetChild(i);
+            TMP_Text _t;
+            TutorialMessage tm = new TutorialMessage();
+            child.TryGetComponent<TMP_Text>(out _t);
+            if (_t)
             {
-                t.fontSize = (int)(s * fontScale);
+                tm.type = messageType.Text;
             }
-            texts[0].fontSize = (int)(s * fontScale * 1.7f);
-            prevHeight = Screen.height;
-            prevWidth = Screen.width;
+            else
+            {
+                tm.type = messageType.Image;
+            }
+            tm.obj = child;
+            steps.Add(tm);
+        }
+
+        StartCoroutine(textOverTime());
+    }
+    public void prevPage()
+    {
+        if (currentPage <= 1)
+            return;
+        if (ongoing)
+        {
+            rush = true;
+            return;
+        }
+        pages[currentPage-1].SetActive(false);
+        pages[currentPage-2].SetActive(true);
+        currentPage--;
+        backForthCheck();
+
+    }
+    void backForthCheck()
+    {
+        if (currentPage <= 1)
+            prev.color = new Color(1, 1, 1, 0.5f);
+        else
+            prev.color = new Color(1, 1, 1, 1);
+
+        if (currentPage < maxPage || maxPage < pages.Count)
+            next.color = new Color(1, 1, 1, 1);
+        else
+            next.color = new Color(1, 1, 1, 0.5f);
+    }
+    IEnumerator textOverTime()
+    {
+        maxPage++;
+        currentPage++;
+        backForthCheck();
+        ongoing = true;
+        textAudio.GetComponent<AudioSource>().Play();
+
+        while (currentStepIndex < steps.Count)
+        {
+            TutorialMessage currentStep = steps[currentStepIndex];
+            if (currentStep.type == messageType.Text)
+            {
+                TMP_Text textComponent = currentStep.obj.GetComponent<TMP_Text>();
+                string currentString = textComponent.text;
+                textComponent.text = "";
+                currentStep.obj.gameObject.SetActive(true);
+                while (currentCharIndex < currentString.Length)
+                {
+                    textComponent.text += currentString[currentCharIndex];
+                    currentCharIndex++;
+                    if(!rush)
+                        yield return new WaitForSeconds(typingSpeed);
+                }
+            }
+            else if (currentStep.type == messageType.Image)
+            {
+                // Assuming the image is a child of the text and it's initially set to inactive
+                currentStep.obj.gameObject.SetActive(true);
+                if(!rush)
+                    yield return new WaitForSeconds(imageDisplayDuration); // Pause for some time to show image
+            }
+            currentStepIndex++;
+            currentCharIndex = 0;
+        }
+        textAudio.GetComponent<AudioSource>().Stop();
+        ongoing = false;
+        rush = false;
+        currentStepIndex = 0;
+    }
+
+    void setPageActive(GameObject item)
+    {
+        Transform parent = item.transform;
+        foreach(Transform child in parent)
+        {
+            setPageActive(child.gameObject);
+            child.gameObject.SetActive(true);
+        }
+    }
+
+    public void changeActive()
+    {
+        if (ongoing)
+        {
+            rush = true;
+        }
+        else if (gameObject.activeSelf)
+        {
+            bg.SetActive(false);
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            backForthCheck();
+            bg.SetActive(true);
+            gameObject.SetActive(true);
         }
     }
 
@@ -93,22 +251,22 @@ public class tutorial : MonoBehaviour
     {
         if (goalPatients > 0)
         {
-            goals.GetComponent<Text>().text = patientsCured.ToString() + "/" + goalPatients.ToString() + " Patients Cured";
+            goals.GetComponent<TMP_Text>().text = patientsCured.ToString() + "/" + goalPatients.ToString() + " Patients Cured";
         }
         
         //no anry patients allowed this level
         if (angryNotAllowed)
         {
             //other conntent
-            if (goals.GetComponent<Text>().text.Length > 0)
+            if (goals.GetComponent<TMP_Text>().text.Length > 0)
             {
-                goals.GetComponent<Text>().text = goals.GetComponent<Text>().text + "\n" + "Don't let any patients get angry and leave without treatment";
+                goals.GetComponent<TMP_Text>().text = goals.GetComponent<TMP_Text>().text + "\n" + "Don't let any patients get angry and leave without treatment";
 
             }
             //no other content
             else
             {
-                goals.GetComponent<Text>().text = "Don't let any patients get angry and leave without treatment";
+                goals.GetComponent<TMP_Text>().text = "Don't let any patients get angry and leave without treatment";
             }
         }
     }
@@ -118,7 +276,7 @@ public class tutorial : MonoBehaviour
         patientsCured += 1;
         if (goalPatients > 0)
         {
-            goals.GetComponent<Text>().text = patientsCured.ToString() + "/" + goalPatients.ToString() + " Patients Cured";
+            goals.GetComponent<TMP_Text>().text = patientsCured.ToString() + "/" + goalPatients.ToString() + " Patients Cured";
         }
 
         //no anry patients allowed this level
@@ -126,193 +284,15 @@ public class tutorial : MonoBehaviour
         {
        
             //content  is only angry wording
-            if(goals.GetComponent<Text>().text == "Don't let any patients get angry and leave without treatment")
+            if(goals.GetComponent<TMP_Text>().text == "Don't let any patients get angry and leave without treatment")
             {
-                goals.GetComponent<Text>().text = "Don't let any patients get angry and leave without treatment";
+                goals.GetComponent<TMP_Text>().text = "Don't let any patients get angry and leave without treatment";
             }
             //other conntent
-            else if (goals.GetComponent<Text>().text.Length > 0)
+            else if (goals.GetComponent<TMP_Text>().text.Length > 0)
             {
-                goals.GetComponent<Text>().text = goals.GetComponent<Text>().text + "\n" + "Don't let any patients get angry and leave without treatment";
+                goals.GetComponent<TMP_Text>().text = goals.GetComponent<TMP_Text>().text + "\n" + "Don't let any patients get angry and leave without treatment";
 
-            }
-        }
-    }
-
-    void setupArrows()
-    {
-        foreach (var o in objectList)
-        {
-            GameObject a = Instantiate(arrowPrefab,iconCanvas.transform, true);
-            a.SetActive(false);
-            a.GetComponent<Arrow>().assignObject(o.transform);
-            a.GetComponent<Image>().SetNativeSize();
-            a.transform.localScale = new Vector3(0.15f, 0.1f, 1);
-            arrows.Add(o,a);
-        }
-    }
-
-    void resetArrows()
-    {
-        foreach(var k_v in arrows)
-        {
-            k_v.Value.SetActive(false);
-        }
-    }
-    void displayArrows<T>() where T : Component
-    {
-        foreach (var k_v in arrows)
-        {
-            if (k_v.Key.GetComponent<T>())
-            {
-                k_v.Value.SetActive(true);
-            }
-        }
-    }
-
-    public void PatientsAdded()
-    {
-        if (level.levelName == "Level 1")
-        {
-            changeStep(1);
-            setupArrows();
-            displayArrows<Patient>();
-        }
-
-        if (level.levelName == "Level 3" || level.levelName == "Level 4")
-        {
-            if (currentStep == 0)
-            {
-                changeStep(1);
-            }
-        }
-    }
-    public void interactedPatient()
-    {
-        if (level.levelName == "Level 1")
-        {
-            if (currentStep == 1)
-            {
-                changeStep(1);
-                resetArrows();
-                displayArrows<Patient>();
-                displayArrows<Bed>();
-            }
-            else if (currentStep == 2)
-            {
-                changeStep(-1);
-                resetArrows();
-                displayArrows<Patient>();
-            }
-        }
-    }
-    public void interactedBedFolder()
-    {
-        if (level.levelName == "Level 1")
-        {
-            if (currentStep == 2)
-            {
-                changeStep(1);
-                resetArrows();
-            }
-
-        }
-    }
-    public void PatientInteractWithBed()
-    {
-        if (level.levelName == "Level 1")
-        {
-            if (currentStep == 3)
-            {
-                changeStep(1);
-                displayArrows<Bed>();
-            }
-        }
-    }
-    public void interactedBed()
-    {
-        if (level.levelName == "Level 1")
-        {
-            if (currentStep == 4)
-            {
-                changeStep(1);
-                resetArrows();
-                displayArrows<SoupMachine>();
-            }
-            else if (currentStep == 6) 
-            { 
-                changeStep(1);
-                resetArrows();
-            }
-        }
-        else if (level.levelName == "Level 2")
-        {
-            if (currentStep == 0)
-            {
-                changeStep(1);
-            }
-        }
-    }
-    public void interactedBin()
-    {
-        if (level.levelName == "Level 1")
-        {
-            if (currentStep == 6)
-            {
-                changeStep(-1);
-                resetArrows();
-                displayArrows<SoupMachine>();
-            }
-        }
-        if (level.levelName == "Level 2")
-        {
-            if (currentStep == 2)
-            {
-                changeStep(-1);
-            }
-        }
-    }
-    public void interactedPill()
-    {
-        if (level.levelName == "Level 2")
-        {
-            if (currentStep == 1)
-            {
-                changeStep(1);
-            }
-        }
-    }
-    public void interactedSoup()
-    {
-        if (level.levelName == "Level 1")
-        {
-            if (currentStep == 5)
-            {
-                changeStep(1);
-                resetArrows();
-                displayArrows<Bed>();
-                displayArrows<Bin>();
-            }
-        }
-    }
-    public void changeStep(int s)
-    {
-        currentStep += s;
-        for (int i = 1; i < texts.Count; i++)
-        {
-            texts[i].gameObject.SetActive(false);
-            texts[i].GetComponent<Text>().fontStyle = FontStyle.Normal;
-        }
-        for (int i = 1; i <= currentStep; i++)
-        {
-            if ( i == currentStep && currentStep == texts.Count)
-            {
-                break;
-            }
-            texts[i].gameObject.SetActive(true);
-            if (i == currentStep)
-            {
-                texts[i].GetComponent<Text>().fontStyle = FontStyle.Bold;
             }
         }
     }

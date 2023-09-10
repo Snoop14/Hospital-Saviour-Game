@@ -44,6 +44,15 @@ public partial class @Player1_Input : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleTutorial"",
+                    ""type"": ""Button"",
+                    ""id"": ""01e525ed-9ab5-4cf6-8d35-b631f5579fca"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -112,6 +121,17 @@ public partial class @Player1_Input : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7af76c97-4428-4c5d-8533-6fecc64f2c6a"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleTutorial"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -122,6 +142,7 @@ public partial class @Player1_Input : IInputActionCollection2, IDisposable
         m_Player_Main = asset.FindActionMap("Player_Main", throwIfNotFound: true);
         m_Player_Main_Move = m_Player_Main.FindAction("Move", throwIfNotFound: true);
         m_Player_Main_Interact = m_Player_Main.FindAction("Interact", throwIfNotFound: true);
+        m_Player_Main_ToggleTutorial = m_Player_Main.FindAction("ToggleTutorial", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -183,12 +204,14 @@ public partial class @Player1_Input : IInputActionCollection2, IDisposable
     private IPlayer_MainActions m_Player_MainActionsCallbackInterface;
     private readonly InputAction m_Player_Main_Move;
     private readonly InputAction m_Player_Main_Interact;
+    private readonly InputAction m_Player_Main_ToggleTutorial;
     public struct Player_MainActions
     {
         private @Player1_Input m_Wrapper;
         public Player_MainActions(@Player1_Input wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Main_Move;
         public InputAction @Interact => m_Wrapper.m_Player_Main_Interact;
+        public InputAction @ToggleTutorial => m_Wrapper.m_Player_Main_ToggleTutorial;
         public InputActionMap Get() { return m_Wrapper.m_Player_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -204,6 +227,9 @@ public partial class @Player1_Input : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_Player_MainActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_Player_MainActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_Player_MainActionsCallbackInterface.OnInteract;
+                @ToggleTutorial.started -= m_Wrapper.m_Player_MainActionsCallbackInterface.OnToggleTutorial;
+                @ToggleTutorial.performed -= m_Wrapper.m_Player_MainActionsCallbackInterface.OnToggleTutorial;
+                @ToggleTutorial.canceled -= m_Wrapper.m_Player_MainActionsCallbackInterface.OnToggleTutorial;
             }
             m_Wrapper.m_Player_MainActionsCallbackInterface = instance;
             if (instance != null)
@@ -214,6 +240,9 @@ public partial class @Player1_Input : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @ToggleTutorial.started += instance.OnToggleTutorial;
+                @ToggleTutorial.performed += instance.OnToggleTutorial;
+                @ToggleTutorial.canceled += instance.OnToggleTutorial;
             }
         }
     }
@@ -222,5 +251,6 @@ public partial class @Player1_Input : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnToggleTutorial(InputAction.CallbackContext context);
     }
 }

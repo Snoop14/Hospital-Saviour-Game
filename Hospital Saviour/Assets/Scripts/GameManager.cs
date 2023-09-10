@@ -11,6 +11,7 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
+    public bool playStartingAnimations = false;
     [SerializeField] NavMeshSurface surface;
 
     GameObject player1;
@@ -150,9 +151,12 @@ public class GameManager : MonoBehaviour
         generateObjects();
         GenerateHUD();
 
-        //trigger start animations
-        animator = GameObject.Find("Scene").GetComponent<Animator>();
-        animator.SetInteger("Level", levelNo);
+        if (playStartingAnimations)
+        {
+            //trigger start animations
+            animator = GameObject.Find("Scene").GetComponent<Animator>();
+            animator.SetInteger("Level", levelNo);
+        }
 
 
         if (timeForLevel > 0)
@@ -167,7 +171,7 @@ public class GameManager : MonoBehaviour
             StartCoroutine(WaitForTimerRunOut());
         }
 
-        tutorialObject.GetComponent<tutorial>().objectList = objectList;
+        //tutorialObject.GetComponent<tutorial>().objectList = objectList;
         tutorialObject.GetComponent<tutorial>().setupTutorial(currentLevel);
 
     }
@@ -263,10 +267,6 @@ public class GameManager : MonoBehaviour
             b.isActive = true;
             b.isInteractable = true;
 
-            if (i == 0)
-                tutorialObject.GetComponent<tutorial>().bed1 = newBed;
-            else if (i == 1)
-                tutorialObject.GetComponent<tutorial>().bed2 = newBed;
         }
 
         surface.BuildNavMesh();
@@ -280,7 +280,6 @@ public class GameManager : MonoBehaviour
         {
             GameObject tempObj = GameObject.Find("SoupMachine");
             objectList.Add(tempObj);
-            tutorialObject.GetComponent<tutorial>().soupMachine = tempObj;
         }
         else
         {
@@ -373,7 +372,6 @@ public class GameManager : MonoBehaviour
 
         GameObject tempBin = GameObject.Find("Bin");
         objectList.Add(tempBin);
-        tutorialObject.GetComponent<tutorial>().bin = tempBin;
     }
 
     IEnumerator CreatePatient()
@@ -408,16 +406,6 @@ public class GameManager : MonoBehaviour
             p.queuePosition = queuePositions[patientQueue.Count - 1];
             p.tutorial = tutorialObject.GetComponent<tutorial>();
             patients.Add(newPatient);
-
-            if (currentLevel.levelName == "Level 3" || currentLevel.levelName == "Level 4") 
-            {
-                tutorialObject.GetComponent<tutorial>().PatientsAdded();
-            }
-
-            if (i == 0 && currentLevel.levelName == "Level 1")
-            { 
-                tutorialObject.GetComponent<tutorial>().PatientsAdded();
-            }
         }
     }
 

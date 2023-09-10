@@ -42,6 +42,7 @@ MonoBehaviour:
   tutorialSteps:
   - This level has a timer.  Treat at least the required number of patients before
     time runs out
+  tutorialPages: {fileID: 0}
   patientsToBeTreated: 4
-  timer: 90
+  timer: 95
   angryNotAllowed: 0
