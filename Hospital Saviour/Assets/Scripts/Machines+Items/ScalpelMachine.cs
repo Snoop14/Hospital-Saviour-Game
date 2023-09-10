@@ -9,7 +9,8 @@ public class ScalpelMachine : MonoBehaviour
     public bool isInteractable = true;
     [SerializeField]
     Material inactiveObjectMaterial;
-
+    [SerializeField]
+    GameObject coveredObject;
 
 
     //public GameObject currentBandage { get; private set; } = null;
@@ -49,7 +50,19 @@ public class ScalpelMachine : MonoBehaviour
         //disable the interactable variable
         isInteractable = false;
 
-        changeMaterial(transform);
+        coverObject();
+        //changeMaterial(transform);
+    }
+
+    private void coverObject()
+    {
+        Vector3 spawnLoc = new Vector3(transform.position.x,
+                                       transform.position.y - 0.965f,
+                                       transform.position.z + 0.01f);
+        Quaternion spawnRot = new Quaternion();
+        spawnRot.eulerAngles = new Vector3(-90, 0, 180);
+        Instantiate(coveredObject, spawnLoc, spawnRot);
+        gameObject.SetActive(false);
     }
 
     private void changeMaterial(Transform objectToChange)

@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField]
     GameObject bedPrefab;
+    [SerializeField]
+    GameObject coveredBedPrefab;
 
     [Serializable]
     public struct PatientsPrefab
@@ -246,6 +248,8 @@ public class GameManager : MonoBehaviour
             //objectList.Add(newBed);
 
         }
+
+        //inActiveBedParent.localPosition = new Vector3(1.8f, -0.5f, 0.3f);
 
         //Instatiate Active beds
         for (int i = 0; i < activeBedCount; i++)

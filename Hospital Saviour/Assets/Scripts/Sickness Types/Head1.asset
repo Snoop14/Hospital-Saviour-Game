@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sicknessBase: {fileID: 11400000, guid: 36ad833ecdd2bd54c8fb7991cc56a8d0, type: 2}
   healingOrderIcons:
-  - {fileID: 5608346624214886593, guid: 9ff7471cab857854198d8e66b2f24c1e, type: 3}
+  - {fileID: 21300000, guid: 3132fa334084b5944acc9c3e70f1731d, type: 3}
   - {fileID: 5142614496686598639, guid: 9ff7471cab857854198d8e66b2f24c1e, type: 3}
   happinessDropLevel: 1
