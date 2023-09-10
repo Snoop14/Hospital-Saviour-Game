@@ -44,5 +44,5 @@ MonoBehaviour:
     time runs out
   tutorialPages: {fileID: 0}
   patientsToBeTreated: 4
-  timer: 95
+  timer: 120
   angryNotAllowed: 0
