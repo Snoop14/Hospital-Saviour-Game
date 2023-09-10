@@ -198,7 +198,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ' and Interact with the it to place the File on it.'
+  m_text: ' and Interact with it to place the File on it.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 84a24f99ea213a54b80a42503b50d2f1, type: 2}
   m_sharedMaterial: {fileID: 5760048141587033385, guid: 84a24f99ea213a54b80a42503b50d2f1,

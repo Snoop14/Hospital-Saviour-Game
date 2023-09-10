@@ -966,7 +966,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: letting you know what the Patient needs, Head over and Interact to the
+  m_text: letting you know what the Patient needs, Head over and Interact with the
     Soup Machine
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 84a24f99ea213a54b80a42503b50d2f1, type: 2}
