@@ -60,6 +60,7 @@ public class MenuSelection : MonoBehaviour
     public void NumberPlayers(Slider players)
     {
         playersSet = (int)players.value;
+        levelSet = 1;
         ResetButtons();
         DisplayHighScore();
     }
