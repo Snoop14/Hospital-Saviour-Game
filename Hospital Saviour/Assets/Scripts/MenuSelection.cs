@@ -43,6 +43,10 @@ public class MenuSelection : MonoBehaviour
             playersSet = PlayerPrefs.GetInt("PlayerNum");
         }
         levelSet = PlayerPrefs.GetInt("LevelNum");
+        if(levelSet == 0)
+        {
+            levelSet = 1;
+        }
         GameObject.Find("PlayersSlider").GetComponent<Slider>().value = playersSet;
     }
 

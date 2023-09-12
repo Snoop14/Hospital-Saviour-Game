@@ -216,7 +216,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: This is the Patient. Notice they have an Icon above their head. This is
-    the Germ Icon which will come in handy later when you are more confortable with
+    the Germ Icon which will come in handy later when you are more comfortable with
     the game.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 84a24f99ea213a54b80a42503b50d2f1, type: 2}
