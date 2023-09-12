@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEditor;
+using TMPro;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
@@ -469,17 +470,17 @@ public class GameManager : MonoBehaviour
 
         GameObject endDetails = HUD.transform.Find("EndDetails").gameObject;
         EndLevelButtonObject.SetActive(false);
-        endDetails.transform.Find("ScoreText").GetComponent<Text>().text = "Score: " + currScore.ToString();
+        endDetails.transform.Find("ScoreText").GetComponent<TMP_Text>().text = "Score: " + currScore.ToString();
         //disaply failed to complete if an angry patient in relevant level
         if (angryPatient)
         {
-            endDetails.transform.Find("ErrorText").GetComponent<Text>().text = "Sorry, you had an angry patient, you did not complete this level, try again";
+            endDetails.transform.Find("ErrorText").GetComponent<TMP_Text>().text = "Sorry, you had an angry patient, you did not complete this level, try again";
         }
 
         //disaply failed to complete if an not enough patients treated in relevant level
         if (!patientGoalMet)
         {
-            endDetails.transform.Find("ErrorText").GetComponent<Text>().text = "Sorry, you didn't treat enough patients, you did not complete this level, try again";
+            endDetails.transform.Find("ErrorText").GetComponent<TMP_Text>().text = "Sorry, you didn't treat enough patients, you did not complete this level, try again";
         }
 
         endDetails.SetActive(true);
