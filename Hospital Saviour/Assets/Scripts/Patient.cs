@@ -373,7 +373,8 @@ public class Patient : MonoBehaviour
     {
         sicknessIconBackground.gameObject.SetActive(false);
         healingIconObject.SetActive(false);
-        FillObject.SetActive(false);
+        icon.transform.GetChild(3).gameObject.SetActive(false);
+        //FillObject.SetActive(false);
         EmojiHappy.SetActive(true); //enable happy icon
         yield return new WaitForSeconds(2f);
         icon.gameObject.SetActive(false); //disable icons above head
@@ -385,7 +386,8 @@ public class Patient : MonoBehaviour
     {
         sicknessIconBackground.gameObject.SetActive(false);
         healingIconObject.SetActive(false);
-        FillObject.SetActive(false);
+        icon.transform.GetChild(3).gameObject.SetActive(false);
+        //FillObject.SetActive(false);
         EmojiAngry.SetActive(true); //enable happy icon
         yield return new WaitForSeconds(2f);
         icon.gameObject.SetActive(false); //disable icons above head
