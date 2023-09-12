@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
     Transform activeBedParent;
     [SerializeField]
     GameObject tutorialObject;
+    [SerializeField]
+    GameObject EndLevelButtonObject;
 
     [Header("")]
     [SerializeField]
@@ -466,6 +468,7 @@ public class GameManager : MonoBehaviour
         
 
         GameObject endDetails = HUD.transform.Find("EndDetails").gameObject;
+        EndLevelButtonObject.SetActive(false);
         endDetails.transform.Find("ScoreText").GetComponent<Text>().text = "Score: " + currScore.ToString();
         //disaply failed to complete if an angry patient in relevant level
         if (angryPatient)
