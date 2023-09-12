@@ -6221,6 +6221,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1342617858}
     m_Modifications:
+    - target: {fileID: 5950256642349176470, guid: 2e17e3e96967ba74fa1aac9332daafcd,
+        type: 3}
+      propertyPath: m_Name
+      value: Bin GFX
+      objectReference: {fileID: 0}
     - target: {fileID: 6933284018039537619, guid: 2e17e3e96967ba74fa1aac9332daafcd,
         type: 3}
       propertyPath: m_RootOrder
