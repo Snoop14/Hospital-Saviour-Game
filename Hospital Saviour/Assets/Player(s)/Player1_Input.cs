@@ -125,7 +125,7 @@ public partial class @Player1_Input : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7af76c97-4428-4c5d-8533-6fecc64f2c6a"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

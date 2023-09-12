@@ -1686,7 +1686,7 @@ GameObject:
   - component: {fileID: 815837410}
   - component: {fileID: 815837409}
   m_Layer: 5
-  m_Name: ESC
+  m_Name: Tab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1707,7 +1707,7 @@ RectTransform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.02, y: 0}
-  m_AnchorMax: {x: 0.14, y: 1}
+  m_AnchorMax: {x: 0.18, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
@@ -1730,7 +1730,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3df2ea73e5abe2141a84d6f8866d0c9b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fecabbba6c8580640b6a95eff278514e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4634,6 +4634,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 139725529}
     m_Modifications:
+    - target: {fileID: 5174242529332431395, guid: 82072609d9c9ec2498dd38f70b3a9533,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174242529527536315, guid: 82072609d9c9ec2498dd38f70b3a9533,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174242530049428497, guid: 82072609d9c9ec2498dd38f70b3a9533,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174242530136290075, guid: 82072609d9c9ec2498dd38f70b3a9533,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174242530166942755, guid: 82072609d9c9ec2498dd38f70b3a9533,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174242530290862664, guid: 82072609d9c9ec2498dd38f70b3a9533,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5174242530422605463, guid: 82072609d9c9ec2498dd38f70b3a9533,
         type: 3}
       propertyPath: m_Pivot.x
@@ -4743,6 +4773,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Page1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174242530741430005, guid: 82072609d9c9ec2498dd38f70b3a9533,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174242531172695510, guid: 82072609d9c9ec2498dd38f70b3a9533,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82072609d9c9ec2498dd38f70b3a9533, type: 3}
