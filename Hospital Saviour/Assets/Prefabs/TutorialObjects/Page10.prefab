@@ -138,7 +138,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Complete the Level Goals before the Timer runs out!
+  m_text: Treat at least the required number of patients before time runs out
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 84a24f99ea213a54b80a42503b50d2f1, type: 2}
   m_sharedMaterial: {fileID: 5760048141587033385, guid: 84a24f99ea213a54b80a42503b50d2f1,
@@ -349,7 +349,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quick! Level 4+ have Timers.
+  m_text: Quick! This level has a timer.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 84a24f99ea213a54b80a42503b50d2f1, type: 2}
   m_sharedMaterial: {fileID: 5760048141587033385, guid: 84a24f99ea213a54b80a42503b50d2f1,

@@ -65,7 +65,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: If the Patient Happiness meter is depleted they will leave. How fast the
-    meter moves depends on the sickness.
+    meter moves depends on their sickness.   The faster you trest them, the higher
+    your score.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 84a24f99ea213a54b80a42503b50d2f1, type: 2}
   m_sharedMaterial: {fileID: 5760048141587033385, guid: 84a24f99ea213a54b80a42503b50d2f1,
@@ -273,7 +274,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You made it to Level 3 where Patients are Impatient and will want to be
+  m_text: 'You made it to Level 3 where Patients are impatient and will want to be
     treated quickly. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 84a24f99ea213a54b80a42503b50d2f1, type: 2}
