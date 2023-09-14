@@ -483,11 +483,11 @@ public class GameManager : MonoBehaviour
 
         GameObject endDetails = HUD.transform.Find("EndDetails").gameObject;
         EndLevelButtonObject.SetActive(false);
-        endDetails.transform.Find("ScoreText").GetComponent<TMP_Text>().text = "Score: " + currScore.ToString();
+        endDetails.transform.GetChild(0).Find("ScoreText").GetComponent<TMP_Text>().text = "Score: " + currScore.ToString();
         //disaply failed to complete if an angry patient in relevant level
         if (angryPatient)
         {
-            endDetails.transform.Find("ErrorText").GetComponent<TMP_Text>().text = "Sorry, you had an angry patient, you did not complete this level, try again";
+            endDetails.transform.GetChild(0).Find("ErrorText").GetComponent<TMP_Text>().text = "Sorry, you had an angry patient, you did not complete this level, try again";
         }
 
         //disaply failed to complete if an not enough patients treated in relevant level
