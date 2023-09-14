@@ -20,10 +20,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dd31ea45492c3ee42af4e7a07217667a, type: 2}
   spawnTimes:
   - 2
-  - 4
-  - 6
-  - 6
+  - 5
   - 8
+  - 10
+  - 12
   inActiveBedCount: 2
   activeBedCount: 4
   stars: 64000000fa00000090010000
