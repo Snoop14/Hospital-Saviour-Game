@@ -1687,6 +1687,8 @@ MonoBehaviour:
     type: 3}
   sickness: {fileID: 0}
   tutorial: {fileID: 0}
+  popupText: {fileID: 5697185057778914640, guid: c07b32ac4a7c4ae4cb88e0d6f7d1328e,
+    type: 3}
 --- !u!195 &-1140215495529084502
 NavMeshAgent:
   m_ObjectHideFlags: 0

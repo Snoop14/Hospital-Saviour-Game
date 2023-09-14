@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using TMPro;
 
 public class Patient : MonoBehaviour
 {
@@ -370,6 +371,7 @@ public class Patient : MonoBehaviour
         else 
         { 
             StartCoroutine(DisplayHappy());// show happy icon for a few seconds
+            StartCoroutine(ScorePopup(happinessLvl));
         }
         agent.SetDestination(ExitTransform.position); //patient heads to exit loc
         manager.UpdateScore(happinessLvl); // increase score
@@ -393,6 +395,29 @@ public class Patient : MonoBehaviour
         icon.gameObject.SetActive(false); //disable icons above head
 
         tutorial.updateGoal();
+    }
+
+    [SerializeField]
+    GameObject popupText;
+    [SerializeField]
+    GameObject iconCanvas;
+    IEnumerator ScorePopup(float score)
+    {
+        iconCanvas = GameObject.Find("IconCanvas");
+        GameObject popup = Instantiate(popupText,iconCanvas.transform);
+        RectTransform rect = popup.GetComponent<RectTransform>();
+        TMP_Text popupT = popup.GetComponent<TMP_Text>();
+        Vector2 newP = Camera.main.WorldToScreenPoint(transform.position);
+        rect.position = new Vector2(newP.x,newP.y+60);
+        popupT.text += score;
+        while (popupT.color.a > 0.1f)
+        {
+            Color n = popupT.color;
+            popupT.color = new Color(n.r,n.g,n.b,n.a-0.05f);
+            rect.position = new Vector2(rect.position.x, rect.position.y+8);
+            yield return new WaitForSeconds(0.1f);
+        }
+        Destroy(popup);
     }
 
     /// <summary>
