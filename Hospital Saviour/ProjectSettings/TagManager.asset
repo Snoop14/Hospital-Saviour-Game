@@ -16,8 +16,8 @@ TagManager:
   - 
   - 
   - IgnoreAI
-  - 
-  - 
+  - BlockPlayers
+  - Players
   - 
   - 
   - 
