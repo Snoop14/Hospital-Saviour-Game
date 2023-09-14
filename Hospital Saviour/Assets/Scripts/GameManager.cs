@@ -166,8 +166,10 @@ public class GameManager : MonoBehaviour
         {
             if(PlayerPrefs.GetInt("PlayerNum") == 2)
             {
+                //Increase timer for 2 player mode
                 timeForLevel += 30;
             }
+            //Activate the timer related objects
             inGameTimer.gameObject.SetActive(true);
             inGameTimer.SetTimeFromSeconds(timeForLevel);
             inGameTimer.StartTimer();
@@ -224,6 +226,10 @@ public class GameManager : MonoBehaviour
         angryNotAllowed = currentLevel.angryNotAllowed;
     }
 
+    /// <summary>
+    /// Generate the active and inactive objects for the current level
+    /// based on the data collected from InitializeLevelData()
+    /// </summary>
     void generateObjects()
     {
         player1 = Instantiate(playerPrefab, GameObject.Find("Player1SpawnSite").transform);
@@ -272,13 +278,14 @@ public class GameManager : MonoBehaviour
 
         }
 
+        //Build nav mesh
         surface.BuildNavMesh();
 
         //Instatiate Patients and folders
         StartCoroutine(CreatePatient());
 
-        //for each interactable object, check if it's interactable and add to lit if it is, and
-        //if not, make if not interactable and change material
+        //for each interactable object, check if it's interactable and add to list if it is, and
+        //if not, make if not interactable and disable it
         if (soupMachine)
         {
             GameObject tempObj = GameObject.Find("SoupMachine");
@@ -357,8 +364,6 @@ public class GameManager : MonoBehaviour
         {
             GameObject tempObj = GameObject.Find("Medkit");
             tempObj.GetComponent<BandageMachine>().disableSelf();
-            //Debug.Log("bandage dispenser" + tempObj.GetComponent<BandageMachine>().isInteractable);
-
         }
 
         if (ECGMachine)
@@ -377,6 +382,10 @@ public class GameManager : MonoBehaviour
         objectList.Add(tempBin);
     }
 
+    /// <summary>
+    /// Spawn the patients in for the level
+    /// </summary>
+    /// <returns></returns>
     IEnumerator CreatePatient()
     {
         for (int i = 0; i < patientCount; i++)
@@ -421,6 +430,10 @@ public class GameManager : MonoBehaviour
         patients.Remove(_patient);
     }
 
+    /// <summary>
+    /// Removes the patient from the initial queue of patients
+    /// </summary>
+    /// <param name="p"></param>
     public void removeFromQueue(GameObject p)
     {
         patientQueue.Remove(p);

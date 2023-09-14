@@ -89,6 +89,9 @@ public class Player : MonoBehaviour
 
     /// <summary>
     /// Called when the interact button is pressed.
+    /// Checks multiple things, such as if the player is carrying, if so what is being carried
+    /// and what the object is that the player is interacting with
+    /// to then decide what functions to call
     /// </summary>
     public void OnInteract()
     {
@@ -381,6 +384,10 @@ public class Player : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Display an icon above the player upon interacting with patient to find out what patient needs
+    /// </summary>
+    /// <param name="s"></param>
     public void IconChange(Sprite s)
     {
         healingIconObject.GetComponent<Image>().sprite = s;
@@ -388,6 +395,10 @@ public class Player : MonoBehaviour
         StartCoroutine(HideIcon());
     }
 
+    /// <summary>
+    /// Hide icon above player
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator HideIcon()
     {
         yield return new WaitForSeconds(2f);

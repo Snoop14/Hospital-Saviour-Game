@@ -50,10 +50,13 @@ public class MenuSelection : MonoBehaviour
         GameObject.Find("PlayersSlider").GetComponent<Slider>().value = playersSet;
     }
 
+    /// <summary>
+    /// This function is called when a level is selected
+    /// </summary>
+    /// <param name="level"></param>
     public void StartLevel(int level)
     {
         levelSet = level;
-        //Debug.Log("Loading Level " + levelSet);
 
         DisplayHighScore();
     }
@@ -61,6 +64,10 @@ public class MenuSelection : MonoBehaviour
 
     //https://stackoverflow.com/questions/32680348/unity3d-slider-onvaluechanged-sending-only-0-or-other-defined-value accessed 3/8/23
     //public void NumberPlayers(int players)
+    /// <summary>
+    /// Change the number of players based on slider value change
+    /// </summary>
+    /// <param name="players"></param>
     public void NumberPlayers(Slider players)
     {
         playersSet = (int)players.value;
@@ -70,7 +77,7 @@ public class MenuSelection : MonoBehaviour
     }
 
     /// <summary>
-    /// Loads the GameScene
+    /// Loads the GameScene upon clicking "Start Game" button
     /// </summary>
     public void StartGame()
     {
@@ -136,11 +143,11 @@ public class MenuSelection : MonoBehaviour
         scoreDisplay.text = currHighScore.ToString();
     }
 
+    /*
     /// <summary>
     /// Deletes all playerPrefs and reloads the scene
     /// Should this be included in the final game?
     /// </summary>
-    /*
     public void ResetGame()
     {
         //https://www.kindacode.com/snippet/unity-how-to-show-a-confirmation-dialog/ accessed 3/9/23
@@ -160,6 +167,10 @@ public class MenuSelection : MonoBehaviour
     }
     */
 
+    /// <summary>
+    /// Disables and enables the buttons that for the levels that
+    /// should and shouldn't be accessible to the player
+    /// </summary>
     private void ResetButtons()
     {
         //turn off buttons

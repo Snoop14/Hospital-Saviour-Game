@@ -143,9 +143,9 @@ public class Patient : MonoBehaviour
         }
         else if(assignedPlacement)
         {
-            //interact with bed is here now
             if (assignedPlacement.TryGetComponent(out Bed b))
             {
+                //check if patient should get on this bed
                 if (b.currentFolder == folder && b.currentPatient == null)
                 {
                     b.NPCInteract(gameObject);
@@ -281,9 +281,10 @@ public class Patient : MonoBehaviour
     }
 
     /// <summary>
-    /// called when patient leaves the bed
+    /// Makes the patient do something based on the parameter
+    /// action
     /// </summary>
-    /// <param name="bed"></param>
+    /// <param name="action"></param>
     /// <returns></returns>
     IEnumerator triggerAction(string action)
     {
@@ -291,8 +292,10 @@ public class Patient : MonoBehaviour
         {
             yield return null;
         }
+        //Makes the patient leave the bed
         if (action == "leave placement")
         {
+            //Makes the patient leave the bed
             //animator.SetTrigger(fromBedHash);
             inAction = true;
             animator.SetTrigger("FromBed");
@@ -306,6 +309,7 @@ public class Patient : MonoBehaviour
         }
         else if(action == "eat soup")
         {
+            //Animate patient drinking soup
             inAction = true;
             animator.SetTrigger("EatSoup");
             yield return new WaitForSeconds(1.5f);
@@ -313,6 +317,7 @@ public class Patient : MonoBehaviour
         }
         else if (action == "eat pill")
         {
+            //Animate patient eating pill
             inAction = true;
             animator.SetTrigger("EatPill");
             yield return new WaitForSeconds(1.5f);
@@ -326,6 +331,10 @@ public class Patient : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Enables the bandages on the patients head one by one
+    /// </summary>
+    /// <returns></returns>
     IEnumerator applyBandages()
     {
         Transform bandagesParent = transform.GetChild(0).Find("BaseCharacter/Specifics/Bandages");
@@ -369,6 +378,10 @@ public class Patient : MonoBehaviour
         isInteractable = false;
     }
 
+    /// <summary>
+    /// Called when patient is aided and happy
+    /// </summary>
+    /// <returns></returns>
     IEnumerator DisplayHappy()
     {
         sicknessIconBackground.gameObject.SetActive(false);
@@ -382,6 +395,10 @@ public class Patient : MonoBehaviour
         tutorial.updateGoal();
     }
 
+    /// <summary>
+    /// Called when patient is not aided in time and unhappy
+    /// </summary>
+    /// <returns></returns>
     IEnumerator DisplayMad()
     {
         sicknessIconBackground.gameObject.SetActive(false);

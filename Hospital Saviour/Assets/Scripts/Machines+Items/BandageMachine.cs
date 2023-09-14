@@ -68,6 +68,10 @@ public class BandageMachine : MonoBehaviour
         //changeMaterial(transform);
     }
 
+    /// <summary>
+    /// Changes the object to a covered object 
+    /// when this object is not active
+    /// </summary>
     private void coverObject()
     {
         Vector3 spawnLoc = new Vector3(transform.position.x - .19f,
