@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 //https://www.kindacode.com/snippet/unity-how-to-show-a-confirmation-dialog/ accessed 3/9/23
 using UnityEditor;
+using TMPro;
 
 public class MenuSelection : MonoBehaviour
 {
@@ -22,10 +23,10 @@ public class MenuSelection : MonoBehaviour
     private int currHighScore;
 
     [SerializeField]
-    Text infoDisplay;
+    TMP_Text infoDisplay;
 
     [SerializeField]
-    Text scoreDisplay;
+    TMP_Text scoreDisplay;
 
     [SerializeField]
     Transform levelsParent;
@@ -127,7 +128,7 @@ public class MenuSelection : MonoBehaviour
 
         for(int i = 0; i <= 2; i++)
         {
-            StarsDisplay.GetChild(3).GetChild(i).GetComponent<Text>().text = (stars[i] * playersSet).ToString();
+            StarsDisplay.GetChild(3).GetChild(i).GetComponent<TMP_Text>().text = (stars[i] * playersSet).ToString();
 
             if(currHighScore >= (stars[i])*playersSet)
             {
