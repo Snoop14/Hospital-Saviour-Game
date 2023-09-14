@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class WithPillMachine : MonoBehaviour
 {
+    //sound for swhen interacting with pill machine
     [SerializeField]
     AudioClip CollectPill;
 
+    //The audiosource that plays the sound
     AudioSource sound;
 
     private void OnEnable()
     {
+        //add the event to the player
         gameObject.GetComponent<Player>().OnInteractWithPillMachine += PlayInteractionSound;
     }
 
     private void OnDisable()
     {
+        //remove event from player
         gameObject.GetComponent<Player>().OnInteractWithPillMachine -= PlayInteractionSound;
 
     }
@@ -23,11 +27,13 @@ public class WithPillMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //find the audiosource in the scene
         sound = GetComponent<AudioSource>();
     }
 
     void PlayInteractionSound()
     {
+        //play the sound once when the function is triggered
         sound.PlayOneShot(CollectPill);
     }
 }
