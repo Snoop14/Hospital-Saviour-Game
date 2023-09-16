@@ -232,10 +232,12 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void generateObjects()
     {
+        //add player 1
         player1 = Instantiate(playerPrefab, GameObject.Find("Player1SpawnSite").transform);
         player1.GetComponent<Player>().gameManager = gameObject;
         player1.GetComponent<Player>().tutorial = tutorialObject.GetComponent<tutorial>();
-        //player1.transform.position += new Vector3(-7, 0, -2);
+
+        //if plyer has selected 2 player, add 2nd player
         if(PlayerPrefs.GetInt("PlayerNum") == 2)
         {
             player2 = Instantiate(player2Prefab, GameObject.Find("Player2SpawnSite").transform);
@@ -244,6 +246,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            //turn off icon for second player if in 1 player mode
             GameObject.Find("PlayerIcon").SetActive(false);
         }
 
@@ -257,12 +260,7 @@ public class GameManager : MonoBehaviour
             {
                 renderer.material = inActiveMat;
             }
-            //Place bed into object list
-            //objectList.Add(newBed);
-
         }
-
-        //inActiveBedParent.localPosition = new Vector3(1.8f, -0.5f, 0.3f);
 
         //Instatiate Active beds
         for (int i = 0; i < activeBedCount; i++)
@@ -295,7 +293,6 @@ public class GameManager : MonoBehaviour
         {
             GameObject tempObj = GameObject.Find("SoupMachine");
             tempObj.GetComponent<SoupMachine>().disableSelf();
-            //Debug.Log("soup" + tempObj.GetComponent<SoupMachine>().isInteractable);
         }
         
         if (ScalpelDispenser)
@@ -330,9 +327,8 @@ public class GameManager : MonoBehaviour
         {
             GameObject tempObj = GameObject.Find("PillDispenser");
             tempObj.GetComponent<PillMachine>().disableSelf();
-            //Debug.Log("pharmacy" + tempObj.GetComponent<PillMachine>().isInteractable);
-
         }
+
         if (Surgery)
         {
             GameObject tempObj = GameObject.Find("Surgery");
@@ -377,7 +373,7 @@ public class GameManager : MonoBehaviour
             tempObj.GetComponent<ECGMachine>().disableSelf();
         }
 
-
+        //add the bin to the object list
         GameObject tempBin = GameObject.Find("Bin");
         objectList.Add(tempBin);
     }
@@ -388,14 +384,17 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator CreatePatient()
     {
+        //work through the number of patients 
         for (int i = 0; i < patientCount; i++)
         {
+            //wait for the next spawn time
             yield return new WaitForSeconds(spawnTimes[i]);
+            //randomise the patient form
             int prefabType = Random.Range(0, patientPrefabs.Length);
+            //make a new patient
             GameObject newPatient = Instantiate(patientPrefabs[prefabType].patientPrefab, EnterTransform.position, EnterTransform.rotation, patientParent);
-            //newPatient.transform.position = EnterTransform.position;
-            //newPatient.transform.rotation = EnterTransform.rotation;
 
+            //add a folder to the patient
             GameObject newFolder = Instantiate(folderPrefab, newPatient.transform, false);
             Folder f = newFolder.GetComponent<Folder>();
             f.changePosToPlayer();
@@ -406,13 +405,13 @@ public class GameManager : MonoBehaviour
             Patient p = newPatient.GetComponent<Patient>();
             p.folder = newFolder;
 
-            //get random value from sickness list for level
+            //get random value for patient from sickness list for level
             //https://docs.unity3d.com/ScriptReference/Random.Range.html accessed 7/8/23
             int sickInt = Random.Range(0, currentLevel.sicknessType.Count);
-            //p.sickness = currentLevel.sicknessType[i];
             p.sickness = currentLevel.sicknessType[sickInt];
             p.ExitTransform = ExitTransform;
 
+            //add the patient to the queue and list of patients
             patientQueue.Add(newPatient);
             queuePositions.Add(EnterTransform.position + new Vector3(25 - patientSeperation * i, 0, 0));
             p.queuePosition = queuePositions[patientQueue.Count - 1];
@@ -427,6 +426,7 @@ public class GameManager : MonoBehaviour
     /// <param name="_patient"></param>
     public void RemovePatientFromList(GameObject _patient)
     {
+        //temove the patient from the patients list
         patients.Remove(_patient);
     }
 
@@ -461,6 +461,7 @@ public class GameManager : MonoBehaviour
     /// <param name="score"></param>
     public void UpdateScore(float score)
     {
+        //adds score to the current score
         currScore += (int)score;
         displayScore.GetComponent<Text>().text = currScore.ToString();
     }
@@ -472,30 +473,31 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void EndGame(bool angryPatient = false, bool patientGoalMet = true)
     {
-        
+        //prevents players from moving (and therefore continuing to interact with the game
         player1.GetComponent<Player>().speed = 0;
-        
         if(PlayerPrefs.GetInt("PlayerNum") == 2)
         {
             player2.GetComponent<Player>().speed = 0;
         }
         
-
+        //displayes the end detsil HUD
         GameObject endDetails = HUD.transform.Find("EndDetails").gameObject;
         EndLevelButtonObject.SetActive(false);
         endDetails.transform.GetChild(0).Find("ScoreText").GetComponent<TMP_Text>().text = "Score: " + currScore.ToString();
-        //disaply failed to complete if an angry patient in relevant level
+        
+        //display failed to complete text if an angry patient in relevant level
         if (angryPatient)
         {
             endDetails.transform.GetChild(0).Find("ErrorText").GetComponent<TMP_Text>().text = "Sorry, you had an angry patient, you did not complete this level, try again";
         }
 
-        //disaply failed to complete if an not enough patients treated in relevant level
+        //disaply failed to complete text if an not enough patients treated in relevant level
         if (!patientGoalMet)
         {
             endDetails.transform.Find("ErrorText").GetComponent<TMP_Text>().text = "Sorry, you didn't treat enough patients, you did not complete this level, try again";
         }
 
+        //turn on the end details text display
         endDetails.SetActive(true);
 
         //Update current high score for level
@@ -514,7 +516,7 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt(levelName, currScore);
         }
 
-
+        //update highest level completed in player prefs (whilst checking its a new high level, not reseting to a lower level)
         if (PlayerPrefs.GetInt("PlayerNum") == 1 && PlayerPrefs.GetInt("Highest_Level_Complete_1p") < levelNo)
         {
             //only move on max level if successfully completed with no angry patients
@@ -541,6 +543,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void ReturnToMenu()
     {
+        //load the menu scene
         SceneManager.LoadScene("MenuScene");
     }
 
@@ -549,7 +552,6 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void MadPatient()
     {
-        //int levelNum = PlayerPrefs.GetInt("LevelNum");
         if (angryNotAllowed)
         {
             StopGameplay();
