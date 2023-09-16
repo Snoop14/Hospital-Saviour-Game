@@ -4,18 +4,10 @@ using UnityEngine;
 
 public class Bin : MonoBehaviour
 {
+    //variable to determine if bin is full
     public bool isFull = false;
+
+    //variable to determine if it is interactable
     public bool isInteractable = true;
 
-    // Start is called before the first frame update
-    //void Start()
-   // {
-        
-    //}
-
-    // Update is called once per frame
-    //void Update()
-    //{
-        
-    //}
 }
