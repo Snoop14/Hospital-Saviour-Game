@@ -288,17 +288,19 @@ public class Player : MonoBehaviour
                         {
                             if (p.isHoldingFolder)
                             {
-                                isCarrying = true;
                                 item = p.folder;
-                                itemType = "Folder";
-                                p.releaseFolder();
-                                Folder i = item.GetComponent<Folder>();
-                                i.transferTo(gameObject);
-                                i.changePosToPlayer();
+                                if (item != null)
+                                {
+                                    isCarrying = true;
+                                    itemType = "Folder";
+                                    p.releaseFolder();
+                                    Folder i = item.GetComponent<Folder>();
+                                    i.transferTo(gameObject);
+                                    i.changePosToPlayer();
 
 
-                                OnInteractWithPatient?.Invoke();
-
+                                    OnInteractWithPatient?.Invoke();
+                                }
 
                                 break;
                             }
@@ -307,44 +309,57 @@ public class Player : MonoBehaviour
 
                     if(go.TryGetComponent(out SoupMachine s))
                     {
-                        isCarrying = true;
                         item = s.currentSoup;
-                        itemType = "Soup";
-                        s.soupPickUp();
-                        Soup i = item.GetComponent<Soup>();
-                        i.transferTo(gameObject);
-                        i.changePosToPlayer();
 
 
-                        OnInteractWithSoupMachine?.Invoke();
+                        if (item != null)
+                        {
+                            isCarrying = true;
+                            itemType = "Soup";
+                            s.soupPickUp();
+                            Soup i = item.GetComponent<Soup>();
+                            i.transferTo(gameObject);
+                            i.changePosToPlayer();
 
+
+                            OnInteractWithSoupMachine?.Invoke();
+                        }
                         break;
                     }
 
                     if (go.TryGetComponent(out PillMachine pillM))
                     {
-                        isCarrying = true;
                         item = pillM.currentPill;
-                        itemType = "Pill";
-                        pillM.pillPickUp();
-                        Pill i = item.GetComponent<Pill>();
-                        i.transferTo(gameObject);
-                        i.changePosToPlayer();
 
+                        if (item != null)
+                        {
+                            isCarrying = true;
+                            itemType = "Pill";
+                            pillM.pillPickUp();
+                            Pill i = item.GetComponent<Pill>();
+                            i.transferTo(gameObject);
+                            i.changePosToPlayer();
 
-                        OnInteractWithPillMachine?.Invoke();
+                            OnInteractWithPillMachine?.Invoke();
+                        }
                         break;
+
                     }
 
-                    if(go.TryGetComponent(out BandageMachine bandM))
+                    if (go.TryGetComponent(out BandageMachine bandM))
                     {
-                        isCarrying = true;
                         item = bandM.currentBandage;
-                        itemType = "Bandage";
-                        bandM.bandagePickUp();
-                        Bandage i = item.GetComponent<Bandage>();
-                        i.transferTo(gameObject);
-                        i.changePosToPlayer();
+
+                        if (item != null)
+                        {
+                            isCarrying = true;
+                            itemType = "Bandage";
+                            bandM.bandagePickUp();
+                            Bandage i = item.GetComponent<Bandage>();
+                            i.transferTo(gameObject);
+                            i.changePosToPlayer();
+                        }
+                        break;
                     }
 
                     if (go.TryGetComponent(out Bed b))
