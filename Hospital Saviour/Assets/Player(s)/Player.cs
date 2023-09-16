@@ -130,8 +130,6 @@ public class Player : MonoBehaviour
                             //check if the patient is the owner of the notes
                             if (f.patientOwner.GetComponent<Patient>() == p)
                             {
-
-                                Debug.Log("true");
                                 
                                 //change to patient 
                                 f.transferTo(go);

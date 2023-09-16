@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.75, y: 0.23}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1634388119461170486
@@ -64,7 +64,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ' to get the Soup and give it to the Patient'
+  m_text: to get the Soup and give it to the Patient
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 84a24f99ea213a54b80a42503b50d2f1, type: 2}
   m_sharedMaterial: {fileID: 5760048141587033385, guid: 84a24f99ea213a54b80a42503b50d2f1,
