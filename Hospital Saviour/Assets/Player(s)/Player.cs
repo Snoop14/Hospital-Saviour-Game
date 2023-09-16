@@ -281,8 +281,6 @@ public class Player : MonoBehaviour
             {
                 if (manager.objectList.Contains(go))
                 {
-                    //Patient p = go.GetComponent<Patient>();
-                    //print(p);
                     //Adjusted the getComponent to TryGetComponent
                     if (go.TryGetComponent(out Patient p))
                     {
