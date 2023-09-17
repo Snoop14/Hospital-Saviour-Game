@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-
+// Reference https://assetstore.unity.com/publishers/57076
 // Inspired by https://gamedevbeginner.com/how-to-make-countdown-timer-in-unity-minutes-seconds/
 public class CustomTimer : MonoBehaviour
 {

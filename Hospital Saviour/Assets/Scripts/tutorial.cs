@@ -13,6 +13,11 @@ class TutorialMessage
     public messageType type;
     public Transform obj;
 }
+
+//https://gerald-burke.itch.io/geralds-keys Accessed sept 2, 23
+//https://emhuo.itch.io/peaberry-pixel-font Accessed sept 2, 23
+//https://pixabay.com/sound-effects/search/game-dialogue/ Accessed sept 2, 23
+
 public class tutorial : MonoBehaviour
 {
     List<TutorialMessage> steps;
@@ -30,6 +35,7 @@ public class tutorial : MonoBehaviour
     public GameObject iconCanvas;
     public GameObject timeCanvas;
 
+    //setup tutorial pages based on level selected
     public void setupTutorial(Levels levelData)
     {
         level = levelData;
@@ -166,6 +172,8 @@ public class tutorial : MonoBehaviour
         backForthCheck();
 
     }
+
+    //enable/disable buttons based on current page
     void backForthCheck()
     {
         if (currentPage <= 1)
