@@ -60,12 +60,12 @@ public class Bed : MonoBehaviour
         isOccupied = false;
     }
 
-    public void interactWithPatient(bool isCarrying, GameObject player)
+    public void interactWithPatient(ItemType t, GameObject player)
     {
         if (isOccupied)
         {
             //gets the beds current patient rather than searching through the children
-            currentPatient.GetComponent<Patient>().interactionOnBed(isCarrying, player);
+            currentPatient.GetComponent<Patient>().interactionOnBed(t, player);
         }
     }
 }

@@ -7,8 +7,6 @@ using TMPro;
 
 public class Patient : MonoBehaviour
 {
-    private GameManager manager;
-
     private NavMeshAgent agent;
 
     public bool isInteractable { get; private set; } = true;
@@ -45,14 +43,17 @@ public class Patient : MonoBehaviour
     private float happinessDrop;
 
     private Animator animator;
-    private int toBedHash;
-    private int fromBedHash;
 
-    public tutorial tutorial;
+    ItemType currentItemNeeded = ItemType.Empty;
+    public int levelNumber = 0;
+
+    public delegate void PatientEvent(string emote, float score);
+    public event PatientEvent OnEmote;
+    public delegate void PatientAssigned(GameObject s);
+    public event PatientAssigned OnAssigned;
 
     void Start()
     {
-        manager = GameObject.Find("Manager").GetComponent<GameManager>();
         agent = gameObject.GetComponent<NavMeshAgent>();
 
         targetPosition = queuePosition;
@@ -72,6 +73,7 @@ public class Patient : MonoBehaviour
         sicknessIconBackground.sprite = sickness.sicknessBase.sicknessIconBackGround;
         sicknessIcon.sprite = sickness.sicknessBase.sicknessIcon;
         healingIcon.sprite = healingOrderIcons[currHeal];
+        currentItemNeeded = stringToItemType(healingIcon.sprite.name);
         healingIcon.SetNativeSize();
         healingIconObject.transform.localScale = new Vector3(0.3f, 0.3f, 1);
         EmojiHappy = icon.transform.GetChild(4).gameObject;
@@ -83,7 +85,7 @@ public class Patient : MonoBehaviour
         happinessDrop = sickness.happinessDropLevel;
 
         //if level is higher than 2, run the dropp happiness code
-        if (manager.levelNo > 2)
+        if (levelNumber > 2)
         {
             //function starts after 10s and repeats every 5s
             InvokeRepeating("dropHappinessLvl", 10, 5);
@@ -97,8 +99,6 @@ public class Patient : MonoBehaviour
 
         //animator = GetComponent<Animator>();
         animator = gameObject.GetComponentInChildren<Animator>();
-        toBedHash = Animator.StringToHash("ToBed");
-        fromBedHash = Animator.StringToHash("FromBed");
     }
 
     /// <summary>
@@ -180,6 +180,7 @@ public class Patient : MonoBehaviour
     /// <param name="place"></param>
     public void folderPlaced(GameObject place)
     {
+        OnAssigned.Invoke(gameObject);
         assignedPlacement = place;
         isInteractable = false;
         targetPosition = assignedPlacement.transform.position - new Vector3(0, 0, 1.0f);
@@ -220,7 +221,6 @@ public class Patient : MonoBehaviour
         
         transform.localPosition = new Vector3(-0.5f, 0.55f, -1.5f);
         animator.applyRootMotion = false; // true breaks animation, but false breaks spawning of patients
-        //animator.SetTrigger(toBedHash);
         animator.SetTrigger("ToBed");
     }
 
@@ -228,28 +228,27 @@ public class Patient : MonoBehaviour
     /// Called when an object is given to the patient while they are on the bed
     /// </summary>
     /// <param name="item"></param>
-    public void healOnBed(string item)
+    public void healOnBed(ItemType item)
     {
-        //animator.ResetTrigger(toBedHash);
         //if the sickness icon is active
         if (sicknessIconObject.gameObject.activeSelf)
         {
             //end the function
             return;
         }
-
+        isInteractable = false;
         //if given item is same as healing icon
-        if (item == healingIcon.sprite.name)
+        if (item == currentItemNeeded)
         {
-            if (healingIcon.sprite.name == "Soup")
+            if (currentItemNeeded == ItemType.Soup)
             {
                 StartCoroutine(triggerAction("eat soup"));
             }
-            if (healingIcon.sprite.name == "Pill")
+            if (currentItemNeeded == ItemType.Pill)
             {
                 StartCoroutine(triggerAction("eat pill"));
             }
-            if (healingIcon.sprite.name == "Bandage")
+            if (currentItemNeeded == ItemType.Bandage)
             {
                 StartCoroutine(triggerAction("bandage head"));
             }
@@ -279,6 +278,7 @@ public class Patient : MonoBehaviour
 
             //icon = healingIcon;
         }
+        
     }
 
     /// <summary>
@@ -350,6 +350,7 @@ public class Patient : MonoBehaviour
             bandagesParent.GetChild(i).gameObject.SetActive(true);
             yield return new WaitForSeconds(0.15f);
         }
+        isInteractable = true;
     }
 
     /// <summary>
@@ -361,6 +362,7 @@ public class Patient : MonoBehaviour
         {
             yield return null;
         }
+        isInteractable = false;
         targetPosition = ExitTransform.position;
         gameObject.GetComponent<Collider>().enabled = true;
         agent.enabled = true; //re-enable navmesh ageny
@@ -374,10 +376,8 @@ public class Patient : MonoBehaviour
             StartCoroutine(ScorePopup(happinessLvl));
         }
         agent.SetDestination(ExitTransform.position); //patient heads to exit loc
-        manager.UpdateScore(happinessLvl); // increase score
 
         folder.GetComponent<Folder>().destroySelf();
-        isInteractable = false;
     }
 
     /// <summary>
@@ -386,6 +386,8 @@ public class Patient : MonoBehaviour
     /// <returns></returns>
     IEnumerator DisplayHappy()
     {
+        OnEmote.Invoke("happy", happinessLvl);
+
         sicknessIconBackground.gameObject.SetActive(false);
         healingIconObject.SetActive(false);
         icon.transform.GetChild(3).gameObject.SetActive(false);
@@ -393,8 +395,6 @@ public class Patient : MonoBehaviour
         EmojiHappy.SetActive(true); //enable happy icon
         yield return new WaitForSeconds(2f);
         icon.gameObject.SetActive(false); //disable icons above head
-
-        tutorial.updateGoal();
     }
 
     [SerializeField]
@@ -437,15 +437,15 @@ public class Patient : MonoBehaviour
 
 
     //managed interactions with player whilst on bed
-    public void interactionOnBed(bool isCarrying, GameObject player)
+    public void interactionOnBed(ItemType t, GameObject player)
     {
         //change icon
-        iterateIcons(isCarrying, player);
+        iterateIcons(t, player);
     }
 
-    private void iterateIcons(bool isCarrying, GameObject player)
+    private void iterateIcons(ItemType t, GameObject player)
     {
-        if (icon.sprite == sickness.sicknessBase.sicknessIcon  && !isCarrying)
+        if (icon.sprite == sickness.sicknessBase.sicknessIcon  && t != ItemType.Empty)
         {
             icon = healingIcon;
         }
@@ -453,6 +453,7 @@ public class Patient : MonoBehaviour
         {
             currHeal = 0;
             healingIcon.sprite = healingOrderIcons[currHeal];
+            currentItemNeeded = stringToItemType(healingIcon.sprite.name);
             healingIcon.SetNativeSize();
             healingIcon.transform.localScale = new Vector3(0.3f, 0.3f, 1);
 
@@ -464,18 +465,34 @@ public class Patient : MonoBehaviour
         player.GetComponent<Player>().IconChange(healingIcon.sprite);
     }
 
+    ItemType stringToItemType(string n)
+    {
+        ItemType it = ItemType.Empty;
+        if (n == "Soup")
+        {
+            it = ItemType.Soup;
+        }
+        if (n == "Pill")
+        {
+            it = ItemType.Pill;
+        }
+        if (n == "Bandage")
+        {
+            it = ItemType.Bandage;
+        }
+        return it;
+    }
     /// <summary>
     /// Called when patient isn't healed in time
     /// </summary>
     private void MadPatient()
     {
+        OnEmote.Invoke("mad",0);
         if (assignedPlacement)
         {
             StartCoroutine(triggerAction("leave placement"));
         }
         StartCoroutine(leaveHospital());
-        
-        manager.MadPatient();
     }
 
     /// <summary>

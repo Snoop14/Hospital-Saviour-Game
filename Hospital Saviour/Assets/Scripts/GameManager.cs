@@ -12,7 +12,6 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
-    public bool playStartingAnimations = false;
     [SerializeField] NavMeshSurface surface;
 
     GameObject player1;
@@ -75,8 +74,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     Transform ExitTransform;
 
-    public List<GameObject> objectList;
-
     [Header("Level Controls")]
     public int scoreAim = 250;
     private int currScore;
@@ -98,8 +95,6 @@ public class GameManager : MonoBehaviour
     private bool XRayMachine;
     private bool ECGMachine;
 
-    private Animator animator;
-
     private int timeForLevel;
     private bool angryNotAllowed;
 
@@ -112,7 +107,6 @@ public class GameManager : MonoBehaviour
         //might need to change this to different function later when we setup levels for resetting
         patientQueue = new List<GameObject>();
         queuePositions = new List<Vector3>();
-        objectList = new List<GameObject>();
         patients = new List<GameObject>();
         spawnTimes = new List<float>();
     }
@@ -142,24 +136,10 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        /**
-         * for now call generateObjects in start() function, later we need to change this to be 
-         * called when user clicks on a level, then pass the level data into 
-         * generateObjects function as a parameter
-        **/
-        //This actually works fine.
 
         InitializeLevelData();
-
         generateObjects();
         GenerateHUD();
-
-        if (playStartingAnimations)
-        {
-            //trigger start animations
-            animator = GameObject.Find("Scene").GetComponent<Animator>();
-            animator.SetInteger("Level", levelNo);
-        }
 
 
         if (timeForLevel > 0)
@@ -234,14 +214,12 @@ public class GameManager : MonoBehaviour
     {
         //add player 1
         player1 = Instantiate(playerPrefab, GameObject.Find("Player1SpawnSite").transform);
-        player1.GetComponent<Player>().gameManager = gameObject;
         player1.GetComponent<Player>().tutorial = tutorialObject.GetComponent<tutorial>();
 
         //if plyer has selected 2 player, add 2nd player
         if(PlayerPrefs.GetInt("PlayerNum") == 2)
         {
             player2 = Instantiate(player2Prefab, GameObject.Find("Player2SpawnSite").transform);
-            player2.GetComponent<Player>().gameManager = gameObject;
             player2.GetComponent<Player>().tutorial = tutorialObject.GetComponent<tutorial>();
         }
         else
@@ -268,8 +246,6 @@ public class GameManager : MonoBehaviour
             float bedStartingPos = inActiveBedCount * -bedSeperation;
             GameObject newBed = Instantiate(bedPrefab, activeBedParent, false);
             newBed.transform.position += new Vector3(0, 0, bedStartingPos - (bedSeperation * i));
-            //Place bed into object list
-            objectList.Add(newBed);
             Bed b = newBed.GetComponent<Bed>();
             b.isActive = true;
             b.isInteractable = true;
@@ -284,98 +260,23 @@ public class GameManager : MonoBehaviour
 
         //for each interactable object, check if it's interactable and add to list if it is, and
         //if not, make if not interactable and disable it
-        if (soupMachine)
-        {
-            GameObject tempObj = GameObject.Find("SoupMachine");
-            objectList.Add(tempObj);
-        }
-        else
-        {
-            GameObject tempObj = GameObject.Find("SoupMachine");
-            tempObj.GetComponent<SoupMachine>().disableSelf();
-        }
+        if (!soupMachine)
+            GameObject.Find("SoupMachine").GetComponent<SoupMachine>().disableSelf();
+        if (!ScalpelDispenser)
+            GameObject.Find("ScalpelDispenser").GetComponent<ScalpelMachine>().disableSelf();
+        if (!TweezerDispenser)
+            GameObject.Find("TweezerDispenser").GetComponent<TweezerMachine>().disableSelf();
+        if (!pharmacy)
+            GameObject.Find("PillDispenser").GetComponent<PillMachine>().disableSelf();
+        if (!Surgery)
+            GameObject.Find("Surgery").GetComponent<SurgeryMachine>().disableSelf();
+        if (!XRayMachine)
+            GameObject.Find("X-Ray").GetComponent<XRayMachine>().disableSelf();
+        if (!bandageDispenser)
+            GameObject.Find("Medkit").GetComponent<BandageMachine>().disableSelf();
+        if (!ECGMachine)
+            GameObject.Find("ECG").GetComponent<ECGMachine>().disableSelf();
         
-        if (ScalpelDispenser)
-        {
-            GameObject tempObj = GameObject.Find("ScalpelDispenser");
-            objectList.Add(tempObj);
-        }
-        else
-        {
-            GameObject tempObj = GameObject.Find("ScalpelDispenser");
-            tempObj.GetComponent<ScalpelMachine>().disableSelf();
-        }
-
-        if (TweezerDispenser)
-        {
-            GameObject tempObj = GameObject.Find("TweezerDispenser");
-            objectList.Add(tempObj);
-        }
-        else
-        {
-            GameObject tempObj = GameObject.Find("TweezerDispenser");
-            tempObj.GetComponent<TweezerMachine>().disableSelf();
-        }
-
-        
-        if (pharmacy)
-        {
-            GameObject tempObj = GameObject.Find("PillDispenser");
-            objectList.Add(tempObj);
-        }
-        else
-        {
-            GameObject tempObj = GameObject.Find("PillDispenser");
-            tempObj.GetComponent<PillMachine>().disableSelf();
-        }
-
-        if (Surgery)
-        {
-            GameObject tempObj = GameObject.Find("Surgery");
-            objectList.Add(tempObj);
-        }
-        else
-        {
-            GameObject tempObj = GameObject.Find("Surgery");
-            tempObj.GetComponent<SurgeryMachine>().disableSelf();
-        }
-
-        if (XRayMachine)
-        {
-            GameObject tempObj = GameObject.Find("X-Ray");
-            objectList.Add(tempObj);
-        }
-        else
-        {
-            GameObject tempObj = GameObject.Find("X-Ray");
-            tempObj.GetComponent<XRayMachine>().disableSelf();
-        }
-
-        if (bandageDispenser)
-        {
-            GameObject tempObj = GameObject.Find("Medkit");
-            objectList.Add(tempObj);
-        }
-        else
-        {
-            GameObject tempObj = GameObject.Find("Medkit");
-            tempObj.GetComponent<BandageMachine>().disableSelf();
-        }
-
-        if (ECGMachine)
-        {
-            GameObject tempObj = GameObject.Find("ECG");
-            objectList.Add(tempObj);
-        }
-        else
-        {
-            GameObject tempObj = GameObject.Find("ECG");
-            tempObj.GetComponent<ECGMachine>().disableSelf();
-        }
-
-        //add the bin to the object list
-        GameObject tempBin = GameObject.Find("Bin");
-        objectList.Add(tempBin);
     }
 
     /// <summary>
@@ -399,9 +300,6 @@ public class GameManager : MonoBehaviour
             Folder f = newFolder.GetComponent<Folder>();
             f.changePosToPlayer();
             f.patientOwner = newPatient;
-
-            //Place patient into object list
-            objectList.Add(newPatient);
             Patient p = newPatient.GetComponent<Patient>();
             p.folder = newFolder;
 
@@ -415,11 +313,22 @@ public class GameManager : MonoBehaviour
             patientQueue.Add(newPatient);
             queuePositions.Add(EnterTransform.position + new Vector3(25 - patientSeperation * i, 0, 0));
             p.queuePosition = queuePositions[patientQueue.Count - 1];
-            p.tutorial = tutorialObject.GetComponent<tutorial>();
+            p.levelNumber = levelNo;
+            p.OnEmote += emoted;
+            p.OnAssigned += removeFromQueue;
             patients.Add(newPatient);
         }
     }
-
+    void emoted(string emote, float score)
+    {
+        if (emote == "happy")
+        {
+            tutorialObject.GetComponent<tutorial>().updateGoal();
+            UpdateScore(score);
+        }
+        else
+            MadPatient();
+    }
     /// <summary>
     /// Removes the specific patient from the list of patients
     /// </summary>

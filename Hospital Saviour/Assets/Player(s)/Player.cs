@@ -11,14 +11,9 @@ public class Player : MonoBehaviour
     
     private Rigidbody rbody;
 
-    [SerializeField]
-    public GameObject gameManager;
-    GameManager manager;
-
     public GameObject healingIconObject;
 
-    public bool isCarrying = false;
-    string itemType = "";
+    ItemType itemType = ItemType.Empty;
     GameObject item = null;
 
     List<GameObject> collidingObjects;
@@ -38,7 +33,6 @@ public class Player : MonoBehaviour
         transform.localPosition = new Vector3(0, 1, 0);
         rbody = GetComponent<Rigidbody>();
         collidingObjects = new List<GameObject>();
-        manager = gameManager.GetComponent<GameManager>();
         healingIconObject = GameObject.Find("PlayerIcon");
         healingIconObject.GetComponent<Image>().SetNativeSize();
         healingIconObject.transform.localScale = new Vector3(0.3f, 0.3f, 1);
@@ -97,284 +91,177 @@ public class Player : MonoBehaviour
     {
         if (tutorial.gameObject.activeSelf)
             return;
-        if (isCarrying)
+        foreach (GameObject go in collidingObjects)
         {
-            if(itemType == "Folder")
+            if (itemType != ItemType.Empty)
             {
-                foreach (GameObject go in collidingObjects)
+                if (itemType == ItemType.Folder)
                 {
-                    if (manager.objectList.Contains(go))
+                    
+                    Bed b = go.GetComponent<Bed>();
+                    if (b && b.isActive && b.isInteractable && !b.hasFolder && !b.isOccupied)
                     {
-                        Bed b = go.GetComponent<Bed>();
-                        if (b && b.isActive && b.isInteractable && !b.hasFolder && !b.isOccupied)
+                        Folder f = item.GetComponent<Folder>();
+                        f.transferTo(go);
+                        f.changePosToBed();
+                        b.folderDropOff(item);
+                        f.patientOwner.GetComponent<Patient>().folderPlaced(go);
+                        item = null;
+                        itemType = ItemType.Empty;
+
+                        break;
+                    }
+
+                    Patient p = go.GetComponent<Patient>();
+                    //may also need a check to confirm folder belongs to this patient
+                    if (p && p.isInteractable && p.isInQueue && !p.isHoldingFolder)
+                    {
+                        Folder f = item.GetComponent<Folder>();
+
+                        //check if the patient is the owner of the notes
+                        if (f.patientOwner.GetComponent<Patient>() == p)
                         {
-                            Folder f = item.GetComponent<Folder>();
+
+                            //change to patient 
                             f.transferTo(go);
-                            f.changePosToBed();
-                            b.folderDropOff(item);
-                            f.patientOwner.GetComponent<Patient>().folderPlaced(go);
-                            manager.removeFromQueue(f.patientOwner);
-                            isCarrying = false;
+                            f.changePosToPatient();
+                            p.retakeFolder();
                             item = null;
-                            itemType = "";
+                            itemType = ItemType.Empty;
+
+
+                            OnInteractWithPatient?.Invoke();
 
                             break;
-                        }
-
-                        Patient p = go.GetComponent<Patient>();
-                        //may also need a check to confirm folder belongs to this patient
-                        if (p && p.isInteractable && p.isInQueue && !p.isHoldingFolder)
-                        {
-                            Folder f = item.GetComponent<Folder>();
-
-                            //check if the patient is the owner of the notes
-                            if (f.patientOwner.GetComponent<Patient>() == p)
-                            {
-                                
-                                //change to patient 
-                                f.transferTo(go);
-                                f.changePosToPatient();
-                                p.retakeFolder();
-                                
-                                isCarrying = false;
-                                item = null;
-                                itemType = "";
-
-
-                                OnInteractWithPatient?.Invoke();
-
-
-
-                                break;
-                            }
-                            
                         }
 
                     }
                 }
-            }
-            
-            else if (itemType == "Soup")
-            {
-                foreach (GameObject go in collidingObjects)
+
+                else
                 {
-                    if (manager.objectList.Contains(go))
+                    Bed b = go.GetComponent<Bed>();
+                    if (b && b.isActive && b.isInteractable && b.hasFolder && b.isOccupied)
                     {
-                        Bed b = go.GetComponent<Bed>();
-                        if (b && b.isActive && b.isInteractable && b.hasFolder && b.isOccupied)
-                        {
-                            Patient patient = b.currentPatient.GetComponent<Patient>();
-                            Soup s = item.GetComponent<Soup>();
-                            s.transferTo(patient.gameObject);
-                            s.changePosToBed();
-                            StartCoroutine(s.destroySelf());
+                        OnInteractWithItem(b);
 
-                            //Stuff needs to be done here to actually continue with soup hand off
-                            patient.healOnBed(itemType);
+                        break;
+                    }
 
-                            isCarrying = false;
-                            item = null;
-                            itemType = "";
+                    Bin bin = go.GetComponent<Bin>();
+                    if (bin)
+                    {
+                        Item s = item.GetComponent<Item>();
+                        s.transferTo(go);
+                        StartCoroutine(s.destroySelf());
+                        item = null;
+                        itemType = ItemType.Empty;
 
-                            break;
-                        }
-
-                        Bin t = go.GetComponent<Bin>();
-                        if (t)
-                        {
-                            Soup s = item.GetComponent<Soup>();
-                            s.transferTo(go);
-                            StartCoroutine(s.destroySelf());
-                            
-                            isCarrying = false;
-                            item = null;
-                            itemType = "";
-
-                            break;
-                        }
+                        break;
                     }
                 }
             }
-            else if (itemType == "Pill")
+            else
             {
-                foreach (GameObject go in collidingObjects)
+                //Adjusted the getComponent to TryGetComponent
+                if (go.TryGetComponent(out Patient p))
                 {
-                    if (manager.objectList.Contains(go))
+                    if (p && p.isInteractable)
                     {
-                        Bed b = go.GetComponent<Bed>();
-                        if (b && b.isActive && b.isInteractable && b.hasFolder && b.isOccupied)
+                        if (p.isHoldingFolder)
                         {
-                            Patient patient = b.currentPatient.GetComponent<Patient>();
-                            Pill p = item.GetComponent<Pill>();
-                            p.transferTo(patient.gameObject);
-                            p.changePosToBed();
-                            StartCoroutine(p.destroySelf());
-
-                            //Stuff needs to be done here to actually continue with soup hand off
-                            patient.healOnBed(itemType);
-
-                            isCarrying = false;
-                            item = null;
-                            itemType = "";
-                            break;
-                        }
-
-
-                        Bin t = go.GetComponent<Bin>();
-                        if (t)
-                        {
-                            Pill p = item.GetComponent<Pill>();
-                            p.transferTo(go);
-                            StartCoroutine(p.destroySelf());
-
-                            isCarrying = false;
-                            item = null;
-                            itemType = "";
-
-                            break;
-                        }
-                    }
-                }
-            }
-            else if (itemType == "Bandage")
-            {
-                foreach (GameObject go in collidingObjects)
-                {
-                    if (manager.objectList.Contains(go))
-                    {
-                        Bed b = go.GetComponent<Bed>();
-                        if (b && b.isActive && b.isInteractable && b.hasFolder && b.isOccupied)
-                        {
-                            Bandage band = item.GetComponent<Bandage>();
-                            band.transferTo(go);
-                            band.changePosToBed();
-                            StartCoroutine(band.destroySelf());
-
-                            //Stuff needs to be done here to actually continue with soup hand off
-                            b.currentPatient.GetComponent<Patient>().healOnBed(itemType);
-
-                            isCarrying = false;
-                            item = null;
-                            itemType = "";
-                            break;
-                        }
-
-                        Bin t = go.GetComponent<Bin>();
-                        if (t)
-                        {
-                            Bandage band = item.GetComponent<Bandage>();
-                            band.transferTo(go);
-                            StartCoroutine(band.destroySelf());
-
-                            isCarrying = false;
-                            item = null;
-                            itemType = "";
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        else
-        {
-            foreach (GameObject go in collidingObjects)
-            {
-                if (manager.objectList.Contains(go))
-                {
-                    //Adjusted the getComponent to TryGetComponent
-                    if (go.TryGetComponent(out Patient p))
-                    {
-                        if (p && p.isInteractable)
-                        {
-                            if (p.isHoldingFolder)
-                            {
-                                item = p.folder;
-                                if (item != null)
-                                {
-                                    isCarrying = true;
-                                    itemType = "Folder";
-                                    p.releaseFolder();
-                                    Folder i = item.GetComponent<Folder>();
-                                    i.transferTo(gameObject);
-                                    i.changePosToPlayer();
-
-
-                                    OnInteractWithPatient?.Invoke();
-                                }
-
-                                break;
-                            }
-                        }
-                    }
-
-                    if(go.TryGetComponent(out SoupMachine s))
-                    {
-                        item = s.currentSoup;
-
-
-                        if (item != null)
-                        {
-                            isCarrying = true;
-                            itemType = "Soup";
-                            s.soupPickUp();
-                            Soup i = item.GetComponent<Soup>();
+                            item = p.folder;
+                            itemType = ItemType.Folder;
+                            p.releaseFolder();
+                            Folder i = item.GetComponent<Folder>();
                             i.transferTo(gameObject);
                             i.changePosToPlayer();
+                            OnInteractWithPatient?.Invoke();
 
-
-                            OnInteractWithSoupMachine?.Invoke();
+                            break;
                         }
-                        break;
                     }
+                }
 
-                    if (go.TryGetComponent(out PillMachine pillM))
+                if (go.TryGetComponent(out SoupMachine s))
+                {
+                    item = s.currentSoup;
+
+
+                    if (item != null)
                     {
-                        item = pillM.currentPill;
+                        itemType = ItemType.Soup;
+                        s.soupPickUp();
+                        Item i = item.GetComponent<Item>();
+                        i.transferTo(gameObject);
+                        i.changePosToPlayer();
 
-                        if (item != null)
-                        {
-                            isCarrying = true;
-                            itemType = "Pill";
-                            pillM.pillPickUp();
-                            Pill i = item.GetComponent<Pill>();
-                            i.transferTo(gameObject);
-                            i.changePosToPlayer();
 
-                            OnInteractWithPillMachine?.Invoke();
-                        }
-                        break;
-
+                        OnInteractWithSoupMachine?.Invoke();
                     }
+                    break;
+                }
 
-                    if (go.TryGetComponent(out BandageMachine bandM))
+                if (go.TryGetComponent(out PillMachine pillM))
+                {
+                    item = pillM.currentPill;
+
+                    if (item != null)
                     {
-                        item = bandM.currentBandage;
+                        itemType = ItemType.Pill;
+                        pillM.pillPickUp();
+                        Item i = item.GetComponent<Item>();
+                        i.transferTo(gameObject);
+                        i.changePosToPlayer();
 
-                        if (item != null)
-                        {
-                            isCarrying = true;
-                            itemType = "Bandage";
-                            bandM.bandagePickUp();
-                            Bandage i = item.GetComponent<Bandage>();
-                            i.transferTo(gameObject);
-                            i.changePosToPlayer();
-                        }
-                        break;
+                        OnInteractWithPillMachine?.Invoke();
                     }
+                    break;
 
-                    if (go.TryGetComponent(out Bed b))
+                }
+
+                if (go.TryGetComponent(out BandageMachine bandM))
+                {
+                    item = bandM.currentBandage;
+
+                    if (item != null)
                     {
-                        b.interactWithPatient(isCarrying, gameObject);
-
-                        OnInteractWithPatient?.Invoke();
-
-                        break;
+                        itemType = ItemType.Bandage;
+                        bandM.bandagePickUp();
+                        Item i = item.GetComponent<Item>();
+                        i.transferTo(gameObject);
+                        i.changePosToPlayer();
                     }
+                    break;
+                }
+
+                if (go.TryGetComponent(out Bed b))
+                {
+                    b.interactWithPatient(itemType, gameObject);
+                    OnInteractWithPatient?.Invoke();
+
+                    break;
                 }
             }
         }
     }
 
+    void OnInteractWithItem(Bed b)
+    {
+        Patient patient = b.currentPatient.GetComponent<Patient>();
+        if (patient.isInteractable)
+        {
+            Item s = item.GetComponent<Item>();
+            s.transferTo(patient.gameObject);
+            s.changePosToBed();
+            item = null;
+            itemType = ItemType.Empty;
+            StartCoroutine(s.destroySelf());
+
+            patient.healOnBed(itemType);
+            
+        }
+    }
     //Called when the player enters in range of another object
     private void OnTriggerEnter(Collider other)
     {
