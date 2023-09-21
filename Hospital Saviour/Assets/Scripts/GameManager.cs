@@ -494,7 +494,7 @@ public class GameManager : MonoBehaviour
         //disaply failed to complete text if an not enough patients treated in relevant level
         if (!patientGoalMet)
         {
-            endDetails.transform.Find("ErrorText").GetComponent<TMP_Text>().text = "Sorry, you didn't treat enough patients, you did not complete this level, try again";
+            endDetails.transform.GetChild(0).Find("ErrorText").GetComponent<TMP_Text>().text = "Sorry, you didn't treat enough patients, you did not complete this level, try again";
         }
 
         //turn on the end details text display
